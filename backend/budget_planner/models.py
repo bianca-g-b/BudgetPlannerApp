@@ -1,13 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-
-# Create users model
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=120)
-    email = models.CharField(max_length=120, unique=True)
-    password = models.CharField(max_length=120)
 
 
 # Create budget model
@@ -30,7 +24,7 @@ class Budget(models.Model):
     #non-essential expenses
     luxury_gifts = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Luxury and Gifts")
     leisure_entertainment = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Leisure & Entertainment")
-    holidays = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Holidays & Travel")
+    holidays = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Holidays and Travel")
     other_non_essential_costs = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Other Non-Essential Costs")
     #financial commitments
     unsecured_loans = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Unsecured Loans (Credit Cards, Store Cards, Payday Loans)")
