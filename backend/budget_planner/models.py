@@ -11,6 +11,7 @@ class Budget(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_updated = models.DateField(auto_now=True)
     #budget
+    month_year = models.DateField(verbose_name="Day Month and Year", help_text = "e.g. 05 September 2023))", unique=True,  default = " 05 September 2023", blank=False, null=False)
     total_income = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Total Income")
     #essential expenses
     housing = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Housing Costs")
