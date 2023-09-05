@@ -16,8 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from budget_planner import views
+
+#Create router
+router = routers.DefaultRouter()
+router.register(r"budget", views.BudgetView, "budget")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("auth/", include("authentication.urls")),
+    path("api/", include(router.urls)),
+    # path("auth/", include("authentication.urls")),
 ]
