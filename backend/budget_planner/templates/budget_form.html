@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Form</title>
+</head>
+<body>
+    <h1>Budget Form</h1>
+
+    <form method ='post' action="{% url 'budget_form' %}">
+        {% csrf_token %}
+        
+        <label for="day_month_year">Date when the monthly budget started</label>
+        <input type="date" name="day_month_year" id="day_month_year" required>
+        <h2>Income</h2>
+        <label for="total_income">Total income:</label>
+        <input type="number" name="total_income" step="0.01" id="total_income" required>
+
+        <h2>Expenses</h2>
+        <h3>Essential expenses</h3>
+        <label for="housing">Housing(rent, mortgage, etc):</label>
+        <input type="number" name="housing" step="0.01" id="housing" required>
+
+        <label for="utily_bills">Utilities(electricity, water, etc):</label>
+        <input type="number" name="utily_bills" step="0.01" id="utily_bills" required>
+
+        <label for="transport">Transportation(gas, bus, etc):</label>
+        <input type="number" name="transport" step="0.01" id="transport" required>
+
+        <label for="food_drinks">Food(groceries, etc):</label>
+        <input type="number" name="food_drinks" step="0.01" id="food_drinks" required>
+
+        <label for="household_goods_services">Household goods and services:</label>
+        <input type="number" name="household_goods_services" step="0.01" id="household_goods_services" required>
+
+        <label for="children_related_costs">Children related(expenses, etc):</label>
+        <input type="number" name="children_related_costs" step="0.01" id="children_related_costs" required>
+
+        <label for="cleaning_toiletries">Cleaning and toiletries:</label>
+        <input type="number" name="cleaning_toiletries" step="0.01" id="cleaning_toiletries" required>
+
+        <label for="other_essential_costs">Other essential expenses:</label>
+        <input type="number" name="other_essential_costs" step="0.01" id="other_essential_costs" required>
+
+        <h3>Non-essential expenses</h3>
+        <label for="luxury_gifts">Luxury and gifts:</label>
+        <input type="number" name="luxury_gifts" step="0.01" id="luxury_gifts" required>
+
+        <label for="leisure_entertainment">Leisure and entertainment:</label>
+        <input type="number" name="leisure_entertainment" step="0.01" id="leisure_entertainment" required>
+
+        <label for="holidays">Holidays expenses:</label>
+        <input type="number" name="holidays" step="0.01" id="holidays" required>
+
+        <label for="other_non_essential_costs">Other non-essential expenses:</label>
+        <input type="number" name="other_non_essential_costs" step="0.01" id="other_non_essential_costs" required>
+
+        <label for=""unsecured_loans>Unsecured debt:</label>
+        <input type="number" name="unsecured_loans" step="0.01" id="unsecured_loans" required>
+
+        <input type="submit" value = "Submit">
+    </form>
+        
+{% include 'authentication/signout.html' %}
+    
+</body>
+</html>

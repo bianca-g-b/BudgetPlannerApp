@@ -8,11 +8,11 @@ from django.utils import timezone
 # Create budget model
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_identifier = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateField(auto_now_add=True)
     date_updated = models.DateField(auto_now=True)
     #budget
-    day_month_year = models.DateField(verbose_name="Day Month and Year", help_text = "e.g. 05/09/2023))", unique=True,  default = timezone.now().date() , blank=False, null=False)
+    day_month_year = models.DateField(verbose_name="Day Month and Year", help_text = "e.g. 05/09/2023))", default = timezone.now().date() , blank=False, null=False)
     total_income = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Total Income")
     #essential expenses
     housing = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Housing Costs")

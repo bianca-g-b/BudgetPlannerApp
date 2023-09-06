@@ -6,4 +6,5 @@ from .models import Budget
 class BudgetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Budget
-        fields = ('id', 'user_id', 'date_created', 'date_updated', 'day_month_year', 'total_income', 'housing', 'utility_bills', 'food_drinks', 'transport', 'household_goods_services', 'children_related_costs', 'cleaning_toiletries', 'other_essential_costs', 'luxury_gifts', 'leisure_entertainment', 'holidays', 'other_non_essential_costs', 'unsecured_loans')
+        fields = "__all__"
+    user_identifier = serializers.ReadOnlyField(source='user_identifier.id')
