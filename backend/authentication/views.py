@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # Create views here
 
+#registration
 def signup(request):
     if request.user.is_authenticated:
         return redirect("/api/budget")
@@ -19,12 +20,12 @@ def signup(request):
             return redirect("/api/budget")
         else:
             form = UserCreationForm()
-            return render(request, "budget_planner/signup.html", {"form": form})
+            return render(request, "authentication/signup.html", {"form": form})
     else:
         form = UserCreationForm()
-        return render(request, "budget_planner/signup.html", {"form": form})
+        return render(request, "authentication/signup.html", {"form": form})
     
-
+#login
 def signin(request):
     if request.user.is_authenticated:
         return redirect("/api/budget")
@@ -38,8 +39,12 @@ def signin(request):
             return redirect("/api/budget")
         else:
             form = AuthenticationForm()
-            return render(request, "budget_planner/signin.html", {"form": form})
+            return render(request, "authentication/signin.html", {"form": form})
     else:
         form = AuthenticationForm()
-        return render(request, "budget_planner/signin.html", {"form": form})
+        return render(request, "authentication/signin.html", {"form": form})
     
+    #logout
+def signout(request):
+    logout(request)
+    return redirect("api/login") 

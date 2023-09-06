@@ -12,3 +12,5 @@ class BudgetView(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Budget.objects.filter(user_id=user.id)
+
+

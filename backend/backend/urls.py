@@ -26,5 +26,5 @@ router.register(r"budget", views.BudgetView, "budget")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
-    # path("auth/", include("authentication.urls")),
+    path("auth/", include("authentication.urls")),
 ]
