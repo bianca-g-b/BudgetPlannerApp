@@ -21,6 +21,7 @@ html, body {
   border-radius: 10px;
   margin-top: 1%;
   margin-bottom: 1%;
+  width: 45%;
 }
 
 .btn-outline-primary {
@@ -34,13 +35,13 @@ html, body {
 }
 
 .income-input {
-  background-color: rgb(204, 249, 223) !important;
+  background-color: #d1e7dd !important;
 }
 
 .essential-input {
-  background-color: rgb(252, 228, 228) !important;
+  background-color:#f8d7da !important;
 }
 
 .non-essential-input {
-  background-color: rgb(253, 236, 220) !important;
+  background-color: #fff3cd !important;
 }
