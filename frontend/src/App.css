@@ -1,42 +1,46 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+html, body {
+  background-color: rgb(228, 228, 228) !important;
+}
+#root{
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  background-color: rgb(228, 228, 228);
+}
+
+.full-form-area {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 10px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.btn-outline-primary {
+  align-self: center !important;
+}
+
+.app-title {
   text-align: center;
+  color:#0d6efd;
+  font-weight: bold;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.income-input {
+  background-color: rgb(204, 249, 223) !important;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.essential-input {
+  background-color: rgb(252, 228, 228) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.non-essential-input {
+  background-color: rgb(253, 236, 220) !important;
 }
