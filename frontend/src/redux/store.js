@@ -1,5 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import  budgetSlice  from "./budgetSlice";
 
 export default configureStore ({
-    reducer: {},
+    reducer: {
+        budget: budgetSlice,
+    },
 })
