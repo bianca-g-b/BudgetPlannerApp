@@ -130,7 +130,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # settings.py
 
 
-CORS_ORIGIN_WHITELIST = [
+# CORS_ORIGIN_WHITELIST = [
+#     "http://localhost:5173"
+# ]
+
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173"
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_HEADERS = [
+    "csrf-token",
+    "content-type",
+    "accept",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 

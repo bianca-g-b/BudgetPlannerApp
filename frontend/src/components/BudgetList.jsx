@@ -2,12 +2,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import {getBudgetList} from "../redux/budgetSlice.js"
 import { useEffect } from "react";
+import { fetchCSRFToken } from "./auth/authActions.js";
 
 function BudgetList() {
     const dispatch = useDispatch();
     const budgetList = useSelector((state) => state.budget.budgetList);
 
     useEffect(() => {
+        dispatch(fetchCSRFToken());
         dispatch(getBudgetList());
     },[dispatch])
     
