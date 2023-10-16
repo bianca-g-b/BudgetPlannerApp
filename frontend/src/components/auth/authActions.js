@@ -37,3 +37,26 @@ export const registerUser = async (username, password, confirmPassword, csrfToke
         throw new Error("Registration failed");
     }
 };
+
+export const loginUser = async (username, password, csrfToken) => {
+    const response = await fetch(`${baseUrl}/auth/signin` , {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+        }),
+        credentials: "include",
+    });
+    console.log(response);
+    if (response.ok) {
+        return response;
+    } else {
+        alert("Login failed. Please try again.")
+        throw new Error("Login failed.")
+    }
+}

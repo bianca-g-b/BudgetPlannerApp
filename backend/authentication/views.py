@@ -22,7 +22,6 @@ def signup(request):
         return JsonResponse({"message": "User is already authenticated"}, status=400)
     print(request)
     if request.method == "POST":
-        # print(request.body)
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             username = data.get("username")
@@ -40,23 +39,25 @@ def signup(request):
 
     
 #login
+@csrf_exempt
 def signin(request):
     if request.user.is_authenticated:
-        return redirect("/api/budget")
+        return JsonResponse({"message": "User is already authenticated"}, status=400)
     if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username = username, password = password)
-
+        if request.content_type == "application/json":
+            data = json.loads(request.body.decode("utf-8"))
+            username = data.get("username")
+            password = data.get("password")
+            print(username, password)
+            user = authenticate(request, username = username, password = password)
+            print("user:", user)
         if user is not None:
             login(request, user)
-            return redirect("/api/budget")
+            return JsonResponse({"message": "Login successful"}, status = 202)
         else:
-            form = AuthenticationForm()
-            return render(request, "authentication/signin.html", {"form": form})
+            return JsonResponse({"message": "User login failed"}, status = 400)
     else:
-        form = AuthenticationForm()
-        return render(request, "authentication/signin.html", {"form": form})
+        return JsonResponse({"message": "User login failed"}, status = 400)
     
 #logout
 def signout(request):

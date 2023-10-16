@@ -9,12 +9,9 @@ function App() {
 
   return (
     <>
-      {/* <MainPage /> */}
-      {/* <BudgetList /> */}
-
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/auth/signup" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<BudgetList />} />
       </Routes>
