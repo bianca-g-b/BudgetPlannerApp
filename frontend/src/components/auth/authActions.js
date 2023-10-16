@@ -1,4 +1,4 @@
-import { setSCRSToken } from "../../redux/csrfSlice";
+import { setCSRFToken } from "../../redux/csrfSlice";
 
 
 const baseUrl = "http://127.0.0.1:8000";
@@ -7,7 +7,7 @@ export const fetchCSRFToken = async (dispatch ) => {
         const response  = await fetch(`${baseUrl}/auth/csrf`);
         if (response.ok) {
             const data = await response.json();
-            dispatch(setSCRSToken(data.csrfToken));
+            dispatch(setCSRFToken(data.csrfToken));
             return data.csrfToken;
         } else {
             throw new Error("Failed to fetch CSRF token");
@@ -16,8 +16,6 @@ export const fetchCSRFToken = async (dispatch ) => {
 
 
 export const registerUser = async (username, password, confirmPassword, csrfToken) => {
-    // const csrfToken = await fetchCSRFToken(dispatch);
-    // console.log(csrfToken);
     const response = await fetch(`${baseUrl}/auth/signup`, {
         method: "POST",
         headers: {
