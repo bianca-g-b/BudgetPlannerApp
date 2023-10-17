@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCSRFToken, loginUser } from "./authActions";
+import {useNavigate } from "react-router-dom";
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -14,6 +16,8 @@ function Login() {
         const response = await loginUser(username, password, csrfToken);
         if (response.status === 202)  {
             alert("Login successful.");
+            navigate("/dashboard")
+            console.log(response, "after redirect")
         } else {
             alert ("Login failed.Please try again.")
         }

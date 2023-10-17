@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .serializers import BudgetSerializer
 from .models import Budget
 from .forms import BudgetForm
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -17,11 +18,11 @@ class BudgetView(viewsets.ModelViewSet):
 def budget_form(request):
     if request.method == "POST":
         form = BudgetForm(request.POST)
-        if form.is_valid():
-            budget = form.save(commit=False)
-            budget.user_id = request.user
-            budget.save()
-            return redirect("/form")
+    if form.is_valid():
+        budget = form.save(commit=False)
+        budget.user_id = request.user
+        budget.save()
+        return redirect("/form")
     else:
         form = BudgetForm()
     return render(request, "budget_form.html", {"form": form})

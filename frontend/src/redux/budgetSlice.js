@@ -1,36 +1,42 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 const baseUrl = "http://127.0.0.1:8000"
 
 // get request
 export const getBudgetList = createAsyncThunk(
-    "api/budget",
-    async() => {
-        const csrfToken = useSelector((state) => state.csrf);
+    "api/budget", async(csrfToken, thunkAPI) => {
         const response = await fetch(`${baseUrl}/api/budget`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "CSRF-Token": csrfToken,
             },
-        })
+        }
+        )
         console.log(response);
         if (response.ok) {
+            console.log(response.data);
             const budgetList = await response.json();
             return budgetList;
+        } else {
+            return thunkAPI.rejectWithValue(response);
         }
     }
 )
 
 export const budgetSlice = createSlice({
     name: "budget",
-    initialState: [],
-    reducers: {},
-    extraReducers: {
-        [getBudgetList.fulfilled]: (state, action) => {
+    initialState: {
+        budgetList: null,
+    },
+    reducers: 
+    {
+        setBudgetList: (state, action) => {
             state.budgetList = action.payload;
         }
     }
 })
+
+export const { setBudgetList } = budgetSlice.actions;
 
 export default budgetSlice.reducer;
