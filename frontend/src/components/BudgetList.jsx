@@ -4,25 +4,29 @@ import {getBudgetList} from "../redux/budgetSlice.js"
 import { useState, useEffect } from "react";
 
 function BudgetList() {
-    // const [budgetList, setBudgetList] = useState([]);
+    const [budgetList, setBudgetList] = useState([]);
     const dispatch = useDispatch();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
-    console.log(csrfToken);
-    console.log(getBudgetList);
     console.log(dispatch(getBudgetList(csrfToken)))
+    console.log(budgetList)
 
     
     useEffect(() => {
         async function fetchData() {
-            const response = await dispatch(getBudgetList(csrfToken));
-            console.log(response);
+            dispatch(getBudgetList(csrfToken))
+                .then((action) => {
+                    if (getBudgetList.fulfilled.match(action)) {
+                        console.log(action.payload)
+                        setBudgetList(action.payload);
+                    }
+                })
         }
-        fetchData(); 
+        fetchData()
     }, [dispatch, csrfToken]);
 
     return (
         <div>
-            {/* {getBudgetList && getBudgetList.map((budget) => {
+            {/* {BudgetList && BudgetList.map((budget) => {
                 <ul>
                 <li>{budget.housing}</li>
                 <li>{budget.transport}</li>

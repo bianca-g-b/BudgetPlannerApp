@@ -7,6 +7,7 @@ from django.middleware.csrf import get_token
 import json
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sessions.models import Session
 
 # Create views here
 
@@ -14,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 def get_csrf_token(request):
     csrf_token = get_token(request)
     return JsonResponse({"csrfToken": csrf_token})
+
 
 #registration
 @csrf_exempt
@@ -48,9 +50,9 @@ def signin(request):
             data = json.loads(request.body.decode("utf-8"))
             username = data.get("username")
             password = data.get("password")
-            print(username, password)
             user = authenticate(request, username = username, password = password)
-            print("user:", user)
+            user.is_active = True
+            print(user, "testing")
         if user is not None:
             login(request, user)
             return JsonResponse({"message": "Login successful"}, status = 202)
@@ -60,6 +62,6 @@ def signin(request):
         return JsonResponse({"message": "User login failed"}, status = 400)
     
 #logout
-def signout(request):
-    logout(request)
-    return redirect(reverse("authentication:signin"))
+# def signout(request):
+#     logout(request)
+#     return redirect(reverse("authentication:signin"))

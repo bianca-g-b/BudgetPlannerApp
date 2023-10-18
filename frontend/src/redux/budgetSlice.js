@@ -4,17 +4,22 @@ const baseUrl = "http://127.0.0.1:8000"
 
 // get request
 export const getBudgetList = createAsyncThunk(
-    "api/budget", async(csrfToken, thunkAPI) => {
-        const response = await fetch(`${baseUrl}/api/budget`, {
+    "api/budget", async(csrfToken,thunkAPI) => {
+        const response = await fetch(`${baseUrl}/api/budget/`, {
             method: "GET",
+            mode: "cors",
+            withCredentials: true, 
             headers: {
                 "Content-Type": "application/json",
                 "CSRF-Token": csrfToken,
+                // "Authorization":csrfToken,
             },
-        }
-        )
+            
+            credentials: "include",
+        });
         console.log(response);
         if (response.ok) {
+            console.log("response: ",response);
             console.log(response.data);
             const budgetList = await response.json();
             return budgetList;

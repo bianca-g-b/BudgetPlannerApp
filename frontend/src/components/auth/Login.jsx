@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCSRFToken, loginUser } from "./authActions";
+import { fetchCSRFToken, loginUser} from "./authActions";
 import {useNavigate } from "react-router-dom";
 
 function Login() {

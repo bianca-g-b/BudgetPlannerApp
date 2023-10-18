@@ -9,7 +9,7 @@ export const csrfSlice = createSlice({
     reducers: {
         setCSRFToken: (state, action) => {
             state.csrfToken = action.payload;
-        }
+        },
     }
 })
 

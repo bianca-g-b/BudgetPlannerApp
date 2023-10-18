@@ -130,9 +130,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # settings.py
 
 
-# CORS_ORIGIN_WHITELIST = [
-#     "http://localhost:5173"
-# ]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173"
@@ -144,7 +145,40 @@ CORS_ALLOW_HEADERS = [
     "csrf-token",
     "content-type",
     "accept",
+    # "authorization",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# REST_FRAMEWORK = {
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         "rest_framework.permissions.IsAuthenticated",
+#     ],
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "rest_framework_simplejwt.authentication.JWTAuthentication",
+#     ],
+
+# }
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173"
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'sessionid'
 

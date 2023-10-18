@@ -27,5 +27,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("auth/", include("authentication.urls", namespace="authentication")),
-    path("form/", views.budget_form, name="budget_form")
+    # path("form/", views.budget_form, name="budget_form")
 ]
