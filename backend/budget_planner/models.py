@@ -8,7 +8,7 @@ from django.utils import timezone
 # Create budget model
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
-    user_identifier = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateField(auto_now_add=True)
     date_updated = models.DateField(auto_now=True)
     #budget

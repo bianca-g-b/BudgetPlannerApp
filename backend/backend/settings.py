@@ -63,9 +63,10 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.contrib.auth.context_processors.auth",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
+                
                 "django.contrib.messages.context_processors.messages",
             ],
         },
@@ -130,13 +131,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # settings.py
 
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:5173",
+CORS_ORIGIN_WHITELIST = [    
     "http://127.0.0.1:5173",
+    # "http://localhost:5173",
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173"
+    "http://127.0.0.1:5173",
+    # "http://localhost:5173",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -145,7 +147,8 @@ CORS_ALLOW_HEADERS = [
     "csrf-token",
     "content-type",
     "accept",
-    # "authorization",
+    "credentials",
+    "withcredentials",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -155,7 +158,7 @@ CORS_ALLOW_CREDENTIALS = True
 #         "rest_framework.permissions.IsAuthenticated",
 #     ],
 #     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework_simplejwt.authentication.JWTAuthentication",
+#         "rest_framework_authentication.SessionAuthentication",
 #     ],
 
 # }
@@ -170,6 +173,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5173",
     "http://localhost:5173"
 ]
 
@@ -178,7 +182,12 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SESSION_COOKIE_SECURE = True
+# SEESION_COOKIE_HTTPONLY = True
+# SESSION_KEY = 'sessionid'
 CSRF_COOKIE_SECURE = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_NAME = 'sessionid'
+# SESSION_COOKIE_NAME = 'sessionid'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2 # 2 weeks
+SESSION_COOKIE_SAME_SITE = 'None'
+# SESSION_COOKIE_DOMAIN = None
 

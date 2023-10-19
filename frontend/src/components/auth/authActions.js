@@ -52,10 +52,13 @@ export const loginUser = async (username, password, csrfToken) => {
         credentials: "include",
     });
     console.log(response);
-    console.log(response.headers);
     if (response.ok) {
+        const sessionCookie = response.headers.get("Set-Cookie");
+        console.log(sessionCookie, "session cookie");
         return response;
     } else {
+        console.log(response, "response");
+        console.log("csrf token in loginuser", csrfToken)
         alert("Login failed. Please try again.")
         throw new Error("Login failed.")
     }

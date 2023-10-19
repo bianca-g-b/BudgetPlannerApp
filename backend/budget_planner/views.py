@@ -6,6 +6,10 @@ from django.http import JsonResponse
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -13,18 +17,19 @@ from django.contrib.auth.models import User
 
 
 class BudgetView(viewsets.ModelViewSet):
-    authentication_classes = [ SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [ SessionAuthentication, BasicAuthentication]
+    # permission_classes = [IsAuthenticated]
     serializer_class = BudgetSerializer
     queryset = Budget.objects.all()
     # Restrict access to only authenticated users based on user id
     def get_queryset(self):
         user = self.request.user
-        test = User.objects.get()
-        print(test, "testing")
+        logger.info(f"User: {user} ")
+        # test = User.objects.get()
+        # print(test, "testing")
         print(self.request, "testing more")
         print(user, "testing in budget views")
-        return Budget.objects.filter(user_identifier=user.id)
+        return Budget.objects.filter(user_id=user.id)
 
 # def budget_form(request):
 #     if request.method == "POST":

@@ -8,14 +8,15 @@ export const getBudgetList = createAsyncThunk(
         const response = await fetch(`${baseUrl}/api/budget/`, {
             method: "GET",
             mode: "cors",
-            withCredentials: true, 
+            withCredentials: true,
+             
             headers: {
                 "Content-Type": "application/json",
                 "CSRF-Token": csrfToken,
-                // "Authorization":csrfToken,
+                // credentials: "include",
+                // withCredentials: true,
             },
-            
-            credentials: "include",
+            credentials: "include",         
         });
         console.log(response);
         if (response.ok) {

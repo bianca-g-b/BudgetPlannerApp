@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCSRFToken, loginUser} from "./authActions";
 import {useNavigate } from "react-router-dom";
+import { setAuthenticated } from "../../redux/authSlice";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -10,12 +11,15 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+
     async function handleLogin(e) {
         e.preventDefault();
         const csrfToken = await fetchCSRFToken(dispatch);
+        console.log("csrf token in login", csrfToken)
         const response = await loginUser(username, password, csrfToken);
         if (response.status === 202)  {
-            alert("Login successful.");
+            dispatch(setAuthenticated(true));
+            console.log("Login successful.");
             navigate("/dashboard")
             console.log(response, "after redirect")
         } else {

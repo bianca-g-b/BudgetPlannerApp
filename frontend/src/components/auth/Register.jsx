@@ -14,9 +14,13 @@ function Register() {
         if (password === confirmPassword) {
             const csrfToken = await fetchCSRFToken(dispatch);
             const response = await registerUser(username, password, confirmPassword, csrfToken);
+            console.log(response);
+            console.log(csrfToken, "registration csrf token first")
             if (response.status === 202) {
                 alert("You have successfully registered!")
             } else {
+                console.log(response);
+                console.log(csrfToken, "registration csrf token")
                 alert("Registration failed. Please try again.")
             } 
         } else {
