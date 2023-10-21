@@ -53,13 +53,29 @@ export const loginUser = async (username, password, csrfToken) => {
     });
     console.log(response);
     if (response.ok) {
-        const sessionCookie = response.headers.get("Set-Cookie");
-        console.log(sessionCookie, "session cookie");
         return response;
     } else {
         console.log(response, "response");
         console.log("csrf token in loginuser", csrfToken)
         alert("Login failed. Please try again.")
         throw new Error("Login failed.")
+    }
+}
+
+export const logoutUser = async (csrfToken) => {
+    const response = await fetch(`${baseUrl}/auth/signout`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "CSRF-Token": csrfToken,
+        },
+        credentials: "include",
+    });
+    if (response.ok) {
+        return response;
+    } else {
+        alert("Logout failed. Please try again.");
+        throw new Error("Logout failed.");
     }
 }

@@ -43,8 +43,8 @@ def signup(request):
 #login
 @csrf_exempt
 def signin(request):
-    if request.user.is_authenticated:
-        return JsonResponse({"message": "User is already authenticated"}, status=400)
+    # if request.user.is_authenticated:
+    #     return JsonResponse({"message": "User is already authenticated"}, status=400)
     if request.method == "POST":
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
@@ -64,6 +64,12 @@ def signin(request):
         return JsonResponse({"message": "User login failed"}, status = 400)
     
 #logout
-# def signout(request):
-#     logout(request)
-#     return redirect(reverse("authentication:signin"))
+@csrf_exempt
+def signout(request):
+    if request.method == "POST":
+        logout(request)
+        return JsonResponse({"message": "Logout successful"}, status = 202)
+    else:
+        return JsonResponse({"message": "Logout failed"}, status = 400)
+
+    
