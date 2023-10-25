@@ -29,6 +29,7 @@ export const registerUser = async (username, password, confirmPassword, csrfToke
         }),
         credentials: "include",
     });
+    console.log(response.message);
     if (response.ok) {
         return response;
     } else {
@@ -51,12 +52,9 @@ export const loginUser = async (username, password, csrfToken) => {
         }),
         credentials: "include",
     });
-    console.log(response);
     if (response.ok) {
         return response;
     } else {
-        console.log(response, "response");
-        console.log("csrf token in loginuser", csrfToken)
         alert("Login failed. Please try again.")
         throw new Error("Login failed.")
     }

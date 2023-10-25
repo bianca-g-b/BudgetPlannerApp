@@ -19,7 +19,7 @@ function Register() {
             if (response.status === 202) {
                 alert("You have successfully registered!")
             } else {
-                console.log(response);
+                console.log(response.message);
                 console.log(csrfToken, "registration csrf token")
                 alert("Registration failed. Please try again.")
             } 

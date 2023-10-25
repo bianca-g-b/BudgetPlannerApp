@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { useSelector } from "react-redux";
 const baseUrl = "http://127.0.0.1:8000"
 
 // get request
@@ -9,19 +8,13 @@ export const getBudgetList = createAsyncThunk(
             method: "GET",
             mode: "cors",
             withCredentials: true,
-             
             headers: {
                 "Content-Type": "application/json",
                 "CSRF-Token": csrfToken,
-                // credentials: "include",
-                // withCredentials: true,
             },
             credentials: "include",         
         });
-        console.log(response);
         if (response.ok) {
-            console.log("response: ",response);
-            console.log(response.data);
             const budgetList = await response.json();
             return budgetList;
         } else {
@@ -30,6 +23,7 @@ export const getBudgetList = createAsyncThunk(
     }
 )
 
+// create budget slice
 export const budgetSlice = createSlice({
     name: "budget",
     initialState: {
@@ -43,6 +37,8 @@ export const budgetSlice = createSlice({
     }
 })
 
+// export actions
 export const { setBudgetList } = budgetSlice.actions;
 
+// export reducer
 export default budgetSlice.reducer;
