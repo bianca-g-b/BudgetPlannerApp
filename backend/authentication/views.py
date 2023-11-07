@@ -16,6 +16,12 @@ def get_csrf_token(request):
     csrf_token = get_token(request)
     return JsonResponse({"csrfToken": csrf_token})
 
+#user details
+def user_details(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+        print(username, "username")
+        return JsonResponse({"username": username})
 
 #registration
 @csrf_exempt
@@ -55,8 +61,8 @@ def signin(request):
         if user is not None:
             login(request, user, backend="django.contrib.auth.backends.ModelBackend")
             # get session id
-            session_id = request.session.session_key
-            print(session_id, "session id")
+            # session_id = request.session.session_key
+            # print(session_id, "session id")
             return JsonResponse({"message": "Login successful"}, status = 202)
         else:
             return JsonResponse({"message": "User login failed"}, status = 400)

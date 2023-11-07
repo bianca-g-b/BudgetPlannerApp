@@ -53,6 +53,7 @@ export const loginUser = async (username, password, csrfToken) => {
         credentials: "include",
     });
     if (response.ok) {
+        console.log(response.payload);
         return response;
     } else {
         alert("Login failed. Please try again.")
