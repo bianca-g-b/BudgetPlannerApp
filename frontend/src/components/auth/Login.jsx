@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCSRFToken, loginUser} from "./authActions";
+import { fetchCSRFToken, loginUser, fetchUser} from "./authActions";
 import {useNavigate } from "react-router-dom";
+import {setUser} from "../../redux/userSlice.js";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -17,7 +18,10 @@ function Login() {
         const response = await loginUser(username, password, csrfToken);
         if (response.status === 202)  {
             console.log("Login successful.");
-            navigate("/dashboard")
+            const user = await fetchUser(dispatch, csrfToken);
+            dispatch(setUser(user));
+            console.log("user in login:", user);
+            navigate("/dashboard");   
         } else {
             alert ("Login failed.Please try again.")
         }
