@@ -4,6 +4,7 @@ import {logoutUser, fetchUser} from "./auth/authActions.js";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {setUser} from "../redux/userSlice.js";
+import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 function BudgetList() {
     const [budgetList, setBudgetList] = useState([]);
@@ -11,13 +12,16 @@ function BudgetList() {
     const navigate = useNavigate();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user = useSelector((state) => state.user.username);
+    const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     console.log("user in budget:", user);
-    console.log(budgetList)
+    console.log("is authenticated in budget:", isAuthenticated);
+    console.log(budgetList);
 
     useEffect(()=> {
         async function getUser() {
             const user = await fetchUser(dispatch, csrfToken);
             dispatch(setUser(user));
+            dispatch(setIsAuthenticated(true));
         }
         if (!user) {     
             getUser();

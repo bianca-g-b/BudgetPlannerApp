@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCSRFToken, loginUser, fetchUser} from "./authActions";
 import {useNavigate } from "react-router-dom";
 import {setUser} from "../../redux/userSlice.js";
+import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
+    const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
 
     async function handleLogin(e) {
         e.preventDefault();
@@ -20,7 +22,9 @@ function Login() {
             console.log("Login successful.");
             const user = await fetchUser(dispatch, csrfToken);
             dispatch(setUser(user));
+            dispatch(setIsAuthenticated(true));
             console.log("user in login:", user);
+            console.log("is authenticated in login:",isAuthenticated);
             navigate("/dashboard");   
         } else {
             alert ("Login failed.Please try again.")
