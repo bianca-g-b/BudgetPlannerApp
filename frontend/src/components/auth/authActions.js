@@ -16,20 +16,27 @@ export const fetchCSRFToken = async (dispatch ) => {
 }
 
 export const fetchUser = async(dispatch, csrfToken) => {
-    const response = await fetch(`${baseUrl}/auth/user`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "CSRF-Token" : csrfToken,
-        },
-        credentials: "include"
-    });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setUser(data.username));
-        return data.username;
-    } else {
-        throw new Error("Failed to fetch user");
+    try {
+        const response = await fetch(`${baseUrl}/auth/user`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "CSRF-Token" : csrfToken,
+            },
+            credentials: "include"
+        })
+        if (response.ok) {
+            const data = await response.json();
+            dispatch(setUser(data.username));
+            return data.username;
+        } else {
+            const data = await response.json();
+            console.log(data);
+            return null;
+        }
+    } catch (error) {
+        console.log(error);
+        return null;
     }
 };
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {getBudgetList} from "../redux/budgetSlice.js";
-import {logoutUser, fetchUser} from "./auth/authActions.js";
+import {logoutUser, /*fetchUser*/} from "./auth/authActions.js";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {setUser} from "../redux/userSlice.js";
@@ -13,27 +13,17 @@ function BudgetList() {
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-    console.log("user in budget:", user);
-    console.log("is authenticated in budget:", isAuthenticated);
     console.log(budgetList);
-
-    useEffect(()=> {
-        async function getUser() {
-            const user = await fetchUser(dispatch, csrfToken);
-            dispatch(setUser(user));
-            dispatch(setIsAuthenticated(true));
-        }
-        if (!user) {     
-            getUser();
-        }
-    },
-    [user, dispatch, csrfToken])
 
 
     const handleLogout = async () => {
         const response  = await logoutUser(csrfToken);
         if (response.status === 202) {
             console.log("logout successful");
+            dispatch(setUser(null));
+            dispatch(setIsAuthenticated(false));
+            console.log(isAuthenticated, "logout");
+            console.log(user, "user after logout");
             navigate("/login") 
         } else {
             alert("Logout failed. Please try again.");

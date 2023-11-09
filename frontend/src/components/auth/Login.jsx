@@ -13,7 +13,7 @@ function Login() {
     const navigate = useNavigate();
 
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-
+    console.log(isAuthenticated, "first");
     async function handleLogin(e) {
         e.preventDefault();
         const csrfToken = await fetchCSRFToken(dispatch);
@@ -22,7 +22,11 @@ function Login() {
             console.log("Login successful.");
             const user = await fetchUser(dispatch, csrfToken);
             dispatch(setUser(user));
-            dispatch(setIsAuthenticated(true));
+            if (user) {
+                dispatch(setIsAuthenticated(true));
+            } else {
+                dispatch(setIsAuthenticated(false));
+            }
             console.log("user in login:", user);
             console.log("is authenticated in login:",isAuthenticated);
             navigate("/dashboard");   
