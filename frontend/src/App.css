@@ -1,5 +1,6 @@
-html, body {
-  background-color: rgb(228, 228, 228) !important;
+html, body, #root {
+  /* background-color: rgb(228, 228, 228) !important; */
+  background-image: url("./assets/3415325.jpg");
 }
 #root{
   min-width: 100vw;
@@ -8,12 +9,14 @@ html, body {
   justify-content: center;
   align-content: center;
   background-color: rgb(228, 228, 228);
+  color: white;
 }
 
 .full-form-area {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  /* background-color: white; */
+  background: rgba(16, 15, 39, 0.734);
   padding-top: 0.5%;
   padding-bottom: 0.5%;
   padding-left: 3%;
@@ -22,6 +25,11 @@ html, body {
   margin-top: 1%;
   margin-bottom: 1%;
   width: 45%;
+}
+
+.form-control {
+  background: rgba(26, 24, 49, 0.734) !important;
+  color: white !important;
 }
 
 .btn-outline-primary {
@@ -34,14 +42,44 @@ html, body {
   font-weight: bold;
 }
 
-.income-input {
-  background-color: #d1e7dd !important;
+.income-input,
+.list-group-item-success {
+  background-color: #04d979 !important;
+  font-weight: bold;
+  color: black !important;
 }
 
-.essential-input {
-  background-color:#f8d7da !important;
+.essential-input,
+.list-group-item-danger {
+  background-color:#a30f1b !important;
+  font-weight: bold;
+  color: black !important;
 }
 
-.non-essential-input {
-  background-color: #fff3cd !important;
+.non-essential-input,
+.list-group-item-warning {
+  background-color: #efb908 !important;
+  font-weight: bold;
+  color: black !important;
+}
+
+.list-group-item-primary {
+  background-color:#0d6efd !important;
+  font-weight: bold;
+  color: black !important;
+}
+
+.budget-div {
+  background: rgba(16, 15, 39, 0.734);
+  padding: 5%;
+  margin-top: 10%;
+  border-radius: 10px;
+}
+
+.list-group-item {
+  border: none !important;
+}
+
+.list-group {
+  border: solid 1px rgb(248, 248, 255) !important;
 }

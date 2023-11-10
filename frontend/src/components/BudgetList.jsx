@@ -48,7 +48,7 @@ function BudgetList() {
     }, [dispatch, csrfToken]);
 
     return (    
-        <div>
+        <div className = "budget-div" >
         <button onClick = {handleLogout}>Logout</button>
         <h1>Budget List</h1>
             {budgetList
