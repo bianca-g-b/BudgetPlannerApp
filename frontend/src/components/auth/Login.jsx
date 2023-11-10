@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCSRFToken, loginUser, fetchUser} from "./authActions";
 import {useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     console.log(isAuthenticated, "first");
 
@@ -36,6 +37,14 @@ function Login() {
             alert ("Login failed.Please try again.")
         }
     }
+
+    // if the user is logged in already, redirect to the dashboard
+    useEffect(()=>{
+        if (user && isAuthenticated) {
+            navigate("/dashboard");
+        }
+    },[user, isAuthenticated, navigate])
+
     return(
         <div className = "login-main">
             <h1 className = "login-form-title">Login here</h1>

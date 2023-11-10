@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from "react-redux";
 import { registerUser, fetchCSRFToken } from "./authActions";
+import { useNavigate } from "react-router-dom"
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -8,6 +9,10 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const user = useSelector((state) => state.user.username);
+    const isAuthenticated = useSelector((state) => state.authenticated.isAuthenticated);
 
     // create user account    
     async function handleRegister(e) {
@@ -28,6 +33,13 @@ function Register() {
             alert("Passwords do not match. Please try again.")
         }
     }
+
+    // if user is logged in already, redirect to dashboard
+    useEffect(()=>{
+        if (user && isAuthenticated) {
+            navigate("/dashboard")
+        }
+    },[user, isAuthenticated, navigate])
     
     return (
         <div className = "register-main">

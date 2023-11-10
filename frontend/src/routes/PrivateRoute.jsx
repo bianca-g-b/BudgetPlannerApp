@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-// import { Navigate } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 function PrivateRoute({children}) {
@@ -9,9 +9,7 @@ function PrivateRoute({children}) {
     console.log("user and auth state in private route:", user, isAuthenticated);
 
     return (
-        user && isAuthenticated ? children : null
-        // <Navigate to="/login" />
-    
+        user && isAuthenticated ? children : <Navigate to = "/login" />
     )
 }
 
