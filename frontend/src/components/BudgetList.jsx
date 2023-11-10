@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {setUser} from "../redux/userSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
+// import { setCSRFToken } from "../redux/csrfSlice.js";
 
 function BudgetList() {
     const [budgetList, setBudgetList] = useState([]);
@@ -15,13 +16,14 @@ function BudgetList() {
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     console.log(budgetList);
 
-
+    // logout user and clear states for user and isAuthenticated
     const handleLogout = async () => {
         const response  = await logoutUser(csrfToken);
         if (response.status === 202) {
             console.log("logout successful");
             dispatch(setUser(null));
             dispatch(setIsAuthenticated(false));
+            // dispatch(setCSRFToken(null));
             console.log(isAuthenticated, "logout");
             console.log(user, "user after logout");
             navigate("/login") 
@@ -30,7 +32,8 @@ function BudgetList() {
             throw new Error("Logout failed");
         }
     }
-        
+    
+    // fetch data
     useEffect(() => {
         async function fetchData() {
             dispatch(getBudgetList(csrfToken))

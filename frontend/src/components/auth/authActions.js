@@ -4,6 +4,7 @@ import {setUser} from "../../redux/userSlice";
 
 const baseUrl = "http://127.0.0.1:8000";
 
+// get CSRF token
 export const fetchCSRFToken = async (dispatch ) => {
         const response  = await fetch(`${baseUrl}/auth/csrf`);
         if (response.ok) {
@@ -15,6 +16,7 @@ export const fetchCSRFToken = async (dispatch ) => {
         }
 }
 
+// get user details
 export const fetchUser = async(dispatch, csrfToken) => {
     try {
         const response = await fetch(`${baseUrl}/auth/user`, {
@@ -40,6 +42,7 @@ export const fetchUser = async(dispatch, csrfToken) => {
     }
 };
 
+// register user
 export const registerUser = async (username, password, confirmPassword, csrfToken) => {
     const response = await fetch(`${baseUrl}/auth/signup`, {
         method: "POST",
@@ -64,6 +67,7 @@ export const registerUser = async (username, password, confirmPassword, csrfToke
     }
 };
 
+// login user
 export const loginUser = async (username, password, csrfToken) => {
     const response = await fetch(`${baseUrl}/auth/signin` , {
         method: "POST",
@@ -87,6 +91,7 @@ export const loginUser = async (username, password, csrfToken) => {
     }
 }
 
+// logout user
 export const logoutUser = async (csrfToken) => {
     const response = await fetch(`${baseUrl}/auth/signout`, {
         method: "POST",

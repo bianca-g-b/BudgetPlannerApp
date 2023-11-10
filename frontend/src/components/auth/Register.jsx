@@ -9,6 +9,7 @@ function Register() {
 
     const dispatch = useDispatch();
 
+    // create user account    
     async function handleRegister(e) {
         e.preventDefault();
         if (password === confirmPassword) {

@@ -14,6 +14,8 @@ function Login() {
 
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     console.log(isAuthenticated, "first");
+
+    // login user and set states for user and isAuthenticated if login is successful
     async function handleLogin(e) {
         e.preventDefault();
         const csrfToken = await fetchCSRFToken(dispatch);

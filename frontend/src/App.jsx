@@ -5,6 +5,7 @@ import MainPage from "./MainPage.jsx";
 import BudgetList from './components/BudgetList';
 import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
+import PrivateRoute from './routes/PrivateRoute.js';
 import { setIsAuthenticated } from "./redux/authenticatedSlice.js";
 import { fetchUser} from "./components/auth/authActions.js";
 import {setUser} from "./redux/userSlice.js";
@@ -18,7 +19,9 @@ function App() {
 
   console.log("user in budget:", user);
   console.log("is authenticated in budget:", isAuthenticated);
+  console.log("csrfToken in budget:", csrfToken);
 
+  // get user details on page refresh and set isAuthenticated to true if user is logged in
   useEffect(()=> {
     async function getUser() {
           const user = await fetchUser(dispatch, csrfToken);
@@ -35,8 +38,8 @@ function App() {
     } catch (error) {
         console.log(error);
     } 
-},
-[user, dispatch, csrfToken])
+  },
+[user, dispatch, csrfToken]);
 
   return (
     <>
@@ -44,7 +47,12 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<BudgetList />} />
+        
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <BudgetList />
+          </PrivateRoute>} 
+        />
       </Routes>
     </>
   )
