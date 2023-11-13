@@ -32,6 +32,10 @@ html, body, #root {
   color: white !important;
 }
 
+.form-control::placeholder {
+  color: white !important;
+}
+
 .btn-outline-primary {
   align-self: center !important;
 }

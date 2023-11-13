@@ -6,6 +6,7 @@ import BudgetList from './components/BudgetList';
 import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
+import AddBudget from './components/AddBudget.jsx';
 import { setIsAuthenticated } from "./redux/authenticatedSlice.js";
 import { fetchUser} from "./components/auth/authActions.js";
 import {setUser} from "./redux/userSlice.js";
@@ -50,6 +51,13 @@ function App() {
           <PrivateRoute>
             <BudgetList />
           </PrivateRoute>} 
+        />
+
+        <Route path="/dashboard/addbudget" element={
+          <PrivateRoute>
+            <AddBudget />
+          </PrivateRoute>
+          } 
         />
 
 <Route path="/" element={<MainPage />} />

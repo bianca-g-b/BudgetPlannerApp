@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getBudgetList} from "../redux/budgetSlice.js";
 import {logoutUser, /*fetchUser*/} from "./auth/authActions.js";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import {setUser} from "../redux/userSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 // import { setCSRFToken } from "../redux/csrfSlice.js";
@@ -47,8 +47,10 @@ function BudgetList() {
         fetchData()
     }, [dispatch, csrfToken]);
 
-    return (    
+    return ( 
+          
         <div className = "budget-div" >
+        <NavLink to="/dashboard/addbudget">Add budget</NavLink> 
         <button onClick = {handleLogout}>Logout</button>
         <h1>Budget List</h1>
             {budgetList
