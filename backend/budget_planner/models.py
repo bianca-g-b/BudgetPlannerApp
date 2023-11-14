@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from datetime import timedelta
+
+#create variable for present date and a a month after
+date_now = timezone.localdate
+next_month = timezone.localdate() + timedelta(days=30)
 
 # Create your models here.
 
@@ -9,10 +14,11 @@ from django.utils import timezone
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    date_created = models.DateField(auto_now_add=True)
-    date_updated = models.DateField(auto_now=True)
+    date_created = models.DateField(auto_now_add=True) #only updates when created
+    date_updated = models.DateField(auto_now=True) #updates every time is modified
     #budget
-    day_month_year = models.DateField(verbose_name="Day Month and Year", help_text = "e.g. 05/09/2023))", default = timezone.now().date() , blank=False, null=False)
+    date_from = models.DateField(verbose_name="Date from: ", help_text = "e.g. 05/09/2023", default = date_now , blank=False, null=False)
+    date_to = models.DateField(verbose_name="Date to:", help_text="eg. 05/10/2023", default=next_month, blank=False, null=False)
     total_income = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Total Income")
     #essential expenses
     housing = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Housing Costs")

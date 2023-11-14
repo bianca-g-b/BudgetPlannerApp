@@ -7,7 +7,8 @@ class BudgetForm(forms.ModelForm):
     class Meta():
         model = Budget
         fields = (
-            'day_month_year', 
+            'date_from',
+            'date_to',
             'total_income', 
             'housing', 
             'utility_bills', 
