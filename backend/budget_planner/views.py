@@ -31,6 +31,7 @@ class BudgetView(viewsets.ModelViewSet):
         print(user, "testing in budget views")
         return Budget.objects.filter(user_id=user.id)
 
+
 # def budget_form(request):
 #     if request.method == "POST":
 #         form = BudgetForm(request.POST)

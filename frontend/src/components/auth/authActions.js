@@ -1,5 +1,5 @@
 import { setCSRFToken} from "../../redux/csrfSlice";
-import {setUser} from "../../redux/userSlice";
+import {setUser, setUserId } from "../../redux/userSlice";
 
 
 const baseUrl = "http://127.0.0.1:8000";
@@ -30,6 +30,7 @@ export const fetchUser = async(dispatch, csrfToken) => {
         if (response.ok) {
             const data = await response.json();
             dispatch(setUser(data.username));
+            dispatch(setUserId(data.user_id));
             return data.username;
         } else {
             const data = await response.json();
@@ -83,7 +84,6 @@ export const loginUser = async (username, password, csrfToken) => {
         credentials: "include",
     });
     if (response.ok) {
-        console.log(response.payload);
         return response;
     } else {
         alert("Login failed. Please try again.")

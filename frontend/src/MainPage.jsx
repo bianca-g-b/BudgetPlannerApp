@@ -210,7 +210,7 @@ function MainPage() {
                 placeholder='0.00'
                 type='number'
                 step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...totalNonEssentialExpenses, unsecuredDebt: parseFloat(event.target.value)})}
+                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, unsecuredDebt: parseFloat(event.target.value)})}
                 />
             </InputGroup>
 

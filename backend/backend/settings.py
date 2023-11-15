@@ -144,7 +144,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_HEADERS = [
-    "csrf-token",
+    "CSRF-Token",
+    'X-CSRFToken',
     "content-type",
     "accept",
     "credentials",

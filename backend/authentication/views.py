@@ -20,8 +20,8 @@ def get_csrf_token(request):
 def user_details(request):
     if request.user.is_authenticated:
         username = request.user.username
-        # print(username, "username")
-        return JsonResponse({"username": username}, status=200)
+        user_id = request.user.id
+        return JsonResponse({"username": username, "user_id": user_id}, status=200)
     else:
         return JsonResponse({"message": "User details not found"}, status=400)
 
