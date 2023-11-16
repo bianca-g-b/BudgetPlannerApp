@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCSRFToken, loginUser, fetchUser} from "./authActions";
+import { fetchCSRFToken, loginUser, fetchUser} from "../../actions/authActions.js";
 import {useNavigate } from "react-router-dom";
 import {setUser} from "../../redux/userSlice.js";
 import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";

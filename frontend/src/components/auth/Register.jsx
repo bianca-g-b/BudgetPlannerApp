@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import { registerUser, fetchCSRFToken } from "./authActions";
+import { registerUser, fetchCSRFToken } from "../../actions/authActions";
 import { useNavigate } from "react-router-dom"
 
 function Register() {

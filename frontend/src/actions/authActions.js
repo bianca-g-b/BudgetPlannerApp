@@ -1,5 +1,5 @@
-import { setCSRFToken} from "../../redux/csrfSlice";
-import {setUser, setUserId } from "../../redux/userSlice";
+import { setCSRFToken} from "../redux/csrfSlice";
+import {setUser, setUserId } from "../redux/userSlice";
 
 
 const baseUrl = "http://127.0.0.1:8000";

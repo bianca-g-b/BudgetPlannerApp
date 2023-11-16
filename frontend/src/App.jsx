@@ -8,7 +8,7 @@ import Login from "./components/auth/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import AddBudget from './components/AddBudget.jsx';
 import { setIsAuthenticated } from "./redux/authenticatedSlice.js";
-import { fetchUser } from "./components/auth/authActions.js";
+import { fetchUser } from "./actions/authActions.js";
 import {setUser, setUserId} from "./redux/userSlice.js";
 import { useEffect } from 'react';
 

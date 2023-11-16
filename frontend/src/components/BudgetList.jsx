@@ -1,20 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
-import {getBudgetList} from "../redux/budgetSlice.js";
-import {logoutUser, /*fetchUser*/} from "./auth/authActions.js";
-import { useState, useEffect } from "react";
+import {getBudgetList} from "../actions/budgetActions.js";
+import {logoutUser, /*fetchUser*/} from "../actions/authActions.js";
+import { useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import {setUser} from "../redux/userSlice.js";
+import { setBudgetList } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
-// import { setCSRFToken } from "../redux/csrfSlice.js";
+
 
 function BudgetList() {
-    const [budgetList, setBudgetList] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-    console.log(budgetList);
+    const budgetList = useSelector((state) => state.budget.budgetList);
+    console.log(budgetList, "testBudgetList");
 
     // logout user and clear states for user and isAuthenticated
     const handleLogout = async () => {
@@ -23,7 +24,6 @@ function BudgetList() {
             console.log("logout successful");
             dispatch(setUser(null));
             dispatch(setIsAuthenticated(false));
-            // dispatch(setCSRFToken(null));
             console.log(isAuthenticated, "logout");
             console.log(user, "user after logout");
             navigate("/login") 
@@ -39,10 +39,11 @@ function BudgetList() {
             dispatch(getBudgetList(csrfToken))
                 .then((action) => {
                     if (getBudgetList.fulfilled.match(action)) {
-                        console.log(action.payload);
-                        setBudgetList(action.payload);
+                        console.log(action.payload, "action payload");
+                        dispatch(setBudgetList(action.payload));
                     }
                 })
+                
         }
         fetchData()
     }, [dispatch, csrfToken]);
