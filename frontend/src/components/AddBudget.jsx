@@ -1,12 +1,11 @@
-// import Form from 'react-bootstrap/Form';
-// import InputGroup from 'react-bootstrap/InputGroup';
-// import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBudget } from '../actions/budgetActions.js';
 import { useState } from 'react';
-import MainForm from "./MainForm.jsx";
-import BudgetFormInputs from "./BudgetFormInputs.jsx";
-import FormButton from "./FormButton.jsx";
+import MainForm from "./form/MainForm.jsx";
+import DateInputs from './form/DateInputs.jsx';
+import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
+import FormButton from "./form/FormButton.jsx";
+
 
 function AddBudget() {
     const [budgetItems, setBudgetItems] = useState({
@@ -76,9 +75,11 @@ function AddBudget() {
         >
             <h3>Add Budget</h3>
             <br/>
-            <BudgetFormInputs
+            <DateInputs 
                 handleDateFrom = {(event)=> setBudgetItems({...budgetItems, dateFrom: event.target.value})}
                 handleDateTo = {(event) => setBudgetItems({...budgetItems, dateTo: event.target.value})}
+            ></DateInputs>
+            <BudgetFormInputs
                 handleTotalIncome = {(event)=> setBudgetItems({...budgetItems, income: event.target.value})}
                 handleHousing = {(event)=> setBudgetItems({...budgetItems, housing: event.target.value})}
                 handleUtilities = {(event)=> setBudgetItems({...budgetItems, utilities: event.target.value})} 

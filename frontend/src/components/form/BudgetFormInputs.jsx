@@ -2,9 +2,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
 
-function BudgetFormInputs(
-    {handleDateFrom,
-    handleDateTo,
+function BudgetFormInputs({
     handleTotalIncome,
     handleHousing,
     handleUtilities,
@@ -18,34 +16,10 @@ function BudgetFormInputs(
     handleLeisure,
     handleHolidays,
     handleOtherNonEssential,
-    handleUnsecured,}
-    ) {
+    handleUnsecured,
+}) {
     return (
             <>
-
-            <Form.Label htmlFor="basic-url">From:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="date-input"
-                >&#x1F4C5;</InputGroup.Text>
-                <Form.Control aria-label="Date"
-                    type='date'
-                    onChange = {handleDateFrom}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">To:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="date-input"
-                >&#x1F4C5;</InputGroup.Text>
-                <Form.Control aria-label="Date"
-                    data-testid="date-display"
-                    type='date'
-                    onChange = {handleDateTo}
-                />
-            </InputGroup>
-
             <Form.Label htmlFor="basic-url"
             >Total income:</Form.Label>
             <InputGroup className="mb-3">
@@ -229,13 +203,10 @@ function BudgetFormInputs(
                 />
             </InputGroup>
             </>
-            // </Form>
     )
 }
 
 BudgetFormInputs.propTypes = {
-    handleDateFrom: PropTypes.func.isRequired,
-    handleDateTo: PropTypes.func.isRequired,
     handleTotalIncome: PropTypes.func.isRequired,
     handleHousing: PropTypes.func.isRequired,
     handleUtilities: PropTypes.func.isRequired,

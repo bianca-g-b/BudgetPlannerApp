@@ -1,6 +1,6 @@
-import MainForm from "./MainForm.jsx";
-import BudgetFormInputs from "./BudgetFormInputs.jsx";
-import FormButton from "./FormButton.jsx";
+import MainForm from "./form/MainForm.jsx";
+import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
+import FormButton from "./form/FormButton.jsx";
 
 function UpdateBudget() {
     return(

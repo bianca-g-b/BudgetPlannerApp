@@ -1,6 +1,6 @@
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
+import MainForm from './components/form/MainForm';
+import BudgetFormInputs from './components/form/BudgetFormInputs';
+import FormListResults from './components/form/FormListResults';
 import { useState, useEffect } from 'react';
 
 function MainPage() {
@@ -27,7 +27,7 @@ function MainPage() {
 
     // Set total income
     function handleTotalIncomeChange(event) {
-        setTotalIncome(event.target.value);
+        setTotalIncome(parseFloat(event.target.value));
     }
     
     // Set total essential, total non-essential expenses and savings
@@ -40,188 +40,31 @@ function MainPage() {
     }, [essentialExpenses, totalEssentialExpenses, nonEssentialExpenses, totalNonEssentialExpenses, savings, totalIncome])
 
     return (
-            <Form className = "full-form-area">
+        <MainForm>
             <h3 className = "app-title">Spendings tracker</h3><br/>
-
-            <Form.Label htmlFor="basic-url"
-            >Total income:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="income-input"
-                >£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01}
-                onChange={handleTotalIncomeChange}
-                 />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Housing(rent, mortgage, etc):</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="essential-input"
-                >£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01}
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, housing: parseFloat(event.target.value)})}
-                 />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Utilities(electricity, water, etc):</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, utilities: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Transportation(gas, bus, etc):</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01}
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, transportation: parseFloat(event.target.value)})}
-                 />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Household goods and services:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, household: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Children related(expenses, etc):</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, children: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Cleaning and toiletries:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, cleaning: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Other essential expenses:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setEssentialExpenses({...essentialExpenses, otherEssential: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Luxury and gifts:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="non-essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, luxury: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Leisure and entertainment:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="non-essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, leisure: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Holidays expenses:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="non-essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, holidays: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Other non-essential expenses:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="non-essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, otherNonEssential: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <Form.Label htmlFor="basic-url">Unsecured debt:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                className="non-essential-input">£</InputGroup.Text>
-                <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder='0.00'
-                type='number'
-                step={0.01} 
-                onChange = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, unsecuredDebt: parseFloat(event.target.value)})}
-                />
-            </InputGroup>
-
-            <ListGroup>
-                <ListGroup.Item variant="success">Total income: £{totalIncome}</ListGroup.Item>
-                <ListGroup.Item variant="danger">Total essential expenses: £{totalEssentialExpenses}</ListGroup.Item>
-                <ListGroup.Item variant="warning">Total non-essential expenses: £{totalNonEssentialExpenses}</ListGroup.Item>
-                <ListGroup.Item variant="primary">Total savings: £{savings}</ListGroup.Item>
-            </ListGroup>
-
-            </Form>
+            <BudgetFormInputs
+                handleTotalIncome = {handleTotalIncomeChange}
+                handleHousing = {(event)=> setEssentialExpenses({...essentialExpenses, housing: parseFloat(event.target.value)})}
+                handleUtilities = {(event)=> setEssentialExpenses({...essentialExpenses, utilities: parseFloat(event.target.value)})}
+                handleFood = {(event)=> setEssentialExpenses({...essentialExpenses, food_drinks: parseFloat(event.target.value)})}
+                handleTransport = {(event)=> setEssentialExpenses({...essentialExpenses, transportation: parseFloat(event.target.value)})}
+                handleHousehold = {(event)=> setEssentialExpenses({...essentialExpenses, household: parseFloat(event.target.value)})}
+                handleChildcare = {(event)=> setEssentialExpenses({...essentialExpenses, children: parseFloat(event.target.value)})}
+                handleCleaning = {(event)=> setEssentialExpenses({...essentialExpenses, cleaning: parseFloat(event.target.value)})}
+                handleOtherEssential = {(event)=> setEssentialExpenses({...essentialExpenses, otherEssential: parseFloat(event.target.value)})}
+                handleLuxury = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, luxury: parseFloat(event.target.value)})}
+                handleLeisure = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, leisure: parseFloat(event.target.value)})}
+                handleHolidays = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, holidays: parseFloat(event.target.value)})}
+                handleOtherNonEssential = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, otherNonEssential: parseFloat(event.target.value)})}
+                handleUnsecured = {(event)=> setNonEssentialExpenses({...nonEssentialExpenses, unsecuredDebt: parseFloat(event.target.value)})} 
+            ></BudgetFormInputs>
+            <FormListResults
+                totalIncome = {totalIncome}
+                totalEssentialExpenses = {totalEssentialExpenses}
+                totalNonEssentialExpenses = {totalNonEssentialExpenses}
+                savings = {savings}
+            ></FormListResults>
+        </MainForm>            
     )
 }
 
