@@ -1,9 +1,12 @@
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
+// import Form from 'react-bootstrap/Form';
+// import InputGroup from 'react-bootstrap/InputGroup';
+// import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { addBudget } from '../redux/budgetSlice.js';
+import { addBudget } from '../actions/budgetActions.js';
 import { useState } from 'react';
+import MainForm from "./MainForm.jsx";
+import BudgetFormInputs from "./BudgetFormInputs.jsx";
+import FormButton from "./FormButton.jsx";
 
 function AddBudget() {
     const [budgetItems, setBudgetItems] = useState({
@@ -53,7 +56,7 @@ function AddBudget() {
         };
         // console.log(details);
         // console.log(csrfToken);
-        // console.log(user_id);
+        console.log(user_id);
 
         try {
             dispatch(addBudget(details, csrfToken))
@@ -68,222 +71,35 @@ function AddBudget() {
     }
 
     return(
-        <Form className = "full-form-area"
-            onSubmit = {handleCreateBudget}
+        <MainForm
+            handleForm = {handleCreateBudget}
         >
-        <h3 className = "app-title">Spendings tracker</h3><br/>
+            <h3>Add Budget</h3>
+            <br/>
+            <BudgetFormInputs
+                handleDateFrom = {(event)=> setBudgetItems({...budgetItems, dateFrom: event.target.value})}
+                handleDateTo = {(event) => setBudgetItems({...budgetItems, dateTo: event.target.value})}
+                handleTotalIncome = {(event)=> setBudgetItems({...budgetItems, income: event.target.value})}
+                handleHousing = {(event)=> setBudgetItems({...budgetItems, housing: event.target.value})}
+                handleUtilities = {(event)=> setBudgetItems({...budgetItems, utilities: event.target.value})} 
+                handleFood = {(event)=> setBudgetItems({...budgetItems, food_drinks: event.target.value})}
+                handleTransport = {(event)=> setBudgetItems({...budgetItems, transport: event.target.value })}
+                handleHousehold = {(event)=> setBudgetItems({...budgetItems, household: event.target.value})}
+                handleChildcare = {(event)=> setBudgetItems({...budgetItems, children: event.target.value})}
+                handleCleaning = {(event)=> setBudgetItems({...budgetItems, cleaning: event.target.value})}
+                handleOtherEssential = {(event)=> setBudgetItems({...budgetItems, otherEssential: event.target.value})}
+                handleLuxury = {(event)=> setBudgetItems({...budgetItems, luxury: event.target.value})}
+                handleLeisure = {(event)=>setBudgetItems({...budgetItems, leisure: event.target.value})}
+                handleHolidays = {(event)=>setBudgetItems({...budgetItems, holidays: event.target.value})} 
+                handleOtherNonEssential = {(event)=>setBudgetItems({...budgetItems, otherNonEssential: event.target.value})}
+                handleUnsecured = {(event)=>setBudgetItems({...budgetItems, unsecuredDebt: event.target.value})}
+            ></BudgetFormInputs>
+            <FormButton
+                buttonTitle="Add Budget"
+            >
+            </FormButton>
 
-        <Form.Label htmlFor="basic-url"
-        >From:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-                className="date-input"
-            >&#x1F4C5;</InputGroup.Text>
-            <Form.Control aria-label="Date"
-            type='date'
-            onChange = {(event)=> setBudgetItems({...budgetItems, dateFrom: event.target.value})}
-             />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url"
-        >To:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-                className="date-input"
-            >&#x1F4C5;</InputGroup.Text>
-            <Form.Control aria-label="Date"
-            data-testid="date-display"
-            type='date'
-            onChange = {(event) => setBudgetItems({...budgetItems, dateTo: event.target.value})}
-             />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url"
-        >Total income:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-                className="income-input"
-            >£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, income: event.target.value})}
-             />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Housing(rent, mortgage, etc):</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-                className="essential-input"
-            >£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, housing: event.target.value})}
-             />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Utilities(electricity, water, etc):</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, utilities: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Food and other groceries:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Food"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, food_drinks: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Transportation(gas, bus, etc):</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, transport: event.target.value })}
-             />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Household goods and services:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01} 
-            onChange = {(event)=> setBudgetItems({...budgetItems, household: event.target.value})}
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Children related(expenses, etc):</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, children: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Cleaning and toiletries:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01} 
-            onChange = {(event)=> setBudgetItems({...budgetItems, cleaning: event.target.value})}
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Other essential expenses:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange={(event)=> setBudgetItems({...budgetItems, otherEssential: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Luxury and gifts:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="non-essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange = {(event)=> setBudgetItems({...budgetItems, luxury: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Leisure and entertainment:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="non-essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange={(event)=>setBudgetItems({...budgetItems, leisure: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Holidays expenses:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="non-essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange={(event)=>setBudgetItems({...budgetItems, holidays: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Other non-essential expenses:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="non-essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange={(event)=>setBudgetItems({...budgetItems, otherNonEssential: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Form.Label htmlFor="basic-url">Unsecured debt:</Form.Label>
-        <InputGroup className="mb-3">
-            <InputGroup.Text
-            className="non-essential-input">£</InputGroup.Text>
-            <Form.Control aria-label="Amount"
-            inputMode='decimal'
-            placeholder='0.00'
-            type='number'
-            step={0.01}
-            onChange={(event)=>setBudgetItems({...budgetItems, unsecuredDebt: event.target.value})} 
-            />
-        </InputGroup>
-
-        <Button type="submit" variant="light">Save</Button>
-
-        </Form>
+        </MainForm>
     )
 }
 

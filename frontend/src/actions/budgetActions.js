@@ -27,7 +27,6 @@ export const getBudgetList = createAsyncThunk(
 export const addBudget = createAsyncThunk(
     "api/budget", async(details, thunkAPI) => {
         const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
-        console.log("test in slice:", csrfToken);
         const response = await fetch(`${baseUrl}/api/budget/`, {
             method: "POST",
             mode: "cors",
@@ -43,6 +42,30 @@ export const addBudget = createAsyncThunk(
             const newBudget = await response.json();
             console.log(newBudget);
             return newBudget;
+        } else {
+            return thunkAPI.rejectWithValue(response);
+        }
+    }
+)
+
+// patch request - edit a budget
+export const editBudget = createAsyncThunk(
+    "api/budget", async(id, details, thunkAPI) => {
+        const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+        const response = await fetch(`${baseUrl}/api/budget/${id}`, {
+            method: "PATCH",
+            mode: "cors",
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+            credentials: "include",
+            body: JSON.stringify(details),
+        });
+        if (response.ok) {
+            const editedBudget = await response.json();
+            return editedBudget;
         } else {
             return thunkAPI.rejectWithValue(response);
         }
