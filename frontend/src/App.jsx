@@ -1,5 +1,6 @@
 import './App.css';
-import {Routes, Route} from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import MainPage from "./MainPage.jsx";
 import BudgetList from './components/BudgetList';
@@ -7,10 +8,10 @@ import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import AddBudget from './components/AddBudget.jsx';
+import UpdateBudget from './components/UpdateBudget.jsx';
 import { setIsAuthenticated } from "./redux/authenticatedSlice.js";
-import { fetchUser } from "./actions/authActions.js";
 import {setUser, setUserId} from "./redux/userSlice.js";
-import { useEffect } from 'react';
+import { fetchUser } from "./actions/authActions.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,7 +62,14 @@ function App() {
           } 
         />
 
-<Route path="/" element={<MainPage />} />
+        <Route path="/dashboard/:id" element={
+          <PrivateRoute>
+            <UpdateBudget />
+          </PrivateRoute>
+          } 
+        />
+
+        <Route path="/" element={<MainPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import {getBudgetList} from "../actions/budgetActions.js";
-import {logoutUser, /*fetchUser*/} from "../actions/authActions.js";
 import { useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import {getBudgetList} from "../actions/budgetActions.js";
+import {logoutUser} from "../actions/authActions.js";
 import {setUser} from "../redux/userSlice.js";
 import { setBudgetList } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
@@ -59,6 +59,7 @@ function BudgetList() {
                 <ul key = {index}>
                 <li>Housing costs: {budget.housing}</li>
                 <li>Transport costs: {budget.transport}</li>
+                <NavLink to={`/dashboard/${budget.id}`}>Edit</NavLink>
                 </ul>
             ))}
         </div>
