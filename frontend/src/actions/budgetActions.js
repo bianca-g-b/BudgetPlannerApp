@@ -71,3 +71,26 @@ export const editBudget = createAsyncThunk(
         }
     }
 )
+
+// delete request - delete a budget
+export const deleteBudget = createAsyncThunk(
+    "api/budget", async(id, thunkAPI) => {
+        const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+        const response = await fetch(`${baseUrl}/api/budget/${id}`,{
+            method: "DELETE",
+            mode: "cors",
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+            credentials: "include",
+        });
+        if (response.ok) {
+            const deletedTask = await response.json();
+            return deletedTask;
+        } else {
+            return thunkAPI.rejectWithValue(response);
+        }
+    }
+)
