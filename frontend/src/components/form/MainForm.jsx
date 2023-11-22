@@ -15,7 +15,7 @@ function MainForm(
 
 MainForm.propTypes = {
     handleForm: PropTypes.func,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node/*.isRequired*/,
 }
 
 export default MainForm;

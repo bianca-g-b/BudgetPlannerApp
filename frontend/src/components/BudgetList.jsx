@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import {getBudgetList} from "../actions/budgetActions.js";
+import {getBudgetList, getBudgetById} from "../actions/budgetActions.js";
 import {logoutUser} from "../actions/authActions.js";
 import {setUser} from "../redux/userSlice.js";
-import { setBudgetList } from "../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 
@@ -16,6 +16,7 @@ function BudgetList() {
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     const budgetList = useSelector((state) => state.budget.budgetList);
     console.log(budgetList, "testBudgetList");
+    const budgetByidtest = useSelector((state)=> state.budget.budgetById)
 
     // logout user and clear states for user and isAuthenticated
     const handleLogout = async () => {
@@ -48,6 +49,17 @@ function BudgetList() {
         fetchData()
     }, [dispatch, csrfToken]);
 
+    async function budgetById(id) {
+        dispatch(getBudgetById(id))
+            .then((action)=> {
+                if (getBudgetById.fulfilled.match(action)) {
+                    console.log(action.payload, "budget by id - action");
+                    dispatch(setBudgetById(action.payload))
+                    console.log(budgetByidtest, "testing state budgetbyid")
+                }
+            })
+    }
+
     return ( 
           
         <div className = "budget-div" >
@@ -59,7 +71,10 @@ function BudgetList() {
                 <ul key = {index}>
                 <li>Housing costs: {budget.housing}</li>
                 <li>Transport costs: {budget.transport}</li>
-                <NavLink to={`/dashboard/${budget.id}`}>Edit</NavLink>
+                <NavLink 
+                    to={`/dashboard/${budget.id}`}
+                    onClick = {()=> budgetById(budget.id)}
+                    >Edit</NavLink>
                 </ul>
             ))}
         </div>

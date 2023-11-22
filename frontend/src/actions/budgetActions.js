@@ -23,6 +23,29 @@ export const getBudgetList = createAsyncThunk(
     }
 )
 
+// get request - get a budget by id
+export const getBudgetById = createAsyncThunk(
+    "api/budget", async(id, thunkAPI)=>{
+        const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+        const response = await fetch(`${baseUrl}/api/budget/${id}/`, {
+            method: "GET",
+            mode: "cors",
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken,
+            },
+            credentials: "include",
+        });
+        if (response.ok) {
+            const budgetById = await response.json();
+            return budgetById
+        } else {
+            return thunkAPI.rejectWithValue(response);
+        }
+    }
+)
+
 // post request - create a budget
 export const addBudget = createAsyncThunk(
     "api/budget", async(details, thunkAPI) => {
