@@ -17,19 +17,18 @@ logger = logging.getLogger(__name__)
 
 
 class BudgetView(viewsets.ModelViewSet):
-    # authentication_classes = [ SessionAuthentication, BasicAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [ SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = BudgetSerializer
     queryset = Budget.objects.all()
     # Restrict access to only authenticated users based on user id
     def get_queryset(self):
         user = self.request.user
         logger.info(f"User: {user} ")
-        # test = User.objects.get()
-        # print(test, "testing")
         print(self.request, "testing more")
         print(user, "testing in budget views")
         return Budget.objects.filter(user_id=user.id)
+    
 
 
 # def budget_form(request):
