@@ -17,6 +17,21 @@ function BudgetFormInputs({
     handleHolidays,
     handleOtherNonEssential,
     handleUnsecured,
+    placeholder,
+    incomeValue,
+    housingValue,
+    utilitiesValue,
+    foodValue,
+    transportValue,
+    householdValue,
+    childcareValue,
+    cleaningValue,
+    otherEssentialValue,
+    luxuryValue,
+    leisureValue,
+    holidaysValue,
+    otherNonEssentialValue,
+    unsecuredValue,
 }) {
     return (
             <>
@@ -28,10 +43,11 @@ function BudgetFormInputs({
                 >£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01}
                 onChange={handleTotalIncome}
+                value={incomeValue}
                  />
             </InputGroup>
 
@@ -42,10 +58,11 @@ function BudgetFormInputs({
                 >£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01}
                 onChange = {handleHousing}
+                value={housingValue}
                  />
             </InputGroup>
 
@@ -54,10 +71,11 @@ function BudgetFormInputs({
                 <InputGroup.Text className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleUtilities}
+                value={utilitiesValue}
                 />
             </InputGroup>
 
@@ -66,10 +84,11 @@ function BudgetFormInputs({
                 <InputGroup.Text className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Food"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01}
                 onChange = {handleFood} 
+                value={foodValue}
                 />
             </InputGroup>
 
@@ -79,10 +98,11 @@ function BudgetFormInputs({
                 className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01}
                 onChange = {handleTransport}
+                value={transportValue}
                  />
             </InputGroup>
 
@@ -92,10 +112,11 @@ function BudgetFormInputs({
                 className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleHousehold}
+                value={householdValue}
                 />
             </InputGroup>
 
@@ -105,10 +126,11 @@ function BudgetFormInputs({
                 className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleChildcare}
+                value={childcareValue}
                 />
             </InputGroup>
 
@@ -118,10 +140,11 @@ function BudgetFormInputs({
                 className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleCleaning}
+                value={cleaningValue}
                 />
             </InputGroup>
 
@@ -131,10 +154,11 @@ function BudgetFormInputs({
                 className="essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleOtherEssential}
+                value={otherEssentialValue}
                 />
             </InputGroup>
 
@@ -144,10 +168,11 @@ function BudgetFormInputs({
                 className="non-essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleLuxury}
+                value={luxuryValue}
                 />
             </InputGroup>
 
@@ -157,10 +182,11 @@ function BudgetFormInputs({
                 className="non-essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleLeisure}
+                value={leisureValue}
                 />
             </InputGroup>
 
@@ -170,10 +196,11 @@ function BudgetFormInputs({
                 className="non-essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleHolidays}
+                value={holidaysValue}
                 />
             </InputGroup>
 
@@ -183,10 +210,11 @@ function BudgetFormInputs({
                 className="non-essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleOtherNonEssential}
+                value={otherNonEssentialValue}
                 />
             </InputGroup>
 
@@ -196,10 +224,11 @@ function BudgetFormInputs({
                 className="non-essential-input">£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
                 inputMode='decimal'
-                placeholder='0.00'
+                placeholder={placeholder}
                 type='number'
                 step={0.01} 
                 onChange = {handleUnsecured}
+                value={unsecuredValue}
                 />
             </InputGroup>
             </>
@@ -207,20 +236,35 @@ function BudgetFormInputs({
 }
 
 BudgetFormInputs.propTypes = {
-    handleTotalIncome: PropTypes.func.isRequired,
-    handleHousing: PropTypes.func.isRequired,
-    handleUtilities: PropTypes.func.isRequired,
-    handleFood: PropTypes.func.isRequired,
-    handleTransport: PropTypes.func.isRequired,
-    handleHousehold: PropTypes.func.isRequired,
-    handleChildcare: PropTypes.func.isRequired,
-    handleCleaning: PropTypes.func.isRequired,
-    handleOtherEssential: PropTypes.func.isRequired,
-    handleLuxury: PropTypes.func.isRequired,
-    handleLeisure: PropTypes.func.isRequired,
-    handleHolidays: PropTypes.func.isRequired,
-    handleOtherNonEssential: PropTypes.func.isRequired,
-    handleUnsecured: PropTypes.func.isRequired,
+    handleTotalIncome: PropTypes.func,
+    handleHousing: PropTypes.func,
+    handleUtilities: PropTypes.func,
+    handleFood: PropTypes.func,
+    handleTransport: PropTypes.func,
+    handleHousehold: PropTypes.func,
+    handleChildcare: PropTypes.func,
+    handleCleaning: PropTypes.func,
+    handleOtherEssential: PropTypes.func,
+    handleLuxury: PropTypes.func,
+    handleLeisure: PropTypes.func,
+    handleHolidays: PropTypes.func,
+    handleOtherNonEssential: PropTypes.func,
+    handleUnsecured: PropTypes.func,
+    placeholder: PropTypes.number,
+    incomeValue: PropTypes.number,
+    housingValue: PropTypes.number,
+    utilitiesValue: PropTypes.number,
+    foodValue: PropTypes.number,
+    transportValue: PropTypes.number,
+    householdValue: PropTypes.number,
+    childcareValue: PropTypes.number,
+    cleaningValue: PropTypes.number,
+    otherEssentialValue: PropTypes.number,
+    luxuryValue: PropTypes.number,
+    leisureValue: PropTypes.number,
+    holidaysValue: PropTypes.number,
+    otherNonEssentialValue: PropTypes.number,
+    unsecuredValue: PropTypes.number,
 }
 
 export default BudgetFormInputs;

@@ -80,20 +80,21 @@ function AddBudget() {
                 handleDateTo = {(event) => setBudgetItems({...budgetItems, dateTo: event.target.value})}
             ></DateInputs>
             <BudgetFormInputs
-                handleTotalIncome = {(event)=> setBudgetItems({...budgetItems, income: event.target.value})}
-                handleHousing = {(event)=> setBudgetItems({...budgetItems, housing: event.target.value})}
-                handleUtilities = {(event)=> setBudgetItems({...budgetItems, utilities: event.target.value})} 
-                handleFood = {(event)=> setBudgetItems({...budgetItems, food_drinks: event.target.value})}
-                handleTransport = {(event)=> setBudgetItems({...budgetItems, transport: event.target.value })}
-                handleHousehold = {(event)=> setBudgetItems({...budgetItems, household: event.target.value})}
-                handleChildcare = {(event)=> setBudgetItems({...budgetItems, children: event.target.value})}
-                handleCleaning = {(event)=> setBudgetItems({...budgetItems, cleaning: event.target.value})}
-                handleOtherEssential = {(event)=> setBudgetItems({...budgetItems, otherEssential: event.target.value})}
-                handleLuxury = {(event)=> setBudgetItems({...budgetItems, luxury: event.target.value})}
-                handleLeisure = {(event)=>setBudgetItems({...budgetItems, leisure: event.target.value})}
-                handleHolidays = {(event)=>setBudgetItems({...budgetItems, holidays: event.target.value})} 
-                handleOtherNonEssential = {(event)=>setBudgetItems({...budgetItems, otherNonEssential: event.target.value})}
-                handleUnsecured = {(event)=>setBudgetItems({...budgetItems, unsecuredDebt: event.target.value})}
+                handleTotalIncome = {(event)=> setBudgetItems({...budgetItems, income: parseFloat(event.target.value)})}
+                handleHousing = {(event)=> setBudgetItems({...budgetItems, housing: parseFloat(event.target.value)})}
+                handleUtilities = {(event)=> setBudgetItems({...budgetItems, utilities: parseFloat(event.target.value)})} 
+                handleFood = {(event)=> setBudgetItems({...budgetItems, food_drinks: parseFloat(event.target.value)})}
+                handleTransport = {(event)=> setBudgetItems({...budgetItems, transport: parseFloat(event.target.value)})}
+                handleHousehold = {(event)=> setBudgetItems({...budgetItems, household: parseFloat(event.target.value)})}
+                handleChildcare = {(event)=> setBudgetItems({...budgetItems, children: parseFloat(event.target.value)})}
+                handleCleaning = {(event)=> setBudgetItems({...budgetItems, cleaning: parseFloat(event.target.value)})}
+                handleOtherEssential = {(event)=> setBudgetItems({...budgetItems, otherEssential: parseFloat(event.target.value)})}
+                handleLuxury = {(event)=> setBudgetItems({...budgetItems, luxury: parseFloat(event.target.value)})}
+                handleLeisure = {(event)=>setBudgetItems({...budgetItems, leisure: parseFloat(event.target.value)})}
+                handleHolidays = {(event)=>setBudgetItems({...budgetItems, holidays: parseFloat(event.target.value)})} 
+                handleOtherNonEssential = {(event)=>setBudgetItems({...budgetItems, otherNonEssential: parseFloat(event.target.value)})}
+                handleUnsecured = {(event)=>setBudgetItems({...budgetItems, unsecuredDebt: parseFloat(event.target.value)})}
+                placeholder={0.0}
             ></BudgetFormInputs>
             <FormButton
                 buttonTitle="Add Budget"
