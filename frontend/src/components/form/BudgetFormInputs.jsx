@@ -47,7 +47,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01}
                 onChange={handleTotalIncome}
-                value={incomeValue}
+                defaultValue={incomeValue}
                  />
             </InputGroup>
 
@@ -62,7 +62,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01}
                 onChange = {handleHousing}
-                value={housingValue}
+                defaultValue={housingValue}
                  />
             </InputGroup>
 
@@ -75,7 +75,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleUtilities}
-                value={utilitiesValue}
+                defaultValue={utilitiesValue}
                 />
             </InputGroup>
 
@@ -88,7 +88,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01}
                 onChange = {handleFood} 
-                value={foodValue}
+                defaultValue={foodValue}
                 />
             </InputGroup>
 
@@ -102,7 +102,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01}
                 onChange = {handleTransport}
-                value={transportValue}
+                defaultValue={transportValue}
                  />
             </InputGroup>
 
@@ -116,7 +116,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleHousehold}
-                value={householdValue}
+                defaultValue={householdValue}
                 />
             </InputGroup>
 
@@ -130,7 +130,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleChildcare}
-                value={childcareValue}
+                defaultValue={childcareValue}
                 />
             </InputGroup>
 
@@ -144,7 +144,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleCleaning}
-                value={cleaningValue}
+                defaultValue={cleaningValue}
                 />
             </InputGroup>
 
@@ -158,7 +158,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleOtherEssential}
-                value={otherEssentialValue}
+                defaultValue={otherEssentialValue}
                 />
             </InputGroup>
 
@@ -172,7 +172,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleLuxury}
-                value={luxuryValue}
+                defaultValue={luxuryValue}
                 />
             </InputGroup>
 
@@ -186,7 +186,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleLeisure}
-                value={leisureValue}
+                defaultValue={leisureValue}
                 />
             </InputGroup>
 
@@ -200,7 +200,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleHolidays}
-                value={holidaysValue}
+                defaultValue={holidaysValue}
                 />
             </InputGroup>
 
@@ -214,7 +214,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleOtherNonEssential}
-                value={otherNonEssentialValue}
+                defaultValue={otherNonEssentialValue}
                 />
             </InputGroup>
 
@@ -228,7 +228,7 @@ function BudgetFormInputs({
                 type='number'
                 step={0.01} 
                 onChange = {handleUnsecured}
-                value={unsecuredValue}
+                defaultValue={unsecuredValue}
                 />
             </InputGroup>
             </>
@@ -251,20 +251,20 @@ BudgetFormInputs.propTypes = {
     handleOtherNonEssential: PropTypes.func,
     handleUnsecured: PropTypes.func,
     placeholder: PropTypes.number || PropTypes.string,
-    incomeValue: PropTypes.number || PropTypes.string,
-    housingValue: PropTypes.number || PropTypes.string,
-    utilitiesValue: PropTypes.number || PropTypes.string,
-    foodValue: PropTypes.number || PropTypes.string,
-    transportValue: PropTypes.number || PropTypes.string,
-    householdValue: PropTypes.number || PropTypes.string,
-    childcareValue: PropTypes.number || PropTypes.string,
-    cleaningValue: PropTypes.number || PropTypes.string,
-    otherEssentialValue: PropTypes.number || PropTypes.string,
-    luxuryValue: PropTypes.number || PropTypes.string,
-    leisureValue: PropTypes.number || PropTypes.string,
-    holidaysValue: PropTypes.number || PropTypes.string,
-    otherNonEssentialValue: PropTypes.number || PropTypes.string,
-    unsecuredValue: PropTypes.number || PropTypes.string,
+    incomeValue: PropTypes.string,
+    housingValue:PropTypes.string,
+    utilitiesValue: PropTypes.string,
+    foodValue: PropTypes.string,
+    transportValue: PropTypes.string,
+    householdValue: PropTypes.string,
+    childcareValue: PropTypes.string,
+    cleaningValue: PropTypes.string,
+    otherEssentialValue: PropTypes.string,
+    luxuryValue: PropTypes.string,
+    leisureValue: PropTypes.string,
+    holidaysValue: PropTypes.string,
+    otherNonEssentialValue: PropTypes.string,
+    unsecuredValue: PropTypes.string,
 }
 
 export default BudgetFormInputs;

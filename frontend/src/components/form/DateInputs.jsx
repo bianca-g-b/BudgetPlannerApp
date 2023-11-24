@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 function DateInputs({
     handleDateFrom,
     handleDateTo,
+    dateFromValue,
+    dateToValue,
 }) {
     return(
         <>
@@ -16,6 +18,7 @@ function DateInputs({
                 <Form.Control aria-label="Date"
                     type='date'
                     onChange = {handleDateFrom}
+                    defaultValue = {dateFromValue}
                 />
             </InputGroup>
 
@@ -28,6 +31,7 @@ function DateInputs({
                     data-testid="date-display"
                     type='date'
                     onChange = {handleDateTo}
+                    defaultValue = {dateToValue}
                 />
             </InputGroup>
         </>
@@ -37,6 +41,8 @@ function DateInputs({
 DateInputs.propTypes = {
     handleDateFrom: PropTypes.func.isRequired,
     handleDateTo: PropTypes.func.isRequired,
+    dateFromValue: PropTypes.string,
+    dateToValue: PropTypes.string,
 }
 
 export default DateInputs;

@@ -75,7 +75,7 @@ export const addBudget = createAsyncThunk(
 export const editBudget = createAsyncThunk(
     "api/budget", async(id, details, thunkAPI) => {
         const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
-        const response = await fetch(`${baseUrl}/api/budget/${id}`, {
+        const response = await fetch(`${baseUrl}/api/budget/${id}/`, {
             method: "PATCH",
             mode: "cors",
             withCredentials: true,
@@ -88,6 +88,7 @@ export const editBudget = createAsyncThunk(
         });
         if (response.ok) {
             const editedBudget = await response.json();
+            console.log(editedBudget);
             return editedBudget;
         } else {
             return thunkAPI.rejectWithValue(response);
