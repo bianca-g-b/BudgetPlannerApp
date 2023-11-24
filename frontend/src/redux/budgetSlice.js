@@ -18,11 +18,15 @@ export const budgetSlice = createSlice({
         createBudget: (state, action) => {
             state.budgetList.push(action.payload);
         },
+        updateBudget: (state, action) => {
+            const index = state.budgetList.findIndex((budget) => budget.id === action.payload.id);
+            state.budgetList[index] = action.payload;
+        }
     }
 })
 
 // export actions
-export const { setBudgetList, createBudget, setBudgetById } = budgetSlice.actions;
+export const { setBudgetList, createBudget, setBudgetById, updateBudget } = budgetSlice.actions;
 
 // export reducer
 export default budgetSlice.reducer;

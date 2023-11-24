@@ -36,5 +36,3 @@ class Budget(models.Model):
     other_non_essential_costs = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Other Non-Essential Costs")
     #financial commitments
     unsecured_loans = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Unsecured Loans (Credit Cards, Store Cards, Payday Loans)")
-
-    
