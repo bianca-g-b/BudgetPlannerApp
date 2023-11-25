@@ -1,37 +1,69 @@
 import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
 import FormButton from "./form/FormButton.jsx";
 import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt } from '../redux/budgetFieldsSlice.js';
-import { /*getBudgetById, */editBudget } from "../actions/budgetActions.js";
+import { getBudgetById,editBudget } from "../actions/budgetActions.js";
 
 function UpdateBudget() {
     const budgetById = useSelector((state)=> state.budget.budgetById);
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
+    const id2 = useSelector((state)=> state.budget.id)
+    console.log(id2, "id2")
+    const budgetList = useSelector((state) => state.budget.budgetList);
+
+    //extract budget by id from budget list
+    const budgetById2 = budgetList.find((budget) => budget.id === id2);
+    console.log(budgetById2, "budget by id 2");
 
     const dispatch = useDispatch();
 
     console.log(budgetById, "update task test");
 
+    // set budget fields to budgetById2 fields
+    useEffect(()=>{
+        if (id2) {
+            dispatch(setDateFrom(budgetById2.date_from));
+            dispatch(setDateTo(budgetById2.date_to));
+            dispatch(setIncome(budgetById2.total_income));
+            dispatch(setHousing(budgetById2.housing));
+            dispatch(setUtilities(budgetById2.utility_bills));
+            dispatch(setFood(budgetById2.food_drinks));
+            dispatch(setTransport(budgetById2.transport));
+            dispatch(setHousehold(budgetById2.household_goods_services));
+            dispatch(setChildcare(budgetById2.children_related_costs));
+            dispatch(setCleaning(budgetById2.cleaning_toiletries));
+            dispatch(setOtherEssential(budgetById2.other_essential_costs));
+            dispatch(setLuxury(budgetById2.luxury_gifts));
+            dispatch(setLeisure(budgetById2.leisure_entertainment));
+            dispatch(setHolidays(budgetById2.holidays));
+            dispatch(setOtherNonEssential(budgetById2.other_non_essential_costs));
+            dispatch(setUnsecuredDebt(budgetById2.unsecured_loans));
+        } 
+    },[dispatch, id2, budgetById2])
+
+
+
     // write useEffect so budgetById is updated properly
-    // useEffect(()=>{
-    //     if (budgetById.id) {
-    //         dispatch(getBudgetById(budgetById.id))
-    //             .then((action) => {
-    //                 if (editBudget.fulfilled.match(action)) {
-    //                     console.log(action.payload, "useEffect");
-    //                     console.log(budgetFields, "budget fields")
-    //                 }
-    //             })
-    //     }
-    // },[dispatch, budgetById.id, budgetFields])
+    useEffect(()=>{
+        if (budgetById.id) {
+            dispatch(getBudgetById(id2))
+                .then((action) => {
+                    if (editBudget.fulfilled.match(action)) {
+                        console.log(action.payload, "useEffect");
+                        console.log(budgetFields, "budget fields")
+                    }
+                })
+        }
+    },[dispatch, budgetById, id2, budgetFields])
 
 
     async function handleUpdateBudget(event) {
         event.preventDefault();
+        console.log(event, "event")
         const details = {
             id: budgetById.id,
             date_from: budgetFields.dateFrom,
@@ -72,27 +104,27 @@ function UpdateBudget() {
             <h3>Update Budget</h3>
             <br/>
             <DateInputs 
-                dateFromValue={budgetById.date_from}
-                dateToValue={budgetById.date_to}
+                dateFromValue={budgetById2.date_from}
+                dateToValue={budgetById2.date_to}
 
                 handleDateFrom = {(event)=> dispatch(setDateFrom(event.target.value))}
                 handleDateTo = {(event) => dispatch(setDateTo(event.target.value))}
             ></DateInputs>
             <BudgetFormInputs
-                incomeValue={budgetById.total_income}
-                housingValue={budgetById.housing}
-                utilitiesValue={budgetById.utility_bills}
-                foodValue={budgetById.food_drinks}
-                transportValue={budgetById.transport}
-                householdValue={budgetById.household_goods_services}
-                childcareValue={budgetById.children_related_costs}
-                cleaningValue={budgetById.cleaning_toiletries}
-                otherEssentialValue={budgetById.other_essential_costs}
-                luxuryValue={budgetById.luxury_gifts}
-                leisureValue={budgetById.leisure_entertainment}
-                holidaysValue={budgetById.holidays}
-                otherNonEssentialValue={budgetById.other_non_essential_costs}
-                unsecuredValue={budgetById.unsecured_loans}
+                incomeValue={budgetById2.total_income}
+                housingValue={budgetById2.housing}
+                utilitiesValue={budgetById2.utility_bills}
+                foodValue={budgetById2.food_drinks}
+                transportValue={budgetById2.transport}
+                householdValue={budgetById2.household_goods_services}
+                childcareValue={budgetById2.children_related_costs}
+                cleaningValue={budgetById2.cleaning_toiletries}
+                otherEssentialValue={budgetById2.other_essential_costs}
+                luxuryValue={budgetById2.luxury_gifts}
+                leisureValue={budgetById2.leisure_entertainment}
+                holidaysValue={budgetById2.holidays}
+                otherNonEssentialValue={budgetById2.other_non_essential_costs}
+                unsecuredValue={budgetById2.unsecured_loans}
                 
                 handleTotalIncome= {(event) => dispatch(setIncome(parseFloat(event.target.value)))}
                 handleHousing= {(event) => dispatch(setHousing(parseFloat(event.target.value)))}

@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById} from "../actions/budgetActions.js";
 import {logoutUser} from "../actions/authActions.js";
 import {setUser} from "../redux/userSlice.js";
-import { setBudgetList, setBudgetById } from "../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 
@@ -17,6 +17,8 @@ function BudgetList() {
     const budgetList = useSelector((state) => state.budget.budgetList);
     console.log(budgetList, "testBudgetList");
     const budgetByidtest = useSelector((state)=> state.budget.budgetById)
+    const id1 = useSelector((state)=> state.budget.id)
+    console.log(id1, "id1")
 
     // logout user and clear states for user and isAuthenticated
     const handleLogout = async () => {
@@ -50,6 +52,7 @@ function BudgetList() {
     }, [dispatch, csrfToken]);
 
     async function budgetById(id) {
+        dispatch(setId(id))
         dispatch(getBudgetById(id))
             .then((action)=> {
                 if (getBudgetById.fulfilled.match(action)) {
@@ -72,8 +75,8 @@ function BudgetList() {
                 <li>Housing costs: {budget.housing}</li>
                 <li>Transport costs: {budget.transport}</li>
                 <NavLink 
-                    to={`/dashboard/${budget.id}`}
                     onClick = {()=> budgetById(budget.id)}
+                    to={`/dashboard/${budget.id}`}
                     >Edit</NavLink>
                 </ul>
             ))}
