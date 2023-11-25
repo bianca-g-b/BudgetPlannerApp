@@ -73,9 +73,9 @@ export const addBudget = createAsyncThunk(
 
 // patch request - edit a budget
 export const editBudget = createAsyncThunk(
-    "api/budget", async(id, details, thunkAPI) => {
+    "api/budget", async(/*id, */details, thunkAPI) => {
         const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
-        const response = await fetch(`${baseUrl}/api/budget/${id}/`, {
+        const response = await fetch(`${baseUrl}/api/budget/${details.id}/`, {
             method: "PATCH",
             mode: "cors",
             withCredentials: true,

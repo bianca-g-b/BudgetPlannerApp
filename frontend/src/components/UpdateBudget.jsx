@@ -1,40 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
 import FormButton from "./form/FormButton.jsx";
-// import { updateBudget } from "../redux/budgetSlice.js";
 import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt } from '../redux/budgetFieldsSlice.js';
-import { getBudgetById, editBudget } from "../actions/budgetActions.js";
+import { /*getBudgetById, */editBudget } from "../actions/budgetActions.js";
 
 function UpdateBudget() {
-    const budgetList = useSelector((state)=> state.budget.budgetList);
-    console.log(budgetList);
     const budgetById = useSelector((state)=> state.budget.budgetById);
-    console.log(budgetById, "update task test");
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
 
     const dispatch = useDispatch();
 
+    console.log(budgetById, "update task test");
+
     // write useEffect so budgetById is updated properly
-    useEffect(()=>{
-        if (budgetById.id) {
-            dispatch(getBudgetById(budgetById.id))
-                .then((action) => {
-                    if (editBudget.fulfilled.match(action)) {
-                        console.log(action.payload, "useEffect");
-                        console.log(budgetFields, "budget fields")
-                    }
-                })
-        }
-    },[dispatch, budgetById.id, budgetFields])
+    // useEffect(()=>{
+    //     if (budgetById.id) {
+    //         dispatch(getBudgetById(budgetById.id))
+    //             .then((action) => {
+    //                 if (editBudget.fulfilled.match(action)) {
+    //                     console.log(action.payload, "useEffect");
+    //                     console.log(budgetFields, "budget fields")
+    //                 }
+    //             })
+    //     }
+    // },[dispatch, budgetById.id, budgetFields])
 
 
     async function handleUpdateBudget(event) {
         event.preventDefault();
         const details = {
+            id: budgetById.id,
             date_from: budgetFields.dateFrom,
             date_to: budgetFields.dateTo,
             total_income: budgetFields.income,
@@ -55,7 +54,7 @@ function UpdateBudget() {
         console.log(details, "details update budget");
 
         try {
-            dispatch(editBudget(budgetById.id, details, csrfToken))
+            dispatch(editBudget(details, csrfToken))
                 .then((action) => {
                     if (editBudget.fulfilled.match(action)) {
                         console.log(action.payload);
