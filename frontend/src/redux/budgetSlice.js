@@ -25,12 +25,15 @@ export const budgetSlice = createSlice({
         },
         setId: (state, action) => { //
             state.id = action.payload;
-        }
+        },
+        removeBudget: (state, action) => {
+            state.budgetList = state.budgetList.filter((budget) => budget.id !== action.payload);
+        },    
     }
 })
 
 // export actions
-export const { setBudgetList, createBudget, setBudgetById, updateBudget, setId } = budgetSlice.actions;
+export const { setBudgetList, createBudget, setBudgetById, updateBudget, setId, removeBudget } = budgetSlice.actions;
 
 // export reducer
 export default budgetSlice.reducer;

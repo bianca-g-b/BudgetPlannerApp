@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import {getBudgetList, getBudgetById} from "../actions/budgetActions.js";
+import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
 import {logoutUser} from "../actions/authActions.js";
 import {setUser} from "../redux/userSlice.js";
-import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById, setId, removeBudget } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 
@@ -63,6 +63,16 @@ function BudgetList() {
             })
     }
 
+    async function handleDeleteBudget(id) {
+        dispatch(deleteBudget(id))
+            .then((action)=> {
+                if (deleteBudget.fulfilled.match(action)) {
+                    console.log(action.payload, "delete action payload")
+                    dispatch(removeBudget(action.payload))
+                }
+            })
+    }
+
     return ( 
           
         <div className = "budget-div" >
@@ -78,6 +88,9 @@ function BudgetList() {
                     onClick = {()=> budgetById(budget.id)}
                     to={`/dashboard/${budget.id}`}
                     >Edit</NavLink>
+                    <button 
+                        onClick={()=> handleDeleteBudget(budget.id)}
+                        className="delete-button">Delete</button>
                 </ul>
             ))}
         </div>

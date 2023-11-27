@@ -100,7 +100,7 @@ export const editBudget = createAsyncThunk(
 export const deleteBudget = createAsyncThunk(
     "api/budget", async(id, thunkAPI) => {
         const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
-        const response = await fetch(`${baseUrl}/api/budget/${id}`,{
+        const response = await fetch(`${baseUrl}/api/budget/${id}/`,{
             method: "DELETE",
             mode: "cors",
             withCredentials: true,
