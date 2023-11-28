@@ -64,13 +64,20 @@ function BudgetList() {
     }
 
     async function handleDeleteBudget(id) {
-        dispatch(deleteBudget(id))
-            .then((action)=> {
-                if (deleteBudget.fulfilled.match(action)) {
-                    console.log(action.payload, "delete action payload")
-                    dispatch(removeBudget(action.payload))
-                }
-            })
+        try  {
+            dispatch(deleteBudget(id))
+                .then((action)=> {
+                    if (deleteBudget.fulfilled.match(action)) {
+                        console.log(action.payload, "delete action payload")
+                        dispatch(removeBudget(action.payload))
+                        console.log("budget deleted")
+                        dispatch(getBudgetList(csrfToken))
+                        navigate("/dashboard")
+                    }
+                })
+        } catch (error) {
+                    console.log(error)
+        }
     }
 
     return ( 
