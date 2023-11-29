@@ -112,6 +112,7 @@ export const deleteBudget = createAsyncThunk(
         });
         if (response.ok) {
             const deletedTask = await response.json();
+            console.log(deletedTask);
             return deletedTask;
         } else {
             return thunkAPI.rejectWithValue(response);

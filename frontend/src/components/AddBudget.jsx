@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addBudget } from '../actions/budgetActions.js';
-// import { useState } from 'react';
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
@@ -9,30 +9,12 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, s
 
 
 function AddBudget() {
-    // const [budgetItems, setBudgetItems] = useState({
-    //     dateFrom: "",
-    //     dateTo: "",
-    //     income: 0.0,
-    //     housing: 0.0,
-    //     utilities: 0.0,
-    //     food: 0.0,
-    //     transport: 0.0,
-    //     household: 0.0,
-    //     childcare: 0.0,
-    //     cleaning: 0.0,
-    //     otherEssential: 0.0,
-    //     luxury: 0.0,
-    //     leisure: 0.0,
-    //     holidays: 0.0,
-    //     otherNonEssential: 0.0,
-    //     unsecuredDebt: 0.0,
-    // });
-
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     async function handleCreateBudget(event) {
         event.preventDefault();
@@ -64,6 +46,7 @@ function AddBudget() {
                 .then((action) => {
                     if (addBudget.fulfilled.match(action)) {
                         console.log(action.payload);
+                        navigate("/dashboard")
                     }
                 })
         } catch (error) {

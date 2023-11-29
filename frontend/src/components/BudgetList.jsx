@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
 import {logoutUser} from "../actions/authActions.js";
 import {setUser} from "../redux/userSlice.js";
-import { setBudgetList, setBudgetById, setId, removeBudget } from "../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById, setId, /*removeBudget*/ } from "../redux/budgetSlice.js";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 
@@ -66,15 +66,16 @@ function BudgetList() {
     async function handleDeleteBudget(id) {
         try  {
             dispatch(deleteBudget(id))
-                .then((action)=> {
-                    if (deleteBudget.fulfilled.match(action)) {
-                        console.log(action.payload, "delete action payload")
-                        dispatch(removeBudget(action.payload))
-                        console.log("budget deleted")
-                        dispatch(getBudgetList(csrfToken))
-                        navigate("/dashboard")
-                    }
-                })
+            window.location.reload()
+                // .then((action)=> {
+                //     if (deleteBudget.fulfilled.match(action)) {
+                //         console.log(action.payload, "delete action payload")
+                //         dispatch(removeBudget(action.payload))
+                //         // console.log("budget deleted")
+                //         // dispatch(getBudgetList(csrfToken))
+                //         // navigate("/dashboard")
+                //     }
+                // })
         } catch (error) {
                     console.log(error)
         }
