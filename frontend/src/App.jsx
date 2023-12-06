@@ -9,6 +9,7 @@ import Login from "./components/auth/Login.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import AddBudget from './components/AddBudget.jsx';
 import UpdateBudget from './components/UpdateBudget.jsx';
+import MenuAppBar from './components/Menu.jsx';
 import { setIsAuthenticated } from "./redux/authenticatedSlice.js";
 import {setUser, setUserId} from "./redux/userSlice.js";
 import { fetchUser } from "./actions/authActions.js";
@@ -46,9 +47,10 @@ function App() {
 
   return (
     <>
+
+    <MenuAppBar />
       <Routes>
-
-
+     
         <Route path="/dashboard" element={
           <PrivateRoute>
             <BudgetList />
