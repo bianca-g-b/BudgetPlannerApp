@@ -77,8 +77,10 @@ html, body, #root {
 .budget-div {
   background: rgba(16, 15, 39, 0.734);
   padding: 5%;
-  margin-top: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
   border-radius: 10px;
+  width: 45%;
 }
 
 .list-group-item {
@@ -92,4 +94,16 @@ html, body, #root {
 /* Menu bar @media (min-width: 1536px) */
 .css-19r6kue-MuiContainer-root {
     max-width: none !important;
+}
+
+.css-ptkaw2-MuiDataGrid-root,
+.css-pdct74-MuiTablePagination-selectLabel,
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.MuiSelect-select,
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon,
+.css-levciy-MuiTablePagination-displayedRows,
+/* .css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar,
+.MuiTablePagination-actions */
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled
+  {
+  color: white !important;
 }
