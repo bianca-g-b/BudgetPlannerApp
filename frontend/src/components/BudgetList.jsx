@@ -1,41 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
-import {logoutUser} from "../actions/authActions.js";
-import {setUser} from "../redux/userSlice.js";
-import { setBudgetList, setBudgetById, setId, /*removeBudget*/ } from "../redux/budgetSlice.js";
-import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
+import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
 
 
 function BudgetList() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
-    const user = useSelector((state) => state.user.username);
-    const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     const budgetList = useSelector((state) => state.budget.budgetList);
     console.log(budgetList, "testBudgetList");
     const budgetByidtest = useSelector((state)=> state.budget.budgetById)
     const id1 = useSelector((state)=> state.budget.id)
     console.log(id1, "id1")
 
-    // logout user and clear states for user and isAuthenticated
-    const handleLogout = async () => {
-        const response  = await logoutUser(csrfToken);
-        if (response.status === 202) {
-            console.log("logout successful");
-            dispatch(setUser(null));
-            dispatch(setIsAuthenticated(false));
-            console.log(isAuthenticated, "logout");
-            console.log(user, "user after logout");
-            navigate("/login") 
-        } else {
-            alert("Logout failed. Please try again.");
-            throw new Error("Logout failed");
-        }
-    }
-    
     // fetch data
     useEffect(() => {
         async function fetchData() {
@@ -67,15 +45,6 @@ function BudgetList() {
         try  {
             dispatch(deleteBudget(id))
             window.location.reload()
-                // .then((action)=> {
-                //     if (deleteBudget.fulfilled.match(action)) {
-                //         console.log(action.payload, "delete action payload")
-                //         dispatch(removeBudget(action.payload))
-                //         // console.log("budget deleted")
-                //         // dispatch(getBudgetList(csrfToken))
-                //         // navigate("/dashboard")
-                //     }
-                // })
         } catch (error) {
                     console.log(error)
         }
@@ -85,7 +54,6 @@ function BudgetList() {
           
         <div className = "budget-div" >
         <NavLink to="/dashboard/addbudget">Add budget</NavLink> 
-        <button onClick = {handleLogout}>Logout</button>
         <h1>Budget List</h1>
             {budgetList
             .map((budget, index) => (
