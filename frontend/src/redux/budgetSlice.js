@@ -5,8 +5,8 @@ export const budgetSlice = createSlice({
     name: "budget",
     initialState: {
         budgetList: [],
-        budgetById: {test:"test"},
-        id: null, //
+        budgetById: null,
+        id: null,
     },
     reducers: 
     {
