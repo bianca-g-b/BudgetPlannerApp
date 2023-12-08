@@ -1,0 +1,47 @@
+.budget-div {
+    display: flex;
+    padding: 5%;
+    padding-left: 0%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    box-sizing: content-box;
+    align-items: flex-start;
+  }
+
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+top:auto !important;
+}
+
+
+  /* Menu bar @media (min-width: 1536px) */
+.css-19r6kue-MuiContainer-root {
+    max-width: none !important;
+}
+
+/*Budget info*/
+ .css-11fl05d-MuiList-root,
+ .css-1r5wa48-MuiList-root {
+    padding-left: 2% !important;
+ }
+
+ .css-ptkaw2-MuiDataGrid-root {
+    border: none !important;
+ }
+
+ .income-icon {
+    background-color: #04d979 !important;
+ }
+
+ .essential-icon {
+    background-color: #a30f1b !important;
+ }
+
+.non-essential-icon {
+    background-color: #efb908 !important;
+}
+
+.arrow-icon {
+    background-color: #1976d2 !important;
+    cursor: pointer;
+}
