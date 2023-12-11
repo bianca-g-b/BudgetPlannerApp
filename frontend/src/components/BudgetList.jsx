@@ -26,6 +26,7 @@ import SnowboardingIcon from '@mui/icons-material/Snowboarding';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
 
 
 function BudgetList() {
@@ -117,7 +118,7 @@ function BudgetList() {
                             <AccountBalanceWalletOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Total income" secondary={budget.total_income} >
+                    <ListItemText primary="Total income" secondary={`£ ${budget.total_income}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -127,7 +128,7 @@ function BudgetList() {
                             <BedroomParentOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Housing" secondary={budget.housing} >
+                    <ListItemText primary="Housing" secondary={`£ ${budget.housing}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -137,7 +138,7 @@ function BudgetList() {
                             <ElectricBoltOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Utilities" secondary={budget.utility_bills} >
+                    <ListItemText primary="Utilities" secondary={`£ ${budget.utility_bills}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -147,7 +148,7 @@ function BudgetList() {
                             <AddShoppingCartOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Food and drinks" secondary={budget.food_drinks} >
+                    <ListItemText primary="Food and drinks" secondary={`£ ${budget.food_drinks}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -157,7 +158,7 @@ function BudgetList() {
                             <DirectionsRailwayFilledOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Transport" secondary={budget.transport} >
+                    <ListItemText primary="Transport" secondary={`£ ${budget.transport}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -167,7 +168,7 @@ function BudgetList() {
                             <HandymanOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Household" secondary={budget.household_goods_services} >
+                    <ListItemText primary="Household" secondary={`£ ${budget.household_goods_services}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -177,7 +178,7 @@ function BudgetList() {
                             <ChildCareOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Childcare" secondary={budget.children_related_costs} >
+                    <ListItemText primary="Childcare" secondary={`£ ${budget.children_related_costs}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -187,7 +188,7 @@ function BudgetList() {
                             <LocalLaundryServiceOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Cleaning and toiletries" secondary={budget.cleaning_toiletries} >
+                    <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budget.cleaning_toiletries}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -197,7 +198,7 @@ function BudgetList() {
                             <ShopOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Other essential" secondary={budget.other_essential_costs} >
+                    <ListItemText primary="Other essential" secondary={`£ ${budget.other_essential_costs}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -207,7 +208,7 @@ function BudgetList() {
                             <DiamondIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Luxury and gifts" secondary={budget.luxury_gifts} >
+                    <ListItemText primary="Luxury and gifts" secondary={`£ ${budget.luxury_gifts}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -217,7 +218,7 @@ function BudgetList() {
                             <SnowboardingIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Leisure and entertainment" secondary={budget.leisure_entertainment} >
+                    <ListItemText primary="Leisure and entertainment" secondary={`£ ${budget.leisure_entertainment}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -227,7 +228,7 @@ function BudgetList() {
                             <BeachAccessIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Holidays" secondary={budget.holidays} >
+                    <ListItemText primary="Holidays" secondary={`£ ${budget.holidays}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -237,7 +238,7 @@ function BudgetList() {
                             <ShopIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Other non-essential" secondary={budget.other_non_essential_costs} >
+                    <ListItemText primary="Other non-essential" secondary={`£ ${budget.other_non_essential_costs}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -247,7 +248,7 @@ function BudgetList() {
                             <CreditCardIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Unsecured debt" secondary={budget.unsecured_loans} >
+                    <ListItemText primary="Unsecured debt" secondary={`£ ${budget.unsecured_loans}`} >
                     </ListItemText>
                 </ListItem>
                 
@@ -260,6 +261,42 @@ function BudgetList() {
                     className="delete-button">Delete
                 </button>
             </List>}
+
+
+
+           {budget && <List sx={{ width: '100%', maxWidth: 360 }}>
+                <ListItem>
+                    <ListItemAvatar>
+                        <Avatar className="essential-icon">
+                            <ShopOutlinedIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Total essential spending" secondary="£" >
+                    </ListItemText>
+                </ListItem>
+
+                <ListItem>
+                    <ListItemAvatar>
+                        <Avatar className="non-essential-icon">
+                            <ShopIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Total non-essential spending" secondary="£" >
+                    </ListItemText>
+                </ListItem>
+
+                <ListItem>
+                    <ListItemAvatar>
+                        <Avatar className="savings-icon">
+                            <CurrencyPoundOutlinedIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Total savings" secondary="£" >
+                    </ListItemText>
+                </ListItem>
+
+                </List>}
+
         </div>
         </div>
 
