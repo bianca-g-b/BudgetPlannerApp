@@ -1,3 +1,4 @@
+import "../styles/BudgetList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
@@ -5,7 +6,7 @@ import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActio
 import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
 import { DataGrid } from '@mui/x-data-grid';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
-import "../styles/BudgetList.css"
+import { Button } from "@mui/material";
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -38,6 +39,10 @@ function BudgetList() {
     const id = useSelector((state)=> state.budget.id)
     console.log(id, ":test if correct id is displayed")
     console.log(budget);
+    // const totalEssential = parseFloat(budget.housing) + parseFloat(budget.utility_bills) + parseFloat(budget.food_drinks) + parseFloat(budget.transport) + parseFloat(budget.household_goods_services) + parseFloat(budget.children_related_costs) + parseFloat(budget.cleaning_toiletries) + parseFloat(budget.other_essential_costs);
+    // const totalNonEssential = parseFloat(budget.luxury_gifts) + parseFloat(budget.leisure_entertainment) + parseFloat(budget.holidays) + parseFloat(budget.other_non_essential_costs);
+    // const totalSpending = totalEssential + totalNonEssential;
+    // const totalSavings = parseFloat(budget.total_income) - totalSpending;
 
     // fetch data
     useEffect(() => {
@@ -256,10 +261,10 @@ function BudgetList() {
                     to={`/dashboard/${budget.id}`}
                     >Edit
                 </NavLink>
-                <button 
+                <Button
                     onClick={()=> handleDeleteBudget(budget.id)}
                     className="delete-button">Delete
-                </button>
+                </Button>
             </List>}
 
 
@@ -271,7 +276,7 @@ function BudgetList() {
                             <ShopOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Total essential spending" secondary="£" >
+                    <ListItemText primary="Total essential spending" secondary={`£ ${budget.total_essential}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -281,7 +286,7 @@ function BudgetList() {
                             <ShopIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Total non-essential spending" secondary="£" >
+                    <ListItemText primary="Total non-essential spending" secondary={`£ ${budget.total_non_essential}`} >
                     </ListItemText>
                 </ListItem>
 
@@ -291,7 +296,17 @@ function BudgetList() {
                             <CurrencyPoundOutlinedIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Total savings" secondary="£" >
+                    <ListItemText primary="Total spending" secondary={`£ ${budget.total_expenses}`} >
+                    </ListItemText>
+                </ListItem>
+
+                <ListItem>
+                    <ListItemAvatar>
+                        <Avatar className="savings-icon">
+                            <CurrencyPoundOutlinedIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Total savings" secondary={`£ ${budget.total_savings}`} >
                     </ListItemText>
                 </ListItem>
 
