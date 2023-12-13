@@ -7,7 +7,7 @@ import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
 import { DataGrid } from '@mui/x-data-grid';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { Button } from "@mui/material";
-
+import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -39,10 +39,6 @@ function BudgetList() {
     const id = useSelector((state)=> state.budget.id)
     console.log(id, ":test if correct id is displayed")
     console.log(budget);
-    // const totalEssential = parseFloat(budget.housing) + parseFloat(budget.utility_bills) + parseFloat(budget.food_drinks) + parseFloat(budget.transport) + parseFloat(budget.household_goods_services) + parseFloat(budget.children_related_costs) + parseFloat(budget.cleaning_toiletries) + parseFloat(budget.other_essential_costs);
-    // const totalNonEssential = parseFloat(budget.luxury_gifts) + parseFloat(budget.leisure_entertainment) + parseFloat(budget.holidays) + parseFloat(budget.other_non_essential_costs);
-    // const totalSpending = totalEssential + totalNonEssential;
-    // const totalSavings = parseFloat(budget.total_income) - totalSpending;
 
     // fetch data
     useEffect(() => {
@@ -117,15 +113,9 @@ function BudgetList() {
 
             {budget && <List sx={{ width: '100%', maxWidth: 360 }}
                             className="single-budget-div">
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar className="income-icon">
-                            <AccountBalanceWalletOutlinedIcon />
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Total income" secondary={`£ ${budget.total_income}`} >
-                    </ListItemText>
-                </ListItem>
+
+                <ListItemText primary="Essential Expenses" />
+                <Divider />
 
                 <ListItem>
                     <ListItemAvatar>
@@ -206,7 +196,14 @@ function BudgetList() {
                     <ListItemText primary="Other essential" secondary={`£ ${budget.other_essential_costs}`} >
                     </ListItemText>
                 </ListItem>
+                </List>}
 
+            {budget && <List sx={{ width: '100%', maxWidth: 360 }}
+                            className="single-budget-div"> 
+                
+                <ListItemText primary="Non Essential Expenses" />
+                <Divider />
+                
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar className="non-essential-icon">
@@ -256,20 +253,23 @@ function BudgetList() {
                     <ListItemText primary="Unsecured debt" secondary={`£ ${budget.unsecured_loans}`} >
                     </ListItemText>
                 </ListItem>
-                
-                <NavLink 
-                    to={`/dashboard/${budget.id}`}
-                    >Edit
-                </NavLink>
-                <Button
-                    onClick={()=> handleDeleteBudget(budget.id)}
-                    className="delete-button">Delete
-                </Button>
             </List>}
 
-
-
            {budget && <List sx={{ width: '100%', maxWidth: 360 }}>
+
+           <ListItemText primary="Budget Breakdown" />
+           <Divider />
+
+           <ListItem>
+                    <ListItemAvatar>
+                        <Avatar className="income-icon">
+                            <AccountBalanceWalletOutlinedIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Total income" secondary={`£ ${budget.total_income}`} >
+                    </ListItemText>
+                </ListItem>
+
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar className="essential-icon">
@@ -300,7 +300,7 @@ function BudgetList() {
                     </ListItemText>
                 </ListItem>
 
-                <ListItem>
+                <ListItem className="last-list-item">
                     <ListItemAvatar>
                         <Avatar className="savings-icon">
                             <CurrencyPoundOutlinedIcon />
@@ -309,6 +309,19 @@ function BudgetList() {
                     <ListItemText primary="Total savings" secondary={`£ ${budget.total_savings}`} >
                     </ListItemText>
                 </ListItem>
+
+                <NavLink
+                    className="edit-button"
+                    to={`/dashboard/${budget.id}`}
+                    ><Button
+                        variant="contained"
+                    >Edit</Button>
+                </NavLink>
+                <Button
+                variant="contained"
+                    onClick={()=> handleDeleteBudget(budget.id)}
+                    className="delete-button">Delete
+                </Button>
 
                 </List>}
 

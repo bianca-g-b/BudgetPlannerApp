@@ -49,3 +49,23 @@ top:auto !important;
 .savings-icon {
    background-color: #1976d2 !important;
 }
+
+/*edit button link*/
+.edit-button {
+   margin-right: 1%;
+   margin-left: 5%;
+}
+
+.last-list-item {
+   margin-bottom: 7%;
+}
+
+/*Divider*/
+.css-9mgopn-MuiDivider-root {
+   border-color: black !important;
+}
+
+/*Expenses lists containers*/
+.css-1r5wa48-MuiList-root  {
+   margin-top: 0.6% !important;
+}
