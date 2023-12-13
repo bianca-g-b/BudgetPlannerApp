@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
 import FormButton from "./form/FormButton.jsx";
-import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt } from '../redux/budgetFieldsSlice.js';
+import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, 
+    setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt,
+    setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
+    } from '../redux/budgetFieldsSlice.js';
 import { getBudgetById,editBudget } from "../actions/budgetActions.js";
 
 function UpdateBudget() {
@@ -20,6 +24,7 @@ function UpdateBudget() {
     console.log(budgetById2, "budget by id 2");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     console.log(budgetById, "update task test");
 
@@ -42,6 +47,10 @@ function UpdateBudget() {
             dispatch(setHolidays(budgetById2.holidays));
             dispatch(setOtherNonEssential(budgetById2.other_non_essential_costs));
             dispatch(setUnsecuredDebt(budgetById2.unsecured_loans));
+            dispatch(setTotalEssential(budgetById2.total_essential));
+            dispatch(setTotalNonEssential(budgetById2.total_non_essential));
+            dispatch(setTotalExpenses(budgetById2.total_expenses));
+            dispatch(setTotalSavings(budgetById2.total_savings));
         } 
     },[dispatch, id2, budgetById2])
 
@@ -82,6 +91,12 @@ function UpdateBudget() {
             holidays: budgetFields.holidays,
             other_non_essential_costs: budgetFields.otherNonEssential,
             unsecured_loans: budgetFields.unsecuredDebt,
+            total_essential: parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential),
+            total_non_essential: parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt),
+            total_expenses: parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential) +
+                            parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt),
+            total_savings: parseFloat(budgetFields.income) - (parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential) +
+                            parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt)),
         };
         console.log(details, "details update budget");
 
@@ -90,6 +105,7 @@ function UpdateBudget() {
                 .then((action) => {
                     if (editBudget.fulfilled.match(action)) {
                         console.log(action.payload);
+                        navigate("/dashboard");
                     }
                 })
         } catch (error) {
@@ -140,6 +156,10 @@ function UpdateBudget() {
                 handleHolidays= {(event) => dispatch(setHolidays(parseFloat(event.target.value)))}
                 handleOtherNonEssential= {(event) => dispatch(setOtherNonEssential(parseFloat(event.target.value)))}
                 handleUnsecured= {(event) => dispatch(setUnsecuredDebt(parseFloat(event.target.value)))}
+                handleTotalEssential = {()=> dispatch(setTotalEssential(parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)))}
+                handleTotalNonEssential = {()=> dispatch(setTotalNonEssential(parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt)))}
+                handleTotalExpenses = {()=> dispatch(setTotalExpenses(parseFloat(budgetFields.totalEssential) + parseFloat(budgetFields.totalNonEssential)))}
+                handleTotalSaving = {()=> dispatch(setTotalSavings(parseFloat(budgetFields.income) - parseFloat(budgetFields.totalExpenses)))}
                 >
             </BudgetFormInputs>
             <FormButton

@@ -37,8 +37,8 @@ class Budget(models.Model):
     #financial commitments
     unsecured_loans = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Unsecured Loans (Credit Cards, Store Cards, Payday Loans)")
     #total expenses and savings
-    total_essential = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Total Essential Expenses")
-    total_non_essential = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Total Non-Essential Expenses")
-    total_expenses = models.DecimalField(max_digits=10, decimal_places=2,  default=0, verbose_name="Total Expenses")
-    total_savings = models.DecimalField(max_digits=10, decimal_places=2,  default=0, verbose_name="Total Savings")
+    total_essential = models.DecimalField(max_digits=20, decimal_places=2, default=0, verbose_name="Total Essential Expenses")
+    total_non_essential = models.DecimalField(max_digits=20, decimal_places=2, default=0, verbose_name="Total Non-Essential Expenses")
+    total_expenses = models.DecimalField(max_digits=20, decimal_places=2,  default=0, verbose_name="Total Expenses")
+    total_savings = models.DecimalField(max_digits=20, decimal_places=2,  default=0, verbose_name="Total Savings")
 
