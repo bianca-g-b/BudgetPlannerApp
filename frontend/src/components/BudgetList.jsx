@@ -5,8 +5,9 @@ import { NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
 import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
 import { DataGrid } from '@mui/x-data-grid';
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { Button } from "@mui/material";
+import { PieChart } from '@mui/x-charts/PieChart';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -324,6 +325,33 @@ function BudgetList() {
                 </Button>
 
                 </List>}
+
+            {budget && 
+            <PieChart
+                series = {[
+                    {
+                        data: [
+                            {id:0, value: parseFloat(budget.housing), label: "Housing"},
+                            {id:1, value: parseFloat(budget.utility_bills), label: "Utilities"},
+                            {id:2, value: parseFloat(budget.food_drinks), label: "Food and drinks"},
+                            {id:3, value: parseFloat(budget.transport), label: "Transport"},
+                            {id:4, value: parseFloat(budget.household_goods_services), label: "Household"},
+                            {id:5, value: parseFloat(budget.children_related_costs), label: "Childcare"},
+                            {id:6, value: parseFloat(budget.cleaning_toiletries), label: "Cleaning and toiletries"},
+                            {id:7, value: parseFloat(budget.other_essential_costs), label: "Other essential"},
+                            {id:8, value: parseFloat(budget.luxury_gifts), label: "Luxury and gifts"},
+                            {id:9, value: parseFloat(budget.leisure_entertainment), label: "Leisure and entertainment"},
+                            {id:10, value: parseFloat(budget.holidays), label: "Holidays"},
+                            {id:11, value: parseFloat(budget.other_non_essential_costs), label: "Other non-essential"},
+                            {id:12, value: parseFloat(budget.unsecured_loans), label: "Unsecured debt"},
+                        ]
+                    }
+                ]}
+                width={1200}
+                height = {600}
+            >
+            </PieChart>
+            }
 
         </div>
         </div>
