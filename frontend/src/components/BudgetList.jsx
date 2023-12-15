@@ -347,8 +347,8 @@ function BudgetList() {
                         ]
                     }
                 ]}
-                width={1200}
-                height = {600}
+                width={900}
+                height = {500}
             >
             </PieChart>
             }

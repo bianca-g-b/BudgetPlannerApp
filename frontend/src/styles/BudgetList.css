@@ -5,8 +5,13 @@
     margin-top: 1%;
     margin-bottom: 1%;
     border-radius: 10px;
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
     align-items: flex-start;
+    /* flex-flow: row wrap; */
+  }
+
+  .data-div {
+   max-width: 100%;
   }
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
@@ -68,4 +73,18 @@ top:auto !important;
 /*Expenses lists containers*/
 .css-1r5wa48-MuiList-root  {
    margin-top: 0.6% !important;
+}
+
+/*Chart*/
+.css-4qu052-MuiResponsiveChart-container>svg {
+   align-self: start !important;
+   margin-right: 1% !important;
+   width:100% !important;
+   height:auto !important;
+}
+
+.css-5d9yge-MuiResponsiveChart-container {
+   margin-top: 1% !important;
+   width:100% !important;
+   height:auto !important;
 }
