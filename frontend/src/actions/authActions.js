@@ -1,5 +1,7 @@
 import { setCSRFToken} from "../redux/csrfSlice";
 import {setUser, setUserId } from "../redux/userSlice";
+import { setLogout } from "../redux/logoutSlice";
+import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
 
 const baseUrl = "http://127.0.0.1:8000";
@@ -92,7 +94,7 @@ export const loginUser = async (username, password, csrfToken) => {
 }
 
 // logout user
-export const logoutUser = async (csrfToken) => {
+export const logoutUser = async (dispatch, csrfToken) => {
     const response = await fetch(`${baseUrl}/auth/signout`, {
         method: "POST",
         headers: {
@@ -103,9 +105,12 @@ export const logoutUser = async (csrfToken) => {
         credentials: "include",
     });
     if (response.ok) {
+        dispatch(setUser(null));
+        dispatch(setIsAuthenticated(false));
+        dispatch(setLogout(true));
         return response;
     } else {
         alert("Logout failed. Please try again.");
         throw new Error("Logout failed.");
     }
-}
+};

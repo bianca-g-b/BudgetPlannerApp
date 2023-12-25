@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../actions/authActions';
-import { setUser } from "../redux/userSlice.js";
-import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
+// import { setUser } from "../redux/userSlice.js";
+// import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -25,7 +25,10 @@ export default function MenuAppBar() {
 
   const csrfToken = useSelector((state) => state.csrf.csrfToken);
   const user = useSelector((state) => state.user.username);
+  console.log(user, "user in menu");
+  
   const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
+  console.log(isAuthenticated, "isAuthenticated in menu");
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -37,13 +40,11 @@ export default function MenuAppBar() {
 
   // logout user and clear states for user and isAuthenticated
   const handleLogout = async () => {
-    const response  = await logoutUser(csrfToken);
+    const response  = await logoutUser(dispatch, csrfToken);
     if (response.status === 202) {
         console.log("logout successful");
-        dispatch(setUser(null));
-        dispatch(setIsAuthenticated(false));
-        console.log(isAuthenticated, "logout");
-        console.log(user, "user after logout");
+        // dispatch(setUser(null));
+        // dispatch(setIsAuthenticated(false));
         handleCloseUserMenu();
         navigate("/login"); 
     } else {
