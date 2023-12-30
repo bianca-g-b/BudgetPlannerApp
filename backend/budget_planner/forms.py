@@ -22,5 +22,9 @@ class BudgetForm(forms.ModelForm):
             'leisure_entertainment', 
             'holidays', 
             'other_non_essential_costs', 
-            'unsecured_loans'
+            'unsecured_loans',
+            'total_essential', 
+            'total_non_essential', 
+            'total_expenses', 
+            'total_savings',
         )
