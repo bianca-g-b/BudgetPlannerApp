@@ -59,13 +59,11 @@ def signin(request):
             username = data.get("username")
             password = data.get("password")
             user = authenticate(request, username = username, password = password)
-            # print(user, "testing")
-        if user is not None:
-            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
-            # get session id
-            # session_id = request.session.session_key
-            # print(session_id, "session id")
-            return JsonResponse({"message": "Login successful"}, status = 202)
+            if user is not None:
+                login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+                return JsonResponse({"message": "Login successful"}, status = 202)
+            else:
+                return JsonResponse({"message": "User login failed"}, status = 400)
         else:
             return JsonResponse({"message": "User login failed"}, status = 400)
     else:

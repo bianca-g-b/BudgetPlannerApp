@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your tests here.
 
 # Test for Budget Model
-class BudgetTests(TestCase):
+class BudgetModelTests(TestCase):
     # Create a budget object for testing
     @classmethod
     def setUpTestData(cls):
