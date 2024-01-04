@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -14,6 +14,7 @@ class BudgetTests(TestCase):
     def test_login(self):
         response = self.client.post("/auth/signin",  self.credentials, content_type="application/json")
         self.assertEqual(response.status_code, 202)
+        # logout user and test if it was successful 
         response = self.client.post("/auth/signout", content_type="application/json")
         self.assertEqual(response.status_code, 202)
 
