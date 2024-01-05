@@ -145,23 +145,23 @@ function UpdateBudget() {
                 otherNonEssentialValue={budgetById2.other_non_essential_costs}
                 unsecuredValue={budgetById2.unsecured_loans}
                 
-                handleTotalIncome= {(event) => dispatch(setIncome(parseFloat(event.target.value)).toFixed(2))}
-                handleHousing= {(event) => dispatch(setHousing(parseFloat(event.target.value)).toFixed(2))}
-                handleUtilities= {(event) => dispatch(setUtilities(parseFloat(event.target.value)).toFixed(2))}
-                handleFood= {(event) => dispatch(setFood(parseFloat(event.target.value)).toFixed(2))}
-                handleTransport= {(event) => dispatch(setTransport(parseFloat(event.target.value)).toFixed(2))}
-                handleHousehold= {(event) => dispatch(setHousehold(parseFloat(event.target.value)).toFixed(2))}
-                handleChildcare= {(event) => dispatch(setChildcare(parseFloat(event.target.value)).toFixed(2))}
-                handleCleaning= {(event) => dispatch(setCleaning(parseFloat(event.target.value)).toFixed(2))}
-                handleOtherEssential= {(event) => dispatch(setOtherEssential(parseFloat(event.target.value)).toFixed(2))}
-                handleLuxury= {(event) => dispatch(setLuxury(parseFloat(event.target.value)).toFixed(2))}
-                handleLeisure= {(event) => dispatch(setLeisure(parseFloat(event.target.value)).toFixed(2))}
-                handleHolidays= {(event) => dispatch(setHolidays(parseFloat(event.target.value)).toFixed(2))}
-                handleOtherNonEssential= {(event) => dispatch(setOtherNonEssential(parseFloat(event.target.value)).toFixed(2))}
-                handleUnsecured= {(event) => dispatch(setUnsecuredDebt(parseFloat(event.target.value)).toFixed(2))}
-                handleTotalEssential = {()=> dispatch(setTotalEssential(parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)).toFixed(2))}
-                handleTotalNonEssential = {()=> dispatch(setTotalNonEssential(parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt)).toFixed(2))}
-                handleTotalExpenses = {()=> dispatch(setTotalExpenses(parseFloat(budgetFields.totalEssential) + parseFloat(budgetFields.totalNonEssential)).toFixed(2))}
+                handleTotalIncome= {(event) => dispatch(setIncome(parseFloat(event.target.value).toFixed(2)))}
+                handleHousing= {(event) => dispatch(setHousing(parseFloat(event.target.value).toFixed(2)))}
+                handleUtilities= {(event) => dispatch(setUtilities(parseFloat(event.target.value).toFixed(2)))}
+                handleFood= {(event) => dispatch(setFood(parseFloat(event.target.value).toFixed(2)))}
+                handleTransport= {(event) => dispatch(setTransport(parseFloat(event.target.value).toFixed(2)))}
+                handleHousehold= {(event) => dispatch(setHousehold(parseFloat(event.target.value).toFixed(2)))}
+                handleChildcare= {(event) => dispatch(setChildcare(parseFloat(event.target.value).toFixed(2)))}
+                handleCleaning= {(event) => dispatch(setCleaning(parseFloat(event.target.value).toFixed(2)))}
+                handleOtherEssential= {(event) => dispatch(setOtherEssential(parseFloat(event.target.value).toFixed(2)))}
+                handleLuxury= {(event) => dispatch(setLuxury(parseFloat(event.target.value).toFixed(2)))}
+                handleLeisure= {(event) => dispatch(setLeisure(parseFloat(event.target.value).toFixed(2)))}
+                handleHolidays= {(event) => dispatch(setHolidays(parseFloat(event.target.value).toFixed(2)))}
+                handleOtherNonEssential= {(event) => dispatch(setOtherNonEssential(parseFloat(event.target.value).toFixed(2)))}
+                handleUnsecured= {(event) => dispatch(setUnsecuredDebt(parseFloat(event.target.value).toFixed(2)))}
+                handleTotalEssential = {()=> dispatch(setTotalEssential((parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)).toFixed(2)))}
+                handleTotalNonEssential = {()=> dispatch(setTotalNonEssential((parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt)).toFixed(2)))}
+                handleTotalExpenses = {()=> dispatch(setTotalExpenses((parseFloat(budgetFields.totalEssential) + parseFloat(budgetFields.totalNonEssential)).toFixed(2)))}
                 handleTotalSaving = {()=> dispatch(setTotalSavings((parseFloat(budgetFields.income) - parseFloat(budgetFields.totalExpenses)).toFixed(2)))}
                 >
             </BudgetFormInputs>
