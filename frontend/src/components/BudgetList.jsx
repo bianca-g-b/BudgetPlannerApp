@@ -1,6 +1,6 @@
 import "../styles/BudgetList.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
 import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
@@ -29,6 +29,7 @@ import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
+import DeleteModal from "./Modal.jsx";
 
 
 function BudgetList() {
@@ -40,6 +41,7 @@ function BudgetList() {
     const id = useSelector((state)=> state.budget.id)
     console.log(id, ":test if correct id is displayed")
     console.log(budget);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // fetch data
     useEffect(() => {
@@ -69,10 +71,21 @@ function BudgetList() {
             })
     }
 
+    // open modal
+    function openModal() {
+        setIsModalOpen(true);
+    }
+
+    // close modal
+    function closeModal() {
+        setIsModalOpen(false);
+    }
+
     // delete budget by id
     async function handleDeleteBudget(id) {
         try  {
             dispatch(deleteBudget(id))
+            setIsModalOpen(false);
             window.location.reload()
         } catch (error) {
                     console.log(error)
@@ -320,9 +333,16 @@ function BudgetList() {
                 </NavLink>
                 <Button
                 variant="contained"
-                    onClick={()=> handleDeleteBudget(budget.id)}
+                    onClick={openModal}
                     className="delete-button">Delete
                 </Button>
+                 <DeleteModal 
+                    isModalOpen={isModalOpen}
+                    handleDelete={()=> handleDeleteBudget(budget.id)}
+                    closeModal={closeModal}
+                    dateFrom={budget.date_from}
+                    dateTo={budget.date_to}
+                />
 
                 </List>}
 
