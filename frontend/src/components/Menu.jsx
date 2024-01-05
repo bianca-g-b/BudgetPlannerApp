@@ -60,19 +60,19 @@ export default function MenuAppBar() {
           <Box 
           sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}
           >
-            <Button
+            {isAuthenticated && <Button
             component={Link}
             href="/dashboard"
             sx={{ my: 2, color: 'white', display: 'block' }}
             >Budgets
-            </Button>
+            </Button>}
 
-            <Button
+            {isAuthenticated && <Button
             component={Link}
             href="/dashboard"
             sx={{ my: 2, color: 'white', display: 'block' }}
             >Graph
-            </Button>
+            </Button>}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -113,18 +113,32 @@ export default function MenuAppBar() {
                   <Typography textAlign="center">About</Typography>
                 </MenuItem>
 
-                <MenuItem 
+                {isAuthenticated && <MenuItem 
                     component = {Link}
                     href="/dashboard"
                     onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
-                </MenuItem>
+                </MenuItem>}
 
-                <MenuItem 
+                {isAuthenticated && <MenuItem 
                     onClick={handleLogout}
                     >
                   <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
+                </MenuItem>}
+
+                {!isAuthenticated && <MenuItem 
+                    component = {Link}
+                    href="/register"
+                    onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Register</Typography>
+                </MenuItem>}
+
+                {!isAuthenticated && <MenuItem 
+                    component = {Link}
+                    href="/login"
+                    onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>}
               
             </Menu>
           </Box>
