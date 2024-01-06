@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../actions/authActions';
-// import { setUser } from "../redux/userSlice.js";
-// import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -43,8 +41,6 @@ export default function MenuAppBar() {
     const response  = await logoutUser(dispatch, csrfToken);
     if (response.status === 202) {
         console.log("logout successful");
-        // dispatch(setUser(null));
-        // dispatch(setIsAuthenticated(false));
         handleCloseUserMenu();
         navigate("/login"); 
     } else {
@@ -115,7 +111,7 @@ export default function MenuAppBar() {
 
                 {isAuthenticated && <MenuItem 
                     component = {Link}
-                    href="/dashboard"
+                    href="/account"
                     onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>}

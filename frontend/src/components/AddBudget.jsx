@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBudget } from '../actions/budgetActions.js';
+import { useState } from 'react';
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
@@ -10,12 +11,15 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood,
     setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../redux/budgetFieldsSlice.js';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 function AddBudget() {
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
+    const [open, setOpen] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -53,7 +57,12 @@ function AddBudget() {
                 .then((action) => {
                     if (addBudget.fulfilled.match(action)) {
                         console.log(action.payload);
-                        navigate("/dashboard")
+                        setOpen(true);
+                        // navigate to dashboard after 1.5 seconds
+                        setTimeout(() => {
+                            navigate("/dashboard");
+                            window.location.reload();
+                        }, 1500);
                     }
                 })
         } catch (error) {
@@ -96,6 +105,12 @@ function AddBudget() {
                 buttonTitle="Add Budget"
             >
             </FormButton>
+
+            <Snackbar open={open} autoHideDuration={1000} onClose={() => setOpen(false)}>
+                <MuiAlert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+                    Budget added successfully!
+                </MuiAlert>
+            </Snackbar>
 
         </MainForm>
     )

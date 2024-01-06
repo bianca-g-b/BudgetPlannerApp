@@ -1,0 +1,37 @@
+.main-account-container {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  margin-left: 2%;
+  margin-top: 10%;
+  height: 90vh;
+}
+
+.account-options-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.account-title {
+    padding: 5px 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #a7a3a3;
+}
+
+.account-link {
+  padding: 5px 10px;
+  font-size: 18px;
+  border-bottom: 1px solid #a7a3a3;
+  text-decoration: none;
+  color: #000;
+}
+
+.account-link:hover {
+  background-color: #e6e1e171;
+  cursor: pointer;
+}
+
+/* .selected-link {
+    border-left: 5px solid #3f8be2;
+} */

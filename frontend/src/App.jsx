@@ -8,6 +8,7 @@ import PrivateRoute from "./routes/PrivateRoute.jsx";
 import AddBudget from './components/AddBudget.jsx';
 import UpdateBudget from './components/UpdateBudget.jsx';
 import MenuAppBar from './components/Menu.jsx';
+import Account from "./components/auth/Account.jsx";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -16,14 +17,14 @@ function App() {
 
   return (
     <>
-
-    <MenuAppBar />
+      <MenuAppBar />
       <Routes>
-     
+      
         <Route path="/dashboard" element={
           <PrivateRoute>
             <BudgetList />
-          </PrivateRoute>} 
+          </PrivateRoute>
+          } 
         />
 
         <Route path="/dashboard/addbudget" element={
@@ -40,11 +41,19 @@ function App() {
           } 
         />
 
+
+        <Route path="/account" element={
+          <PrivateRoute>
+            <Account />
+          </PrivateRoute>
+          } 
+        />
+
         <Route path="/" element={<MainPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </>
+   </>
   )
 }
 

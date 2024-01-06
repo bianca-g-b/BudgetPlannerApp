@@ -88,3 +88,8 @@ top:auto !important;
    width:100% !important;
    height:auto !important;
 }
+
+/*Selected table row*/
+.Mui-selected {
+   border-left: 5px solid #3f8be2!important;
+}
