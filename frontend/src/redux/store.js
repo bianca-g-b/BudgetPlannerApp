@@ -18,14 +18,14 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-    console.log(action, "action")
+    // console.log(action, "action")
     if (action.type === "logout/setLogout") {
-        console.log("signout request");
+        // console.log("signout request");
         storage.removeItem("persist:root");
         localStorage.removeItem("persist:root");
         return appReducer(undefined, action);
     }
-    console.log("root reducer not signout request");
+    // console.log("root reducer not signout request");
     return appReducer(state, action);
 }
 
