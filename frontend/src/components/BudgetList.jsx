@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
-import { setBudgetList, setBudgetById, setId } from "../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById, setId, setClicked } from "../redux/budgetSlice.js";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from "@mui/material";
 import { PieChart } from '@mui/x-charts/PieChart';
@@ -36,12 +36,11 @@ function BudgetList() {
     const dispatch = useDispatch();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const budgetList = useSelector((state) => state.budget.budgetList);
-    console.log(budgetList, "testBudgetList");
-    const budget = useSelector((state)=> state.budget.budgetById)
-    const id = useSelector((state)=> state.budget.id)
-    console.log(id, ":test if correct id is displayed")
-    console.log(budget);
+    const budget = useSelector((state)=> state.budget.budgetById);
+    const id = useSelector((state)=> state.budget.id);
+    const clicked = useSelector((state)=> state.budget.clicked);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     // fetch data
     useEffect(() => {
@@ -58,6 +57,7 @@ function BudgetList() {
         fetchData()
     }, [dispatch, csrfToken]);
 
+
     // get and set budget by id, id
     async function budgetById(id) {
         dispatch(setId(id))
@@ -66,10 +66,22 @@ function BudgetList() {
                 if (getBudgetById.fulfilled.match(action)) {
                     console.log(action.payload, "budget by id - action");
                     dispatch(setBudgetById(action.payload))
-                    console.log(budget, "testing state budgetbyid")
+                    console.log(budget, "testing state budgetbyid");
+                    dispatch(setClicked(id));
+                    console.log(clicked, "testing clicked")
                 }
             })
     }
+    
+    // write useEffect to add className to table row when button is clicked and remove className when another button is clicked
+    useEffect(() => {
+        if (clicked === id) {
+            setIsClicked(true)
+        } else {
+            setIsClicked(false)
+        }
+    }, [clicked, id])
+
 
     // open modal
     function openModal() {
@@ -102,6 +114,10 @@ function BudgetList() {
                 <div className="data-div">
                     <DataGrid
                         rows={budgetList}
+                        getRowId={(row) => row.id}
+                        getRowClassName={(params) => 
+                            (params.id === clicked && isClicked) ? 'clicked' : ''
+                        }
                         columns={[
                             { field: 'date_from', headerName: 'Date from', width: 200 },
                             { field: 'date_to', headerName: 'Date to', width: 200 },

@@ -5,11 +5,13 @@ function MainForm(
     { handleForm, children }
 ) {
     return (
+        <div className="form-main-container">
         <Form
             className = "full-form-area"
             onSubmit = {handleForm}>
             {children}
         </Form>
+        </div>
     )
 }
 

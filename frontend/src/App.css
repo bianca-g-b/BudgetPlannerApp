@@ -6,6 +6,13 @@ html, body {
   background-color: #f8f8ff;
 }
 
+.form-main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(213, 215, 243, 0.678);
+}
+
 .full-form-area {
   display: flex;
   flex-direction: column;
@@ -17,6 +24,7 @@ html, body {
   margin-top: 1%;
   margin-bottom: 1%;
   width: 45%;
+  background-color:#f8f8ff;
 }
 
 /* .form-control {
@@ -59,7 +67,7 @@ html, body {
 }
 
 .list-group-item-primary {
-  background-color:#0d6efd !important;
+  background-color: #1976d2  !important;
   font-weight: bold;
   color: black !important;
 }
@@ -70,4 +78,14 @@ html, body {
 
 .list-group {
   border: solid 1px rgb(248, 248, 255) !important;
+}
+
+.form-button {
+  background-color: #1976d2e0 !important;
+  color: white !important;
+  text-shadow: 1px 1px 1px black;
+}
+
+.form-button:hover {
+  background-color: #1668b9  !important;
 }

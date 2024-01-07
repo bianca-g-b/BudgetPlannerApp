@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function FormButton({buttonTitle}) {
     return (
-        <Button type="submit" variant="light">{buttonTitle}</Button>
+        <Button type="submit" className="form-button">{buttonTitle}</Button>
     )
 }
 
