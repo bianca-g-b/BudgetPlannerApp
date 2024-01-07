@@ -7,6 +7,7 @@ function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [email,setEmail] = useState(null);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Register() {
         e.preventDefault();
         if (password === confirmPassword) {
             const csrfToken = await fetchCSRFToken(dispatch);
-            const response = await registerUser(username, password, confirmPassword, csrfToken);
+            const response = await registerUser(username, password, confirmPassword, email, csrfToken);
             console.log(response);
             console.log(csrfToken, "registration csrf token first")
             if (response.status === 202) {
@@ -53,6 +54,15 @@ function Register() {
                     className="reg-username" 
                     placeholder="Create username"
                     onChange = { (e) => setUsername(e.target.value)}
+                     />
+            </div>
+
+            <div className="reg-email-container">
+                <label htmlFor="email">Username</label>
+                <input type="email" 
+                    className="reg-email" 
+                    placeholder="Add email (optional)"
+                    onChange = { (e) => setEmail(e.target.value)}
                      />
             </div>
 

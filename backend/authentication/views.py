@@ -1,15 +1,18 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.urls import reverse
+# from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout, get_user_model
+# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+# from django.urls import reverse
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 import json
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.sessions.models import Session
+# from django.contrib.sessions.models import Session
 
 # Create views here
+
+# Get user model
+User = get_user_model()
 
 #csrf token
 def get_csrf_token(request):
@@ -37,8 +40,9 @@ def signup(request):
             username = data.get("username")
             password = data.get("password")
             confirmPassword = data.get("confirmPassword")
+            email = data.get("email")
             if password == confirmPassword:
-                user = User.objects.create_user(username, password=password)
+                user = User.objects.create_user(username, password=password, email=email)
                 return JsonResponse({"message": "Registration request received successfully"}, status=202)
             else:
                 return JsonResponse({"message": "Passwords do not match"}, status=400)

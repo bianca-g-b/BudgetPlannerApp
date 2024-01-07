@@ -46,7 +46,7 @@ export const fetchUser = async(dispatch, csrfToken) => {
 };
 
 // register user
-export const registerUser = async (username, password, confirmPassword, csrfToken) => {
+export const registerUser = async (username, password, confirmPassword, email, csrfToken) => {
     const response = await fetch(`${baseUrl}/auth/signup`, {
         method: "POST",
         headers: {
@@ -57,6 +57,7 @@ export const registerUser = async (username, password, confirmPassword, csrfToke
         body: JSON.stringify({
             username: username,
             password: password,
+            email: email,
             confirmPassword: confirmPassword,
         }),
         credentials: "include",

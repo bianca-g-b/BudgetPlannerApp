@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from authentication.models import CustomUser
 from django.utils import timezone
 from datetime import timedelta
 
@@ -9,11 +11,13 @@ next_month = timezone.localdate() + timedelta(days=30)
 
 # Create your models here.
 
+# Get user model
+# User = get_user_model()
 
 # Create budget model
 class Budget(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date_created = models.DateField(auto_now_add=True) #only updates when created
     date_updated = models.DateField(auto_now=True) #updates every time is modified
     #budget
