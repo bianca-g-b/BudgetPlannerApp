@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Budget
+from authentication.models import CustomUser
 
 class BudgetAdmin(admin.ModelAdmin):
     list_display = (
@@ -28,6 +29,19 @@ class BudgetAdmin(admin.ModelAdmin):
         'total_expenses', 
         'total_savings',
         )
+    
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 
+        'username', 
+        'email', 
+        'first_name', 
+        'last_name', 
+        'is_staff', 
+        'is_active', 
+        'date_joined',
+        )
 
 # Register your models here.
 admin.site.register(Budget, BudgetAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)

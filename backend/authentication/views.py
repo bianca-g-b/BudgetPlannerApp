@@ -32,6 +32,7 @@ def user_details(request):
 @csrf_exempt
 def signup(request):
     if request.user.is_authenticated:
+        print(request.user)
         return JsonResponse({"message": "User is already authenticated"}, status=400)
     print(request)
     if request.method == "POST":
@@ -55,8 +56,8 @@ def signup(request):
 #login
 @csrf_exempt
 def signin(request):
-    # if request.user.is_authenticated:
-    #     return JsonResponse({"message": "User is already authenticated"}, status=400)
+    if request.user.is_authenticated:
+        return JsonResponse({"message": "User is already authenticated"}, status=400)
     if request.method == "POST":
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
@@ -67,11 +68,11 @@ def signin(request):
                 login(request, user, backend="django.contrib.auth.backends.ModelBackend")
                 return JsonResponse({"message": "Login successful"}, status = 202)
             else:
-                return JsonResponse({"message": "User login failed"}, status = 400)
+                return JsonResponse({"message": "User login failed1"}, status = 400)
         else:
-            return JsonResponse({"message": "User login failed"}, status = 400)
+            return JsonResponse({"message": "User login failed2"}, status = 400)
     else:
-        return JsonResponse({"message": "User login failed"}, status = 400)
+        return JsonResponse({"message": "User login failed3"}, status = 400)
     
 #logout
 @csrf_exempt

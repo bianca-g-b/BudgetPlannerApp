@@ -21,13 +21,9 @@ function Register() {
         if (password === confirmPassword) {
             const csrfToken = await fetchCSRFToken(dispatch);
             const response = await registerUser(username, password, confirmPassword, email, csrfToken);
-            console.log(response);
-            console.log(csrfToken, "registration csrf token first")
             if (response.status === 202) {
                 alert("You have successfully registered!")
             } else {
-                console.log(response.message);
-                console.log(csrfToken, "registration csrf token")
                 alert("Registration failed. Please try again.")
             } 
         } else {
@@ -58,7 +54,7 @@ function Register() {
             </div>
 
             <div className="reg-email-container">
-                <label htmlFor="email">Username</label>
+                <label htmlFor="email">Email (optional)</label>
                 <input type="email" 
                     className="reg-email" 
                     placeholder="Add email (optional)"
