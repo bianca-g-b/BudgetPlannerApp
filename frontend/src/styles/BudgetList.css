@@ -39,11 +39,11 @@ top:auto !important;
  }
 
  .essential-icon {
-    background-color: #a30f1b !important;
+    background-color: #d63384 !important;
  }
 
 .non-essential-icon {
-    background-color: #efb908 !important;
+    background-color: #ffc107 !important;
 }
 
 .arrow-icon {
@@ -52,7 +52,7 @@ top:auto !important;
 }
 
 .savings-icon {
-   background-color: #1976d2 !important;
+   background-color: #6f42c1 !important;
 }
 
 /*edit button link*/

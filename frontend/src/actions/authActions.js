@@ -1,5 +1,5 @@
 import { setCSRFToken} from "../redux/csrfSlice";
-import {setUser, setUserId } from "../redux/userSlice";
+import {setUser, setUserId, setEmail } from "../redux/userSlice";
 import { setLogout } from "../redux/logoutSlice";
 import { setIsAuthenticated } from "../redux/authenticatedSlice.js";
 
@@ -33,10 +33,11 @@ export const fetchUser = async(dispatch, csrfToken) => {
             const data = await response.json();
             dispatch(setUser(data.username));
             dispatch(setUserId(data.user_id));
+            dispatch(setEmail(data.email));
             return data.username;
         } else {
-            const data = await response.json();
-            console.log(data);
+            // const data = await response.json();
+            // console.log(data);
             return null;
         }
     } catch (error) {

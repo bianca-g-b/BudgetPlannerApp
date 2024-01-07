@@ -24,7 +24,8 @@ def user_details(request):
     if request.user.is_authenticated:
         username = request.user.username
         user_id = request.user.id
-        return JsonResponse({"username": username, "user_id": user_id}, status=200)
+        email = request.user.email
+        return JsonResponse({"username": username, "user_id": user_id, "email": email}, status=200)
     else:
         return JsonResponse({"message": "User details not found"}, status=400)
 

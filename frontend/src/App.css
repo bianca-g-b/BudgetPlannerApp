@@ -54,14 +54,14 @@ html, body {
 
 .essential-input,
 .list-group-item-danger {
-  background-color:#a30f1b !important;
+  background-color:#d63384 !important;
   font-weight: bold;
   color: black !important;
 }
 
 .non-essential-input,
 .list-group-item-warning {
-  background-color: #efb908 !important;
+  background-color: #ffc107 !important;
   font-weight: bold;
   color: black !important;
 }

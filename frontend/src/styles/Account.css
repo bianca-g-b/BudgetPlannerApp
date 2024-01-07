@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items:flex-start;
   margin-left: 2%;
-  margin-top: 10%;
+  margin-top: 5%;
   height: 90vh;
 }
 
@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* position: sticky; */
 }
 
 .account-title {
@@ -35,3 +36,25 @@
 /* .selected-link {
     border-left: 5px solid #3f8be2;
 } */
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+
+.intro-title {
+  font-size: 20px;
+  margin-bottom: 2%;
+}
+
+.intro-user, .intro-email {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.intro-message {
+  font-size: 18px;
+  margin-bottom: 2%;
+}
