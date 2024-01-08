@@ -7,6 +7,7 @@ from django.middleware.csrf import get_token
 import json
 # from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 # from django.contrib.sessions.models import Session
 
 # Create views here
@@ -20,6 +21,7 @@ def get_csrf_token(request):
     return JsonResponse({"csrfToken": csrf_token})
 
 #user details
+@login_required
 def user_details(request):
     if request.user.is_authenticated:
         username = request.user.username
@@ -84,4 +86,17 @@ def signout(request):
     else:
         return JsonResponse({"message": "Logout failed"}, status = 400)
 
-    
+# add or change email address
+@login_required
+def change_email(request):
+    if request.method == "POST":
+        if request.content_type == "application/json":
+            data = json.loads(request.body.decode("utf-8"))
+            email = data.get("email")
+            request.user.email = email
+            request.user.save()
+            return JsonResponse({"message": "Email address changed successfully", "email":email}, status = 202)
+        else:
+            return JsonResponse({"message": "Email address change failed1"}, status = 400)
+    else:
+        return JsonResponse({"message": "Email address change failed2"}, status = 400)

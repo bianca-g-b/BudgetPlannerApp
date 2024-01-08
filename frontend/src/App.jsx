@@ -9,6 +9,7 @@ import AddBudget from './components/AddBudget.jsx';
 import UpdateBudget from './components/UpdateBudget.jsx';
 import MenuAppBar from './components/Menu.jsx';
 import Account from "./components/auth/Account.jsx";
+import EmailForm from "./components/auth/authChildren/EmailForm.jsx";
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -41,13 +42,17 @@ function App() {
           } 
         />
 
-
+        
         <Route path="/account" element={
           <PrivateRoute>
             <Account />
-          </PrivateRoute>
-          } 
-        />
+          </PrivateRoute>}>
+            <Route 
+              path="email"
+              element={
+                <EmailForm />}
+            />
+        </Route>
 
         <Route path="/" element={<MainPage />} />
         <Route path="/register" element={<Register />} />

@@ -36,8 +36,6 @@ export const fetchUser = async(dispatch, csrfToken) => {
             dispatch(setEmail(data.email));
             return data.username;
         } else {
-            // const data = await response.json();
-            // console.log(data);
             return null;
         }
     } catch (error) {
@@ -114,5 +112,30 @@ export const logoutUser = async (dispatch, csrfToken) => {
     } else {
         alert("Logout failed. Please try again.");
         throw new Error("Logout failed.");
+    }
+};
+
+// add or update email
+export const updateEmail = async (dispatch, email) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    const response = await fetch(`${baseUrl}/auth/email`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify({
+            email: email,
+        }),
+        credentials: "include",
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setEmail(data.email));
+        return response;
+    } else {
+        alert("Update email failed. Please try again.");
+        throw new Error("Update email failed.");
     }
 };
