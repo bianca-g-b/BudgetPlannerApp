@@ -19,7 +19,8 @@ function AddBudget() {
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
-    const [open, setOpen] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openFail, setOpenFail] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -57,12 +58,14 @@ function AddBudget() {
                 .then((action) => {
                     if (addBudget.fulfilled.match(action)) {
                         console.log(action.payload);
-                        setOpen(true);
+                        setOpenSuccess(true);
                         // navigate to dashboard after 1.5 seconds
                         setTimeout(() => {
                             navigate("/dashboard");
                             window.location.reload();
                         }, 1500);
+                    } else {
+                        setOpenFail(true);
                     }
                 })
         } catch (error) {
@@ -106,9 +109,15 @@ function AddBudget() {
             >
             </FormButton>
 
-            <Snackbar open={open} autoHideDuration={1000} onClose={() => setOpen(false)}>
-                <MuiAlert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+            <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
+                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
                     Budget added successfully!
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    Budget failed to add. Please try again.
                 </MuiAlert>
             </Snackbar>
 

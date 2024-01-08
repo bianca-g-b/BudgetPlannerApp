@@ -30,6 +30,8 @@ import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
 import DeleteModal from "./Modal.jsx";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 function BudgetList() {
@@ -41,6 +43,8 @@ function BudgetList() {
     const clicked = useSelector((state)=> state.budget.clicked);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openFail, setOpenFail] = useState(false);
 
     // fetch data
     useEffect(() => {
@@ -95,12 +99,21 @@ function BudgetList() {
 
     // delete budget by id
     async function handleDeleteBudget(id) {
-        try  {
-            dispatch(deleteBudget(id))
-            setIsModalOpen(false);
-            window.location.reload()
+        try {
+            dispatch(deleteBudget(id, csrfToken))
+                .then((action) => {
+                    if (deleteBudget.fulfilled.match(action)) {
+                        setOpenSuccess(true);
+                        // reload dashboard after 1.5 seconds
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        setOpenFail(true);
+                    }
+                })
         } catch (error) {
-                    console.log(error)
+            console.log(error);
         }
     }
 
@@ -347,7 +360,7 @@ function BudgetList() {
                         >Edit</Button>
                     </NavLink>
                     <Button
-                    variant="contained"
+                        variant="contained"
                         onClick={openModal}
                         className="delete-button">Delete
                     </Button>
@@ -389,6 +402,19 @@ function BudgetList() {
                 }
 
             </div>
+
+            <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
+                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                    Budget deleted successfully!
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    Budget deletion failed. Please try again.
+                </MuiAlert>
+            </Snackbar>
+
         </div>
 
     )

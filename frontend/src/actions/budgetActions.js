@@ -63,7 +63,6 @@ export const addBudget = createAsyncThunk(
         });
         if (response.ok) {
             const newBudget = await response.json();
-            console.log(newBudget);
             return newBudget;
         } else {
             return thunkAPI.rejectWithValue(response);
@@ -88,7 +87,6 @@ export const editBudget = createAsyncThunk(
         });
         if (response.ok) {
             const editedBudget = await response.json();
-            console.log(editedBudget);
             return editedBudget;
         } else {
             return thunkAPI.rejectWithValue(response);
@@ -111,11 +109,9 @@ export const deleteBudget = createAsyncThunk(
             credentials: "include",
         });
         if (response.ok) {
-            const deletedTask = await response.json();
-            console.log(deletedTask);
-            return deletedTask;
+            return {"status": 204}
         } else {
-            return thunkAPI.rejectWithValue(response);
+            return thunkAPI.rejectWithValue({"status": 400});
         }
     }
 )

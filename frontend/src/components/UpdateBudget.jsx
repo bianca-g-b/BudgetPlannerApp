@@ -19,18 +19,16 @@ function UpdateBudget() {
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const id2 = useSelector((state)=> state.budget.id)
-    console.log(id2, "id2")
     const budgetList = useSelector((state) => state.budget.budgetList);
-    const [open, setOpen] = useState(false);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openFail, setOpenFail] = useState(false);
 
     //extract budget by id from budget list
     const budgetById2 = budgetList.find((budget) => budget.id === id2);
-    console.log(budgetById2, "budget by id 2");
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(budgetById, "update task test");
 
     // set budget fields to budgetById2 fields
     useEffect(()=>{
@@ -102,7 +100,6 @@ function UpdateBudget() {
             total_savings: (parseFloat(budgetFields.income) - (parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential) +
                             parseFloat(budgetFields.luxury) + parseFloat(budgetFields.leisure) + parseFloat(budgetFields.holidays) + parseFloat(budgetFields.otherNonEssential) + parseFloat(budgetFields.unsecuredDebt))).toFixed(2),
         };
-        console.log(details, "details update budget");
 
         try {
             dispatch(editBudget(details, csrfToken))
@@ -110,12 +107,14 @@ function UpdateBudget() {
                     if (editBudget.fulfilled.match(action)) {
                         console.log(action.payload);
                         dispatch(setBudgetById(action.payload));
-                        setOpen(true);
+                        setOpenSuccess(true);
                         // navigate to dashboard after 1.5 seconds
                         setTimeout(() => {
                         navigate("/dashboard");
                         window.location.reload();
                         }, 1500);
+                    } else {
+                        setOpenFail(true);
                     }
                 })
         } catch (error) {
@@ -177,8 +176,14 @@ function UpdateBudget() {
             >
             </FormButton>
 
-            <Snackbar open={open} autoHideDuration={1000} onClose={() => setOpen(false)}>
-                <MuiAlert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+            <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
+                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                    Budget added successfully!
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="success" sx={{ width: '100%' }}>
                     Budget added successfully!
                 </MuiAlert>
             </Snackbar>
