@@ -139,3 +139,25 @@ export const updateEmail = async (dispatch, email) => {
         throw new Error("Update email failed.");
     }
 };
+
+// dlete email address
+export const deleteEmail = async (dispatch) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    const response = await fetch(`${baseUrl}/auth/emaildelete`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+    });
+    if (response.ok) {
+        dispatch(setEmail(null));
+        return response;
+    } else {
+        console.log(response);
+        alert("Delete email failed. Please try again.");
+        throw new Error("Delete email failed");
+    }
+}

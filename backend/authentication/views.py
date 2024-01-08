@@ -100,3 +100,16 @@ def change_email(request):
             return JsonResponse({"message": "Email address change failed1"}, status = 400)
     else:
         return JsonResponse({"message": "Email address change failed2"}, status = 400)
+    
+# delete email address from account
+# @login_required
+def delete_email(request):
+    if request.method =="DELETE":
+        if request.content_type == "application/json":
+            request.user.email = None
+            request.user.save()
+            return JsonResponse({"message": "Email address deleted successfully"}, status = 202)
+        else:
+            return JsonResponse({"message": "Failed to delete email address1"}, status = 400)
+    else:
+        return JsonResponse({"message": "Failed to delete email address2"}, status = 400)
