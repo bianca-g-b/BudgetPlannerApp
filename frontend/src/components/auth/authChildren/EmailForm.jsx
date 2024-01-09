@@ -1,5 +1,6 @@
 import "../../../styles/EmailForm.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { updateEmail, deleteEmail } from "../../../actions/authActions";
 import { fetchCSRFToken } from "../../../actions/authActions";
 import { useDispatch } from "react-redux";
@@ -7,12 +8,13 @@ import { Button } from "@mui/material";
 
 function EmailForm() {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState(null);
+    const email = useSelector((state) => state.user.email);
+    const [newEmail, setNewEmail] = useState("");
 
     async function handleUpdateEmail(e) {
         e.preventDefault();
         const csrfToken = await fetchCSRFToken(dispatch);
-        const response = await updateEmail(dispatch, email, csrfToken);
+        const response = await updateEmail(dispatch, newEmail, csrfToken);
         if (response.status === 202) {
             alert("You have successfully updated your email address!")
         } else {
@@ -47,7 +49,7 @@ function EmailForm() {
                         <input type="email" 
                             className="email-input" 
                             placeholder="Enter email address"
-                            onChange = { (e) => setEmail(e.target.value)}
+                            onChange = { (e) => setNewEmail(e.target.value)}
                             />
                     </div>
                     <div className="submit-container">
@@ -59,7 +61,7 @@ function EmailForm() {
                 </form>
             </div>
 
-                <div className="delete-email-container">
+                {email && <div className="delete-email-container">
                     <div className="delete-information">    
                         <p className="delete-title">Delete email address</p>
                     </div>
@@ -73,7 +75,7 @@ function EmailForm() {
                         >Delete</Button>
                     </div>
                 </div>
-
+}
         </div>
     )
 }
