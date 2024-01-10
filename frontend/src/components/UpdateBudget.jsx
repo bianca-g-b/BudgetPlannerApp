@@ -178,13 +178,13 @@ function UpdateBudget() {
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
                 <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
-                    Budget added successfully!
+                    Budget updated successfully!
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
                 <MuiAlert onClose={() => setOpenFail(false)} severity="success" sx={{ width: '100%' }}>
-                    Budget added successfully!
+                    Budget failed to update. Please try again.
                 </MuiAlert>
             </Snackbar>
 
