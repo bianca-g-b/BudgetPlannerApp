@@ -23,10 +23,8 @@ function EmailForm() {
         const csrfToken = await fetchCSRFToken(dispatch);
         const response = await updateEmail(dispatch, newEmail, csrfToken);
         if (response.status === 202) {
-            // alert("You have successfully updated your email address!")
             setOpenSuccessUpdate(true);
         } else {
-            // alert("Update failed. Please try again.")
             setOpenFailUpdate(true);
         }
     }
@@ -36,10 +34,8 @@ function EmailForm() {
         const csrfToken = await fetchCSRFToken(dispatch);
         const response = await deleteEmail(dispatch, csrfToken);
         if (response.status === 202) {
-            // alert("You have successfully deleted your email address!")
             setOpenSuccessDelete(true);
         } else {
-            // alert("Delete failed. Please try again.")
             setOpenFailDelete(true);
         }
     }
@@ -94,7 +90,7 @@ function EmailForm() {
             </Snackbar>
 
             <Snackbar open={openFailUpdate} autoHideDuration={1500} onClose={() => setOpenFailUpdate(false)}>
-                <MuiAlert onClose={() => setOpenFailUpdate(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert onClose={() => setOpenFailUpdate(false)} severity="error" sx={{ width: '100%' }}>
                     Failed to update email! Please try again.
                 </MuiAlert>
             </Snackbar>
@@ -106,7 +102,7 @@ function EmailForm() {
             </Snackbar>
 
             <Snackbar open={openFailDelete} autoHideDuration={1500} onClose={() => setOpenFailDelete(false)}>
-                <MuiAlert onClose={() => setOpenFailDelete(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert onClose={() => setOpenFailDelete(false)} severity="error" sx={{ width: '100%' }}>
                     Failed to delete email! Please try again.
                 </MuiAlert>
             </Snackbar>

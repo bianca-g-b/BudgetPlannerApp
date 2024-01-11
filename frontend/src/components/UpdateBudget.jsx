@@ -183,7 +183,7 @@ function UpdateBudget() {
             </Snackbar>
 
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
                     Budget failed to update. Please try again.
                 </MuiAlert>
             </Snackbar>
