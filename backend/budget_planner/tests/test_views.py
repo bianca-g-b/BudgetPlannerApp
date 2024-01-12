@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
+from authentication.models import CustomUser
 
 # Create your tests here.
 class BudgetTests(TestCase):
@@ -9,7 +9,7 @@ class BudgetTests(TestCase):
             "username": "user",
             "password": "12345",
         }
-        cls.user = User.objects.create_user(**cls.credentials)
+        cls.user = CustomUser.objects.create_user(**cls.credentials)
      # Test if user can login  
     def test_login(self):
         response = self.client.post("/auth/signin",  self.credentials, content_type="application/json")

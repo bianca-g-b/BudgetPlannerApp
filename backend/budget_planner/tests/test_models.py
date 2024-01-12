@@ -1,6 +1,6 @@
 from django.test import TestCase
 from budget_planner.models import Budget
-from django.contrib.auth.models import User
+from authentication.models import CustomUser
 
 
 # Create your tests here.
@@ -12,7 +12,7 @@ class BudgetModelTests(TestCase):
     def setUpTestData(cls):
         cls.post = Budget.objects.create(
             id=1,
-            user_id=User.objects.create_user(username="user1", password="12345"),
+            user_id=CustomUser.objects.create_user(username="user1", password="12345", email="user@user.com"),
             date_from="2021-01-01",
             date_to="2021-01-31",
             total_income=1500,
@@ -39,6 +39,7 @@ class BudgetModelTests(TestCase):
     def test_budget_content(self):
         self.assertEqual(self.post.id, 1)
         self.assertEqual(self.post.user_id.username, "user1")
+        self.assertEqual(self.post.user_id.email, "user@user.com")
         self.assertEqual(self.post.date_from, "2021-01-01")
         self.assertEqual(self.post.date_to, "2021-01-31" )
         self.assertEqual(self.post.total_income, 1500)
