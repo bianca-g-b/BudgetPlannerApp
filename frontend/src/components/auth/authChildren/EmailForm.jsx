@@ -45,7 +45,8 @@ function EmailForm() {
 
             <div className="update-email-container">
                 <div className="form-information">
-                    <p className="update-title">Update email address</p>
+                    {email && <p className="update-title">Update email address</p>}
+                    {!email && <p className="update-title">Add email address</p>}
                 </div>
 
                 <form className="email-form"
@@ -59,11 +60,16 @@ function EmailForm() {
                             onChange = { (e) => setNewEmail(e.target.value)}
                             />
                     </div>
-                    <div className="submit-container">
+                   {email && <div className="submit-container">
                         <Button type="submit" className="submit-button"
                         variant="contained"
                         >Update</Button>
-                    </div>
+                    </div>}
+                    {!email && <div className="submit-container">
+                        <Button type="submit" className="submit-button"
+                        variant="contained"
+                        >Add</Button>
+                    </div>}
 
                 </form>
             </div>

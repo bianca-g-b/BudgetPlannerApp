@@ -102,7 +102,7 @@ def change_email(request):
         return JsonResponse({"message": "Email address change failed2"}, status = 400)
     
 # delete email address from account
-# @login_required
+@login_required
 def delete_email(request):
     if request.method =="DELETE":
         if request.content_type == "application/json":

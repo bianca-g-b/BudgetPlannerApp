@@ -19,18 +19,14 @@ function Account() {
                 
                 <div className="account-options-container">
                     <div className="account-title">MY ACCOUNT</div>
-                    {!email && <NavLink 
+                    <NavLink 
                         className="account-link"
                         to="/account/email"
-                        >Add email</NavLink>}
-                    {email && <NavLink 
-                        className="account-link"
-                        to="/account/email"
-                        >Change email</NavLink>}
+                        >Email</NavLink>
                     <NavLink 
                         className="account-link"
                         to="/account/password"
-                        >Change password</NavLink>
+                        >Password</NavLink>
                     <NavLink 
                         className="account-link"
                         to="/account/delete"
