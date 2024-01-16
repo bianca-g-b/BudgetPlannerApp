@@ -10,6 +10,7 @@ import UpdateBudget from './components/UpdateBudget.jsx';
 import MenuAppBar from './components/Menu.jsx';
 import Account from "./components/auth/Account.jsx";
 import EmailForm from "./components/auth/authChildren/EmailForm.jsx";
+import ChangePassword from './components/auth/authChildren/ChangePassword.jsx';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -52,6 +53,12 @@ function App() {
               element={
                 <EmailForm />}
             />
+
+            <Route 
+              path="password"
+              element={
+                <ChangePassword />}
+            />    
         </Route>
 
         <Route path="/" element={<MainPage />} />

@@ -123,6 +123,7 @@ def change_password(request):
             password = data.get("password")
             confirmPassword = data.get("confirmPassword")
             if password == confirmPassword:
+                request.user.set_password(password)
                 request.user.save()
                 return JsonResponse({"message": "Password changed successfully"}, status = 202)
             else:
