@@ -124,6 +124,7 @@ def change_password(request):
             confirmPassword = data.get("confirmPassword")
             if password == confirmPassword:
                 request.user.save()
+                return JsonResponse({"message": "Password changed successfully"}, status = 202)
             else:
                 return JsonResponse({"message": "Passwords do not match"}, status=400)
         else:

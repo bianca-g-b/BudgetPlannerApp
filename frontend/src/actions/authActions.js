@@ -161,3 +161,26 @@ export const deleteEmail = async (dispatch) => {
         throw new Error("Delete email failed");
     }
 }
+
+// change password
+export const changePassword = async (password, confirmPassword) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    const response = await fetch(`${baseUrl}/auth/changepassword`,{
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,  
+        },
+        body: JSON.stringify({
+            password: password,
+            confirmPassword: confirmPassword,
+        }),
+        credentials: "include",
+    });
+    if (response.ok) {
+        return response
+    } else {
+        throw new Error("Password change failed")
+    }
+}

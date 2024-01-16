@@ -1,9 +1,8 @@
 import "../../../styles/EmailForm.css";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { updateEmail, deleteEmail } from "../../../actions/authActions";
 import { fetchCSRFToken } from "../../../actions/authActions";
-import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';

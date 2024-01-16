@@ -11,5 +11,5 @@ urlpatterns = [
     path("user", user_details, name="user"),
     path("email", change_email, name="email"),
     path("emaildelete", delete_email, name="emaildelete"),
-    path("change_password", change_password, name="change_password")
+    path("changepassword", change_password, name="changepassword")
 ]
