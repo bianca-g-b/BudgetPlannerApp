@@ -113,3 +113,20 @@ def delete_email(request):
             return JsonResponse({"message": "Failed to delete email address1"}, status = 400)
     else:
         return JsonResponse({"message": "Failed to delete email address2"}, status = 400)
+    
+# change password
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        if request.content_type == "application/json":
+            data = json.loads(request.body.decode("utf-8"))
+            password = data.get("password")
+            confirmPassword = data.get("confirmPassword")
+            if password == confirmPassword:
+                request.user.save()
+            else:
+                return JsonResponse({"message": "Passwords do not match"}, status=400)
+        else:
+            return JsonResponse({"message": "Password change failed (content type)"}, status=400)
+    else:
+        return JsonResponse({"message": "Password change failed (request method)"}, status=400)
