@@ -179,8 +179,11 @@ export const changePassword = async (password, confirmPassword) => {
         credentials: "include",
     });
     if (response.ok) {
+        console.log(response.status)
         return response
     } else {
-        throw new Error("Password change failed")
+        console.log(response);
+        console.log("Password change failed")
+        return response
     }
 }
