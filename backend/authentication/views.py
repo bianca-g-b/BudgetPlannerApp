@@ -45,9 +45,16 @@ def signup(request):
             password = data.get("password")
             confirmPassword = data.get("confirmPassword")
             email = data.get("email")
+            if email == "":
+                email=None
+            print("email",email)
             if password == confirmPassword:
-                user = User.objects.create_user(username, password=password, email=email)
-                return JsonResponse({"message": "Registration request received successfully"}, status=202)
+                if email==None or email=="":
+                    user = User.objects.create_user(username, password=password)
+                    return JsonResponse({"message": "Registration request received successfully"}, status=202)
+                else:
+                    user = User.objects.create_user(username, password=password, email=email)
+                    return JsonResponse({"message": "Registration request received successfully"}, status=202)
             else:
                 return JsonResponse({"message": "Passwords do not match"}, status=400)
         else:

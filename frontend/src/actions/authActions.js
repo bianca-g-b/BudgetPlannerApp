@@ -65,8 +65,8 @@ export const registerUser = async (username, password, confirmPassword, email, c
     if (response.ok) {
         return response;
     } else {
-        alert("Registration failed. Please try again.");
-        throw new Error("Registration failed");
+        console.log("Registration failed. Please try again.");
+        return response;
     }
 };
 
@@ -88,8 +88,8 @@ export const loginUser = async (username, password, csrfToken) => {
     if (response.ok) {
         return response;
     } else {
-        alert("Login failed. Please try again.")
-        throw new Error("Login failed.")
+        console.log("Login failed. Please try again.");
+        return response;
     }
 }
 
@@ -110,8 +110,8 @@ export const logoutUser = async (dispatch, csrfToken) => {
         dispatch(setLogout(true));
         return response;
     } else {
-        alert("Logout failed. Please try again.");
-        throw new Error("Logout failed.");
+        console.log("Logout failed. Please try again.");
+        return response;
     }
 };
 
@@ -135,8 +135,8 @@ export const updateEmail = async (dispatch, email) => {
         dispatch(setEmail(data.email));
         return response;
     } else {
-        alert("Update email failed. Please try again.");
-        throw new Error("Update email failed.");
+        console.log("Update email failed. Please try again.");
+        return response;
     }
 };
 
@@ -156,9 +156,8 @@ export const deleteEmail = async (dispatch) => {
         dispatch(setEmail(null));
         return response;
     } else {
-        console.log(response);
-        alert("Delete email failed. Please try again.");
-        throw new Error("Delete email failed");
+        console.log("Delete email failed. Please try again.");
+        return response;
     }
 }
 
@@ -182,7 +181,6 @@ export const changePassword = async (password, confirmPassword) => {
         console.log(response.status)
         return response
     } else {
-        console.log(response);
         console.log("Password change failed")
         return response
     }

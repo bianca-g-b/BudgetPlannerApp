@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { registerUser, fetchCSRFToken } from "../../actions/authActions";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [email,setEmail] = useState(null);
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [openFail, setOpenFail] = useState(false);
+    const [openWarning, setOpenWarning] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,12 +27,15 @@ function Register() {
             const csrfToken = await fetchCSRFToken(dispatch);
             const response = await registerUser(username, password, confirmPassword, email, csrfToken);
             if (response.status === 202) {
-                alert("You have successfully registered!")
+                setOpenSuccess(true);
+                setTimeout(()=> {
+                    navigate("/login")
+                }, 1500)
             } else {
-                alert("Registration failed. Please try again.")
+                setOpenFail(true);
             } 
         } else {
-            alert("Passwords do not match. Please try again.")
+            setOpenWarning(true);
         }
     }
 
@@ -82,6 +90,24 @@ function Register() {
 
             <button type="submit" className="register-button">Register</button>
         </form>
+
+        <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
+                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                    Account created successfully!
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    Failed to create account. Please try again.
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openWarning} autoHideDuration={1500} onClose={() => setOpenWarning(false)}>
+                <MuiAlert onClose={() => setOpenWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                    Passwords do not match. Please try again.
+                </MuiAlert>
+            </Snackbar>
 
         </div>
     )

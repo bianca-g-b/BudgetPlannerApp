@@ -52,7 +52,7 @@ function EmailForm() {
                     onSubmit = {handleUpdateEmail}
                 >
                     <div className="email-container">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email (must be unique)</label>
                         <input type="email" 
                             className="email-input" 
                             placeholder="Enter email address"
