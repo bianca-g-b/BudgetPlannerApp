@@ -4,10 +4,13 @@ import { fetchCSRFToken, loginUser, fetchUser} from "../../actions/authActions.j
 import {useNavigate } from "react-router-dom";
 import {setUser} from "../../redux/userSlice.js";
 import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [openFail, setOpenFail] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -34,7 +37,7 @@ function Login() {
             console.log("is authenticated in login:",isAuthenticated);
             navigate("/dashboard");   
         } else {
-            alert ("Login failed.Please try again.")
+            setOpenFail(true);
         }
     }
 
@@ -71,6 +74,13 @@ function Login() {
 
                 <button type="submit" className="login-button">Login</button>
             </form>
+
+
+            <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
+                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    Login failed! Please try again.
+                </MuiAlert>
+            </Snackbar>
         </div>
     )
 }
