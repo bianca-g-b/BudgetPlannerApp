@@ -1,3 +1,4 @@
+import "../../../styles/ChangePassword.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";
@@ -38,30 +39,43 @@ function ChangePassword() {
 
         return (
 
-        <div>
-            <form onSubmit={updatePassword}>
-                <div className="password-container">
-                    <label htmlFor="password">New password</label>
-                    <input type="password" 
-                        className="password-input" 
-                        placeholder="Enter new password"
-                        onChange = {(e)=> setPassword(e.target.value)}
-                    />
+        <div className="change-psw-main-container">
+
+            <div className="change-psw-container">
+
+                <div className="change-psw-info-container">
+                    <p className="psw-form-information">Change your password below</p>
                 </div>
 
-                <div className="password-container">
-                    <label htmlFor="password">Confirm password</label>
-                    <input type="password" 
-                        className="password-input" 
-                        placeholder="Confirm new password"
-                        onChange = {(e) => setConfirmPassword(e.target.value)}
-                    />
-                </div>
+                <form className="change-psw-form"
+                    onSubmit={updatePassword}>
 
-                <Button type="submit" className="submit-button"
-                        variant="contained">Submit</Button>
+                    <div className="new-password-container">
+                        <label htmlFor="password">New password</label>
+                        <input type="password" 
+                            className="change-psw-input" 
+                            placeholder="Enter new password"
+                            onChange = {(e)=> setPassword(e.target.value)}
+                        />
+                    </div>
 
-            </form>
+                    <div className="new-password-container">
+                        <label htmlFor="password">Confirm password</label>
+                        <input type="password" 
+                            className="change-psw-input" 
+                            placeholder="Confirm new password"
+                            onChange = {(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="submit-container">
+                        <Button type="submit" className="submit-button"
+                                variant="contained">Submit
+                        </Button>
+                    </div>
+
+                </form>
+
+            </div>
 
             <Snackbar open={openSuccess} autoHideDuration={1000} onClose={() => setOpenSuccess(false)}>
                 <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>

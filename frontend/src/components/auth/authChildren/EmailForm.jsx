@@ -42,7 +42,7 @@ function EmailForm() {
     return (
         <div className="all-email-container">
 
-            <div className="update-email-container">
+            <div className={`update-email-container ${ email ? "" : "add-email-container"}`}>
                 <div className="form-information">
                     {email && <p className="update-title">Update email address</p>}
                     {!email && <p className="update-title">Add email address</p>}
