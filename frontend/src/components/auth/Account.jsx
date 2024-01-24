@@ -1,11 +1,23 @@
 import "../../styles/Account.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { useState } from "react";
+import DeleteAccountModal from "./authChildren/DeleteAccountModal";
 
 function Account() {
     const user = useSelector((state) => state.user.username);
     const email = useSelector((state) => state.user.email);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // open modal
+    function openModal() {
+        setIsModalOpen(true);
+    }
+    
+    // close modal
+    function closeModal() {
+        setIsModalOpen(false);
+    }
 
     return (
         <div className = "main-account-container">
@@ -27,11 +39,16 @@ function Account() {
                         className="account-link"
                         to="/account/password"
                         >Password</NavLink>
-                    <NavLink 
-                        className="account-link"
-                        to="/account/delete"
-                        >Delete account</NavLink>
+                    <button 
+                        className="delete-account-button account-link"
+                        onClick={openModal}
+                        >Delete account</button>
                 </div>
+                <DeleteAccountModal 
+                    isModalOpen = {isModalOpen}
+                    // handleDelete={handleDeleteAccount}
+                    closeModal={closeModal}
+                />
                
             </div>
 

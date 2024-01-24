@@ -16,13 +16,13 @@
   align-self: flex-start;
   width: 20%;
   margin-right: 7%;
+  border-right: 2px solid #a7a3a33b;
 }
 
 .account-options-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* position: sticky; */
 }
 
 .account-title {
@@ -42,6 +42,13 @@
 .account-link:hover {
   background-color: #e6e1e171;
   cursor: pointer;
+}
+
+.delete-account-button {
+  background-color: white;
+  border-left: none;
+  border-right: none;
+  border-top: none;
 }
 
 .active{
@@ -68,4 +75,13 @@
 .intro-message {
   font-size: 18px;
   margin-bottom: 2%;
+}
+
+#parent-modal-title {
+  margin-bottom: 10%;
+}
+
+#parent-modal-second-description {
+  margin-top: 6%;
+  margin-bottom: 9%;
 }
