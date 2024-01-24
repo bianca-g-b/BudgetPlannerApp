@@ -139,3 +139,19 @@ def change_password(request):
             return JsonResponse({"message": "Password change failed (content type)"}, status=400)
     else:
         return JsonResponse({"message": "Password change failed (request method)"}, status=400)
+    
+# delete account and all data associated with it
+@login_required
+def delete_account(request):
+    if request.method == "DELETE":
+        if request.content_type == "application/json":
+            user_pk = request.user.pk
+            user_data = User.objects.get(pk=user_pk)
+            user_data.delete()
+            request.user.delete()
+            return JsonResponse({"message": "Account deleted successfully"}, status = 202)
+        else:
+            return JsonResponse({"message": "Failed to delete account1"}, status = 400)
+    else:
+        return JsonResponse({"message": "Failed to delete account2"}, status = 400)
+    
