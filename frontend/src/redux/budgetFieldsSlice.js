@@ -7,8 +7,10 @@ const today = new Date();
 export const budgetFieldsSlice = createSlice({
     name: "budgetFields",
     initialState: {
-        dateFrom: today.toISOString().split('T')[0],
-        dateTo: new Date(today.setDate(today.getDate() + 30)).toISOString().split('T')[0],
+        dateFrom: today.toLocaleDateString(),
+        // dateFrom: today.toISOString().split('T')[0],
+        // dateTo: new Date(today.setDate(today.getDate() + 30)).toISOString().split('T')[0],
+        dateTo:new Date(today.setDate(today.getDate() + 30)).toLocaleDateString(),
         income: 0.0,
         housing: 0.0,
         utilities: 0.0,
