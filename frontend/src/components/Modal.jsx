@@ -16,6 +16,7 @@ const style = {
   pt: 2,
   px: 4,
   pb: 3,
+  textAlign: 'center',
 };
 
 
@@ -35,8 +36,20 @@ function DeleteModal({isModalOpen, handleDelete, closeModal, dateFrom, dateTo}) 
             Are you sure you want to permanently delete this budget?
           </p>
           <p id="parent-modal-description">{`${dateFrom} to ${dateTo}`}</p>
-          <Button onClick={handleDelete}>Delete</Button>
-          <Button onClick={closeModal}>Cancel</Button>
+          <div className="budget-modal-buttons-div">
+            <Button 
+                sx = {{width: '40%'}}
+                color="error"
+                variant="contained"
+                onClick={handleDelete}>Delete
+            </Button>
+
+            <Button 
+                sx = {{width: '40%'}}
+                variant='contained'
+                onClick={closeModal}>Cancel
+            </Button>
+          </div>
         </Box>
       </Modal>
   );

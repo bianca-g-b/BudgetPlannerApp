@@ -88,3 +88,9 @@ html, body {
 .form-button:hover {
   background-color: #1668b9  !important;
 }
+
+/*Delete budget modal buttons div*/
+.budget-modal-buttons-div {
+  display: flex;
+  justify-content: space-around;
+}
