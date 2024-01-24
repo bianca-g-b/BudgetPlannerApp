@@ -1,13 +1,19 @@
 import "../../styles/Account.css";
 import { NavLink, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import DeleteAccountModal from "./authChildren/DeleteAccountModal";
+import { deleteAccount, fetchCSRFToken } from "../../actions/authActions";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function Account() {
     const user = useSelector((state) => state.user.username);
     const email = useSelector((state) => state.user.email);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [openFail, setOpenFail] = useState(false);
+
+    const dispatch = useDispatch();
 
     // open modal
     function openModal() {
@@ -17,6 +23,18 @@ function Account() {
     // close modal
     function closeModal() {
         setIsModalOpen(false);
+    }
+
+    // handle delete account
+    async function handleDeleteAccount(e) {
+        e.preventDefault();
+        const csrfToken = fetchCSRFToken(dispatch);
+        const response = await deleteAccount(dispatch, csrfToken);
+        if (response.status === 202) {
+            console.log("Account deleted successfully")
+        } else {
+            setOpenFail(true);
+        }
     }
 
     return (
@@ -46,9 +64,15 @@ function Account() {
                 </div>
                 <DeleteAccountModal 
                     isModalOpen = {isModalOpen}
-                    // handleDelete={handleDeleteAccount}
+                    handleDelete={handleDeleteAccount}
                     closeModal={closeModal}
                 />
+
+                <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                    <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                        Failed to delete account! Please try again.
+                    </MuiAlert>
+                </Snackbar>
                
             </div>
 

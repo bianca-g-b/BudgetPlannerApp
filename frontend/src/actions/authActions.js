@@ -185,3 +185,27 @@ export const changePassword = async (password, confirmPassword) => {
         return response
     }
 }
+
+// delete account
+export const deleteAccount = async (dispatch) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    const response = await fetch(`${baseUrl}/auth/deleteaccount`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        },
+        credentials: "include",
+    });
+    if (response.ok) {
+        alert("Account deleted successfully");
+        dispatch(setUser(null));
+        dispatch(setIsAuthenticated(false));
+        dispatch(setLogout(true));
+        return response;
+    } else {
+        console.log("Delete account failed. Please try again.");
+        return response;
+    }
+}
