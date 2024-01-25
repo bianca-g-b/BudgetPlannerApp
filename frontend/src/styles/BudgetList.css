@@ -77,13 +77,16 @@ top:auto !important;
 
 /*Chart*/
 .css-4qu052-MuiResponsiveChart-container>svg {
-   align-self: start !important;
+   /* align-self: start !important;
    margin-right: 1% !important;
    width:100% !important;
-   height:auto !important;
+   height:auto !important; */
+   /* margin-bottom: 3% !important; */
+   align-self: center !important;
 }
 
 .css-5d9yge-MuiResponsiveChart-container {
+   display: flex !important;
    margin-top: 1% !important;
    width:100% !important;
    height:auto !important;
@@ -92,4 +95,15 @@ top:auto !important;
 .clicked {
    border-left: 5px solid #3f8be2!important;
    background-color: rgba(25, 118, 210, 0.08);
+}
+
+.pie-chart-container {
+   height: 500px !important;
+   width: 500px !important;
+   /* height: 100%; */
+}
+
+.pie-div {
+   height: 500px;
+   width: 500px;
 }
