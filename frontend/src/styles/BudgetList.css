@@ -1,13 +1,18 @@
 .budget-div {
-    display: flex;
-    padding: 5%;
-    padding-left: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 10px;
-    /* box-sizing: content-box; */
-    align-items: flex-start;
-    /* flex-flow: row wrap; */
+   display: flex;
+   padding-top: 5%;
+   margin-left: 1%;
+   padding-left: 1%;
+   margin-right: 1%;
+   margin-top: 1%;
+   margin-bottom: 1%;
+   border-radius: 10px;
+   /* box-sizing: content-box; */
+   align-items: flex-start;
+   /* flex-flow: row wrap; */
+   border: 1px solid #e0e0e0;
+   background-color: #d2c1f012 ;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   .data-div {
@@ -75,35 +80,34 @@ top:auto !important;
    margin-top: 0.6% !important;
 }
 
-/*Chart*/
-.css-4qu052-MuiResponsiveChart-container>svg {
-   /* align-self: start !important;
-   margin-right: 1% !important;
-   width:100% !important;
-   height:auto !important; */
-   /* margin-bottom: 3% !important; */
-   align-self: center !important;
-}
-
-.css-5d9yge-MuiResponsiveChart-container {
-   display: flex !important;
-   margin-top: 1% !important;
-   width:100% !important;
-   height:auto !important;
-}
-
 .clicked {
    border-left: 5px solid #3f8be2!important;
    background-color: rgba(25, 118, 210, 0.08);
 }
 
-.pie-chart-container {
-   height: 500px !important;
-   width: 500px !important;
-   /* height: 100%; */
+/*Bar chart*/
+.bar-div {
+   height: 550px;
+   width: 750px;
 }
 
-.pie-div {
-   height: 500px;
-   width: 500px;
+/*Title and add budget div*/
+.header-div {
+   display: flex;
+   margin-top: 2%;
+   flex-direction: column;
+   margin-left: 1.5%;
+}
+
+.add-budget-link {
+   text-decoration: none;
+   margin-left: 1%;
+   margin-top: 1%;
+   font-weight: 600;
+   font-size: 1.2rem;
+   letter-spacing: 1.5px;
+}
+
+.add-budget-link:hover {
+   color: rgb(78, 77, 77);
 }

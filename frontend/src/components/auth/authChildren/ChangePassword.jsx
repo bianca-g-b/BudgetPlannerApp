@@ -22,17 +22,17 @@ function ChangePassword() {
                 const response = await changePassword(password, confirmPassword, csrfToken);
                 if (response.status === 202) {
                     setOpenSuccess(true);
-                    console.log("Password changed successfully")
+                    console.log("Password changed successfully");
                     setTimeout(() => {
                         logoutUser(dispatch, csrfToken);
                     }, 1000);
                     
                 } else {
-                    console.log("Failed to change password")
+                    console.log("Failed to change password");
                     setOpenFail(true);
                 }
             } else {
-                console.log("Passwords do not match")
+                console.log("Passwords do not match");
                 setOpenWarning(true);
             }
         }
@@ -55,6 +55,7 @@ function ChangePassword() {
                         <input type="password" 
                             className="change-psw-input" 
                             placeholder="Enter new password"
+                            autoComplete="new-password"
                             onChange = {(e)=> setPassword(e.target.value)}
                         />
                     </div>
@@ -64,6 +65,7 @@ function ChangePassword() {
                         <input type="password" 
                             className="change-psw-input" 
                             placeholder="Confirm new password"
+                            autoComplete="new-password"
                             onChange = {(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>

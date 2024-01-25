@@ -38,45 +38,50 @@ function Account() {
     }
 
     return (
-        <div className = "main-account-container">
-            <div className="account-container">    
-                <div className= "intro-container">
-                    <div className="intro-title">Welcome, </div>
-                    <div className="intro-user">{user}</div>
-                    {email && <div className="intro-email">{email}</div>}
-                    <div className="intro-message">Here you can manage your account details.</div>
-                </div>
-                
-                <div className="account-options-container">
-                    <div className="account-title">MY ACCOUNT</div>
-                    <NavLink 
-                        className="account-link"
-                        to="/account/email"
-                        >Email</NavLink>
-                    <NavLink 
-                        className="account-link"
-                        to="/account/password"
-                        >Password</NavLink>
-                    <button 
-                        className="delete-account-button account-link"
-                        onClick={openModal}
-                        >Delete account</button>
-                </div>
-                <DeleteAccountModal 
-                    isModalOpen = {isModalOpen}
-                    handleDelete={handleDeleteAccount}
-                    closeModal={closeModal}
-                />
-
-                <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                    <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
-                        Failed to delete account! Please try again.
-                    </MuiAlert>
-                </Snackbar>
-               
+        <div className="full-account-area">
+            <div className="account-header-container">
+                <h1 className="account-header">Account</h1>
             </div>
+            <div className = "main-account-container">
+                <div className="account-container">    
+                    <div className= "intro-container">
+                        <div className="intro-title">Welcome, </div>
+                        <div className="intro-user">{user}</div>
+                        {email && <div className="intro-email">{email}</div>}
+                        <div className="intro-message">Here you can manage your account details.</div>
+                    </div>
+                    
+                    <div className="account-options-container">
+                        <div className="account-title">MY ACCOUNT</div>
+                        <NavLink 
+                            className="account-link"
+                            to="/account/email"
+                            >Email</NavLink>
+                        <NavLink 
+                            className="account-link"
+                            to="/account/password"
+                            >Password</NavLink>
+                        <button 
+                            className="delete-account-button account-link"
+                            onClick={openModal}
+                            >Delete account</button>
+                    </div>
+                    <DeleteAccountModal 
+                        isModalOpen = {isModalOpen}
+                        handleDelete={handleDeleteAccount}
+                        closeModal={closeModal}
+                    />
 
-            <Outlet /> 
+                    <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                        <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                            Failed to delete account! Please try again.
+                        </MuiAlert>
+                    </Snackbar>
+                
+                </div>
+
+                <Outlet /> 
+            </div>
         </div>
 
 

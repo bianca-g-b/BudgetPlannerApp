@@ -55,6 +55,7 @@ function EmailForm() {
                         <input type="email" 
                             className="email-input" 
                             placeholder="Enter email address"
+                            autoComplete="email"
                             onChange = { (e) => setNewEmail(e.target.value)}
                             />
                     </div>

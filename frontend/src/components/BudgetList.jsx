@@ -6,7 +6,6 @@ import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActio
 import { setBudgetList, setBudgetById, setId, setClicked } from "../redux/budgetSlice.js";
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from "@mui/material";
-// import { PieChart } from '@mui/x-charts/PieChart';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
@@ -122,8 +121,17 @@ function BudgetList() {
     return ( 
           
         <div className="all-budget-div">
-            <NavLink to="/dashboard/addbudget">Add budget</NavLink> 
-            {budgetList.length >0 && <h1>Budget List</h1>}
+            <div className="add-budget-empty-list">
+                {!budgetList && <NavLink to="/dashboard/addbudget">Add budget</NavLink> }
+            </div>
+
+            {budgetList.length >0 && <div className="header-div">
+                 <h1>Budget List</h1>
+                <NavLink 
+                    className="add-budget-link"
+                    to="/dashboard/addbudget">Add new budget</NavLink> 
+            </div>}
+
             <div className = "budget-div" >
                 {budgetList.length >0 && 
                 <div className="data-div">
@@ -377,77 +385,34 @@ function BudgetList() {
                 </List>}
 
                 {budget && 
-                <div className="pie-div">
-                {/* <PieChart
-                    className="pie-chart-container"
-                    series = {[
-                        {
+                <div className="bar-div">
+                    <BarChart 
+                        xAxis={[{
+                            scaleType: 'band',
                             data: [
-                                {id:0, value: parseFloat(budget.housing), label: "Housing"},
-                                {id:1, value: parseFloat(budget.utility_bills), label: "Utilities"},
-                                {id:2, value: parseFloat(budget.food_drinks), label: "Food and drinks"},
-                                {id:3, value: parseFloat(budget.transport), label: "Transport"},
-                                {id:4, value: parseFloat(budget.household_goods_services), label: "Household"},
-                                {id:5, value: parseFloat(budget.children_related_costs), label: "Childcare"},
-                                {id:6, value: parseFloat(budget.cleaning_toiletries), label: "Cleaning and toiletries"},
-                                {id:7, value: parseFloat(budget.other_essential_costs), label: "Other essential"},
-                                {id:8, value: parseFloat(budget.luxury_gifts), label: "Luxury and gifts"},
-                                {id:9, value: parseFloat(budget.leisure_entertainment), label: "Leisure and entertainment"},
-                                {id:10, value: parseFloat(budget.holidays), label: "Holidays"},
-                                {id:11, value: parseFloat(budget.other_non_essential_costs), label: "Other non-essential"},
-                                {id:12, value: parseFloat(budget.unsecured_loans), label: "Unsecured debt"},
+                                'Housing',
+                                'Utilities',
+                                'Food and drinks',
+                                'Transport',
+                                'Household',
+                                'Childcare',
+                                'Cleaning and toiletries',
+                                'Other essential',
+                                'Luxury and gifts',
+                                'Leisure and entertainment',
+                                'Holidays',
+                                'Other non-essential',
+                                'Unsecured debt',
+                            ]
+                        }]}
+
+                        series={[{
+                            data: [
+                                parseFloat(budget.housing), parseFloat(budget.utility_bills), parseFloat(budget.food_drinks), parseFloat(budget.transport), parseFloat(budget.household_goods_services), parseFloat(budget.children_related_costs), parseFloat(budget.cleaning_toiletries), parseFloat(budget.other_essential_costs), parseFloat(budget.luxury_gifts), parseFloat(budget.leisure_entertainment), parseFloat(budget.holidays), parseFloat(budget.other_non_essential_costs), parseFloat(budget.unsecured_loans),
                             ],
-                            // outerRadius: 150,
-                        }
-                    ]}
-                    // width={900}
-                    // height = {500}
-                    slotProps={{
-                        legend: {
-                            direction: 'row',
-                            position: {vertical: 'bottom', horizontal: 'right'},
-                            padding: 0,
-                            itemMarkWidth: 10,
-                            itemMarkHeight: 10,
-                            markGap: 5,
-                            itemGap: 5,
-                            labelStyle: {
-                                fontSize: 12,
-                                fill: '#000'
-                            }
-                        },
-                        
-                    }}
-                >
-                </PieChart> */}
-
-                <BarChart 
-                    xAxis={[{
-                        scaleType: 'band',
-                        data: [
-                            'Housing',
-                            'Utilities',
-                            'Food and drinks',
-                            'Transport',
-                            'Household',
-                            'Childcare',
-                            'Cleaning and toiletries',
-                            'Other essential',
-                            'Luxury and gifts',
-                            'Leisure and entertainment',
-                            'Holidays',
-                            'Other non-essential',
-                            'Unsecured debt',
-                        ]
-                    }]}
-
-                    series={[{
-                        data: [
-                            parseFloat(budget.housing), parseFloat(budget.utility_bills), parseFloat(budget.food_drinks), parseFloat(budget.transport), parseFloat(budget.household_goods_services), parseFloat(budget.children_related_costs), parseFloat(budget.cleaning_toiletries), parseFloat(budget.other_essential_costs), parseFloat(budget.luxury_gifts), parseFloat(budget.leisure_entertainment), parseFloat(budget.holidays), parseFloat(budget.other_non_essential_costs), parseFloat(budget.unsecured_loans),
-                        ],
-                        label: 'All expenses (GBP)',
-                    }]}
-                />
+                            label: 'All expenses (GBP)',
+                        }]}
+                    />
                 </div>
                 }
 

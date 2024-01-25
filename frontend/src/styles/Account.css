@@ -1,9 +1,24 @@
 .main-account-container {
   display: flex;
-  flex-direction: row;
-  margin-top: 2%;
+  /* flex-direction: row; */
+  flex-flow: row wrap;
   margin-left: 2%;
   margin-right: 2%;
+  padding-bottom: 5%;
+  border: 1px solid #e0e0e0;
+  background-color: #d2c1f012 ;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.account-header-container {
+  display: flex;
+  margin-bottom: 0.5%;
+  margin-left: 3%;
+  /* color:#0d6efd; */
+}
+
+.full-account-area {
+  margin-top: 3%;
 }
 
 .account-container {
@@ -45,7 +60,7 @@
 }
 
 .delete-account-button {
-  background-color: white;
+  background: none;
   border-left: none;
   border-right: none;
   border-top: none;
@@ -70,6 +85,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 2%;
+  color:#0d6efd;
 }
 
 .intro-message {

@@ -57,6 +57,7 @@ function Register() {
                 <input type="username" 
                     className="reg-username" 
                     placeholder="Create username"
+                    autoComplete="username"
                     onChange = { (e) => setUsername(e.target.value)}
                      />
             </div>
@@ -66,6 +67,7 @@ function Register() {
                 <input type="email" 
                     className="reg-email" 
                     placeholder="Add email (optional)"
+                    autoComplete="email"
                     onChange = { (e) => setEmail(e.target.value)}
                      />
             </div>
@@ -75,6 +77,7 @@ function Register() {
                 <input type="password" 
                     className="reg-password" 
                     placeholder="Create password"
+                    autoComplete="new-password"
                     onChange = { (e) => setPassword(e.target.value)}
                      />
             </div>
@@ -84,6 +87,7 @@ function Register() {
                 <input type="password" 
                     className="reg-password" 
                     placeholder="Confirm password"
+                    autoComplete="new-password"
                     onChange = { (e) => setConfirmPassword(e.target.value)}
                      />
             </div>
