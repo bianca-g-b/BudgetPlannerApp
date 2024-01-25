@@ -25,6 +25,7 @@ function UpdateBudget() {
 
     //extract budget by id from budget list
     const budgetById2 = budgetList.find((budget) => budget.id === id2);
+    console.log(budgetById2, "budgetById2");
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -70,6 +71,33 @@ function UpdateBudget() {
                 })
         }
     },[dispatch, budgetById, id2, budgetFields])
+
+    // add useEffect to reset budget fields when budget has been updated successfully
+    useEffect(()=>{
+        if (openSuccess) {
+            const today = new Date();
+            dispatch(setDateFrom(today.toLocaleDateString()));
+            dispatch(setDateTo(new Date(today.setDate(today.getDate() + 30)).toLocaleDateString()));
+            dispatch(setIncome(0.0));
+            dispatch(setHousing(0.0));
+            dispatch(setUtilities(0.0));
+            dispatch(setFood(0.0));
+            dispatch(setTransport(0.0));
+            dispatch(setHousehold(0.0));
+            dispatch(setChildcare(0.0));
+            dispatch(setCleaning(0.0));
+            dispatch(setOtherEssential(0.0));
+            dispatch(setLuxury(0.0));
+            dispatch(setLeisure(0.0));
+            dispatch(setHolidays(0.0));
+            dispatch(setOtherNonEssential(0.0));
+            dispatch(setUnsecuredDebt(0.0));
+            dispatch(setTotalEssential(0.0));
+            dispatch(setTotalNonEssential(0.0));
+            dispatch(setTotalExpenses(0.0));
+            dispatch(setTotalSavings(0.0));
+        }
+    }, [openSuccess, dispatch])
 
 
     async function handleUpdateBudget(event) {
@@ -122,6 +150,20 @@ function UpdateBudget() {
         }
     }
 
+    // write function to get date format that will display in date input
+    function formatDate(date) {
+        const dateFormatted = date.split("/").reverse().join("-");
+        const trialDate = new Date(dateFormatted);
+        const finalDate = trialDate.getFullYear() +
+        '-' +
+        ('0' + (trialDate.getMonth() + 1)).slice(-2) +
+        '-' +
+        ('0' + trialDate.getDate()).slice(-2);
+
+        return finalDate;
+    }
+    
+
     return(
         <MainForm 
             handleForm = {handleUpdateBudget}
@@ -129,11 +171,11 @@ function UpdateBudget() {
             <h3>Update Budget</h3>
             <br/>
             <DateInputs 
-                dateFromValue={budgetById2.date_from}
-                dateToValue={budgetById2.date_to}
+                dateFromValue={formatDate(budgetById2.date_from)}
+                dateToValue = {formatDate(budgetById2.date_to)}
 
-                handleDateFrom = {(event)=> dispatch(setDateFrom(event.target.value))}
-                handleDateTo = {(event) => dispatch(setDateTo(event.target.value))}
+                handleDateFrom = {(event)=> dispatch(setDateFrom(new Date(event.target.value).toLocaleDateString()))}
+                handleDateTo = {(event) => dispatch(setDateTo(new Date(event.target.value).toLocaleDateString()))}
             ></DateInputs>
             <BudgetFormInputs
                 incomeValue={budgetById2.total_income}

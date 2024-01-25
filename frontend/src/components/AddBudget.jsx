@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addBudget } from '../actions/budgetActions.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
@@ -24,6 +24,33 @@ function AddBudget() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    // add useEffect to reset budget fields when new budget has been added
+    useEffect(()=>{
+        if (openSuccess) {
+            const today = new Date();
+            dispatch(setDateFrom(today.toLocaleDateString()));
+            dispatch(setDateTo(new Date(today.setDate(today.getDate() + 30)).toLocaleDateString()));
+            dispatch(setIncome(0.0));
+            dispatch(setHousing(0.0));
+            dispatch(setUtilities(0.0));
+            dispatch(setFood(0.0));
+            dispatch(setTransport(0.0));
+            dispatch(setHousehold(0.0));
+            dispatch(setChildcare(0.0));
+            dispatch(setCleaning(0.0));
+            dispatch(setOtherEssential(0.0));
+            dispatch(setLuxury(0.0));
+            dispatch(setLeisure(0.0));
+            dispatch(setHolidays(0.0));
+            dispatch(setOtherNonEssential(0.0));
+            dispatch(setUnsecuredDebt(0.0));
+            dispatch(setTotalEssential(0.0));
+            dispatch(setTotalNonEssential(0.0));
+            dispatch(setTotalExpenses(0.0));
+            dispatch(setTotalSavings(0.0));
+        }
+    }, [openSuccess, dispatch])
 
     async function handleCreateBudget(event) {
         event.preventDefault();
@@ -81,63 +108,77 @@ function AddBudget() {
             <br/>
             <DateInputs 
                 handleDateFrom = {(event)=> dispatch(setDateFrom(new Date(event.target.value).toLocaleDateString()))}
-                handleDateTo = {(event) => dispatch(setDateTo(event.target.value))}
+                handleDateTo = {(event) => dispatch(setDateTo(new Date(event.target.value).toLocaleDateString()))}
             ></DateInputs>
             <BudgetFormInputs
+
                 handleTotalIncome= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
-                    dispatch(setIncome(parseFloat(value)));
+                    dispatch(setIncome(parseFloat(value)))   
                 }}
+
                 handleHousing= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
                     dispatch(setHousing(parseFloat(value)));
                 }}
                 handleUtilities= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setUtilities(parseFloat(value)))
                 }}
                 handleFood= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setFood(parseFloat(value)))
                 }}
                 handleTransport= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setTransport(parseFloat(value)))
                 }}
                 handleHousehold= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setHousehold(parseFloat(value)))
                 }}
                 handleChildcare= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setChildcare(parseFloat(value)))
                 }}
                 handleCleaning= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setCleaning(parseFloat(value)))
                 }}
                 handleOtherEssential= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setOtherEssential(parseFloat(value)));
                 }}      
                 handleLuxury= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setLuxury(parseFloat(value)))
                 }}
                 handleLeisure= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setLeisure(parseFloat(value)))
                 }}
                 handleHolidays= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setHolidays(parseFloat(value)))
                 }}
                 handleOtherNonEssential= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setOtherNonEssential(parseFloat(value)))
                 }}
                 handleUnsecured= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    console.log(value);
                     dispatch(setUnsecuredDebt(parseFloat(value)))
                 }}
                 handleTotalEssential = {()=> dispatch(setTotalEssential((parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)).toFixed(2)))}

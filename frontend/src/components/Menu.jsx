@@ -59,7 +59,7 @@ export default function MenuAppBar() {
             {isAuthenticated && <Button
             component={Link}
             href="/dashboard"
-            sx={{ my: 1, color: 'white', display: 'block', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2rem', textTransform: 'uppercase', '&:hover': {color: '#cfe2ff'}}}S
+            sx={{ my: 1, color: 'white', display: 'block', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2rem', textTransform: 'uppercase', '&:hover': {color: '#cfe2ff'}}}
             >Budgets
             </Button>}
 
