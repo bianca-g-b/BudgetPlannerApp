@@ -1,3 +1,4 @@
+import "../styles/MainChart.css";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import { useSelector } from 'react-redux';
@@ -8,13 +9,12 @@ function MainChart() {
 
     const dataset = budgetList.map((budget, index)=> {
         return {
-            x: index,
+            x: `${index+1}\n ${budget.date_from} - ${budget.date_to}`,
             income: parseFloat(budget.total_income),
             essential: parseFloat(budget.total_essential),
             non_essential: parseFloat(budget.total_non_essential),
             totalExpenses: parseFloat(budget.total_expenses),
             savings: parseFloat(budget.total_savings),
-            date: `${budget.date_from} - ${budget.date_to}`,
         }
     })
     dataset.reverse();
@@ -29,8 +29,10 @@ function MainChart() {
         height:800,
         sx: {
           [`.${axisClasses.left} .${axisClasses.label}`]: {
-            transform: 'translate(-20px, 0)',
+            transform: 'translate(-12px, 0)',
           },
+            marginLeft: 3,
+            marginRight: 3,
         },
       };
 
@@ -38,10 +40,10 @@ function MainChart() {
 
 
     return (
-        <div>
+        <div className="main-bar-chart-div">
                 <BarChart
                     dataset={dataset}
-                    xAxis={[{scaleType: 'band', dataKey: 'x', label: 'Dates'}]}
+                    xAxis={[{scaleType: 'band', dataKey: 'x'}]}
                     
                     series={[
                         {dataKey: 'income', label: 'Income', valueFormatter},
