@@ -11,11 +11,9 @@ import MenuAppBar from './components/Menu.jsx';
 import Account from "./components/auth/Account.jsx";
 import EmailForm from "./components/auth/authChildren/EmailForm.jsx";
 import ChangePassword from './components/auth/authChildren/ChangePassword.jsx';
-import { useSelector } from 'react-redux';
+import MainChart from './components/MainChart.jsx';
 
 function App() {
-  const user = useSelector((state) => state.user.username);
-  console.log(user, "user in app");
 
   return (
     <>
@@ -28,6 +26,13 @@ function App() {
           </PrivateRoute>
           } 
         />
+
+      <Route path="/chart" element={
+        <PrivateRoute>
+          <MainChart/>
+        </PrivateRoute>
+      }
+      />  
 
         <Route path="/dashboard/addbudget" element={
           <PrivateRoute>

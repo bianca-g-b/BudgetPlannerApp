@@ -63,6 +63,13 @@ export default function MenuAppBar() {
             >Budgets
             </Button>}
 
+            {isAuthenticated && <Button
+            component={Link}
+            href="/chart"
+            sx={{ my: 1, color: 'white', display: 'block', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2rem', marginLeft: '15px' ,textTransform: 'uppercase', '&:hover': {color: '#cfe2ff'}}}
+            >Chart
+            </Button>}
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
