@@ -1,11 +1,13 @@
+import "../../styles/Login.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCSRFToken, loginUser, fetchUser} from "../../actions/authActions.js";
-import {useNavigate } from "react-router-dom";
+import {useNavigate, NavLink } from "react-router-dom";
 import {setUser} from "../../redux/userSlice.js";
 import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -49,40 +51,51 @@ function Login() {
     },[user, isAuthenticated, navigate])
 
     return(
-        <div className = "login-main">
-            <h1 className = "login-form-title">Login here</h1>
-            <form className = "login-form"
-                onSubmit = {handleLogin}
-            >
-                <div className="login-username-container">
-                    <label htmlFor="username">Username</label>
-                    <input type="username" 
-                    className="login-username" 
-                    placeholder="Enter username"
-                    autoComplete="username"
-                    onChange = {(e) => {setUsername(e.target.value)}}
-                     />
-                </div>
+        <div className = "login-form-container">
+            <div className = "login-main">
+                <h1 className = "login-form-title">Login</h1>
+                <form className = "login-form"
+                    onSubmit = {handleLogin}
+                >
+                    <div className="login-username-container">
+                        <label htmlFor="username">Username</label>
+                        <input type="username" 
+                        className="login-username-input" 
+                        placeholder="Enter username"
+                        autoComplete="username"
+                        onChange = {(e) => {setUsername(e.target.value)}}
+                        />
+                    </div>
 
-                <div className="login-password-container">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" 
-                    className="login-password" 
-                    placeholder="Enter password"
-                    autoComplete="current-password"
-                    onChange = {(e) => {setPassword(e.target.value)}}
-                     />
-                </div>
+                    <div className="login-password-container">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" 
+                        className="login-password-input" 
+                        placeholder="Enter password"
+                        autoComplete="current-password"
+                        onChange = {(e) => {setPassword(e.target.value)}}
+                        />
+                    </div>
 
-                <button type="submit" className="login-button">Login</button>
-            </form>
+                    <Button 
+                        type="submit" 
+                        color="primary"
+                        variant="contained"
+                        >Login</Button>
+                </form>
 
 
-            <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
-                    Login failed! Please try again.
-                </MuiAlert>
-            </Snackbar>
+                <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
+                    <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                        Login failed! Please try again.
+                    </MuiAlert>
+                </Snackbar>
+            </div>
+            <p className="register-redirect-message">Don&#39;t have an account?</p>
+            <NavLink 
+                to="/register"
+                className="register-redirect-link">Register here
+            </NavLink>
         </div>
     )
 }

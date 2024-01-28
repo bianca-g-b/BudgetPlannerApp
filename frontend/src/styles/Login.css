@@ -1,0 +1,73 @@
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15%;
+    width: 100%;
+}
+
+.login-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5%;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #d2c1f012 ;
+    box-shadow: 0 0 10px #0173714a;
+}
+
+.login-form-title {
+    font-weight: 600;
+    color: #017371;
+    text-transform: uppercase;
+    font-size:xx-large;
+    margin-bottom: 10%;
+    letter-spacing: 0.07em;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-username-container,
+.login-password-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+.login-username-input,
+.login-password-input {
+    border: 1px solid #b4b4b4;
+    border-radius: 7px;
+    padding: 2%;
+    margin-top: 1%;
+    box-shadow: 0 0 10px #1616164a;
+}
+
+.login-password-input {
+    margin-bottom: 5%;
+}
+
+.register-redirect-message {
+    margin-top: 5%;
+    font-weight: 600;
+    font-size: large;
+}
+
+.register-redirect-link {
+    color: #017371;
+    font-size: x-large;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-redirect-link:hover {
+    color:#1668b9;
+    font-size:xx-large;
+}
