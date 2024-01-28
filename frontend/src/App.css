@@ -96,8 +96,13 @@ html, body {
   background-color: #1668b9  !important;
 }
 
-/*Delete budget modal buttons div*/
+/*Delete budget modal*/
 .budget-modal-buttons-div {
   display: flex;
   justify-content: space-around;
+}
+
+.date-delete-modal {
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }

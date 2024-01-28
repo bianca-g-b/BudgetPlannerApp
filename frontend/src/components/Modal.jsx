@@ -35,7 +35,7 @@ function DeleteModal({isModalOpen, handleDelete, closeModal, dateFrom, dateTo}) 
           <p id="parent-modal-description">
             Are you sure you want to permanently delete this budget?
           </p>
-          <p id="parent-modal-description">{`${dateFrom} to ${dateTo}`}</p>
+          <p id="parent-modal-description"><span className="date-delete-modal">{`${dateFrom}`}</span> to <span className="date-delete-modal">{`${dateTo}`}</span></p>
           <div className="budget-modal-buttons-div">
             <Button 
                 sx = {{width: '40%'}}
