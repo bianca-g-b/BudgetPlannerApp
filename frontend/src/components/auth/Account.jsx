@@ -62,7 +62,7 @@ function Account() {
                         <div className="intro-title">Welcome, </div>
                         <div className="intro-user">{user}</div>
                         {email && <div className="intro-email">{email}</div>}
-                        <div className="intro-message">Here you can manage your account details.</div>
+                        <br/>
                     </div>
                     
                     <div className="account-options-container">
@@ -101,7 +101,7 @@ function Account() {
                         <div className="account-description">
                             <h3 className="account-description-title">Welcome to your account page</h3>
                             <p className="account-description-text">Here you can manage your account details.</p>
-                            <p>Use the MY ACCOUNT menu on the left to modify your details or delete your account.</p>
+                            <p>Use the <span className="my-account-reference">MY ACCOUNT</span> menu on the left to modify your details or to delete your account.</p>
                         </div>
                     </div>
                 }

@@ -21,6 +21,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color:#f8f8ff;
+  flex-direction: column;
 }
 
 .full-form-area {
@@ -34,7 +36,15 @@ html, body {
   margin-top: 1%;
   margin-bottom: 1%;
   width: 45%;
-  background-color:#f8f8ff;
+  border: 1px solid #e0e0e0;
+  background-color: #d2c1f012 ;
+  box-shadow: 0 0 10px   #0173714a;  
+}
+
+.form-header-container {
+  display: flex;
+  width: 45%;
+  margin-top: 3%;
 }
 
 .btn-outline-primary {

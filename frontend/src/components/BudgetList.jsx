@@ -146,7 +146,7 @@ function BudgetList() {
                             { field: 'date_to', headerName: 'Date to', width: 200 },
                             { field: 'id',
                               key: 'id',
-                              headerName: 'More',
+                              headerName: 'Expand',
                               width: 100,
                               color: 'white',
                               renderCell: (params) => (

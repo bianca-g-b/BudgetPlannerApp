@@ -167,9 +167,8 @@ function UpdateBudget() {
     return(
         <MainForm 
             handleForm = {handleUpdateBudget}
+            formTitle = "Update Budget"
         >
-            <h3>Update Budget</h3>
-            <br/>
             <DateInputs 
                 dateFromValue={formatDate(budgetById2.date_from)}
                 dateToValue = {formatDate(budgetById2.date_to)}

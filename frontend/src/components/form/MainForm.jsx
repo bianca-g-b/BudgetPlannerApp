@@ -2,10 +2,13 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from "prop-types";
 
 function MainForm(
-    { handleForm, children }
+    { handleForm, children, formTitle }
 ) {
     return (
         <div className="form-main-container">
+        <div className="form-header-container">
+            <h1 className="form-header">{formTitle}</h1>
+        </div>
         <Form
             className = "full-form-area"
             onSubmit = {handleForm}>
@@ -17,7 +20,8 @@ function MainForm(
 
 MainForm.propTypes = {
     handleForm: PropTypes.func,
-    children: PropTypes.node/*.isRequired*/,
+    children: PropTypes.node,
+    formTitle: PropTypes.string
 }
 
 export default MainForm;

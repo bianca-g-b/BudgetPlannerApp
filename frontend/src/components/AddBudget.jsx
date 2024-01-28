@@ -103,9 +103,8 @@ function AddBudget() {
     return(
         <MainForm
             handleForm = {handleCreateBudget}
+            formTitle = "Add Budget"
         >
-            <h3>Add Budget</h3>
-            <br/>
             <DateInputs 
                 handleDateFrom = {(event)=> dispatch(setDateFrom(new Date(event.target.value).toLocaleDateString()))}
                 handleDateTo = {(event) => dispatch(setDateTo(new Date(event.target.value).toLocaleDateString()))}

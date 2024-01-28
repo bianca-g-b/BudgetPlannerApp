@@ -61,7 +61,10 @@
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
-    font-weight: 700;   
+    font-weight: 600;
+    color: #017371;
+    text-transform: uppercase;
+    font-size:large;
 }
 
 .delete-message-container {

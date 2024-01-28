@@ -44,7 +44,7 @@ function ChangePassword() {
             <div className="change-psw-container">
 
                 <div className="change-psw-info-container">
-                    <p className="psw-form-information">Change your password below</p>
+                    <p className="psw-form-information">Change password</p>
                 </div>
 
                 <form className="change-psw-form"
