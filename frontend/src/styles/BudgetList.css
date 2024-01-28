@@ -12,7 +12,8 @@
    /* flex-flow: row wrap; */
    border: 1px solid #e0e0e0;
    background-color: #d2c1f012 ;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+   box-shadow: 0 0 10px   #0173714a;
   }
 
   .data-div {
@@ -106,6 +107,8 @@ top:auto !important;
    font-weight: 600;
    font-size: 1.2rem;
    letter-spacing: 1.5px;
+   /* color: #014b73; */
+   color: #3344DD;
 }
 
 .add-budget-link:hover {

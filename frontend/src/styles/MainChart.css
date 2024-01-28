@@ -2,7 +2,8 @@
     margin: 1%;
     border: 1px solid #e0e0e0;
     background-color: #d2c1f012 ;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 0 10px   #0173714a;
     padding-top: 1%;
     padding-bottom: 1%;
     border-radius: 10px;

@@ -1,7 +1,7 @@
 import "../../styles/Account.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DeleteAccountModal from "./authChildren/DeleteAccountModal";
 import { deleteAccount, fetchCSRFToken } from "../../actions/authActions";
 import Snackbar from '@mui/material/Snackbar';
@@ -12,6 +12,7 @@ function Account() {
     const email = useSelector((state) => state.user.email);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openFail, setOpenFail] = useState(false);
+    const [showDescription, setShowDescription] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -37,6 +38,19 @@ function Account() {
         }
     }
 
+    function hideDescription() {
+        setShowDescription(false);
+    }
+
+    // write useEffect to check the pathname and hide the description if the path is not /account
+    useEffect(() => {
+        if (window.location.pathname === "/account") {
+            setShowDescription(true);
+        } else {
+            setShowDescription(false);
+        }
+    }, [])
+
     return (
         <div className="full-account-area">
             <div className="account-header-container">
@@ -56,10 +70,12 @@ function Account() {
                         <NavLink 
                             className="account-link"
                             to="/account/email"
+                            onClick={hideDescription}
                             >Email</NavLink>
                         <NavLink 
                             className="account-link"
                             to="/account/password"
+                            onClick={hideDescription}
                             >Password</NavLink>
                         <button 
                             className="delete-account-button account-link"
@@ -79,6 +95,16 @@ function Account() {
                     </Snackbar>
                 
                 </div>
+
+                {showDescription && 
+                    <div className="account-description-container">
+                        <div className="account-description">
+                            <h3 className="account-description-title">Welcome to your account page</h3>
+                            <p className="account-description-text">Here you can manage your account details.</p>
+                            <p>Use the MY ACCOUNT menu on the left to modify your details or delete your account.</p>
+                        </div>
+                    </div>
+                }
 
                 <Outlet /> 
             </div>

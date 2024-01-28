@@ -1,13 +1,15 @@
 .main-account-container {
   display: flex;
   /* flex-direction: row; */
-  flex-flow: row wrap;
+  /* flex-flow: row wrap; */
   margin-left: 2%;
   margin-right: 2%;
   padding-bottom: 5%;
   border: 1px solid #e0e0e0;
   background-color: #d2c1f012 ;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 0 10px   #0173714a;
+  border-radius: 10px;
 }
 
 .account-header-container {
@@ -44,6 +46,8 @@
     padding: 5px 10px;
     font-size: 20px;
     border-bottom: 1px solid #a7a3a3;
+    color: #017371;
+    font-weight:600;
 }
 
 .account-link {
@@ -85,7 +89,8 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 2%;
-  color:#0d6efd;
+  /* color:#0d6efd; */
+  color: #017371;
 }
 
 .intro-message {
@@ -100,4 +105,25 @@
 #parent-modal-second-description {
   margin-top: 6%;
   margin-bottom: 9%;
+}
+
+.account-description-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-description {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.account-description-title {
+  margin-bottom: 5%;
+  margin-top: 15%;
+  /* color: #02B2AF; */
+  color: #017371;
+  font-weight: 500;
+  /* text-shadow: -1px 0 rgb(38, 38, 38), 0 1px rgb(38, 38, 38), 1px 0 rgb(38, 38, 38), 0 -1px rgb(38, 38, 38); */
 }

@@ -129,7 +129,7 @@ function BudgetList() {
                  <h1>Budget List</h1>
                 <NavLink 
                     className="add-budget-link"
-                    to="/dashboard/addbudget">Add new budget</NavLink> 
+                    to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink> 
             </div>}
 
             <div className = "budget-div" >
