@@ -37,6 +37,7 @@ class Budget(models.Model):
     luxury_gifts = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Luxury and Gifts")
     leisure_entertainment = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Leisure & Entertainment")
     holidays = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Holidays and Travel")
+    charity = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Charitable contributions")
     other_non_essential_costs = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Other Non-Essential Costs")
     #financial commitments
     unsecured_loans = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Unsecured Loans (Credit Cards, Store Cards, Payday Loans)")

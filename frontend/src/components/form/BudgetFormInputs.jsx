@@ -15,6 +15,7 @@ function BudgetFormInputs({
     handleLuxury,
     handleLeisure,
     handleHolidays,
+    handleCharity,
     handleOtherNonEssential,
     handleUnsecured,
     placeholder,
@@ -30,6 +31,7 @@ function BudgetFormInputs({
     luxuryValue,
     leisureValue,
     holidaysValue,
+    charityValue,
     otherNonEssentialValue,
     unsecuredValue,
 }) {
@@ -204,6 +206,20 @@ function BudgetFormInputs({
                 />
             </InputGroup>
 
+            <Form.Label htmlFor="basic-url">Charitable contributions:</Form.Label>
+            <InputGroup className="mb-3">
+                <InputGroup.Text
+                className="non-essential-input">£</InputGroup.Text>
+                <Form.Control aria-label="Amount"
+                inputMode='decimal'
+                placeholder={placeholder}
+                type='number'
+                step={0.01} 
+                onChange = {handleCharity}
+                defaultValue={charityValue}
+                />
+            </InputGroup>
+
             <Form.Label htmlFor="basic-url">Other non-essential expenses:</Form.Label>
             <InputGroup className="mb-3">
                 <InputGroup.Text
@@ -248,6 +264,7 @@ BudgetFormInputs.propTypes = {
     handleLuxury: PropTypes.func,
     handleLeisure: PropTypes.func,
     handleHolidays: PropTypes.func,
+    handleCharity: PropTypes.func,
     handleOtherNonEssential: PropTypes.func,
     handleUnsecured: PropTypes.func,
     placeholder: PropTypes.number || PropTypes.string,
@@ -263,6 +280,7 @@ BudgetFormInputs.propTypes = {
     luxuryValue: PropTypes.string,
     leisureValue: PropTypes.string,
     holidaysValue: PropTypes.string,
+    charityValue: PropTypes.string,
     otherNonEssentialValue: PropTypes.string,
     unsecuredValue: PropTypes.string,
 }

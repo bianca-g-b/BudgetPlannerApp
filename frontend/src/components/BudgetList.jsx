@@ -25,6 +25,7 @@ import ShopOutlinedIcon from '@mui/icons-material/ShopOutlined';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import SnowboardingIcon from '@mui/icons-material/Snowboarding';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivismOutlined';
 import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
@@ -46,6 +47,9 @@ function BudgetList() {
     const [isClicked, setIsClicked] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
+
+    console.log("clicked in main component", clicked);
+    console.log(budget, "testing state budgetbyid in main budgetList");
 
     // fetch data
     useEffect(() => {
@@ -289,6 +293,17 @@ function BudgetList() {
                     <ListItem>
                         <ListItemAvatar>
                             <Avatar className="non-essential-icon">
+                                <VolunteerActivismOutlinedIcon />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Charity donations" secondary={`£ ${budget.charity}`} >
+                        </ListItemText>
+                    </ListItem>
+
+
+                    <ListItem>
+                        <ListItemAvatar>
+                            <Avatar className="non-essential-icon">
                                 <ShopIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -401,6 +416,7 @@ function BudgetList() {
                                 'Luxury and gifts',
                                 'Leisure and entertainment',
                                 'Holidays',
+                                'Charity',
                                 'Other non-essential',
                                 'Unsecured debt',
                             ]

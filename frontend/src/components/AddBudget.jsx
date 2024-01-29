@@ -8,7 +8,7 @@ import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
 import FormButton from "./form/FormButton.jsx";
 import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood,
     setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, 
-    setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt,
+    setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../redux/budgetFieldsSlice.js';
 import Snackbar from '@mui/material/Snackbar';
@@ -43,6 +43,7 @@ function AddBudget() {
             dispatch(setLuxury(0.0));
             dispatch(setLeisure(0.0));
             dispatch(setHolidays(0.0));
+            dispatch(setCharity(0.0));
             dispatch(setOtherNonEssential(0.0));
             dispatch(setUnsecuredDebt(0.0));
             dispatch(setTotalEssential(0.0));
@@ -70,6 +71,7 @@ function AddBudget() {
             luxury_gifts: parseFloat(budgetFields.luxury).toFixed(2),
             leisure_entertainment: parseFloat(budgetFields.leisure).toFixed(2),
             holidays: parseFloat(budgetFields.holidays).toFixed(2),
+            charity: parseFloat(budgetFields.charity).toFixed(2),
             other_non_essential_costs: parseFloat(budgetFields.otherNonEssential).toFixed(2),
             unsecured_loans: parseFloat(budgetFields.unsecuredDebt).toFixed(2),
             total_essential: (parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)).toFixed(2),
@@ -169,6 +171,10 @@ function AddBudget() {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
                     console.log(value);
                     dispatch(setHolidays(parseFloat(value)))
+                }}
+                handleCharity= {(event) => {
+                    const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    dispatch(setCharity(parseFloat(value)))
                 }}
                 handleOtherNonEssential= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;

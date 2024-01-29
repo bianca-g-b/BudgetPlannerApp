@@ -6,7 +6,7 @@ import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
 import FormButton from "./form/FormButton.jsx";
 import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, 
-    setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt,
+    setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../redux/budgetFieldsSlice.js';
 import { setBudgetById } from "../redux/budgetSlice.js";
@@ -15,17 +15,21 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 function UpdateBudget() {
+    // window.location.reload();
     const budgetById = useSelector((state)=> state.budget.budgetById);
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
-    const id2 = useSelector((state)=> state.budget.id)
+    const id2 = useSelector((state)=> state.budget.id);
+
     const budgetList = useSelector((state) => state.budget.budgetList);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
     //extract budget by id from budget list
     const budgetById2 = budgetList.find((budget) => budget.id === id2);
-    console.log(budgetById2, "budgetById2");
+    console.log(budgetById2, "budgetById2 in update main");
+    console.log("id", id2);
+
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -48,6 +52,7 @@ function UpdateBudget() {
             dispatch(setLuxury(budgetById2.luxury_gifts));
             dispatch(setLeisure(budgetById2.leisure_entertainment));
             dispatch(setHolidays(budgetById2.holidays));
+            dispatch(setCharity(budgetById2.charity));
             dispatch(setOtherNonEssential(budgetById2.other_non_essential_costs));
             dispatch(setUnsecuredDebt(budgetById2.unsecured_loans));
             dispatch(setTotalEssential(budgetById2.total_essential));
@@ -90,6 +95,7 @@ function UpdateBudget() {
             dispatch(setLuxury(0.0));
             dispatch(setLeisure(0.0));
             dispatch(setHolidays(0.0));
+            dispatch(setCharity(0.0));
             dispatch(setOtherNonEssential(0.0));
             dispatch(setUnsecuredDebt(0.0));
             dispatch(setTotalEssential(0.0));
@@ -119,6 +125,7 @@ function UpdateBudget() {
             luxury_gifts: parseFloat(budgetFields.luxury).toFixed(2),
             leisure_entertainment: parseFloat(budgetFields.leisure).toFixed(2),
             holidays: parseFloat(budgetFields.holidays).toFixed(2),
+            charity: parseFloat(budgetFields.charity).toFixed(2),
             other_non_essential_costs: parseFloat(budgetFields.otherNonEssential).toFixed(2),
             unsecured_loans: parseFloat(budgetFields.unsecuredDebt).toFixed(2),
             total_essential: (parseFloat(budgetFields.housing) + parseFloat(budgetFields.utilities) + parseFloat(budgetFields.food) + parseFloat(budgetFields.transport) + parseFloat(budgetFields.household) + parseFloat(budgetFields.childcare) + parseFloat(budgetFields.cleaning) + parseFloat(budgetFields.otherEssential)).toFixed(2),
@@ -189,6 +196,7 @@ function UpdateBudget() {
                 luxuryValue={budgetById2.luxury_gifts}
                 leisureValue={budgetById2.leisure_entertainment}
                 holidaysValue={budgetById2.holidays}
+                charityValue={budgetById2.charity}
                 otherNonEssentialValue={budgetById2.other_non_essential_costs}
                 unsecuredValue={budgetById2.unsecured_loans}
                 
@@ -239,6 +247,10 @@ function UpdateBudget() {
                 handleHolidays= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
                     dispatch(setHolidays(parseFloat(value)))
+                }}
+                handleCharity= {(event) => {
+                    const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;
+                    dispatch(setCharity(parseFloat(value)))
                 }}
                 handleOtherNonEssential= {(event) => {
                     const value = event.target.value !== "" ? parseFloat(event.target.value).toFixed(2) : 0.0;

@@ -21,6 +21,7 @@ export const budgetFieldsSlice = createSlice({
         luxury: 0.0,
         leisure: 0.0,
         holidays: 0.0,
+        charity: 0.0,
         otherNonEssential: 0.0,
         unsecuredDebt: 0.0,
         totalEssential: 0.0,
@@ -71,6 +72,9 @@ export const budgetFieldsSlice = createSlice({
         setHolidays: (state, action) => {
             state.holidays = action.payload;
         },
+        setCharity: (state, action) => {
+            state.charity = action.payload;
+        },
         setOtherNonEssential: (state, action) => {
             state.otherNonEssential = action.payload;
         },
@@ -93,7 +97,7 @@ export const budgetFieldsSlice = createSlice({
 })
 
 // export actions
-export const { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure, setHolidays, setOtherNonEssential, setUnsecuredDebt, setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings } = budgetFieldsSlice.actions;
+export const { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt, setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings } = budgetFieldsSlice.actions;
 
 // export reducer
 export default budgetFieldsSlice.reducer;
