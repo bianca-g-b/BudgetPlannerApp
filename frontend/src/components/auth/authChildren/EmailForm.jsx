@@ -80,7 +80,7 @@ function EmailForm() {
                 <div className="delete-message-container">
                     <p className="delete-message">Please note that deleting your email address will prevent you from recovering your account if you forget your password.</p>
                 </div>
-                <div className="submit-container">
+                <div className="submit-delete-container">
                      <Button className="delete-email-button"
                         variant="contained"
                         onClick = {handleDeleteEmail}

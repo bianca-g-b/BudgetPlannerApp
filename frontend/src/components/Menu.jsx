@@ -103,12 +103,12 @@ export default function MenuAppBar() {
               onClose={handleCloseUserMenu}
             > 
 
-                {/* <MenuItem 
+                <MenuItem 
                     component = {Link}
                     href="/"
                     onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">About</Typography>
-                </MenuItem>      */}
+                </MenuItem>     
 
                 {isAuthenticated && <MenuItem 
                     component = {Link}

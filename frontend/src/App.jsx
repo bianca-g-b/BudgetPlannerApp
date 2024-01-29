@@ -12,6 +12,7 @@ import Account from "./components/auth/Account.jsx";
 import EmailForm from "./components/auth/authChildren/EmailForm.jsx";
 import ChangePassword from './components/auth/authChildren/ChangePassword.jsx';
 import MainChart from './components/MainChart.jsx';
+import About from './components/About.jsx';
 
 function App() {
 
@@ -44,6 +45,13 @@ function App() {
         <Route path="/dashboard/:id" element={
           <PrivateRoute>
             <UpdateBudget />
+          </PrivateRoute>
+          } 
+        />
+
+<Route path="/" element={
+          <PrivateRoute>
+            <About />
           </PrivateRoute>
           } 
         />

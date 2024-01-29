@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: 8%;
 }
 
 .update-email-container,
@@ -10,12 +11,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10%;
     width: 100%;
 }
 
 .add-email-container {
-    margin-top: 75%;
     margin-left: 75%;
 }
 
@@ -29,7 +28,8 @@
     font-weight: 500;
 }
 
-.submit-container {
+.submit-container,
+.submit-delete-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +37,12 @@
     margin-top: 2%;
 }
 
-.submit-button {
+.submit-delete-container {
+    width: 50%;
+}
+
+.submit-button,
+.delete-email-button {
     width: 50%;
     cursor: pointer;
 }
