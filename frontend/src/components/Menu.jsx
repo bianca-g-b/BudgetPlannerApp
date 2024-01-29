@@ -101,14 +101,14 @@ export default function MenuAppBar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            >
+            > 
 
-                <MenuItem 
+                {/* <MenuItem 
                     component = {Link}
                     href="/"
                     onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">About</Typography>
-                </MenuItem>
+                </MenuItem>      */}
 
                 {isAuthenticated && <MenuItem 
                     component = {Link}
@@ -116,6 +116,13 @@ export default function MenuAppBar() {
                     onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>}
+
+                <MenuItem 
+                    component = {Link}
+                    href="/calculator"
+                    onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Calculator</Typography>
+                </MenuItem>
 
                 {isAuthenticated && <MenuItem 
                     onClick={handleLogout}

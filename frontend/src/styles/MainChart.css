@@ -9,3 +9,16 @@
     border-radius: 10px;
     margin-top: 5.7%;
 }
+
+.empty-budget-chart-message {
+    margin-left: 2%;
+    margin-top: 1%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3344DD;
+    text-decoration: none;
+}
+
+.empty-budget-chart-message:hover {
+    color: #017371;
+}

@@ -107,10 +107,19 @@ top:auto !important;
    font-weight: 600;
    font-size: 1.2rem;
    letter-spacing: 1.5px;
-   /* color: #014b73; */
    color: #3344DD;
 }
 
-.add-budget-link:hover {
-   color: rgb(78, 77, 77);
+.add-first-budget-link {
+   text-decoration: none;
+   margin-left: 1%;
+   font-weight: 600;
+   font-size: 1.2rem;
+   letter-spacing: 1.5px;
+   color: #3344DD;
+}
+
+.add-budget-link:hover,
+.add-first-budget-link:hover {
+   color: #017371;
 }

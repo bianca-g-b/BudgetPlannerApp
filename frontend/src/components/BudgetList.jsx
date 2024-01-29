@@ -125,9 +125,7 @@ function BudgetList() {
     return ( 
           
         <div className="all-budget-div">
-            <div className="add-budget-empty-list">
-                {!budgetList && <NavLink to="/dashboard/addbudget">Add budget</NavLink> }
-            </div>
+           
 
             {budgetList.length >0 && <div className="header-div">
                  <h1>Budget List</h1>
@@ -137,6 +135,9 @@ function BudgetList() {
             </div>}
 
             <div className = "budget-div" >
+                { budgetList.length===0 && <NavLink 
+                    className="add-first-budget-link"
+                    to="/dashboard/addbudget">Add your first budget &#x21F1;</NavLink> }
                 {budgetList.length >0 && 
                 <div className="data-div">
                     <DataGrid

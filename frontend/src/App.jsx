@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import MainPage from "./MainPage.jsx";
+import EasyCalculator from "./EasyCalculator.jsx";
 import BudgetList from './components/BudgetList';
 import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
@@ -66,7 +66,7 @@ function App() {
             />    
         </Route>
 
-        <Route path="/" element={<MainPage />} />
+        <Route path="/calculator" element={<EasyCalculator />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>

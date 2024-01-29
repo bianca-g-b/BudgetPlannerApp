@@ -1,5 +1,6 @@
 import "../styles/MainChart.css";
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import { useSelector } from 'react-redux';
@@ -59,7 +60,14 @@ function MainChart() {
 
     return (
         <div className="main-bar-chart-div">
-                <BarChart
+                {budgetList.length===0 && 
+                <div>
+                  <NavLink 
+                    to="/dashboard/addbudget"
+                    className="empty-budget-chart-message">Add a budget to see the chart &#x21F1;</NavLink>
+                </div>
+                }
+                {budgetList.length > 0 && <BarChart
                     dataset={chartData}
                     xAxis={[{scaleType: 'band', dataKey: 'x'}]}
                     
@@ -71,14 +79,14 @@ function MainChart() {
                         {dataKey: 'savings', label: 'Savings', valueFormatter},
                     ]}
                     {...chartSettings}
-                /> 
-                <Stack spacing={2} className="pagination-div">
+                /> }
+                {budgetList.length > 0 && <Stack spacing={2} className="pagination-div">
                     <Pagination count={totalPages} 
                                 color="primary"
                                 size="large" 
                                 onChange = {(event, value) => handlePageChange(value)}
                       />
-                </Stack>
+                </Stack>}
         </div>
     )
 }
