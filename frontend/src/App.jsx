@@ -49,7 +49,7 @@ function App() {
           } 
         />
 
-<Route path="/" element={
+        <Route path="/" element={
           <PrivateRoute>
             <About />
           </PrivateRoute>

@@ -27,6 +27,7 @@ class BudgetModelTests(TestCase):
             luxury_gifts=100,
             leisure_entertainment=100,
             holidays=100,
+            charity=100,
             other_non_essential_costs=100,
             unsecured_loans=100,
             total_essential= 800,
@@ -54,6 +55,7 @@ class BudgetModelTests(TestCase):
         self.assertEqual(self.post.luxury_gifts, 100)
         self.assertEqual(self.post.leisure_entertainment, 100)
         self.assertEqual(self.post.holidays, 100)
+        self.assertEqual(self.post.charity, 100)
         self.assertEqual(self.post.other_non_essential_costs, 100)
         self.assertEqual(self.post.unsecured_loans, 100)
         self.assertEqual(self.post.total_essential, 800)
