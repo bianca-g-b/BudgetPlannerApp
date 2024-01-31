@@ -6,6 +6,8 @@ import { useNavigate, NavLink } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import PasswordChecklist from 'react-password-checklist';
+import validator from 'validator';
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -15,6 +17,7 @@ function Register() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
+    const [openPasswordWarning, setOpenPasswordWarning] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,20 +25,36 @@ function Register() {
     const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state) => state.authenticated.isAuthenticated);
 
+    // password validation
+    function validatePassword(password) {
+        if (validator.isStrongPassword(password, {
+            minLength:8,
+            minSymbols:1,
+            minNumbers:1,
+        })) {
+            return true;
+        } else {
+            return false;
+    }}
+
     // create user account    
     async function handleRegister(e) {
         e.preventDefault();
         if (password === confirmPassword) {
-            const csrfToken = await fetchCSRFToken(dispatch);
-            const response = await registerUser(username, password, confirmPassword, email, csrfToken);
-            if (response.status === 202) {
-                setOpenSuccess(true);
-                setTimeout(()=> {
-                    navigate("/login")
-                }, 1500)
+            if (validatePassword(password)=== true) {
+                const csrfToken = await fetchCSRFToken(dispatch);
+                const response = await registerUser(username, password, confirmPassword, email, csrfToken);
+                if (response.status === 202) {
+                    setOpenSuccess(true);
+                    setTimeout(()=> {
+                        navigate("/login")
+                    }, 1500)
+                } else {
+                    setOpenFail(true);
+                }
             } else {
-                setOpenFail(true);
-            } 
+                setOpenWarning(true);
+            }
         } else {
             setOpenWarning(true);
         }
@@ -95,6 +114,14 @@ function Register() {
                         />
                 </div>
 
+                <PasswordChecklist
+                        rules={["minLength", "specialChar", "number", "match"]}
+                        minLength={8}
+                        value={password}
+                        valueAgain={confirmPassword}
+                        onChange={(isValid) => console.log("Is valid?", isValid)}
+                    />
+
                 <Button 
                     type="submit" 
                     color="primary"
@@ -111,6 +138,12 @@ function Register() {
                 <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
                     <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
                         Failed to create account. Please try again.
+                    </MuiAlert>
+                </Snackbar>
+
+                <Snackbar open={openPasswordWarning} autoHideDuration={1500} onClose={() => setOpenPasswordWarning(false)}>
+                    <MuiAlert onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                        Password does not meet minimum requirements. Please try again.
                     </MuiAlert>
                 </Snackbar>
 

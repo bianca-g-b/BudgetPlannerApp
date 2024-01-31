@@ -5,6 +5,8 @@ import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/aut
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import PasswordChecklist from "react-password-checklist";
+import validator from 'validator';
 
 function ChangePassword() {
     const [password, setPassword] = useState("");
@@ -12,12 +14,26 @@ function ChangePassword() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
+    const [openPasswordWarning, setOpenPasswordWarning] = useState(false);
 
     const dispatch = useDispatch();
+
+    // password validation
+    function validatePassword(password) {
+        if (validator.isStrongPassword(password, {
+            minLength:8,
+            minSymbols:1,
+            minNumbers:1,
+        })) {
+            return true;
+        } else {
+            return false;
+    }}
     
-        async function updatePassword(e) {
-            e.preventDefault();
-            if (password === confirmPassword) {
+    async function updatePassword(e) {
+        e.preventDefault();
+        if (password === confirmPassword) {
+            if (validatePassword(password)=== true) {
                 const csrfToken = await fetchCSRFToken(dispatch);
                 const response = await changePassword(password, confirmPassword, csrfToken);
                 if (response.status === 202) {
@@ -25,28 +41,28 @@ function ChangePassword() {
                     console.log("Password changed successfully");
                     setTimeout(() => {
                         logoutUser(dispatch, csrfToken);
-                    }, 1000);
-                    
+                    }, 1000);                  
                 } else {
                     console.log("Failed to change password");
                     setOpenFail(true);
                 }
             } else {
-                console.log("Passwords do not match");
-                setOpenWarning(true);
+                console.log("Password does not meet requirements");
+                setOpenPasswordWarning(true);
             }
+        } else {
+            console.log("Passwords do not match");
+            setOpenWarning(true);
         }
+    }
 
-        return (
-
+    return (
         <div className="change-psw-main-container">
-
             <div className="change-psw-container">
-
                 <div className="change-psw-info-container">
                     <p className="psw-form-information">Change password</p>
                 </div>
-
+                
                 <form className="change-psw-form"
                     onSubmit={updatePassword}>
 
@@ -69,6 +85,15 @@ function ChangePassword() {
                             onChange = {(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
+
+                    <PasswordChecklist
+                        rules={["minLength", "specialChar", "number", "match"]}
+                        minLength={8}
+                        value={password}
+                        valueAgain={confirmPassword}
+                        onChange={(isValid) => console.log("Is valid?", isValid)}
+                    />
+
                     <div className="submit-container">
                         <Button type="submit" className="submit-button"
                                 variant="contained">Submit
@@ -88,6 +113,12 @@ function ChangePassword() {
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
                 <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
                     Failed to change password. Please try again.
+                </MuiAlert>
+            </Snackbar>
+
+            <Snackbar open={openPasswordWarning} autoHideDuration={2000} onClose={() => setOpenPasswordWarning(false)}>
+                <MuiAlert onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                    Password does not meet minimum requirements. Please try again.
                 </MuiAlert>
             </Snackbar>
 
