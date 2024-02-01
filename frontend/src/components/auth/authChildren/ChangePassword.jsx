@@ -88,14 +88,21 @@ function ChangePassword() {
                     </div>
 
                     <PasswordChecklist
-                        rules={["minLength", "specialChar", "number", "match"]}
+                        rules={["minLength", "lowercase", "specialChar", "number", "match", ]}
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
+                        messages = {{
+                            minLength: "Password must be at least 8 characters long",
+                            lowercase: "Password must contain at least one lowercase letter",
+                            specialChar: "Password must contain at least one special character",
+                            number: "Password must contain at least one number",
+                            match: "Passwords must match",
+                        }}
                         onChange={(isValid) => console.log("Is valid?", isValid)}
                     />
 
-                    <div className="submit-container">
+                    <div className="submit-container new-psw-button-div">
                         <Button type="submit" className="submit-button"
                                 variant="contained">Submit
                         </Button>

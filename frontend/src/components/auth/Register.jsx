@@ -120,6 +120,13 @@ function Register() {
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
+                        messages = {{
+                            minLength: "Password must be at least 8 characters long",
+                            lowercase: "Password must contain at least one lowercase letter",
+                            specialChar: "Password must contain at least one special character",
+                            number: "Password must contain at least one number",
+                            match: "Passwords must match",
+                        }}
                         onChange={(isValid) => console.log("Is valid?", isValid)}
                     />
 

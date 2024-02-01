@@ -21,7 +21,6 @@
 .email-container {
     display: flex;
     flex-direction: column;
-    margin-top: 2%;
     margin-bottom: 7%;
     width: 120%;
     border-radius: 10px;
@@ -58,7 +57,8 @@
 .delete-information {
     display: flex;
     justify-content: center;
-    width: 160%;
+    width: 100%;
+    margin-bottom: 2.5%;
 }
 
 .update-title,
@@ -69,7 +69,7 @@
     font-weight: 600;
     color: #017371;
     text-transform: uppercase;
-    font-size:large;
+    font-size:larger;
 }
 
 .delete-message-container {
