@@ -116,7 +116,7 @@ function Register() {
                 </div>
 
                 <PasswordChecklist
-                        rules={["minLength", "specialChar", "number", "match"]}
+                        rules={["minLength","lowercase", "specialChar", "number", "match"]}
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
@@ -129,12 +129,13 @@ function Register() {
                         }}
                         onChange={(isValid) => console.log("Is valid?", isValid)}
                     />
-
-                <Button 
-                    type="submit" 
-                    color="primary"
-                    variant="contained"
-                    >Register</Button>
+                    <Button 
+                    sx={{ marginTop: "4%", }}
+                        type="submit" 
+                        color="primary"
+                        variant="contained"
+                        >Register
+                    </Button>
             </form>
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
