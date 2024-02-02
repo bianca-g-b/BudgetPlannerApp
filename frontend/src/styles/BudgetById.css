@@ -1,0 +1,8 @@
+.budgetLists {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 25%;
+  margin-top: 5.6%;
+}

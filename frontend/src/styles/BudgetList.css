@@ -7,17 +7,15 @@
    margin-top: 1%;
    margin-bottom: 1%;
    border-radius: 10px;
-   /* box-sizing: content-box; */
    align-items: flex-start;
-   /* flex-flow: row wrap; */
    border: 1px solid #e0e0e0;
    background-color: #d2c1f012 ;
-   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
    box-shadow: 0 0 10px   #0173714a;
   }
 
   .data-div {
    max-width: 100%;
+   padding-right: 2%;
   }
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
@@ -31,10 +29,7 @@ top:auto !important;
 }
 
 /*Budget info*/
- .css-11fl05d-MuiList-root,
- .css-1r5wa48-MuiList-root {
-    padding-left: 2% !important;
- }
+
 
  .css-ptkaw2-MuiDataGrid-root {
     border: none !important;

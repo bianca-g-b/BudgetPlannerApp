@@ -1,18 +1,13 @@
-import "../styles/BudgetList.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import {getBudgetList, getBudgetById, deleteBudget} from "../actions/budgetActions.js";
-import { setBudgetList, setBudgetById, setId, setClicked } from "../redux/budgetSlice.js";
-import { DataGrid } from '@mui/x-data-grid';
-import { Button } from "@mui/material";
-import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
-import Divider from '@mui/material/Divider';
+import "../../../styles/BudgetById.css";
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import DeleteModal from "./Modal";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import BedroomParentOutlinedIcon from '@mui/icons-material/BedroomParentOutlined';
 import ElectricBoltOutlinedIcon from '@mui/icons-material/ElectricBoltOutlined';
@@ -29,147 +24,19 @@ import VolunteerActivismOutlinedIcon from '@mui/icons-material/VolunteerActivism
 import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
-import DeleteModal from "./Modal.jsx";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-
 import { BarChart } from '@mui/x-charts/BarChart';
+import { Button } from "@mui/material";
+import { useOutletContext } from "react-router-dom";
 
 
-function BudgetList() {
-    const dispatch = useDispatch();
-    const csrfToken = useSelector((state) => state.csrf.csrfToken);
-    const budgetList = useSelector((state) => state.budget.budgetList);
-    const budget = useSelector((state)=> state.budget.budgetById);
-    const id = useSelector((state)=> state.budget.id);
-    const clicked = useSelector((state)=> state.budget.clicked);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
-    const [openSuccess, setOpenSuccess] = useState(false);
-    const [openFail, setOpenFail] = useState(false);
-
-    console.log("clicked in main component", clicked);
-    console.log(budget, "testing state budgetbyid in main budgetList");
-
-    // fetch data
-    useEffect(() => {
-        async function fetchData() {
-            dispatch(getBudgetList(csrfToken))
-                .then((action) => {
-                    if (getBudgetList.fulfilled.match(action)) {
-                        console.log(action.payload, "action payload");
-                        dispatch(setBudgetList(action.payload));
-                    }
-                })
-                
-        }
-        fetchData()
-    }, [dispatch, csrfToken]);
-
-
-    // get and set budget by id, id
-    async function budgetById(id) {
-        dispatch(setId(id))
-        dispatch(getBudgetById(id))
-            .then((action)=> {
-                if (getBudgetById.fulfilled.match(action)) {
-                    console.log(action.payload, "budget by id - action");
-                    dispatch(setBudgetById(action.payload))
-                    console.log(budget, "testing state budgetbyid");
-                    dispatch(setClicked(id));
-                    console.log(clicked, "testing clicked")
-                }
-            })
-    }
+function BudgetById() {
+    const {budgetbyid, handleDeleteBudget, isModalOpen, openModal, closeModal }= useOutletContext();
     
-    // write useEffect to add className to table row when button is clicked and remove className when another button is clicked
-    useEffect(() => {
-        if (clicked === id) {
-            setIsClicked(true)
-        } else {
-            setIsClicked(false)
-        }
-    }, [clicked, id])
-
-
-    // open modal
-    function openModal() {
-        setIsModalOpen(true);
-    }
-
-    // close modal
-    function closeModal() {
-        setIsModalOpen(false);
-    }
-
-    // delete budget by id
-    async function handleDeleteBudget(id) {
-        try {
-            dispatch(deleteBudget(id, csrfToken))
-                .then((action) => {
-                    if (deleteBudget.fulfilled.match(action)) {
-                        setOpenSuccess(true);
-                        // reload dashboard after 1.5 seconds
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 1500);
-                    } else {
-                        setOpenFail(true);
-                    }
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    return ( 
-          
-        <div className="all-budget-div">
-           
-
-            {budgetList.length >0 && <div className="header-div">
-                 <h1>Budget List</h1>
-                <NavLink 
-                    className="add-budget-link"
-                    to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink> 
-            </div>}
-
-            <div className = "budget-div" >
-                { budgetList.length===0 && <NavLink 
-                    className="add-first-budget-link"
-                    to="/dashboard/addbudget">Add your first budget &#x21F1;</NavLink> }
-                {budgetList.length >0 && 
-                <div className="data-div">
-                    <DataGrid
-                        rows={budgetList}
-                        getRowId={(row) => row.id}
-                        getRowClassName={(params) => 
-                            (params.id === clicked && isClicked) ? 'clicked' : ''
-                        }
-                        columns={[
-                            { field: 'date_from', headerName: 'Date from', width: 200 },
-                            { field: 'date_to', headerName: 'Date to', width: 200 },
-                            { field: 'id',
-                              key: 'id',
-                              headerName: 'Expand',
-                              width: 100,
-                              color: 'white',
-                              renderCell: (params) => (
-                                    <Avatar className="arrow-icon">
-                                        <NavigateNextRoundedIcon 
-                                            onClick = {()=> budgetById(params.value)}
-                                            to={`/dashboard/${params.value}`}
-                                            color= "white"
-                                            />
-                                    </Avatar>
-                                ),
-                            },
-                        ]}
-                    />
-                </div>}
-
-                {budget && 
-                <List sx={{ width: '100%', maxWidth: 360 }}
+    return (
+        <div className="budgetLists">
+                {budgetbyid && 
+                <List 
+                    // sx={listStyle}
                     className="single-budget-div">
                     <ListItemText primary="Essential Expenses" />
                     <Divider />
@@ -180,7 +47,7 @@ function BudgetList() {
                                 <BedroomParentOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Housing" secondary={`£ ${budget.housing}`} >
+                        <ListItemText primary="Housing" secondary={`£ ${budgetbyid.housing}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -190,7 +57,7 @@ function BudgetList() {
                                 <ElectricBoltOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Utilities" secondary={`£ ${budget.utility_bills}`} >
+                        <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -200,7 +67,7 @@ function BudgetList() {
                                 <AddShoppingCartOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Food and drinks" secondary={`£ ${budget.food_drinks}`} >
+                        <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -210,7 +77,7 @@ function BudgetList() {
                                 <DirectionsRailwayFilledOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Transport" secondary={`£ ${budget.transport}`} >
+                        <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -220,7 +87,7 @@ function BudgetList() {
                                 <HandymanOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Household" secondary={`£ ${budget.household_goods_services}`} >
+                        <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -230,7 +97,7 @@ function BudgetList() {
                                 <ChildCareOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Childcare" secondary={`£ ${budget.children_related_costs}`} >
+                        <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -240,7 +107,7 @@ function BudgetList() {
                                 <LocalLaundryServiceOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budget.cleaning_toiletries}`} >
+                        <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -250,13 +117,14 @@ function BudgetList() {
                                 <ShopOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Other essential" secondary={`£ ${budget.other_essential_costs}`} >
+                        <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} >
                         </ListItemText>
                     </ListItem>
                 </List>}
 
-                {budget && 
-                <List sx={{ width: '100%', maxWidth: 360 }}
+                {budgetbyid && 
+                <List 
+                    // sx={listStyle}
                     className="single-budget-div"> 
                     <ListItemText primary="Non Essential Expenses" />
                     <Divider />
@@ -267,7 +135,7 @@ function BudgetList() {
                                 <DiamondIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Luxury and gifts" secondary={`£ ${budget.luxury_gifts}`} >
+                        <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -277,7 +145,7 @@ function BudgetList() {
                                 <SnowboardingIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Leisure and entertainment" secondary={`£ ${budget.leisure_entertainment}`} >
+                        <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -287,7 +155,7 @@ function BudgetList() {
                                 <BeachAccessIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Holidays" secondary={`£ ${budget.holidays}`} >
+                        <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -297,7 +165,7 @@ function BudgetList() {
                                 <VolunteerActivismOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Charity donations" secondary={`£ ${budget.charity}`} >
+                        <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -308,7 +176,7 @@ function BudgetList() {
                                 <ShopIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Other non-essential" secondary={`£ ${budget.other_non_essential_costs}`} >
+                        <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -318,13 +186,15 @@ function BudgetList() {
                                 <CreditCardIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Unsecured debt" secondary={`£ ${budget.unsecured_loans}`} >
+                        <ListItemText primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} >
                         </ListItemText>
                     </ListItem>
                 </List>}
 
-            {budget && 
-                <List sx={{ width: '100%', maxWidth: 360 }}>
+            {budgetbyid && 
+                <List 
+                    // sx={listStyle}
+                    >
                     <ListItemText primary="Budget Breakdown" />
                     <Divider />
 
@@ -334,7 +204,7 @@ function BudgetList() {
                                 <AccountBalanceWalletOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Total income" secondary={`£ ${budget.total_income}`} >
+                        <ListItemText primary="Total income" secondary={`£ ${budgetbyid.total_income}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -344,7 +214,7 @@ function BudgetList() {
                                 <ShopOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Total essential spending" secondary={`£ ${budget.total_essential}`} >
+                        <ListItemText primary="Total essential spending" secondary={`£ ${budgetbyid.total_essential}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -354,7 +224,7 @@ function BudgetList() {
                                 <ShopIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Total non-essential spending" secondary={`£ ${budget.total_non_essential}`} >
+                        <ListItemText primary="Total non-essential spending" secondary={`£ ${budgetbyid.total_non_essential}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -364,7 +234,7 @@ function BudgetList() {
                                 <CurrencyPoundOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Total spending" secondary={`£ ${budget.total_expenses}`} >
+                        <ListItemText primary="Total spending" secondary={`£ ${budgetbyid.total_expenses}`} >
                         </ListItemText>
                     </ListItem>
 
@@ -374,13 +244,13 @@ function BudgetList() {
                                 <CurrencyPoundOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Total savings" secondary={`£ ${budget.total_savings}`} >
+                        <ListItemText primary="Total savings" secondary={`£ ${budgetbyid.total_savings}`} >
                         </ListItemText>
                     </ListItem>
 
                     <NavLink
                         className="edit-button"
-                        to={`/dashboard/${budget.id}`}
+                        to={`/dashboard/update/${budgetbyid.id}`}
                         ><Button
                             variant="contained"
                         >Edit</Button>
@@ -392,15 +262,15 @@ function BudgetList() {
                     </Button>
                     <DeleteModal 
                         isModalOpen={isModalOpen}
-                        handleDelete={()=> handleDeleteBudget(budget.id)}
+                        handleDelete={()=> handleDeleteBudget(budgetbyid.id)}
                         closeModal={closeModal}
-                        dateFrom={budget.date_from}
-                        dateTo={budget.date_to}
+                        dateFrom={budgetbyid.date_from}
+                        dateTo={budgetbyid.date_to}
                     />
 
                 </List>}
 
-                {budget && 
+                {budgetbyid && 
                 <div className="bar-div">
                     <BarChart 
                         xAxis={[{
@@ -425,7 +295,7 @@ function BudgetList() {
 
                         series={[{
                             data: [
-                                parseFloat(budget.housing), parseFloat(budget.utility_bills), parseFloat(budget.food_drinks), parseFloat(budget.transport), parseFloat(budget.household_goods_services), parseFloat(budget.children_related_costs), parseFloat(budget.cleaning_toiletries), parseFloat(budget.other_essential_costs), parseFloat(budget.luxury_gifts), parseFloat(budget.leisure_entertainment), parseFloat(budget.holidays), parseFloat(budget.other_non_essential_costs), parseFloat(budget.unsecured_loans),
+                                parseFloat(budgetbyid.housing), parseFloat(budgetbyid.utility_bills), parseFloat(budgetbyid.food_drinks), parseFloat(budgetbyid.transport), parseFloat(budgetbyid.household_goods_services), parseFloat(budgetbyid.children_related_costs), parseFloat(budgetbyid.cleaning_toiletries), parseFloat(budgetbyid.other_essential_costs), parseFloat(budgetbyid.luxury_gifts), parseFloat(budgetbyid.leisure_entertainment), parseFloat(budgetbyid.holidays), parseFloat(budgetbyid.other_non_essential_costs), parseFloat(budgetbyid.unsecured_loans),
                             ],
                             label: 'All expenses (GBP)',
                         }]}
@@ -433,23 +303,16 @@ function BudgetList() {
                 </div>
                 }
 
-            </div>
-
-            <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
-                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
-                    Budget deleted successfully!
-                </MuiAlert>
-            </Snackbar>
-
-            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
-                    Budget deletion failed. Please try again.
-                </MuiAlert>
-            </Snackbar>
-
         </div>
-
     )
 }
 
-export default BudgetList;
+export default BudgetById;
+
+BudgetById.propTypes = {
+    budgetbyid: PropTypes.object.isRequired,
+    handleDeleteBudget: PropTypes.func,
+    isModalOpen: PropTypes.bool,
+    openModal: PropTypes.func,
+    closeModal: PropTypes.func,
+}

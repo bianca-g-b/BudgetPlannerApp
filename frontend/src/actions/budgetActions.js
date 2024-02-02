@@ -16,7 +16,8 @@ export const getBudgetList = createAsyncThunk(
         });
         if (response.ok) {
             const budgetList = await response.json();
-            return budgetList;
+            const reversedBudgetList = budgetList.slice().reverse();
+            return reversedBudgetList;
         } else {
             return thunkAPI.rejectWithValue(response);
         }
