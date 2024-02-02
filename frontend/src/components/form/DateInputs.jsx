@@ -1,3 +1,4 @@
+import "../../styles/Forms.css";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
@@ -9,32 +10,37 @@ function DateInputs({
     dateToValue,
 }) {
     return(
-        <>
-            <Form.Label htmlFor="basic-url">From:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="date-input"
-                >&#x1F4C5;</InputGroup.Text>
-                <Form.Control aria-label="Date"
-                    type='date'
-                    onChange = {handleDateFrom}
-                    defaultValue = {dateFromValue}
-                />
-            </InputGroup>
+        <div className="date-inputs-container">
+            <div className="date-from-inputs-container">
+                <Form.Label htmlFor="basic-url">Date From:</Form.Label>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text
+                        className="date-input"
+                    >&#x1F4C5;</InputGroup.Text>
+                    <Form.Control aria-label="Date"
+                        type='date'
+                        onChange = {handleDateFrom}
+                        defaultValue = {dateFromValue}
+                    />
+                </InputGroup>
+            </div>
 
-            <Form.Label htmlFor="basic-url">To:</Form.Label>
-            <InputGroup className="mb-3">
-                <InputGroup.Text
-                    className="date-input"
-                >&#x1F4C5;</InputGroup.Text>
-                <Form.Control aria-label="Date"
-                    data-testid="date-display"
-                    type='date'
-                    onChange = {handleDateTo}
-                    defaultValue = {dateToValue}
-                />
-            </InputGroup>
-        </>
+            <div className="date-to-inputs-container">
+                <Form.Label htmlFor="basic-url">Date To:</Form.Label>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text
+                        className="date-input"
+                    >&#x1F4C5;</InputGroup.Text>
+                    <Form.Control aria-label="Date"
+                        data-testid="date-display"
+                        type='date'
+                        onChange = {handleDateTo}
+                        defaultValue = {dateToValue}
+                    />
+                </InputGroup>
+            </div>
+        </div>
+    
     )
 }
 

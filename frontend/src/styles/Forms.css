@@ -10,14 +10,14 @@
   .full-form-area {
     display: flex;
     flex-direction: column;
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
+    padding-top: 2%;
+    padding-bottom: 5%;
     padding-left: 3%;
     padding-right: 3%;
     border-radius: 10px;
     margin-top: 1%;
     margin-bottom: 1%;
-    width: 45%;
+    width: 50%;
     border: 1px solid #e0e0e0;
     background-color: #d2c1f012 ;
     box-shadow: 0 0 10px   #0173714a;  
@@ -27,4 +27,30 @@
     display: flex;
     width: 45%;
     margin-top: 3%;
+  }
+
+  /* Date and budget input containers*/
+  .date-inputs-container,
+  .expenses-group-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .date-from-inputs-container,
+  .date-to-inputs-container,
+  .expenses-input-div {
+    width: 48%;
+  }
+
+  .label-div {
+    text-align: center !important;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    padding-top: 1%;
+    width: 100%;
+    border-bottom: 1px solid #afafaf;
+    border-top: 1px solid #afafaf;
   }
