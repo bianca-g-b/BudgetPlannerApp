@@ -1,8 +1,30 @@
-.budgetLists {
+/*Expenses lists and  chart container*/
+.budget-lists {
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 20px;
   margin-left: 25%;
   margin-top: 5.6%;
 }
+
+/*Expenses lists*/
+.expenses-lists {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+}
+
+
+/*Bar chart*/
+.bar-div {
+  height: 550px;
+  width: 750px;
+}
+
+
+  /*Media queries*/
+  @media (max-width: 2250) {
+    /*chart div needs to be smaller*/
+  }
+  

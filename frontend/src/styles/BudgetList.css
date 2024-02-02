@@ -120,12 +120,6 @@ th, td {
    color: #017371;
 }
 
-/*Bar chart*/
-.bar-div {
-   height: 550px;
-   width: 750px;
-}
-
 /*Delete budget modal*/
 .budget-modal-buttons-div {
     display: flex;
@@ -136,5 +130,5 @@ th, td {
     font-weight: 600;
     letter-spacing: 0.05em;
   }
-  
+
 

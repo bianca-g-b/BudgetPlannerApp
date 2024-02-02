@@ -25,25 +25,68 @@ import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { Button } from "@mui/material";
+import { Button, ThemeProvider } from "@mui/material";
+import { createTheme } from '@mui/material/styles';
 import { useOutletContext } from "react-router-dom";
 
 
 function BudgetById() {
     const {budgetbyid, handleDeleteBudget, isModalOpen, openModal, closeModal}= useOutletContext();
     
+    const listStyle = {
+        maxWidth: 360,
+        padding: 1,
+        fontSizeAdjust: 0.5,
+    }
+
+    const dividerStyle = {
+        borderColor: 'gray',
+    }
+
+    const essentialIconStyle = {
+        backgroundColor: '#ec3e94',
+    }
+
+    const nonEssentialIconStyle = {
+        backgroundColor: '#ffb407',
+    }
+
+    const incomeIconStyle = {
+        backgroundColor: '#41c961',
+    }
+
+    const savingsIconStyle = {
+        backgroundColor: '#00b2d5',
+    }
+
+    const totalSpendingIconStyle = {
+        backgroundColor: '#f54d5d',
+    }
+
+    const fontTheme = createTheme({
+        typography: {
+            fontFamily: 'Poppins, sans-serif',
+        }
+    })
+
     return (
-        <div className="budgetLists">
+        <div className="budget-lists">
+        <ThemeProvider theme={fontTheme}>
+            <div className="expenses-lists">
                 {budgetbyid && 
                 <List 
-                    // sx={listStyle}
+                    sx={listStyle}
                     className="single-budget-div">
-                    <ListItemText primary="Essential Expenses" />
-                    <Divider />
-
+                    <ListItemText
+                        primary="Essential Expenses" />
+                    <Divider 
+                        sx= {dividerStyle}
+                    />
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <BedroomParentOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -53,7 +96,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <ElectricBoltOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -63,7 +108,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <AddShoppingCartOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -73,7 +120,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <DirectionsRailwayFilledOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -83,7 +132,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <HandymanOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -93,7 +144,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <ChildCareOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -103,7 +156,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <LocalLaundryServiceOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -113,7 +168,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <ShopOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -124,14 +181,17 @@ function BudgetById() {
 
                 {budgetbyid && 
                 <List 
-                    // sx={listStyle}
+                    sx={listStyle}
                     className="single-budget-div"> 
                     <ListItemText primary="Non Essential Expenses" />
-                    <Divider />
-                    
+                    <Divider 
+                        sx= {dividerStyle}
+                    />
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <DiamondIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -141,7 +201,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <SnowboardingIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -151,7 +213,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <BeachAccessIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -161,7 +225,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <VolunteerActivismOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -172,7 +238,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <ShopIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -182,25 +250,31 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <CreditCardIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} >
+                        <ListItemText 
+                            primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} >
                         </ListItemText>
                     </ListItem>
                 </List>}
 
             {budgetbyid && 
                 <List 
-                    // sx={listStyle}
+                    sx={listStyle}
                     >
                     <ListItemText primary="Budget Breakdown" />
-                    <Divider />
-
+                    <Divider 
+                        sx= {dividerStyle}
+                    />
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="income-icon">
+                            <Avatar 
+                                sx={incomeIconStyle}
+                                className="income-icon">
                                 <AccountBalanceWalletOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -210,7 +284,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="essential-icon">
+                            <Avatar 
+                                sx={essentialIconStyle}
+                                className="essential-icon">
                                 <ShopOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -220,7 +296,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="non-essential-icon">
+                            <Avatar 
+                                sx={nonEssentialIconStyle}
+                                className="non-essential-icon">
                                 <ShopIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -230,7 +308,9 @@ function BudgetById() {
 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar className="savings-icon">
+                            <Avatar 
+                                sx={totalSpendingIconStyle}
+                                className="savings-icon">
                                 <CurrencyPoundOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -240,7 +320,9 @@ function BudgetById() {
 
                     <ListItem className="last-list-item">
                         <ListItemAvatar>
-                            <Avatar className="savings-icon">
+                            <Avatar 
+                                sx={savingsIconStyle}
+                                className="savings-icon">
                                 <CurrencyPoundOutlinedIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -269,6 +351,7 @@ function BudgetById() {
                     />
 
                 </List>}
+            </div>
 
                 {budgetbyid && 
                 <div className="bar-div">
@@ -302,7 +385,7 @@ function BudgetById() {
                     />
                 </div>
                 }
-
+        </ThemeProvider>
         </div>
     )
 }
