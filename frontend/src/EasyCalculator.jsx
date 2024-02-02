@@ -1,3 +1,4 @@
+import "./styles/Forms.css";
 import MainForm from './components/form/MainForm';
 import BudgetFormInputs from './components/form/BudgetFormInputs';
 import FormListResults from './components/form/FormListResults';
@@ -40,8 +41,9 @@ function EasyCalculator() {
     }, [essentialExpenses, totalEssentialExpenses, nonEssentialExpenses, totalNonEssentialExpenses, savings, totalIncome])
 
     return (
-        <MainForm>
-            <h3 className = "app-title">Easy calculator</h3><br/>
+        <MainForm
+            formTitle = "Easy Calculator"
+        >
             <BudgetFormInputs
                 handleTotalIncome = {handleTotalIncomeChange}
 

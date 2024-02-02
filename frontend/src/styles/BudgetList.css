@@ -1,84 +1,123 @@
-.budget-div {
-   display: flex;
-   padding-top: 5%;
-   margin-left: 1%;
-   padding-left: 1%;
-   margin-right: 1%;
-   margin-top: 1%;
-   margin-bottom: 1%;
-   border-radius: 10px;
-   align-items: flex-start;
-   border: 1px solid #e0e0e0;
-   background-color: #d2c1f012 ;
-   box-shadow: 0 0 10px   #0173714a;
-  }
-
-  .data-div {
-   max-width: 100%;
-   padding-right: 2%;
-  }
-
-.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
-top:auto !important;
+/*First component container*/
+.trial-first-div {
+    margin-top: 5%;
 }
 
-
-  /* Menu bar @media (min-width: 1536px) */
-.css-19r6kue-MuiContainer-root {
-    max-width: none !important;
+.full-budgets-div {
+    display: flex;
+    flex-direction: row;
 }
 
-/*Budget info*/
-
-
- .css-ptkaw2-MuiDataGrid-root {
-    border: none !important;
- }
-
- .income-icon {
-    background-color: #04d979 !important;
- }
-
- .essential-icon {
-    background-color: #d63384 !important;
- }
-
-.non-essential-icon {
-    background-color: #ffc107 !important;
+/*Table styling*/
+.table-area-div {
+    display: flex;
+    padding-top: 5%;
+    margin-left: 1%;
+    padding-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;
+    padding-bottom: 3%;
+    border-radius: 10px;
+    align-items: flex-start;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    background-color: #d2c1f012 ;
+    box-shadow: 0 0 10px   #0173714a;
+    position: absolute;
+    height: 780px;
 }
 
-.arrow-icon {
-    background-color: #1976d2 !important;
+table {
+    border-collapse: collapse; 
+    border-spacing: 0 1px;
+    border-radius: 10px;
+    table-layout: fixed;
+    width: 20%;
+    margin-left: 1%;
+}
+
+.date-from-col {
+    width: 20%;
+}
+
+.date-to-col {
+    width: 18%;
+}
+
+.budget-row {
+    border-top: 1px solid rgba(224, 224, 224, 1);
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    background-color: #d2c1f012;
+}
+
+th, td {
+    width: 100%;
+    padding: 7px;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+}
+
+.see-more {
+    width: 10%;
+    text-align: center;
+}
+
+.see-more-link {
+    text-decoration: none;
+    color: #1976d2;
+    font-weight: 600;
+    font-size:x-large;
+    padding: 7px;
+    border: none;
     cursor: pointer;
-}
-
-.savings-icon {
-   background-color: #6f42c1 !important;
-}
-
-/*edit button link*/
-.edit-button {
-   margin-right: 1%;
-   margin-left: 5%;
-}
-
-.last-list-item {
-   margin-bottom: 7%;
-}
-
-/*Divider*/
-.css-9mgopn-MuiDivider-root {
-   border-color: black !important;
-}
-
-/*Expenses lists containers*/
-.css-1r5wa48-MuiList-root  {
-   margin-top: 0.6% !important;
+    width: 40px;
+    height: 40px;
 }
 
 .clicked {
-   border-left: 5px solid #3f8be2!important;
-   background-color: rgba(25, 118, 210, 0.08);
+    border-left: 5px solid #3f8be2!important;
+    background-color: rgba(25, 118, 210, 0.08);
+ }
+
+/*Pagination*/
+.budget-pagination-div {
+    margin-top: 1%;
+    margin-left: 2%;
+    position: absolute;
+    bottom: 3%;
+}
+
+/*Header*/
+.header-div {
+   display: flex;
+   flex-direction: column;
+   margin-left: 1.5%;
+}
+
+/*Add budget link*/
+.add-budget-link {
+    text-decoration: none;
+    margin-left: 1%;
+    margin-top: 1%;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    color: #3344DD;
+ }
+ 
+ .add-first-budget-link {
+    text-decoration: none;
+    margin-left: 1%;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    color: #3344DD;
+ }
+.add-budget-link:hover,
+.add-first-budget-link:hover {
+   color: #017371;
 }
 
 /*Bar chart*/
@@ -87,34 +126,15 @@ top:auto !important;
    width: 750px;
 }
 
-/*Title and add budget div*/
-.header-div {
-   display: flex;
-   margin-top: 2%;
-   flex-direction: column;
-   margin-left: 1.5%;
-}
+/*Delete budget modal*/
+.budget-modal-buttons-div {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .date-delete-modal {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  
 
-.add-budget-link {
-   text-decoration: none;
-   margin-left: 1%;
-   margin-top: 1%;
-   font-weight: 600;
-   font-size: 1.2rem;
-   letter-spacing: 1.5px;
-   color: #3344DD;
-}
-
-.add-first-budget-link {
-   text-decoration: none;
-   margin-left: 1%;
-   font-weight: 600;
-   font-size: 1.2rem;
-   letter-spacing: 1.5px;
-   color: #3344DD;
-}
-
-.add-budget-link:hover,
-.add-first-budget-link:hover {
-   color: #017371;
-}

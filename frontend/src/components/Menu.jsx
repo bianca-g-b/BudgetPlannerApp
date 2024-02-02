@@ -50,11 +50,11 @@ export default function MenuAppBar() {
 }
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="absolute">
+      <Container maxWidth="xxl">
         <Toolbar disableGutters>
           <Box 
-          sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}
+          sx={{ flexGrow: 1, display: 'flex', maxWidth: '100%', justifyContent: 'flex-start' }}
           >
             {isAuthenticated && <Button
             component={Link}

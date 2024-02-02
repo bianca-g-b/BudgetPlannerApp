@@ -1,3 +1,4 @@
+import "../../styles/Forms.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +16,6 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 function UpdateBudget() {
-    // window.location.reload();
     const budgetById = useSelector((state)=> state.budget.budgetById);
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);

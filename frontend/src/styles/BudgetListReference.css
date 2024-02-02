@@ -1,0 +1,120 @@
+/* .budget-div {
+   display: flex;
+   padding-top: 5%;
+   margin-left: 1%;
+   padding-left: 1%;
+   margin-right: 1%;
+   margin-top: 1%;
+   margin-bottom: 1%;
+   border-radius: 10px;
+   align-items: flex-start;
+   border: 1px solid #e0e0e0;
+   background-color: #d2c1f012 ;
+   box-shadow: 0 0 10px   #0173714a;
+  }
+
+  .data-div {
+   max-width: 100%;
+   padding-right: 2%;
+  }
+
+.css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
+top:auto !important;
+} */
+
+
+  /* Menu bar @media (min-width: 1536px) */
+/* .css-19r6kue-MuiContainer-root {
+    max-width: none !important;
+} */
+
+/*Budget info*/
+
+/* 
+ .css-ptkaw2-MuiDataGrid-root {
+    border: none !important;
+ }
+
+ .income-icon {
+    background-color: #04d979 !important;
+ }
+
+ .essential-icon {
+    background-color: #d63384 !important;
+ }
+
+.non-essential-icon {
+    background-color: #ffc107 !important;
+}
+
+.arrow-icon {
+    background-color: #1976d2 !important;
+    cursor: pointer;
+}
+
+.savings-icon {
+   background-color: #6f42c1 !important;
+} */
+
+/*edit button link*/
+/* .edit-button {
+   margin-right: 1%;
+   margin-left: 5%;
+}
+
+.last-list-item {
+   margin-bottom: 7%;
+} */
+
+/*Divider*/
+/* .css-9mgopn-MuiDivider-root {
+   border-color: black !important;
+} */
+
+/*Expenses lists containers*/
+/* .css-1r5wa48-MuiList-root  {
+   margin-top: 0.6% !important;
+} */
+
+/* .clicked {
+   border-left: 5px solid #3f8be2!important;
+   background-color: rgba(25, 118, 210, 0.08);
+} */
+
+/*Bar chart*/
+/* .bar-div {
+   height: 550px;
+   width: 750px;
+} */
+
+/*Title and add budget div*/
+/* .header-div {
+   display: flex;
+   margin-top: 2%;
+   flex-direction: column;
+   margin-left: 1.5%;
+}
+
+.add-budget-link {
+   text-decoration: none;
+   margin-left: 1%;
+   margin-top: 1%;
+   font-weight: 600;
+   font-size: 1.2rem;
+   letter-spacing: 1.5px;
+   color: #3344DD;
+}
+
+.add-first-budget-link {
+   text-decoration: none;
+   margin-left: 1%;
+   font-weight: 600;
+   font-size: 1.2rem;
+   letter-spacing: 1.5px;
+   color: #3344DD;
+}
+
+.add-budget-link:hover,
+.add-first-budget-link:hover {
+   color: #017371;
+} */

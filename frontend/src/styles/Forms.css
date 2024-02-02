@@ -1,0 +1,30 @@
+.form-main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#f8f8ff;
+    flex-direction: column;
+    margin-top: 4.2%;
+  }
+  
+  .full-form-area {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 45%;
+    border: 1px solid #e0e0e0;
+    background-color: #d2c1f012 ;
+    box-shadow: 0 0 10px   #0173714a;  
+  }
+  
+  .form-header-container {
+    display: flex;
+    width: 45%;
+    margin-top: 3%;
+  }

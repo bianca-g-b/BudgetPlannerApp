@@ -13,23 +13,26 @@ import EmailForm from "./components/auth/authChildren/EmailForm.jsx";
 import ChangePassword from './components/auth/authChildren/ChangePassword.jsx';
 import MainChart from './components/MainChart.jsx';
 import About from './components/About.jsx';
-import TrialList from './components/budget/TrialList.jsx';
 import BudgetById from './components/budget/budgetChildren/BudgetById.jsx';
 
 function App() {
 
   return (
-    <>
+    <div className="app">
       <MenuAppBar />
       <Routes>
-      
-        <Route path="/dashboard" element={
+
+      <Route path="/dashboard" element={
           <PrivateRoute>
             <BudgetList />
-          </PrivateRoute>
-          } 
-        />
-
+          </PrivateRoute>}>
+            <Route 
+              path=":id"
+              element={
+                <BudgetById />}
+            />  
+        </Route>
+      
       <Route path="/chart" element={
         <PrivateRoute>
           <MainChart/>
@@ -57,19 +60,7 @@ function App() {
           </PrivateRoute>
           } 
         />
-
-        <Route path="/dashboard/trial" element={
-          <PrivateRoute>
-            <TrialList />
-          </PrivateRoute>}>
-            <Route 
-              path=":id"
-              element={
-                <BudgetById />}
-            />  
-        </Route>
-
-        
+    
         <Route path="/account" element={
           <PrivateRoute>
             <Account />
@@ -91,7 +82,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-   </>
+   </div>
   )
 }
 
