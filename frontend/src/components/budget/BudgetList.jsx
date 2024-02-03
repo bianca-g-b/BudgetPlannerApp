@@ -2,7 +2,7 @@ import "../../styles/BudgetList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {getBudgetList, getBudgetById, deleteBudget} from "../../actions/budgetActions.js";
-import { setBudgetList, setBudgetById, setId, setClicked } from "../../redux/budgetSlice.js";
+import { setBudgetList, setBudgetById, setId, setClicked, setCurrentBudgets } from "../../redux/budgetSlice.js";
 import { NavLink, Outlet} from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -10,22 +10,23 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 
-function TrialList() {
+function BudgetList() {
     const dispatch = useDispatch();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const budgetList = useSelector((state) => state.budget.budgetList);
+    const currentBudgets = useSelector((state) => state.budget.currentBudgets);
     const budget = useSelector((state)=> state.budget.budgetById);
     const id = useSelector((state)=> state.budget.id);
     const clicked = useSelector((state)=> state.budget.clicked);
     const [isClicked, setIsClicked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
-    const [currentBudgets, setCurrentBudgets] = useState(budgetList.slice(0, 10));
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
     
 
     console.log(budgetList, "testing state budgetlist");
+    console.log(currentBudgets, "testing state currentbudgets");
 
     // fetch data
     useEffect(() => {
@@ -33,8 +34,9 @@ function TrialList() {
             dispatch(getBudgetList(csrfToken))
                 .then((action) => {
                     if (getBudgetList.fulfilled.match(action)) {
-                        console.log(action.payload, "action payload");
+                        // console.log(action.payload, "action payload");
                         dispatch(setBudgetList(action.payload));
+                        dispatch(setCurrentBudgets(action.payload.slice(0, 10)));
                     }
                 })               
         }
@@ -47,9 +49,9 @@ function TrialList() {
         dispatch(getBudgetById(id))
             .then((action)=> {
                 if (getBudgetById.fulfilled.match(action)) {
-                    console.log(action.payload, "budget by id - action");
+                    // console.log(action.payload, "budget by id - action");
                     dispatch(setBudgetById(action.payload))
-                    console.log(budget, "testing state budgetbyid");
+                    // console.log(budget, "testing state budgetbyid");
                     dispatch(setClicked(id));
                 }
             })
@@ -104,7 +106,7 @@ function TrialList() {
     function handlePageChange(value) {
         const firstIndex = (value-1) * 10;
         const lastIndex = firstIndex + 10;
-        setCurrentBudgets(budgetList.slice(firstIndex, lastIndex));
+        dispatch(setCurrentBudgets(budgetList.slice(firstIndex, lastIndex)));
     }
 
 
@@ -127,7 +129,7 @@ function TrialList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentBudgets.map((budgetItem, index) => {
+                        {currentBudgets && currentBudgets.length > 0 && currentBudgets.map((budgetItem, index) => {
                             return (
                                 <tr key={index} 
                                     className={(budgetItem.id===clicked && isClicked) ? "clicked budget-row" : "budget-row"}>
@@ -144,7 +146,7 @@ function TrialList() {
                         })}
                     </tbody>
                 </table>
-                {budgetList.length > 5 && <div className="budget-pagination-div">
+                {budgetList.length > 10 && <div className="budget-pagination-div">
                     <Stack spacing={2}>
                         <Pagination 
                             count={totalPages}
@@ -183,4 +185,4 @@ function TrialList() {
     )
 }
 
-export default TrialList;
+export default BudgetList;
