@@ -47,10 +47,18 @@
 }
 
 .email-input {
-    border: 1px solid #b4b4b4;
+    border: 1px solid #0173714a;
     border-radius: 7px;
     padding: 2%;
     margin-top: 1%;
+}
+
+.email-input:focus-visible {
+    outline: none;
+}
+
+.email-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(32 201 151 / 9%);
 }
 
 .form-information,
