@@ -35,59 +35,83 @@ function BudgetFormInputs({
     otherNonEssentialValue,
     unsecuredValue,
 }) {
+
+    const handleInputFocus =  (e) => {
+        e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
+    }
+
+    const handleInputBlur = (e) => {
+        e.target.style.boxShadow = 'none';
+    }
+
     return (
-            <div className="budget-form-inputs-main-container">
-            <Form.Label htmlFor="basic-url"
-            >Total income:</Form.Label>
+        <div className="budget-form-inputs-main-container">
+
+            <Form.Label 
+                htmlFor="basic-url">Total income:
+            </Form.Label>
             <InputGroup className="mb-3">
                 <InputGroup.Text
+                    style = {{border: '1px solid #0173714a'}}
                     className="income-input"
                 >£</InputGroup.Text>
                 <Form.Control aria-label="Amount"
-                inputMode='decimal'
-                placeholder={placeholder}
-                type='number'
-                step={0.01}
-                onChange={handleTotalIncome}
-                defaultValue={incomeValue}
+                    inputMode='decimal'
+                    placeholder={placeholder}
+                    type='number'
+                    step={0.01}
+                    onChange={handleTotalIncome}
+                    defaultValue={incomeValue}
+                    style = {{border: '1px solid #0173714a'}}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                  />
             </InputGroup>
 
             <div className="label-div">
                     <Form.Label 
-                        style={{fontWeight: "bold"}}
+                        style={{ color: '#017371', textTransform: 'uppercase'}}
                         htmlFor="basic-url">Essential Expenses</Form.Label>
             </div>
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Housing(rent, mortgage, etc):</Form.Label>
+                        <Form.Label htmlFor="basic-url">Housing (rent, mortgage, etc.)</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
+                                style = {{border: '1px solid #0173714a'}}
                                 className="essential-input"
                             >£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01}
-                            onChange = {handleHousing}
-                            defaultValue={housingValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01}
+                                onChange = {handleHousing}
+                                defaultValue={housingValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Utilities(electricity, water, etc):</Form.Label>
+                        <Form.Label htmlFor="basic-url">Utilities (electricity, water, etc.)</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text className="essential-input">£</InputGroup.Text>
+                            <InputGroup.Text 
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleUtilities}
-                            defaultValue={utilitiesValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleUtilities}
+                                defaultValue={utilitiesValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
@@ -95,66 +119,41 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Food and other groceries:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Food and other groceries</Form.Label>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text className="essential-input">£</InputGroup.Text>
+                            <InputGroup.Text 
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Food"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01}
-                            onChange = {handleFood} 
-                            defaultValue={foodValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01}
+                                onChange = {handleFood} 
+                                defaultValue={foodValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Transportation(gas, bus, etc):</Form.Label>
+                        <Form.Label htmlFor="basic-url">Transportation (petrol, bus fare, etc.)</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01}
-                            onChange = {handleTransport}
-                            defaultValue={transportValue}
-                            />
-                        </InputGroup>
-                    </div>
-                </div>
-
-                <div className="expenses-group-div">
-                    <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Household goods and services:</Form.Label>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text
-                            className="essential-input">£</InputGroup.Text>
-                            <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleHousehold}
-                            defaultValue={householdValue}
-                            />
-                        </InputGroup>
-                    </div>
-
-                    <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Children related(expenses, etc):</Form.Label>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text
-                            className="essential-input">£</InputGroup.Text>
-                            <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleChildcare}
-                            defaultValue={childcareValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01}
+                                onChange = {handleTransport}
+                                defaultValue={transportValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
@@ -162,33 +161,83 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Cleaning and toiletries:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Household goods and services</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleCleaning}
-                            defaultValue={cleaningValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleHousehold}
+                                defaultValue={householdValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Other essential expenses:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Chilcare</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleOtherEssential}
-                            defaultValue={otherEssentialValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleChildcare}
+                                defaultValue={childcareValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
+                            />
+                        </InputGroup>
+                    </div>
+                </div>
+
+                <div className="expenses-group-div">
+                    <div className="expenses-input-div">
+                        <Form.Label htmlFor="basic-url">Cleaning and toiletries</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
+                            <Form.Control aria-label="Amount"
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleCleaning}
+                                defaultValue={cleaningValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
+                            />
+                        </InputGroup>
+                    </div>
+
+                    <div className="expenses-input-div">
+                        <Form.Label htmlFor="basic-url">Other essential expenses</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text
+                                style = {{border: '1px solid #0173714a'}}
+                                className="essential-input">£</InputGroup.Text>
+                            <Form.Control aria-label="Amount"
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleOtherEssential}
+                                defaultValue={otherEssentialValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
@@ -196,73 +245,47 @@ function BudgetFormInputs({
 
                 <div className="label-div">
                     <Form.Label 
-                        style={{fontWeight: "bold"}}
+                        style={{color: '#017371', textTransform: 'uppercase'}}
                         htmlFor="basic-url">Non-Essential Expenses</Form.Label>
                 </div>
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Luxury and gifts:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Luxury and gifts</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="non-essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleLuxury}
-                            defaultValue={luxuryValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleLuxury}
+                                defaultValue={luxuryValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Leisure and entertainment:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Leisure and entertainment</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="non-essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleLeisure}
-                            defaultValue={leisureValue}
-                            />
-                        </InputGroup>
-                    </div>
-                </div>
-
-                <div className="expenses-group-div">
-                    <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Holidays expenses:</Form.Label>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
-                            <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleHolidays}
-                            defaultValue={holidaysValue}
-                            />
-                        </InputGroup>
-                    </div>
-
-                    <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Charitable contributions:</Form.Label>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
-                            <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleCharity}
-                            defaultValue={charityValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleLeisure}
+                                defaultValue={leisureValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
@@ -270,33 +293,82 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Other non-essential expenses:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Holidays expenses</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="non-essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleOtherNonEssential}
-                            defaultValue={otherNonEssentialValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleHolidays}
+                                defaultValue={holidaysValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Unsecured debt:</Form.Label>
+                        <Form.Label htmlFor="basic-url">Charitable contributions</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
-                            className="non-essential-input">£</InputGroup.Text>
+                                style = {{border: '1px solid #0173714a'}}
+                                className="non-essential-input">£</InputGroup.Text>
                             <Form.Control aria-label="Amount"
-                            inputMode='decimal'
-                            placeholder={placeholder}
-                            type='number'
-                            step={0.01} 
-                            onChange = {handleUnsecured}
-                            defaultValue={unsecuredValue}
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleCharity}
+                                defaultValue={charityValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
+                            />
+                        </InputGroup>
+                    </div>
+                </div>
+
+                <div className="expenses-group-div">
+                    <div className="expenses-input-div">
+                        <Form.Label htmlFor="basic-url">Other non-essential expenses</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text
+                                className="non-essential-input">£</InputGroup.Text>
+                            <Form.Control aria-label="Amount"
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleOtherNonEssential}
+                                defaultValue={otherNonEssentialValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
+                            />
+                        </InputGroup>
+                    </div>
+
+                    <div className="expenses-input-div">
+                        <Form.Label htmlFor="basic-url">Unsecured debt</Form.Label>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text
+                                style = {{border: '1px solid #0173714a'}}
+                                className="non-essential-input">£</InputGroup.Text>
+                            <Form.Control aria-label="Amount"
+                                inputMode='decimal'
+                                placeholder={placeholder}
+                                type='number'
+                                step={0.01} 
+                                onChange = {handleUnsecured}
+                                defaultValue={unsecuredValue}
+                                style = {{border: '1px solid #0173714a'}}
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
                             />
                         </InputGroup>
                     </div>

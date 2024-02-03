@@ -7,7 +7,7 @@ function MainForm(
     return (
         <div className="form-main-container">
         <div className="form-header-container">
-            <h1 className="form-header">{formTitle}</h1>
+            <p className="form-header">{formTitle}</p>
         </div>
         <Form
             className = "full-form-area"

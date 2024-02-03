@@ -9,18 +9,32 @@ function DateInputs({
     dateFromValue,
     dateToValue,
 }) {
+
+    const handleInputFocus =  (e) => {
+        e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
+    }
+
+    const handleInputBlur = (e) => {
+        e.target.style.boxShadow = 'none';
+    }
+
+
     return(
         <div className="date-inputs-container">
             <div className="date-from-inputs-container">
                 <Form.Label htmlFor="basic-url">Date From:</Form.Label>
                 <InputGroup className="mb-3">
                     <InputGroup.Text
+                        style = {{border: '1px solid #0173714a'}}
                         className="date-input"
                     >&#x1F4C5;</InputGroup.Text>
                     <Form.Control aria-label="Date"
                         type='date'
                         onChange = {handleDateFrom}
                         defaultValue = {dateFromValue}
+                        style = {{border: '1px solid #0173714a'}}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                     />
                 </InputGroup>
             </div>
@@ -29,6 +43,7 @@ function DateInputs({
                 <Form.Label htmlFor="basic-url">Date To:</Form.Label>
                 <InputGroup className="mb-3">
                     <InputGroup.Text
+                        style = {{border: '1px solid #0173714a'}}
                         className="date-input"
                     >&#x1F4C5;</InputGroup.Text>
                     <Form.Control aria-label="Date"
@@ -36,6 +51,9 @@ function DateInputs({
                         type='date'
                         onChange = {handleDateTo}
                         defaultValue = {dateToValue}
+                        style = {{border: '1px solid #0173714a'}}
+                        onFocus={handleInputFocus}
+                        onBlur={handleInputBlur}
                     />
                 </InputGroup>
             </div>
