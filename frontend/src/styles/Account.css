@@ -3,6 +3,11 @@
   margin-top: 7.6%;
 }
 
+.account-header {
+  text-transform: uppercase;
+  font-size: xx-large;
+}
+
 .main-account-container {
   display: flex;
   /* flex-direction: row; */

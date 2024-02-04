@@ -112,8 +112,8 @@ function BudgetList() {
 
     return (
         <div className="trial-first-div">
-            {budgetList.length >0 && <div className="header-div">
-                 <h1>Budget List</h1>
+            {budgetList.length > 0 && <div className="header-div">
+                 <p className="budgets-page-header">Budget List</p>
                 <NavLink 
                     className="add-budget-link"
                     to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink> 
@@ -123,9 +123,9 @@ function BudgetList() {
                 <table>
                     <thead>
                         <tr>
-                            <th className="date-from-col">Date from</th>
-                            <th className="date-to-col">Date to</th>
-                            <th className="see-more">See more</th>
+                            <th className="date-from-col table-col-title">Date from</th>
+                            <th className="date-to-col  table-col-title">Date to</th>
+                            <th className="see-more  table-col-title">More</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -36,6 +36,13 @@ table {
     margin-left: 1%;
 }
 
+.table-col-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgb(1, 115, 113);
+    font-size: medium;
+}
+
 .date-from-col {
     width: 20%;
 }
@@ -45,9 +52,8 @@ table {
 }
 
 .budget-row {
-    border-top: 1px solid rgba(224, 224, 224, 1);
-    border-bottom: 1px solid rgba(224, 224, 224, 1);
-    background-color: #d2c1f012;
+    border-bottom: 1px solid rgba(1, 115, 113, 0.144);
+    border-top: 1px solid #1976d2ad;
 }
 
 th, td {
@@ -55,7 +61,7 @@ th, td {
     padding: 7px;
     font-weight: 400;
     font-size: 0.875rem;
-    line-height: 1.43;
+    line-height: 1.44;
     letter-spacing: 0.01071em;
 }
 
@@ -78,7 +84,7 @@ th, td {
 
 .clicked {
     border-left: 5px solid #3f8be2!important;
-    background-color: rgba(25, 118, 210, 0.08);
+    background-color: rgba(1, 115, 113, 0.059);
  }
 
 /*Pagination*/
@@ -96,13 +102,19 @@ th, td {
    margin-left: 1.5%;
 }
 
+.budgets-page-header {
+    text-transform: uppercase;
+    font-size: xx-large;
+}
+
 /*Add budget link*/
 .add-budget-link {
     text-decoration: none;
+    text-transform: uppercase;
     margin-left: 1%;
     margin-top: 1%;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size:larger;
     letter-spacing: 1.5px;
     color: #3344DD;
  }
@@ -111,7 +123,7 @@ th, td {
     text-decoration: none;
     margin-left: 1%;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: larger;
     letter-spacing: 1.5px;
     color: #3344DD;
  }

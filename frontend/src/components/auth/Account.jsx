@@ -54,7 +54,7 @@ function Account() {
     return (
         <div className="full-account-area">
             <div className="account-header-container">
-                <h1 className="account-header">Account</h1>
+                <p className="account-header">Account</p>
             </div>
             <div className = "main-account-container">
                 <div className="account-container">    

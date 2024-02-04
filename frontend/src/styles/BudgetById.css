@@ -2,26 +2,99 @@
 .budget-lists {
   display: flex;
   flex-direction: row;
-  /* margin-top: 20px; */
   margin-bottom: 20px;
   margin-left: 25%;
   margin-top: 5.6%;
+  width: 100%;
 }
 
 /*Expenses lists*/
-.expenses-lists {
+.budgets-edit-delete-div {
   display: flex;
-  flex-direction: row;
-  width: 60%;
+  flex-direction: column;
+  width: 100%;
 }
 
+.expenses-totals-lists {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3%;
+  width: 100%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid rgba(1,115,113,0.5);
+}
+
+.expenses-only-div {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.expenses-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+/* Totals list*/
+.totals-list-div {
+  display: flex;
+  width: 40%;
+  justify-content: center;
+}
 
 /*Bar chart*/
 .bar-div {
-  height: 550px;
-  width: 750px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 87%;
+  margin-right: 0.5%;
+  margin-left: 1%;
+  margin-bottom: 1%;
 }
 
+/*Edit and delete button links*/
+.edit-delete-links-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 1%;
+  padding-top: 4%;
+  margin-bottom: 2%;
+  border-top: 1px solid rgba(1,115,113,0.5);
+}
+
+/*Edit link and delete button*/
+.edit-budget-link,
+.delete-budget-button {
+  z-index: 2;
+  font: inherit;
+  cursor: pointer;
+  letter-spacing: 1px;
+  word-spacing: normal;
+  text-transform: uppercase;
+  color: #3344DD;
+  font-size: medium;
+  font-weight: 600;
+}
+
+.edit-budget-link:hover,
+.delete-budget-button:hover {
+  color: #017371;
+}
+
+.delete-budget-button {
+  background: none;
+  border: none;
+}
+
+.edit-budget-link {
+  text-decoration: none;
+  padding: 0;
+}
 
   /*Media queries*/
   @media (max-width: 2250) {

@@ -7,7 +7,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import BedroomParentOutlinedIcon from '@mui/icons-material/BedroomParentOutlined';
 import ElectricBoltOutlinedIcon from '@mui/icons-material/ElectricBoltOutlined';
@@ -25,7 +24,7 @@ import ShopIcon from '@mui/icons-material/Shop';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { Button, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
 import { useOutletContext } from "react-router-dom";
 
@@ -34,33 +33,59 @@ function BudgetById() {
     const {budgetbyid, handleDeleteBudget, isModalOpen, openModal, closeModal}= useOutletContext();
     
     const listStyle = {
-        maxWidth: 360,
-        padding: 1,
-        fontSizeAdjust: 0.5,
+        padding: 0,
+        // fontSizeAdjust: 0.5,
     }
 
-    const dividerStyle = {
-        borderColor: 'gray',
+    const listTypeStyle = {
+        borderBottom: '1px solid rgba(1,115,113,0.5)',
+        borderTop: '1px solid rgba(1,115,113,0.5)',
+        textTransform: 'uppercase',
+        color: 'rgb(1, 115, 113)',
+        textAlign: 'center',
+        marginTop: '2px',
+        marginBottom: '2px',
+        paddingTop: '3px',
     }
 
     const essentialIconStyle = {
-        backgroundColor: '#ec3e94',
+        color: '#ec3e94',
+        backgroundColor: 'white',
+        border: '1px solid #ec3e94',
+        width: '35px',
+        height: '35px',
     }
 
     const nonEssentialIconStyle = {
-        backgroundColor: '#ffb407',
+        color: '#fd7e14',
+        backgroundColor: 'white',
+        border: '1px solid #fd7e14',
+        width: '35px',
+        height: '35px',
     }
 
     const incomeIconStyle = {
-        backgroundColor: '#41c961',
+        color: '#36a67e',
+        backgroundColor: 'white',
+        border: '1px solid #36a67e',
+        width: '35px',
+        height: '35px',
     }
 
     const savingsIconStyle = {
-        backgroundColor: '#00b2d5',
+        color: '#2394d0',
+        backgroundColor: 'white',
+        border: '1px solid #2394d0',
+        width: '35px',
+        height: '35px',
     }
 
     const totalSpendingIconStyle = {
-        backgroundColor: '#f54d5d',
+        color: '#dc3545',
+        backgroundColor: 'white',
+        border: '1px solid #dc3545',
+        width: '35px',
+        height: '35px',
     }
 
     const fontTheme = createTheme({
@@ -69,279 +94,305 @@ function BudgetById() {
         }
     })
 
+    const listItemStyle = {
+        paddingBottom: '1px',
+        paddingTop: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+    }
+
     return (
         <div className="budget-lists">
         <ThemeProvider theme={fontTheme}>
-            <div className="expenses-lists">
-                {budgetbyid && 
-                <List 
-                    sx={listStyle}
-                    className="single-budget-div">
-                    <ListItemText
-                        primary="Essential Expenses" />
-                    <Divider 
-                        sx= {dividerStyle}
-                    />
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <BedroomParentOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Housing" secondary={`£ ${budgetbyid.housing}`} >
-                        </ListItemText>
-                    </ListItem>
+            <div className = "budgets-edit-delete-div">
+                <div className="expenses-totals-lists">
+                    <div className="expenses-only-div">
+                        {budgetbyid && 
+                        <List 
+                            sx={listStyle}
+                            className="single-budget-div">
+                            <ListItemText
+                                sx= {listTypeStyle}
+                                primary="Essential Expenses" />
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <ElectricBoltOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <BedroomParentOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Housing" secondary={`£ ${budgetbyid.housing}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <AddShoppingCartOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <ElectricBoltOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <DirectionsRailwayFilledOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <div className="expenses-group">    
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <AddShoppingCartOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <HandymanOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <DirectionsRailwayFilledOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <ChildCareOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <HandymanOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <LocalLaundryServiceOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <ChildCareOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <ShopOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} >
-                        </ListItemText>
-                    </ListItem>
-                </List>}
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <LocalLaundryServiceOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                {budgetbyid && 
-                <List 
-                    sx={listStyle}
-                    className="single-budget-div"> 
-                    <ListItemText primary="Non Essential Expenses" />
-                    <Divider 
-                        sx= {dividerStyle}
-                    />
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <DiamondIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={essentialIconStyle}
+                                            className="essential-icon">
+                                            <ShopOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
+                        </List>}
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <SnowboardingIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} >
-                        </ListItemText>
-                    </ListItem>
+                        {budgetbyid && 
+                        <List 
+                            sx={listStyle}
+                            className="single-budget-div"> 
+                            <ListItemText 
+                                sx= {listTypeStyle}
+                                primary="Non Essential Expenses" />
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <BeachAccessIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <DiamondIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <VolunteerActivismOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <SnowboardingIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
 
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <BeachAccessIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <ShopIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <VolunteerActivismOutlinedIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <CreditCardIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText 
-                            primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} >
-                        </ListItemText>
-                    </ListItem>
-                </List>}
+                            <div className="expenses-group">
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <ShopIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} >
+                                    </ListItemText>
+                                </ListItem>
 
-            {budgetbyid && 
-                <List 
-                    sx={listStyle}
-                    >
-                    <ListItemText primary="Budget Breakdown" />
-                    <Divider 
-                        sx= {dividerStyle}
-                    />
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={incomeIconStyle}
-                                className="income-icon">
-                                <AccountBalanceWalletOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total income" secondary={`£ ${budgetbyid.total_income}`} >
-                        </ListItemText>
-                    </ListItem>
+                                <ListItem sx={listItemStyle}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            sx={nonEssentialIconStyle}
+                                            className="non-essential-icon">
+                                            <CreditCardIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText 
+                                        primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} >
+                                    </ListItemText>
+                                </ListItem>
+                            </div>
+                    </List>}
+                </div>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={essentialIconStyle}
-                                className="essential-icon">
-                                <ShopOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total essential spending" secondary={`£ ${budgetbyid.total_essential}`} >
-                        </ListItemText>
-                    </ListItem>
+                <div className="totals-list-div">            
+                    {budgetbyid && 
+                        <List 
+                            sx={listStyle}
+                            >
+                            <ListItemText 
+                                sx={listTypeStyle}
+                                primary="Totals" />
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={nonEssentialIconStyle}
-                                className="non-essential-icon">
-                                <ShopIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total non-essential spending" secondary={`£ ${budgetbyid.total_non_essential}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar 
+                                        sx={incomeIconStyle}
+                                        className="income-icon">
+                                        <AccountBalanceWalletOutlinedIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="Income" secondary={`£ ${budgetbyid.total_income}`} >
+                                </ListItemText>
+                            </ListItem>
 
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={totalSpendingIconStyle}
-                                className="savings-icon">
-                                <CurrencyPoundOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total spending" secondary={`£ ${budgetbyid.total_expenses}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar 
+                                        sx={essentialIconStyle}
+                                        className="essential-icon">
+                                        <ShopOutlinedIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="Essentials" secondary={`£ ${budgetbyid.total_essential}`} >
+                                </ListItemText>
+                            </ListItem>
 
-                    <ListItem className="last-list-item">
-                        <ListItemAvatar>
-                            <Avatar 
-                                sx={savingsIconStyle}
-                                className="savings-icon">
-                                <CurrencyPoundOutlinedIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Total savings" secondary={`£ ${budgetbyid.total_savings}`} >
-                        </ListItemText>
-                    </ListItem>
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar 
+                                        sx={nonEssentialIconStyle}
+                                        className="non-essential-icon">
+                                        <ShopIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} >
+                                </ListItemText>
+                            </ListItem>
 
+                            <ListItem>
+                                <ListItemAvatar>
+                                    <Avatar 
+                                        sx={totalSpendingIconStyle}
+                                        className="savings-icon">
+                                        <CurrencyPoundOutlinedIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="All expenses" secondary={`£ ${budgetbyid.total_expenses}`} >
+                                </ListItemText>
+                            </ListItem>
+
+                            <ListItem className="last-list-item">
+                                <ListItemAvatar>
+                                    <Avatar 
+                                        sx={savingsIconStyle}
+                                        className="savings-icon">
+                                        <CurrencyPoundOutlinedIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} >
+                                </ListItemText>
+                            </ListItem>
+                        </List>}
+                    </div>
+                </div>
+
+                <div className="edit-delete-links-div">
                     <NavLink
-                        className="edit-button"
+                        className="edit-budget-link"
                         to={`/dashboard/update/${budgetbyid.id}`}
-                        ><Button
-                            variant="contained"
-                        >Edit</Button>
+                        >Edit this budget &#x21F1;
                     </NavLink>
-                    <Button
-                        variant="contained"
+
+                    <button
                         onClick={openModal}
-                        className="delete-button">Delete
-                    </Button>
+                        className="delete-budget-button">Delete this budget &#x21F1;
+                    </button>
+
                     <DeleteModal 
                         isModalOpen={isModalOpen}
                         handleDelete={()=> handleDeleteBudget(budgetbyid.id)}
@@ -349,8 +400,7 @@ function BudgetById() {
                         dateFrom={budgetbyid.date_from}
                         dateTo={budgetbyid.date_to}
                     />
-
-                </List>}
+                </div>
             </div>
 
                 {budgetbyid && 
@@ -378,7 +428,7 @@ function BudgetById() {
 
                         series={[{
                             data: [
-                                parseFloat(budgetbyid.housing), parseFloat(budgetbyid.utility_bills), parseFloat(budgetbyid.food_drinks), parseFloat(budgetbyid.transport), parseFloat(budgetbyid.household_goods_services), parseFloat(budgetbyid.children_related_costs), parseFloat(budgetbyid.cleaning_toiletries), parseFloat(budgetbyid.other_essential_costs), parseFloat(budgetbyid.luxury_gifts), parseFloat(budgetbyid.leisure_entertainment), parseFloat(budgetbyid.holidays), parseFloat(budgetbyid.other_non_essential_costs), parseFloat(budgetbyid.unsecured_loans),
+                                parseFloat(budgetbyid.housing), parseFloat(budgetbyid.utility_bills), parseFloat(budgetbyid.food_drinks), parseFloat(budgetbyid.transport), parseFloat(budgetbyid.household_goods_services), parseFloat(budgetbyid.children_related_costs), parseFloat(budgetbyid.cleaning_toiletries), parseFloat(budgetbyid.other_essential_costs), parseFloat(budgetbyid.luxury_gifts), parseFloat(budgetbyid.leisure_entertainment), parseFloat(budgetbyid.holidays),parseFloat(budgetbyid.charity) ,parseFloat(budgetbyid.other_non_essential_costs), parseFloat(budgetbyid.unsecured_loans)
                             ],
                             label: 'All expenses (GBP)',
                         }]}
