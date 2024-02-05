@@ -36,7 +36,7 @@ function MainChart() {
         height:800,
         sx: {
           [`.${axisClasses.left} .${axisClasses.label}`]: {
-            transform: 'translate(-12px, 0)',
+            transform: 'translate(-12px, 0)',           
           },
             marginLeft: 3,
             marginRight: 3,
@@ -70,7 +70,6 @@ function MainChart() {
                 {budgetList.length > 0 && <BarChart
                     dataset={chartData}
                     xAxis={[{scaleType: 'band', dataKey: 'x'}]}
-                    
                     series={[
                         {dataKey: 'income', label: 'Income', valueFormatter},
                         {dataKey: 'essential', label: 'Essential Expenses', valueFormatter},

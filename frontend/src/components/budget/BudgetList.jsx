@@ -27,6 +27,7 @@ function BudgetList() {
 
     console.log(budgetList, "testing state budgetlist");
     console.log(currentBudgets, "testing state currentbudgets");
+    console.log(budget, "testing state budgetbyid");
 
     // fetch data
     useEffect(() => {
@@ -51,7 +52,6 @@ function BudgetList() {
                 if (getBudgetById.fulfilled.match(action)) {
                     // console.log(action.payload, "budget by id - action");
                     dispatch(setBudgetById(action.payload))
-                    // console.log(budget, "testing state budgetbyid");
                     dispatch(setClicked(id));
                 }
             })
@@ -156,7 +156,7 @@ function BudgetList() {
                     </Stack>
                 </div>}
                 </div>
-                <Outlet 
+                {budget && <Outlet 
                     context= {{
                         budgetbyid: budget,
                         handleDelete: () => handleDeleteBudget(budget.id),
@@ -164,7 +164,7 @@ function BudgetList() {
                         openModal: openModal,
                         closeModal: closeModal,
                     }}
-                    />
+                    />}
             
             </div>
 

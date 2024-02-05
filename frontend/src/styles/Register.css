@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 7%;
     width: 100%;
 }
 
@@ -12,7 +12,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 5%;
+    padding-top: 4%;
+    padding-right: 4.5%;
+    padding-left: 4.5%;
+    padding-bottom: 2%;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     background-color: #d2c1f012 ;
@@ -20,11 +23,11 @@
 }
 
 .register-form-title {
-    font-weight: 600;
+    font-weight: 400;
     color: #017371;
     text-transform: uppercase;
     font-size:xx-large;
-    margin-bottom: 10%;
+    margin-bottom: 12%;
 }
 
 .register-container {
@@ -58,19 +61,19 @@
 
 .login-redirect-message {
     margin-top: 5%;
-    font-weight: 600;
+    font-weight: 500;
     font-size: large;
 }
 
 .login-redirect-link {
     color: #017371;
     font-size: x-large;
-    font-weight: 600;
+    font-weight: 500;
     text-decoration: none;
 }
 
 .login-redirect-link:hover {
     color:#1668b9;
-    font-size:xx-large;
+    font-weight: 600;
 }
 
