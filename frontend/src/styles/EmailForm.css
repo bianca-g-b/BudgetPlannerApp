@@ -24,7 +24,7 @@
     margin-bottom: 7%;
     width: 120%;
     border-radius: 10px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .submit-container,
@@ -74,7 +74,7 @@
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
-    font-weight: 600;
+    font-weight: 400;
     color: #017371;
     text-transform: uppercase;
     font-size:larger;

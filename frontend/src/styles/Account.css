@@ -3,11 +3,19 @@
   margin-top: 7.6%;
 }
 
+/*Page header*/
+.account-header-container {
+  display: flex;
+  margin-bottom: 0.5%;
+  margin-left: 3%;
+}
+
 .account-header {
   text-transform: uppercase;
   font-size: xx-large;
 }
 
+/*Page content*/
 .main-account-container {
   display: flex;
   /* flex-direction: row; */
@@ -21,12 +29,8 @@
   border-radius: 10px;
 }
 
-.account-header-container {
-  display: flex;
-  margin-bottom: 0.5%;
-  margin-left: 3%;
-}
-
+/* Account options - left side */
+/*User info*/
 .account-container {
   display: flex;
   flex-direction: column;
@@ -40,6 +44,24 @@
   border-right: 2px solid #a7a3a33b;
 }
 
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+}
+
+.intro-title {
+  font-size: larger;
+  margin-bottom: 2%;
+}
+
+.intro-user, .intro-email {
+  font-size: large;
+  font-weight: 500;
+  margin-bottom: 2%;
+}
+
+/*Menu*/
 .account-options-container {
   display: flex;
   flex-direction: column;
@@ -49,22 +71,26 @@
 .account-title {
     padding: 5px 10px;
     font-size: 20px;
-    border-bottom: 1px solid #a7a3a3;
+    border-bottom: 1px solid #1976d2ad;
     color: #017371;
-    font-weight:600;
+    font-weight:400;
 }
 
 .account-link {
   padding: 5px 10px;
-  font-size: 18px;
-  border-bottom: 1px solid #a7a3a3;
+  font-size: large;
+  border-bottom: 1px solid rgba(1, 115, 113, 0.144);
   text-decoration: none;
   color: #000;
 }
 
 .account-link:hover {
-  background-color: #e6e1e171;
+  background-color: rgba(1, 115, 113, 0.03);
   cursor: pointer;
+}
+
+.account-link.active{
+  border-left: 5px solid #3f8be2;
 }
 
 .delete-account-button {
@@ -74,41 +100,27 @@
   border-top: none;
 }
 
-.account-link.active{
-    border-left: 5px solid #3f8be2;
-}
-
-.intro-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3%;
-}
-
-.intro-title {
-  font-size: 20px;
-  margin-bottom: 2%;
-}
-
-.intro-user, .intro-email {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 2%;
-}
-
-.intro-message {
-  font-size: 18px;
-  margin-bottom: 2%;
-}
-
+/* Delete account modal */
 #parent-modal-title {
   margin-bottom: 10%;
+  font-size: x-large;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #017371;
+  letter-spacing: 1px;
+}
+
+#parent-modal-description  {
+  text-align: justify;
 }
 
 #parent-modal-second-description {
   margin-top: 6%;
   margin-bottom: 9%;
+  text-align: justify;
 }
 
+/*Account page welcome messages - right side*/
 .account-description-container {
   display: flex;
   flex-direction: column;
@@ -125,10 +137,11 @@
   margin-bottom: 5%;
   margin-top: 15%;
   color: #017371;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .my-account-reference {
   color: #017371;
-  font-weight: 600;
+  font-weight: 400;
 }

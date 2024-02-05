@@ -12,7 +12,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '1px solid #e0e0e0',
   boxShadow: 24,
-  borderRadius: 3,
+  borderRadius: '10px',
   pt: 2,
   px: 4,
   pb: 3,
@@ -35,7 +35,7 @@ function DeleteModal({isModalOpen, handleDelete, closeModal, dateFrom, dateTo}) 
           <p id="parent-modal-description">
             Are you sure you want to permanently delete this budget?
           </p>
-          <p id="parent-modal-description"><span className="date-delete-modal">{`${dateFrom}`}</span> to <span className="date-delete-modal">{`${dateTo}`}</span></p>
+          <p id="parent-modal-description-dates"><span className="date-delete-modal">{`${dateFrom.split('/').join('-')}`}</span> to <span className="date-delete-modal">{`${dateTo.split('/').join('-')}`}</span></p>
           <div className="budget-modal-buttons-div">
             <Button 
                 sx = {{width: '40%'}}

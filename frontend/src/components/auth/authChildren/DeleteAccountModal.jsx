@@ -12,7 +12,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '1px solid #e0e0e0',
   boxShadow: 24,
-  borderRadius: 3,
+  borderRadius: '10px',
   pt: 2,
   px: 4,
   pb: 3,
@@ -35,7 +35,7 @@ function DeleteAccountModal({isModalOpen, handleDelete, closeModal}) {
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400, }}>
-          <h2 id="parent-modal-title">Delete Account</h2>
+          <p id="parent-modal-title">Delete Account</p>
           <p id="parent-modal-description">
             Are you sure you want to delete your account ?
           </p>

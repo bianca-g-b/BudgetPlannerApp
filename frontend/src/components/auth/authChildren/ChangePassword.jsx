@@ -88,10 +88,13 @@ function ChangePassword() {
                     </div>
 
                     <PasswordChecklist
+                        className="password-checklist"
                         rules={["minLength", "lowercase", "specialChar", "number", "match", ]}
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
+                        validTextColor= '#017371'
+                        invalidTextColor= '#017371'
                         messages = {{
                             minLength: "Password must be at least 8 characters long",
                             lowercase: "Password must contain at least one lowercase letter",
