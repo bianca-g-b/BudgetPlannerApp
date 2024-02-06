@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../actions/authActions';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -50,6 +50,7 @@ export default function MenuAppBar() {
 }
 
   return (
+    <>
     <AppBar position="absolute">
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
@@ -149,5 +150,8 @@ export default function MenuAppBar() {
         </Toolbar>
       </Container>
     </AppBar>
+
+    <Outlet />
+    </>
   );
   }

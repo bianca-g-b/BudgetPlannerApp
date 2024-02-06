@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 13%;
+    margin-top: 20%;
     width: 100%;
 }
 
@@ -73,7 +73,7 @@ input:-webkit-autofill {
 }
 
 .register-redirect-message {
-    margin-top: 5%;
+    margin-top: 15.7%;
     font-weight: 500;
     font-size: large;
 }
