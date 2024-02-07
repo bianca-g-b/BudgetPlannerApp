@@ -1,7 +1,7 @@
-import "./styles/Forms.css";
-import MainForm from './components/form/MainForm';
-import BudgetFormInputs from './components/form/BudgetFormInputs';
-import FormListResults from './components/form/FormListResults';
+import "../../styles/budget/Forms.css";
+import MainForm from "../form/MainForm";
+import BudgetFormInputs from "../form/BudgetFormInputs";
+import FormListResults from "../form/FormListResults";
 import { useState, useEffect } from 'react';
 
 function EasyCalculator() {

@@ -1,4 +1,4 @@
-import "../../../styles/EmailForm.css";
+import "../../../styles/auth/EmailForm.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateEmail, deleteEmail,fetchCSRFToken } from "../../../actions/authActions";

@@ -1,4 +1,4 @@
-import "../../../styles/ChangePassword.css";
+import "../../../styles/auth/ChangePassword.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";

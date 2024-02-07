@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import EasyCalculator from "./EasyCalculator.jsx";
+import EasyCalculator from "./components/budget/EasyCalculator.jsx";
 import BudgetList from './components/budget/BudgetList.jsx';
 import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
@@ -13,6 +13,8 @@ import MainChart from './components/MainChart.jsx';
 import About from './components/About.jsx';
 import BudgetById from './components/budget/budgetChildren/BudgetById.jsx';
 import MenuAppBar from './components/Menu.jsx';
+import PasswordReset from './components/auth/passwordReset/PasswordReset.jsx';
+import PasswordResetDone from './components/auth/passwordReset/PasswordResetDone.jsx';
 
 function Root() {
     return (
@@ -60,6 +62,8 @@ function Root() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<About />} />
+                <Route path="reset" element={<PasswordReset />} />
+                <Route path="reset/sent" element={<PasswordResetDone />} />
             
             </Route>
         

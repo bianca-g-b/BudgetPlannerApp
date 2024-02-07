@@ -1,4 +1,4 @@
-import "../../../styles/BudgetById.css";
+import "../../../styles/budget/BudgetById.css";
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import DeleteModal from "./Modal";

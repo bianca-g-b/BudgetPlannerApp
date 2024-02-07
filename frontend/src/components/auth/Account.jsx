@@ -1,4 +1,4 @@
-import "../../styles/Account.css";
+import "../../styles/auth/Account.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";

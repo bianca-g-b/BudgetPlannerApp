@@ -53,11 +53,22 @@
 .reg-username-input,
 .reg-email-input,
 .reg-password-input {
-    border: 1px solid #b4b4b4;
+    border: 1px solid #0173714a;
     border-radius: 7px;
     padding: 2%;
     margin-top: 1%;
-    box-shadow: 0 0 10px #1616164a;
+}
+
+.reg-username-input:focus-visible,
+.reg-email-input:focus-visible,
+.reg-password-input:focus-visible {
+    outline: none;
+}
+
+.reg-username-input:focus,
+.reg-email-input:focus,
+.reg-password-input:focus {
+    box-shadow: 0 0 0 0.25rem rgb(32 201 151 / 9%);
 }
 
 .reg-new-password-container {

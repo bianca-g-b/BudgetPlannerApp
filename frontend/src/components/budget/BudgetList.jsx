@@ -1,4 +1,4 @@
-import "../../styles/BudgetList.css";
+import "../../styles/budget/BudgetList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {getBudgetList, getBudgetById, deleteBudget} from "../../actions/budgetActions.js";

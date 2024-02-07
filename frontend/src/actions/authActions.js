@@ -209,3 +209,27 @@ export const deleteAccount = async (dispatch) => {
         return response;
     }
 }
+
+// password reset
+export const passwordReset = async (email) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    console.log(csrfToken, "csrf token in auth actions");
+    const response = await fetch(`${baseUrl}/auth/password_reset/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify({
+            email: email,
+        }),
+        credentials: "include",
+    });
+    if (response.ok) {
+        return response;
+    } else {
+        console.log("Password reset failed. Please try again.");
+        return response;
+    }
+}

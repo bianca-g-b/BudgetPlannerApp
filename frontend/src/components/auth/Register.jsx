@@ -1,4 +1,4 @@
-import "../../styles/Register.css";
+import "../../styles/auth/Register.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { registerUser, fetchCSRFToken } from "../../actions/authActions";

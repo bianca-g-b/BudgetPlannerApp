@@ -1,6 +1,6 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import EasyCalculator from "./EasyCalculator.jsx";
+import EasyCalculator from "./components/budget/EasyCalculator.jsx";
 import BudgetList from './components/budget/BudgetList.jsx';
 import Register from "./components/auth/Register.jsx";
 import Login from "./components/auth/Login.jsx";
@@ -15,6 +15,8 @@ import MainChart from './components/MainChart.jsx';
 import About from './components/About.jsx';
 import BudgetById from './components/budget/budgetChildren/BudgetById.jsx';
 import Root from './Root.jsx';
+import PasswordReset from './components/auth/passwordReset/PasswordReset.jsx';
+import PasswordResetDone from './components/auth/passwordReset/PasswordResetDone.jsx';
 
 
 const router = createBrowserRouter([{
@@ -45,6 +47,8 @@ const router = createBrowserRouter([{
         { path: "/register", Component: Register},
         { path: "/login", Component: Login},
         { path: "/", Component: About},
+        { path: "/reset", Component: PasswordReset},
+        { path: "/reset/sent", Component: PasswordResetDone},
         { path: "*", Component: Root}
       ]
 }])

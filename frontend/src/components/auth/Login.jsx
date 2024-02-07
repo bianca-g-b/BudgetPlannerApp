@@ -1,4 +1,4 @@
-import "../../styles/Login.css";
+import "../../styles/auth/Login.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCSRFToken, loginUser, fetchUser} from "../../actions/authActions.js";
@@ -59,21 +59,21 @@ function Login() {
                 >
                     <div className="login-username-container">
                         <label htmlFor="username">Username</label>
-                        <input type="username" 
-                        className="login-username-input" 
-                        placeholder="Enter username"
-                        autoComplete="username"
-                        onChange = {(e) => {setUsername(e.target.value)}}
+                        <input type="text"
+                            className="login-username-input" 
+                            placeholder="Enter username"
+                            autoComplete="username"
+                            onChange = {(e) => {setUsername(e.target.value)}}
                         />
                     </div>
 
                     <div className="login-password-container">
                         <label htmlFor="password">Password</label>
                         <input type="password" 
-                        className="login-password-input" 
-                        placeholder="Enter password"
-                        autoComplete="current-password"
-                        onChange = {(e) => {setPassword(e.target.value)}}
+                            className="login-password-input" 
+                            placeholder="Enter password"
+                            autoComplete="current-password"
+                            onChange = {(e) => {setPassword(e.target.value)}}
                         />
                     </div>
 
