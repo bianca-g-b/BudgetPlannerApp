@@ -81,7 +81,16 @@ function Login() {
                         type="submit" 
                         color="primary"
                         variant="contained"
-                        >Login</Button>
+                        >Login
+                    </Button>
+
+                    <div className="forgot-password-div">
+                        <NavLink
+                        className="forgot-password-link"
+                            to="/reset">
+                            Forgot password?
+                        </NavLink>
+                    </div>
                 </form>
 
 

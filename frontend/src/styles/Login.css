@@ -1,12 +1,14 @@
+/*Login page principal container*/
 .login-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20%;
+    margin-top: 12%;
     width: 100%;
 }
 
+/*Form container*/
 .login-main {
     display: flex;
     align-items: center;
@@ -15,27 +17,30 @@
     padding-top: 4%;
     padding-right: 4.5%;
     padding-left: 4.5%;
-    padding-bottom: 4%;
+    padding-bottom: 1.5%;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     background-color: #d2c1f012 ;
     box-shadow: 0 0 10px #0173714a;
 }
 
+/*Form title*/
 .login-form-title {
     font-weight: 400;
     color: #017371;
     text-transform: uppercase;
     font-size:xx-large;
-    margin-bottom: 12%;
+    margin-bottom: 10%;
     letter-spacing: 0.07em;
 }
 
+/*Form content*/
 .login-form {
     display: flex;
     flex-direction: column;
 }
 
+/*Form inputs*/
 .login-username-container,
 .login-password-container {
     display: flex;
@@ -67,13 +72,13 @@ input:-webkit-autofill {
     -webkit-background-clip: text;
 }
 
-
 .login-password-input {
     margin-bottom: 5%;
 }
 
+/*Register redirect*/
 .register-redirect-message {
-    margin-top: 15.7%;
+    margin-top: 12%;
     font-weight: 500;
     font-size: large;
 }
@@ -88,4 +93,22 @@ input:-webkit-autofill {
 .register-redirect-link:hover {
     color:#1668b9;
     font-weight: 600;
+}
+
+/*Forgot password redirect*/
+.forgot-password-div {
+    display: flex;
+    align-self: center;
+    margin-top: 20%;
+}
+
+.forgot-password-link {
+    text-decoration: none;
+    color: #017371;
+    font-weight: 400;
+}
+
+.forgot-password-link:hover {
+    color: #1668b9;
+    font-weight: 500;
 }
