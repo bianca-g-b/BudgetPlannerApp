@@ -169,16 +169,6 @@ CORS_ALLOW_HEADERS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         "rest_framework.permissions.IsAuthenticated",
-#     ],
-#     "DEFAULT_AUTHENTICATION_CLASSES": [
-#         "rest_framework_authentication.SessionAuthentication",
-#     ],
-
-# }
-
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -199,11 +189,17 @@ AUTHENTICATION_BACKENDS = [
 
 SESSION_COOKIE_SECURE = True
 SEESION_COOKIE_HTTPONLY = True
-# SESSION_KEY = 'sessionid'
 CSRF_COOKIE_SECURE = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-# SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2 # 2 weeks
 SESSION_COOKIE_SAME_SITE = 'None'
-# SESSION_COOKIE_DOMAIN = None
+
+# Email settings for sending password reset emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.titan.email'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 

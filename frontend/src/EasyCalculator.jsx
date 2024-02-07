@@ -26,11 +26,6 @@ function EasyCalculator() {
     const [totalNonEssentialExpenses, setTotalNonEssentialExpenses] = useState(0);
     const [savings, setSavings] = useState(0)
 
-    // Set total income
-    function handleTotalIncomeChange(event) {
-        setTotalIncome(parseFloat(event.target.value));
-    }
-    
     // Set total essential, total non-essential expenses and savings
     useEffect(() => {
         const totalEssential = Object.values(essentialExpenses).reduce((a, b) => a + b, 0);
@@ -45,11 +40,14 @@ function EasyCalculator() {
             formTitle = "Easy Calculator"
         >
             <BudgetFormInputs
-                handleTotalIncome = {handleTotalIncomeChange}
+                handleTotalIncome = {(event) => {
+                    const value = event.target.value !== "" ? parseFloat(event.target.value) : 0.0;
+                    setTotalIncome(parseFloat(value));
+                }}
 
                 handleHousing = {(event)=> {
-                const value = event.target.value !== "" ? parseFloat(event.target.value) : 0.0;
-                setEssentialExpenses({...essentialExpenses, housing: parseFloat(value)})}}
+                    const value = event.target.value !== "" ? parseFloat(event.target.value) : 0.0;
+                    setEssentialExpenses({...essentialExpenses, housing: parseFloat(value)})}}
                 
                 handleUtilities = {(event)=> {
                     const value = event.target.value !== "" ? parseFloat(event.target.value) : 0.0;
