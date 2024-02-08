@@ -9,9 +9,9 @@ function PrivateRoute({children}) {
     console.log("user and auth state in private route:", user, isAuthenticated);
 
     return (
-        <Outlet>
-            {user && isAuthenticated ? children : <Navigate to = "/login" />}   
-        </Outlet> 
+        <>
+            {user && isAuthenticated ? <Outlet>{children}</Outlet> : <Navigate to = "/login" />}   
+        </> 
     )
 }
 
