@@ -1,14 +1,17 @@
-# from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
-# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-# from django.urls import reverse
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
-import json
-# from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-# from django.contrib.sessions.models import Session
+from django.core.mail import send_mail
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.conf import settings
+import json
+import os
+from dotenv import load_dotenv
 
 # Create views here
 
@@ -127,19 +130,23 @@ def change_password(request):
     if request.method == "POST":
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
-            password = data.get("password")
-            confirmPassword = data.get("confirmPassword")
-            if password == confirmPassword:
-                request.user.set_password(password)
-                request.user.save()
-                return JsonResponse({"message": "Password changed successfully"}, status = 202)
+            old_password = data.get("oldPassword")
+            if request.user.check_password(old_password):
+                password = data.get("password")
+                confirmPassword = data.get("confirmPassword")
+                if password == confirmPassword:
+                    request.user.set_password(password)
+                    request.user.save()
+                    return JsonResponse({"message": "Password changed successfully"}, status = 202)
+                else:
+                    return JsonResponse({"message": "Passwords do not match"}, status=400)
             else:
-                return JsonResponse({"message": "Passwords do not match"}, status=400)
+                return JsonResponse({"message": "Old password is incorrect"}, status=400)
         else:
             return JsonResponse({"message": "Password change failed (content type)"}, status=400)
     else:
         return JsonResponse({"message": "Password change failed (request method)"}, status=400)
-    
+        
 # delete account and all data associated with it
 @login_required
 def delete_account(request):
@@ -155,3 +162,38 @@ def delete_account(request):
     else:
         return JsonResponse({"message": "Failed to delete account2"}, status = 400)
     
+# password reset views
+@csrf_exempt    
+def reset_password(request):
+    if request.method == "POST":
+        if request.content_type == "application/json":
+            data = json.loads(request.body.decode("utf-8"))
+            email = data.get("email")
+            #check if email exists in the database
+            if User.objects.filter(email=email).exists():
+                # set uid and token for password reset link
+                user = User.objects.get(email=email)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                token = PasswordResetTokenGenerator().make_token(user)
+                port = os.environ.get("PORT")
+                email_url = f"http://127.0.0.1:{port}/reset/{uid}/{token}"
+                #send email with password reset link
+                send_mail(
+                    "Password reset request",
+                    f'Please click the link to reset your password:\n {email_url}',
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False,
+                )
+                return JsonResponse({"message": "Password reset email sent successfully"}, status = 200)
+            else:
+                return JsonResponse({"message": "Password reset email not sent"}, status = 400)
+        else:
+            return JsonResponse({"message": "Password reset email not sent"}, status = 400)
+    else:
+        return JsonResponse({"message": "Password reset email not sent"}, status = 400)
+
+
+
+
+

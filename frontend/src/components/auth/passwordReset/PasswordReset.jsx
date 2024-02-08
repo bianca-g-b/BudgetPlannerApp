@@ -31,8 +31,7 @@ function PasswordReset() {
             <div className="password-reset-page-info">
                 <p className="password-reset-page-title">Password Reset</p>
                 <p className="password-reset-page-message">Please enter the email address associated with your account. 
-                    We will send you an email with a link to reset your password.
-                </p>
+                    We will send you an email with a link to reset your password.</p>
             </div>
             <form 
                 className="password-reset-request-form"
@@ -42,7 +41,8 @@ function PasswordReset() {
                     <label htmlFor="email">Email</label>
                     <input
                         className="password-reset-email-input"
-                        type="email" 
+                        type="email"
+                        autoComplete="email"
                         placeholder="Your email address" />
                 </div>
 
@@ -55,7 +55,7 @@ function PasswordReset() {
             </form>
             <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
                 <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
-                        Login failed! Please try again.
+                    Password reset request failed! Please try again.
                 </MuiAlert>
             </Snackbar>
         </div>

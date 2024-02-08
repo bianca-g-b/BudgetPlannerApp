@@ -9,6 +9,7 @@ import PasswordChecklist from "react-password-checklist";
 import validator from 'validator';
 
 function ChangePassword() {
+    const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [openSuccess, setOpenSuccess] = useState(false);
@@ -36,7 +37,7 @@ function ChangePassword() {
         if (password === confirmPassword) {
             if (validatePassword(password)=== true) {
                 const csrfToken = await fetchCSRFToken(dispatch);
-                const response = await changePassword(password, confirmPassword, csrfToken);
+                const response = await changePassword(oldPassword, password, confirmPassword, csrfToken);
                 if (response.status === 202) {
                     setOpenSuccess(true);
                     console.log("Password changed successfully");
@@ -68,11 +69,19 @@ function ChangePassword() {
                     onSubmit={updatePassword}>
 
                     <div className="new-password-container">
+                        <label htmlFor="password">Current password</label>
+                        <input type="password" 
+                            className="change-psw-input" 
+                            placeholder="Enter current password"
+                            onChange = {(e)=> setOldPassword(e.target.value)}
+                        />
+                    </div>   
+
+                    <div className="new-password-container">
                         <label htmlFor="password">New password</label>
                         <input type="password" 
                             className="change-psw-input" 
                             placeholder="Enter new password"
-                            autoComplete="new-password"
                             onChange = {(e)=> setPassword(e.target.value)}
                         />
                     </div>
@@ -82,7 +91,6 @@ function ChangePassword() {
                         <input type="password" 
                             className="change-psw-input" 
                             placeholder="Confirm new password"
-                            autoComplete="new-password"
                             onChange = {(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>

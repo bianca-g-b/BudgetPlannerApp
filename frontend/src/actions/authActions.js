@@ -162,7 +162,7 @@ export const deleteEmail = async (dispatch) => {
 }
 
 // change password
-export const changePassword = async (password, confirmPassword) => {
+export const changePassword = async (oldPassword,password, confirmPassword) => {
     const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
     const response = await fetch(`${baseUrl}/auth/changepassword`,{
         method: "POST",
@@ -172,6 +172,7 @@ export const changePassword = async (password, confirmPassword) => {
             "X-CSRFToken": csrfToken,  
         },
         body: JSON.stringify({
+            oldPassword: oldPassword,
             password: password,
             confirmPassword: confirmPassword,
         }),
@@ -213,8 +214,7 @@ export const deleteAccount = async (dispatch) => {
 // password reset
 export const passwordReset = async (email) => {
     const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
-    console.log(csrfToken, "csrf token in auth actions");
-    const response = await fetch(`${baseUrl}/auth/password_reset/`, {
+    const response = await fetch(`${baseUrl}/auth/resetpassword`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -227,6 +227,7 @@ export const passwordReset = async (email) => {
         credentials: "include",
     });
     if (response.ok) {
+        console.log(response);
         return response;
     } else {
         console.log("Password reset failed. Please try again.");
