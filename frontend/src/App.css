@@ -2,16 +2,11 @@
   font-family: "Poppins" , "sans-serif";
 }
 
-/* .css-10hburv-MuiTypography-root {
-  font-family: "Poppins" !important;
-} */
-
-
 /*Base styling settings*/
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #f8f8ff;
+  /* background-color: #f8f8ff; */
 }
 
 html {
@@ -37,94 +32,13 @@ body, #root, .app {
   overflow-y: auto;
 }
 
-
-
-/* .form-main-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color:#f8f8ff;
-  flex-direction: column;
+/*Light mode and dark mode*/
+.light {
+  background-color: #f8f8ff;
+  color: #1e1e1e;
 }
 
-.full-form-area {
-  display: flex;
-  flex-direction: column;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  padding-left: 3%;
-  padding-right: 3%;
-  border-radius: 10px;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  width: 45%;
-  border: 1px solid #e0e0e0;
-  background-color: #d2c1f012 ;
-  box-shadow: 0 0 10px   #0173714a;  
+.dark {
+  background-color: #1e1e1e;
+  color: #f8f8ff;
 }
-
-.form-header-container {
-  display: flex;
-  width: 45%;
-  margin-top: 3%;
-} */
-
-/* .btn-outline-primary {
-  align-self: center !important;
-}
-
-.income-input,
-.list-group-item-success {
-  background-color: #04d979 !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.essential-input,
-.list-group-item-danger {
-  background-color:#d63384 !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.non-essential-input,
-.list-group-item-warning {
-  background-color: #ffc107 !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.list-group-item-primary {
-  background-color: #1976d2  !important;
-  font-weight: bold;
-  color: black !important;
-}
-
-.list-group-item {
-  border: none !important;
-}
-
-.list-group {
-  border: solid 1px rgb(248, 248, 255) !important;
-}
-
-.form-button {
-  background-color: #1976d2e0 !important;
-  color: white !important;
-  text-shadow: 1px 1px 1px black;
-}
-
-.form-button:hover {
-  background-color: #1668b9  !important;
-} */
-
-/*Delete budget modal*/
-/* .budget-modal-buttons-div {
-  display: flex;
-  justify-content: space-around;
-}
-
-.date-delete-modal {
-  font-weight: 600;
-  letter-spacing: 0.05em;
-} */

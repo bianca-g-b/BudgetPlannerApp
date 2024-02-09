@@ -1,5 +1,6 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import EasyCalculator from "./components/budget/EasyCalculator.jsx";
 import BudgetList from './components/budget/BudgetList.jsx';
 import Register from "./components/auth/Register.jsx";
@@ -55,8 +56,9 @@ const router = createBrowserRouter([{
 
 
 function App() {
+  const theme = useSelector(state => state.theme.theme);
   return (
-    <div className="app">
+    <div className={`app ${theme === `dark` ? `dark` : `light`}`}>
       <RouterProvider router={router}/>
    </div>
   )

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../actions/authActions';
+import { toggleTheme } from '../redux/themeSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +15,9 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import GridViewIcon from '@mui/icons-material/GridView';
+import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+
 
 
 export default function MenuAppBar() {
@@ -22,11 +26,10 @@ export default function MenuAppBar() {
   const navigate = useNavigate();
 
   const csrfToken = useSelector((state) => state.csrf.csrfToken);
-  const user = useSelector((state) => state.user.username);
-  console.log(user, "user in menu");
-  
   const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-  console.log(isAuthenticated, "isAuthenticated in menu");
+  const theme = useSelector((state) => state.theme.theme);
+  console.log(theme, "theme");
+  
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -49,6 +52,12 @@ export default function MenuAppBar() {
     }
 }
 
+// toggle theme
+const handleTheme = () => {
+  dispatch(toggleTheme());
+  console.log(theme, "theme");
+}
+
   return (
     <>
     <AppBar position="absolute">
@@ -57,6 +66,14 @@ export default function MenuAppBar() {
           <Box 
           sx={{ flexGrow: 1, display: 'flex', maxWidth: '100%', justifyContent: 'flex-start' }}
           >
+          <IconButton
+            onClick={handleTheme}
+            color="inherit"
+            aria-label="toggle theme"
+          >
+            {theme === "light" ? <DarkModeRoundedIcon /> : <Brightness7RoundedIcon />}
+          </IconButton>
+
             {isAuthenticated && <Button
             component={Link}
             href="/dashboard"

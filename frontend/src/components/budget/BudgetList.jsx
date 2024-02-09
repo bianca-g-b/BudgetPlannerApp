@@ -18,6 +18,7 @@ function BudgetList() {
     const budget = useSelector((state)=> state.budget.budgetById);
     const id = useSelector((state)=> state.budget.id);
     const clicked = useSelector((state)=> state.budget.clicked);
+    const theme = useSelector((state) => state.theme.theme);
     const [isClicked, setIsClicked] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -35,7 +36,6 @@ function BudgetList() {
             dispatch(getBudgetList(csrfToken))
                 .then((action) => {
                     if (getBudgetList.fulfilled.match(action)) {
-                        // console.log(action.payload, "action payload");
                         dispatch(setBudgetList(action.payload));
                         dispatch(setCurrentBudgets(action.payload.slice(0, 10)));
                     }
@@ -50,7 +50,6 @@ function BudgetList() {
         dispatch(getBudgetById(id))
             .then((action)=> {
                 if (getBudgetById.fulfilled.match(action)) {
-                    // console.log(action.payload, "budget by id - action");
                     dispatch(setBudgetById(action.payload))
                     dispatch(setClicked(id));
                 }
@@ -115,24 +114,27 @@ function BudgetList() {
             {budgetList.length > 0 && <div className="header-div">
                  <p className="budgets-page-header">Budget List</p>
                 <NavLink 
-                    className="add-budget-link"
+                    className={`add-budget-link ${theme === "dark" ? "dark-add-budget-link" : ""}`}
                     to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink> 
             </div>}
             <div className="full-budgets-div">
-            <div className="table-area-div">
+            <div className= {`table-area-div ${theme === "dark" ? "dark-table-area-div" : ""}`}   
+            // "table-area-div"
+            >
                 <table>
                     <thead>
                         <tr>
-                            <th className="date-from-col table-col-title">Date from</th>
-                            <th className="date-to-col  table-col-title">Date to</th>
-                            <th className="see-more  table-col-title">More</th>
+                            <th className={`date-from-col table-col-title ${theme === "dark" ? "dark-col-title" : ""}`}>Date from</th>
+                            <th className={`date-to-col  table-col-title ${theme === "dark" ? "dark-col-title" : ""}`}>Date to</th>
+                            <th className={`see-more  table-col-title ${theme === "dark" ? "dark-col-title" : ""}`}>More</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentBudgets && currentBudgets.length > 0 && currentBudgets.map((budgetItem, index) => {
                             return (
                                 <tr key={index} 
-                                    className={(budgetItem.id===clicked && isClicked) ? "clicked budget-row" : "budget-row"}>
+                                    className = {`${theme === "dark" ? "dark-row" : "budget-row"} ${budgetItem.id===clicked && isClicked ? "clicked" : ""}`}
+                                    >
                                     <td className="date-from-col">{budgetItem.date_from}</td>
                                     <td className="date-to-col">{budgetItem.date_to}</td>
                                     <td className="button-col see-more">

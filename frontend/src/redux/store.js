@@ -5,6 +5,7 @@ import csrfSlice  from "./csrfSlice";
 import userSlice from "./userSlice";
 import authenticatedSlice from "./authenticatedSlice";
 import logoutSlice from "./logoutSlice";
+import themeSlice from "./themeSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from "redux-persist";
 
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
     user: userSlice,
     authenticated: authenticatedSlice,
     logout: logoutSlice,
+    theme: themeSlice,
 });
 
 const rootReducer = (state, action) => {
