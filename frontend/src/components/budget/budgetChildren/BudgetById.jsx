@@ -108,7 +108,7 @@ function BudgetById() {
         paddingLeft: 0,
         paddingRight: 0,
     }
-    
+
 
     return (
         <div className="budget-lists">
@@ -418,6 +418,13 @@ function BudgetById() {
                 {budgetbyid && 
                 <div className="bar-div">
                     <BarChart
+                        sx = {{
+                            "& .css-1rbllhb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            }}
                         xAxis={[{
                             scaleType: 'band',
                             data: [

@@ -1,15 +1,16 @@
 import "../styles/MainChart.css";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
-import { useSelector } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 function MainChart() {
     const budgetList = useSelector((state)=> state.budget.budgetList);
     const [totalPages, setTotalPages] = useState(0);
+    const theme = useSelector((state) => state.theme.theme);
 
     // extract chosen data from all budgets and create a dataset, then reverse it so that the most recently added budget is first
     const dataset = budgetList.map((budget, index)=> {
@@ -35,11 +36,16 @@ function MainChart() {
         ],
         height:800,
         sx: {
+          "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+          "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+          "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+          "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+          "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
           [`.${axisClasses.left} .${axisClasses.label}`]: {
             transform: 'translate(-12px, 0)',           
           },
-            marginLeft: 3,
-            marginRight: 3,
+          marginLeft: 3,
+          marginRight: 3,
         },
       };
 
