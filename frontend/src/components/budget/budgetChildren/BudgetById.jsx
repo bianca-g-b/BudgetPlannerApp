@@ -1,7 +1,7 @@
 import "../../../styles/budget/BudgetById.css";
 import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useOutletContext } from 'react-router-dom';
 import DeleteModal from "./Modal";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -27,7 +27,6 @@ import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined
 import { BarChart } from '@mui/x-charts/BarChart';
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
-import { useOutletContext } from "react-router-dom";
 
 
 function BudgetById() {
@@ -55,7 +54,7 @@ function BudgetById() {
 
     const essentialIconStyle = {
         color: '#ec3e94',
-        backgroundColor: 'white',
+        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
         border: '1px solid #ec3e94',
         width: '35px',
         height: '35px',
@@ -63,7 +62,7 @@ function BudgetById() {
 
     const nonEssentialIconStyle = {
         color: '#fd7e14',
-        backgroundColor: 'white',
+        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
         border: '1px solid #fd7e14',
         width: '35px',
         height: '35px',
@@ -71,7 +70,7 @@ function BudgetById() {
 
     const incomeIconStyle = {
         color: '#36a67e',
-        backgroundColor: 'white',
+        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
         border: '1px solid #36a67e',
         width: '35px',
         height: '35px',
@@ -79,7 +78,7 @@ function BudgetById() {
 
     const savingsIconStyle = {
         color: '#2394d0',
-        backgroundColor: 'white',
+        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
         border: '1px solid #2394d0',
         width: '35px',
         height: '35px',
@@ -87,7 +86,7 @@ function BudgetById() {
 
     const totalSpendingIconStyle = {
         color: '#dc3545',
-        backgroundColor: 'white',
+        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
         border: '1px solid #dc3545',
         width: '35px',
         height: '35px',
@@ -97,9 +96,6 @@ function BudgetById() {
         typography: {
             fontFamily: 'Poppins, sans-serif',
         },
-        pallette: {
-            mode: 'dark'
-        }
     })
 
     const listItemStyle = {
@@ -450,6 +446,18 @@ function BudgetById() {
                             ],
                             label: 'All expenses (GBP)',
                         }]}
+                        
+                        slotProps={{
+                            popper: {
+                                style: {
+                                    // WebkitMaxInlineSize: '100%',
+                                    width: '50%',
+                                    transform: 'translate3d(-2.1rem, -2expx)',
+                                    backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(173,181,189,1)',
+                                },
+                                placement: 'auto',
+                            }
+                        }}
                     />
                 </div>
                 }

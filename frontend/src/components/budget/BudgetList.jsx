@@ -154,6 +154,10 @@ function BudgetList() {
                             count={totalPages}
                             onChange={(event, value) => handlePageChange(value)}
                             color="primary"
+                            sx={{ 
+                                "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"}, 
+                                "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected" : {color: theme === "dark" ? "white" : "white"},
+                            }}
                         />
                     </Stack>
                 </div>}

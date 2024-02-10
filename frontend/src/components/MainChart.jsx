@@ -42,12 +42,25 @@ function MainChart() {
           "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
           "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
           [`.${axisClasses.left} .${axisClasses.label}`]: {
-            transform: 'translate(-12px, 0)',           
+            transform: 'translate(-12px, 0)',
+            fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)',
           },
           marginLeft: 3,
           marginRight: 3,
         },
-      };
+        slotProps: {
+          popper : {
+            style: {
+              width: '40%',
+              maxWidth: '1000px',
+              transform: 'translate3d(-2.1rem, -2expx)',
+              backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(173,181,189,1)',
+              display: 'flex',
+            },
+            placement: 'auto',         
+          }
+        }
+    };
 
     const valueFormatter = (value) => `£ ${value}`;
 
@@ -90,6 +103,10 @@ function MainChart() {
                                 color="primary"
                                 size="large" 
                                 onChange = {(event, value) => handlePageChange(value)}
+                                sx={{ 
+                                "& .css-bf9wz-MuiButtonBase-root-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"}, 
+                                "& .css-bf9wz-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected" : {color: theme === "dark" ? "white" : "white"},
+                            }}
                       />
                 </Stack>}
         </div>
