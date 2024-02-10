@@ -52,12 +52,25 @@ function MainChart() {
           popper : {
             style: {
               width: '40%',
-              maxWidth: '1000px',
               transform: 'translate3d(-2.1rem, -2expx)',
-              backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(173,181,189,1)',
-              display: 'flex',
+              
             },
-            placement: 'auto',         
+            placement: 'auto',
+            sx: {
+              "& .css-1vz5lb3-MuiChartsTooltip-container": {
+                backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'white',
+                color: theme === 'dark' ? 'white' : 'black',
+                },
+              "& .css-2hvfka-MuiChartsTooltip-table" : {
+                borderSpacing: '5px'
+              },
+              "& .css-s3y5yc-MuiChartsTooltip-cell" : {
+                color: theme === 'dark' ? 'white' : 'black',
+              },
+              "& .css-s3y5yc-MuiChartsTooltip-cell.MuiChartsTooltip-valueCell" : {
+                color: theme === 'dark' ? 'white' : 'black',
+              }
+            }     
           }
         }
     };

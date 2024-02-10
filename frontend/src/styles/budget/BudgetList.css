@@ -27,18 +27,24 @@
     height: 780px;
 }
 
-.dark-table-area-div {
-    /* background-color: #1e1e1e; */
-    /* border: 1px solid #3f8be2a3; */
-    box-shadow: 0 0 10px   #3f8be25a;
+.date-from-col,
+.date-to-col,
+.see-more {
+    width: 100%;
+    padding: 7px;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.44;
+    letter-spacing: 0.01071em;
+}
 
+.dark-table-area-div {
     background-color: #1d14a711;
-    /* border: 1px solid #203145dc; */
     border: 1px solid #3f8be2a3;
     box-shadow: 0 0 10px   #3f8be25a;
 }
 
-table {
+.budgets-table {
     border-collapse: collapse; 
     border-spacing: 0 1px;
     border-radius: 10px;
@@ -82,15 +88,6 @@ table {
 
 .dark-row:hover {
     background-color: rgba(118, 238, 236, 0.03);
-}
-
-th, td {
-    width: 100%;
-    padding: 7px;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.44;
-    letter-spacing: 0.01071em;
 }
 
 .see-more {

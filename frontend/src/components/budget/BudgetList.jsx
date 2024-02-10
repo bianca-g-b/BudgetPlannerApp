@@ -121,7 +121,7 @@ function BudgetList() {
             <div className= {`table-area-div ${theme === "dark" ? "dark-table-area-div" : ""}`}   
             // "table-area-div"
             >
-                <table>
+                <table className="budgets-table">
                     <thead>
                         <tr>
                             <th className={`date-from-col table-col-title ${theme === "dark" ? "dark-col-title" : ""}`}>Date from</th>

@@ -21,23 +21,3 @@
 .empty-budget-chart-message:hover {
     color: #017371;
 }
-
-/*Testing css classes*/
-/* .css-sfv08n-MuiChartsTooltip-root {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-around;
-    background-color: orange !important;
-    margin-right: none !important;
-}
-
-.MuiPopper-root:last-child:first-child{
-    z-index: 0 !important;
-    display: flex !important;
-    position: relative !important;
-    flex-direction: column !important;
-    justify-content: space-around;
-    width: 100% !important;
-    background-color: red !important;
-    color: blue !important;
-} */

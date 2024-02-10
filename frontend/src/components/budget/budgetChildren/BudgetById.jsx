@@ -444,18 +444,31 @@ function BudgetById() {
                             data: [
                                 parseFloat(budgetbyid.housing), parseFloat(budgetbyid.utility_bills), parseFloat(budgetbyid.food_drinks), parseFloat(budgetbyid.transport), parseFloat(budgetbyid.household_goods_services), parseFloat(budgetbyid.children_related_costs), parseFloat(budgetbyid.cleaning_toiletries), parseFloat(budgetbyid.other_essential_costs), parseFloat(budgetbyid.luxury_gifts), parseFloat(budgetbyid.leisure_entertainment), parseFloat(budgetbyid.holidays),parseFloat(budgetbyid.charity) ,parseFloat(budgetbyid.other_non_essential_costs), parseFloat(budgetbyid.unsecured_loans)
                             ],
-                            label: 'All expenses (GBP)',
+                            label: 'Amount (GBP)',
                         }]}
                         
                         slotProps={{
                             popper: {
                                 style: {
-                                    // WebkitMaxInlineSize: '100%',
-                                    width: '50%',
-                                    transform: 'translate3d(-2.1rem, -2expx)',
-                                    backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.6)' : 'rgba(173,181,189,1)',
+                                    width: '30%',
+                                    transform: 'translate3d(-2.1rem, -2expx)',                               
                                 },
-                                placement: 'auto',
+                                placement: 'auto', 
+                                sx: {
+                                    "& .css-1vz5lb3-MuiChartsTooltip-container": {
+                                        backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'white',
+                                        color: theme === 'dark' ? 'white' : 'black',
+                                        },
+                                    "& .css-2hvfka-MuiChartsTooltip-table" : {
+                                        borderSpacing: '5px'
+                                    },
+                                    "& .css-s3y5yc-MuiChartsTooltip-cell" : {
+                                        color: theme === 'dark' ? 'white' : 'black',
+                                    },
+                                    "& .css-s3y5yc-MuiChartsTooltip-cell.MuiChartsTooltip-valueCell" : {
+                                        color: theme === 'dark' ? 'white' : 'black',
+                                    }
+                                }
                             }
                         }}
                     />
