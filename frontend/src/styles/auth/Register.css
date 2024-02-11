@@ -23,6 +23,11 @@
     background-color: #d2c1f012 ;
     box-shadow: 0 0 10px #0173714a;
 }
+.register-main-dark {
+    background-color: #1e14a70a;
+    border: 1px solid #3f8be2a3;
+    box-shadow: 0 0 10px #3f8be25a;
+}
 
 /*Form title*/
 .register-form-title {
@@ -31,6 +36,10 @@
     text-transform: uppercase;
     font-size:xx-large;
     margin-bottom: 12%;
+}
+
+.register-form-title-dark {
+    color: rgba(5,815,313,0.8);
 }
 
 /*Form content*/
@@ -59,6 +68,14 @@
     margin-top: 1%;
 }
 
+.reg-username-input-dark,
+.reg-email-input-dark,
+.reg-password-input-dark {
+    background-color: #1d14a711;
+    color: white;
+    border: 1px solid #3f8be236;
+}
+
 .reg-username-input:focus-visible,
 .reg-email-input:focus-visible,
 .reg-password-input:focus-visible {
@@ -69,6 +86,26 @@
 .reg-email-input:focus,
 .reg-password-input:focus {
     box-shadow: 0 0 0 0.25rem rgb(32 201 151 / 9%);
+}
+
+.reg-username-input-dark:focus,
+.reg-email-input-dark:focus,
+.reg-password-input-dark:focus {
+    box-shadow: 0 0 0 0.25rem rgba(32, 142, 201, 0.09);
+}
+
+.reg-username-input:-webkit-autofill,
+.reg-email-input:-webkit-autofill,
+.reg-password-input-dark:-webkit-autofill { 
+    -webkit-text-fill-color: black;
+    -webkit-background-clip: text;
+}
+
+.reg-username-input-dark:-webkit-autofill,
+.reg-email-input-dark:-webkit-autofill,
+.reg-password-input-dark:-webkit-autofill { 
+    -webkit-text-fill-color: white;
+    -webkit-background-clip: text;
 }
 
 .reg-new-password-container {
@@ -89,8 +126,16 @@
     text-decoration: none;
 }
 
+.login-redirect-link-dark {
+    color: rgba(5,815,313,0.8);
+}
+
 .login-redirect-link:hover {
     color:#1668b9;
     font-weight: 600;
+}
+
+.login-redirect-link-dark:hover {
+    color: #2f97ff;
 }
 

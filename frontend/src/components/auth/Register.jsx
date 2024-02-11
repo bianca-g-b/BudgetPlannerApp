@@ -24,6 +24,7 @@ function Register() {
 
     const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state) => state.authenticated.isAuthenticated);
+    const theme = useSelector((state) => state.theme.theme);
 
     // password validation
     function validatePassword(password) {
@@ -70,15 +71,15 @@ function Register() {
     
     return (
         <div className = "register-form-container">
-            <div className = "register-main">
-            <h1 className = "register-form-title">Create account</h1>
+            <div className = {`register-main ${theme==='dark' ? 'register-main-dark' : ''}`}>
+            <h1 className = {`register-form-title ${theme==='dark' ? 'register-form-title-dark' : ''}`}>Create account</h1>
             <form className = "register-container"
                 onSubmit = {handleRegister}
                 >
                 <div className="reg-username-container">
                     <label htmlFor="username">Username</label>
                     <input type="username" 
-                        className="reg-username-input" 
+                        className={`reg-username-input ${theme==='dark' ? 'reg-username-input-dark' : ''}`} 
                         placeholder="Create username"
                         autoComplete="username"
                         onChange = { (e) => setUsername(e.target.value)}
@@ -88,7 +89,7 @@ function Register() {
                 <div className="reg-email-container">
                     <label htmlFor="email">Email (optional)</label>
                     <input type="email" 
-                        className="reg-email-input" 
+                        className={`reg-email-input ${theme==='dark' ? 'reg-email-input-dark' : ''}`} 
                         placeholder="Add email (optional)"
                         autoComplete="email"
                         onChange = { (e) => setEmail(e.target.value)}
@@ -98,7 +99,7 @@ function Register() {
                 <div className="reg-password-container">
                     <label htmlFor="password">Password</label>
                     <input type="password" 
-                        className="reg-password-input" 
+                        className={`reg-password-input ${theme==='dark' ? 'reg-password-input-dark' : ''}`}
                         placeholder="Create password"
                         autoComplete="new-password"
                         onChange = { (e) => setPassword(e.target.value)}
@@ -108,7 +109,7 @@ function Register() {
                 <div className="reg-new-password-container">
                     <label htmlFor="password">Confirm Password</label>
                     <input type="password" 
-                        className="reg-password-input" 
+                        className={`reg-password-input ${theme==='dark' ? 'reg-password-input-dark' : ''}`} 
                         placeholder="Confirm password"
                         autoComplete="new-password"
                         onChange = { (e) => setConfirmPassword(e.target.value)}
@@ -121,8 +122,8 @@ function Register() {
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
-                        validTextColor= '#017371'
-                        invalidTextColor= '#017371'
+                        validTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
+                        invalidTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
                         messages = {{
                             minLength: "Password must be at least 8 characters long",
                             lowercase: "Password must contain at least one lowercase letter",
@@ -136,7 +137,7 @@ function Register() {
                     sx={{ marginTop: "4%", }}
                         type="submit" 
                         color="primary"
-                        variant="contained"
+                        variant={theme === "dark" ? "outlined" : "contained"}
                         >Register
                     </Button>
             </form>
@@ -169,7 +170,7 @@ function Register() {
             <p className="login-redirect-message">Already have an account?</p>
             <NavLink 
                 to="/login"
-                className="login-redirect-link">Login here
+                className={`login-redirect-link ${theme==='dark' ? 'login-redirect-link-dark' : ''}`}>Login here
             </NavLink>
         </div>
     )

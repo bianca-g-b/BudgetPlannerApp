@@ -1,7 +1,7 @@
 import "../../../styles/auth/resetPassword/PasswordReset.css";
 import { passwordReset, fetchCSRFToken } from '../../../actions/authActions';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
@@ -11,6 +11,7 @@ function PasswordReset() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [openFail, setOpenFail] = useState(false);
+    const theme = useSelector((state) => state.theme.theme);
 
     async function handlePasswordReset(e) {
         e.preventDefault();
@@ -27,9 +28,9 @@ function PasswordReset() {
     }
 
     return (
-        <div className="password-reset-request-div">
+        <div className={`password-reset-request-div ${theme==='dark' ? 'password-reset-request-div-dark' : ''}`}>
             <div className="password-reset-page-info">
-                <p className="password-reset-page-title">Password Reset</p>
+                <p className={`password-reset-page-title ${theme==='dark' ? 'password-reset-page-title-dark' : ''}`}>Password Reset</p>
                 <p className="password-reset-page-message">Please enter the email address associated with your account. 
                     We will send you an email with a link to reset your password.</p>
             </div>
@@ -40,7 +41,7 @@ function PasswordReset() {
                 <div className="password-reset-email-container">
                     <label htmlFor="email">Email</label>
                     <input
-                        className="password-reset-email-input"
+                        className={`password-reset-email-input ${theme==='dark' ? 'password-reset-email-input-dark' : ''}`}
                         type="email"
                         autoComplete="email"
                         placeholder="Your email address" />
@@ -48,7 +49,7 @@ function PasswordReset() {
 
                 <Button 
                     type="submit"
-                    variant="contained" 
+                    variant={theme === "dark" ? "outlined" : "contained"} 
                     color="primary">
                     Reset Password
                 </Button>

@@ -71,7 +71,11 @@
     box-shadow: 0 0 0 0.25rem rgba(32, 142, 201, 0.09); 
 }
 
-.email-input-dark:-webkit-autofill,
+.email-input:-webkit-autofill {
+    -webkit-text-fill-color: black;
+    -webkit-background-clip: text;
+}
+
 .email-input-dark:-webkit-autofill:hover, 
 .email-input-dark:-webkit-autofill:focus, 
 .email-input-dark:-webkit-autofill:active {

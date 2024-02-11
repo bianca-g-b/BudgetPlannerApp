@@ -19,7 +19,7 @@ function Login() {
 
     const user = useSelector((state) => state.user.username);
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-    console.log(isAuthenticated, "first");
+    const theme = useSelector((state) => state.theme.theme);
 
     // login user and set states for user and isAuthenticated if login is successful
     async function handleLogin(e) {
@@ -52,15 +52,15 @@ function Login() {
 
     return(
         <div className = "login-form-container">
-            <div className = "login-main">
-                <h1 className = "login-form-title">Login</h1>
+            <div className = {`login-main ${theme==='dark' ? 'login-main-dark' : ''}`}>
+                <h1 className = {`login-form-title ${theme==='dark' ? 'login-form-title-dark' : ''}`}>Login</h1>
                 <form className = "login-form"
                     onSubmit = {handleLogin}
                 >
                     <div className="login-username-container">
                         <label htmlFor="username">Username</label>
                         <input type="text"
-                            className="login-username-input" 
+                            className={`login-username-input ${theme==='dark' ? 'login-username-input-dark' : ''}`}
                             placeholder="Enter username"
                             autoComplete="username"
                             onChange = {(e) => {setUsername(e.target.value)}}
@@ -70,7 +70,7 @@ function Login() {
                     <div className="login-password-container">
                         <label htmlFor="password">Password</label>
                         <input type="password" 
-                            className="login-password-input" 
+                            className={`login-password-input ${theme==='dark' ? 'login-password-input-dark' : ''}`}
                             placeholder="Enter password"
                             autoComplete="current-password"
                             onChange = {(e) => {setPassword(e.target.value)}}
@@ -80,13 +80,13 @@ function Login() {
                     <Button 
                         type="submit" 
                         color="primary"
-                        variant="contained"
+                        variant={theme==='dark' ? "outlined" : "contained"}
                         >Login
                     </Button>
 
                     <div className="forgot-password-div">
                         <NavLink
-                        className="forgot-password-link"
+                        className={`forgot-password-link ${theme==='dark' ? 'forgot-password-link-dark' : ''}`}
                             to="/reset">
                             Forgot password?
                         </NavLink>
@@ -103,7 +103,7 @@ function Login() {
             <p className="register-redirect-message">Don&#39;t have an account?</p>
             <NavLink 
                 to="/register"
-                className="register-redirect-link">Register here
+                className={`register-redirect-link ${theme==='dark' ? 'register-redirect-link-dark' : ''}`}>Register here
             </NavLink>
         </div>
     )
