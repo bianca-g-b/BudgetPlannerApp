@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import ListGroup from 'react-bootstrap/ListGroup';
 import PropTypes from "prop-types";
 
@@ -7,13 +8,14 @@ function FormListResults({
     totalNonEssentialExpenses,
     savings,
 }) {
+    const theme = useSelector((state) => state.theme.theme);
     return(
-        <ListGroup>
-        <ListGroup.Item variant="success">Total income: £{totalIncome}</ListGroup.Item>
-        <ListGroup.Item variant="danger">Total essential expenses: £{totalEssentialExpenses}</ListGroup.Item>
-        <ListGroup.Item variant="warning">Total non-essential expenses: £{totalNonEssentialExpenses}</ListGroup.Item>
-        <ListGroup.Item variant="primary">Total savings: £{savings}</ListGroup.Item>
-    </ListGroup>        
+        <ListGroup data-bs-theme={ theme === 'dark' ? 'dark' : ''}>
+            <ListGroup.Item variant="success">Total income: £{totalIncome}</ListGroup.Item>
+            <ListGroup.Item variant="danger">Total essential expenses: £{totalEssentialExpenses}</ListGroup.Item>
+            <ListGroup.Item variant="warning">Total non-essential expenses: £{totalNonEssentialExpenses}</ListGroup.Item>
+            <ListGroup.Item variant="primary">Total savings: £{savings}</ListGroup.Item>
+        </ListGroup>        
     )
 }
 
