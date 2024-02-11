@@ -63,12 +63,12 @@ const handleTheme = () => {
     <AppBar 
       position="absolute"
       sx = {{
-        backgroundColor: theme === "dark" ? "#0319394a" : "#1976d2",
+        backgroundColor: theme === "dark" ? "#0c1225" : "#1976d2",
         color: 'white',
         boxShadow: 0,
+        position: 'fixed',
         borderBottom: theme === "dark" ? ' 1px solid #3f6de229' : '1px solid white',
         zIndex: (theme) => theme.zIndex.drawer + 1,
-      
       }}
       >
       <Container maxWidth="xxl">
@@ -136,7 +136,6 @@ const handleTheme = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              bgColor= {theme === "dark" ? "primary.dark" : "primary.light"}
             > 
 
                 <MenuItem 
