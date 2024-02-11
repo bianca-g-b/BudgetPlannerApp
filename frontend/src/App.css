@@ -6,7 +6,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  /* background-color: #f8f8ff; */
 }
 
 html {
@@ -15,7 +14,6 @@ html {
 }
 
 #root {
-  background-color: #f8f8ff;
   min-width: 100vw;
 }
 
@@ -35,10 +33,10 @@ body, #root, .app {
 /*Light mode and dark mode*/
 .light {
   background-color: #f8f8ff;
-  color: #1e1e1e;
+  color: #11111c;
 }
 
 .dark {
-  background-color: #1e1e1e;
+  background-color: #11111c;
   color: #f8f8ff;
 }

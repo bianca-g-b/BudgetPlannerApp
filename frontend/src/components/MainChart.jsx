@@ -15,7 +15,7 @@ function MainChart() {
     // extract chosen data from all budgets and create a dataset, then reverse it so that the most recently added budget is first
     const dataset = budgetList.map((budget, index)=> {
         return {
-            x: `${budgetList.length-index}\n ${budget.date_from} - ${budget.date_to}`,
+            x: `${budgetList.length-index}. \n ${budget.date_from} - ${budget.date_to}`,
             income: parseFloat(budget.total_income),
             essential: parseFloat(budget.total_essential),
             non_essential: parseFloat(budget.total_non_essential),
@@ -36,14 +36,14 @@ function MainChart() {
         ],
         height:800,
         sx: {
-          "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-          "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-          "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-          "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-          "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+          "& .css-1k2u9zb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+          "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+          "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+          "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+          "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
           [`.${axisClasses.left} .${axisClasses.label}`]: {
             transform: 'translate(-12px, 0)',
-            fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)',
+            fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 0.6)',
           },
           marginLeft: 3,
           marginRight: 3,
@@ -51,14 +51,14 @@ function MainChart() {
         slotProps: {
           popper : {
             style: {
-              width: '40%',
+              width: '30%',
               transform: 'translate3d(-2.1rem, -2expx)',
               
             },
             placement: 'auto',
             sx: {
               "& .css-1vz5lb3-MuiChartsTooltip-container": {
-                backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'white',
+                backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 1)' : 'white',
                 color: theme === 'dark' ? 'white' : 'black',
                 },
               "& .css-2hvfka-MuiChartsTooltip-table" : {
@@ -91,7 +91,7 @@ function MainChart() {
 
 
     return (
-        <div className="main-bar-chart-div">
+        <div className= {`main-bar-chart-div ${theme==='dark' ? 'main-bar-chart-div-dark' : '' }`}>
                 {budgetList.length===0 && 
                 <div>
                   <NavLink 

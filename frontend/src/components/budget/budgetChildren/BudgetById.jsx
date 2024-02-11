@@ -415,11 +415,11 @@ function BudgetById() {
                 <div className="bar-div">
                     <BarChart
                         sx = {{
-                            "& .css-1rbllhb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-                            "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-                            "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-                            "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
-                            "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)'},
+                            "& .css-1rbllhb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+                            "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+                            "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+                            "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
+                            "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
                             }}
                         xAxis={[{
                             scaleType: 'band',

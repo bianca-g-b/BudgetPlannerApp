@@ -14,6 +14,7 @@ function EmailForm() {
     const [openFailUpdate, setOpenFailUpdate] = useState(false);
     const [openSuccessDelete, setOpenSuccessDelete] = useState(false);
     const [openFailDelete, setOpenFailDelete] = useState(false);
+    const theme = useSelector((state) => state.theme.theme);
 
 
     async function handleUpdateEmail(e) {
@@ -43,8 +44,8 @@ function EmailForm() {
 
             <div className={`update-email-container ${ email ? "" : "add-email-container"}`}>
                 <div className="form-information">
-                    {email && <p className="update-title">Update email address</p>}
-                    {!email && <p className="update-title">Add email address</p>}
+                    {email && <p className={`update-title ${theme==="dark" ? "update-title-dark" : "" }`}>Update email address</p>}
+                    {!email && <p className={`update-title ${theme==="dark" ? "update-title-dark" : "" }`}>Add email address</p>}
                 </div>
 
                 <form className="email-form"
@@ -53,7 +54,7 @@ function EmailForm() {
                     <div className="email-container">
                         <label htmlFor="email">Email (must be unique)</label>
                         <input type="email" 
-                            className="email-input" 
+                            className={`email-input ${theme==="dark" ? "email-input-dark" : "" }`}
                             placeholder="Enter email address"
                             autoComplete="email"
                             onChange = { (e) => setNewEmail(e.target.value)}
@@ -61,12 +62,12 @@ function EmailForm() {
                     </div>
                    {email && <div className="submit-container">
                         <Button type="submit" className="submit-button"
-                        variant="contained"
+                            variant={theme === "dark" ? "outlined" : "contained"}
                         >Update</Button>
                     </div>}
                     {!email && <div className="submit-container">
                         <Button type="submit" className="submit-button"
-                        variant="contained"
+                        variant={theme === "dark" ? "outlined" : "contained"}
                         >Add</Button>
                     </div>}
 
@@ -75,14 +76,14 @@ function EmailForm() {
 
             {email && <div className="delete-email-container">
                 <div className="delete-information">    
-                    <p className="delete-title">Delete email address</p>
+                    <p className={`delete-title ${theme==="dark" ? "delete-title-dark" : "" }`}>Delete email address</p>
                 </div>
                 <div className="delete-message-container">
                     <p className="delete-message">Please note that deleting your email address will prevent you from recovering your account if you forget your password.</p>
                 </div>
                 <div className="submit-delete-container">
                      <Button className="delete-email-button"
-                        variant="contained"
+                        variant={theme === "dark" ? "outlined" : "contained"}
                         onClick = {handleDeleteEmail}
                     >Delete</Button>
                 </div>

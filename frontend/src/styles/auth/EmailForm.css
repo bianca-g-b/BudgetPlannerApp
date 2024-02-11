@@ -61,6 +61,28 @@
     box-shadow: 0 0 0 0.25rem rgb(32 201 151 / 9%);
 }
 
+.email-input-dark {
+    background-color: #1d14a711;
+    color: white;
+    border: 1px solid #3f8be236;
+}
+
+.email-input-dark:focus {
+    box-shadow: 0 0 0 0.25rem rgba(32, 142, 201, 0.09); 
+}
+
+.email-input-dark:-webkit-autofill,
+.email-input-dark:-webkit-autofill:hover, 
+.email-input-dark:-webkit-autofill:focus, 
+.email-input-dark:-webkit-autofill:active {
+    color: white;
+}
+
+.email-input-dark:-webkit-autofill {
+    -webkit-text-fill-color: white;
+    -webkit-background-clip: text;
+}
+
 .form-information,
 .delete-information {
     display: flex;
@@ -78,6 +100,11 @@
     color: #017371;
     text-transform: uppercase;
     font-size:larger;
+}
+
+.update-title-dark,
+.delete-title-dark {
+    color: rgba(5,815,313,0.8);
 }
 
 .delete-message-container {

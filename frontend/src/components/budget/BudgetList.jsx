@@ -119,7 +119,6 @@ function BudgetList() {
             </div>}
             <div className="full-budgets-div">
             <div className= {`table-area-div ${theme === "dark" ? "dark-table-area-div" : ""}`}   
-            // "table-area-div"
             >
                 <table className="budgets-table">
                     <thead>

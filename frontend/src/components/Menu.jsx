@@ -60,7 +60,17 @@ const handleTheme = () => {
 
   return (
     <>
-    <AppBar position="absolute">
+    <AppBar 
+      position="absolute"
+      sx = {{
+        backgroundColor: theme === "dark" ? "#0319394a" : "#1976d2",
+        color: 'white',
+        boxShadow: 0,
+        borderBottom: theme === "dark" ? ' 1px solid #3f6de229' : '1px solid white',
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+      
+      }}
+      >
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
           <Box 
@@ -71,7 +81,7 @@ const handleTheme = () => {
             color="inherit"
             aria-label="toggle theme"
           >
-            {theme === "light" ? <DarkModeRoundedIcon /> : <Brightness7RoundedIcon />}
+            {theme === "light" ? <DarkModeRoundedIcon sx={{color: "#1a233a"}}/> : <Brightness7RoundedIcon sx={{color: " #FDB813"}}/>}
           </IconButton>
 
             {isAuthenticated && <Button
@@ -105,7 +115,14 @@ const handleTheme = () => {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ 
+                mt: '45px',
+                '& .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper' : {
+                  backgroundColor: theme === "dark" ? "#1a1a1a" : "#1976d2",
+                  border: theme === "dark" ? '1px solid black' : '1px solid white',
+                  color: 'white',
+                  }
+                }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -119,6 +136,7 @@ const handleTheme = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              bgColor= {theme === "dark" ? "primary.dark" : "primary.light"}
             > 
 
                 <MenuItem 

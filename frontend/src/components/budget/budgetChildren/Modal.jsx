@@ -1,26 +1,30 @@
+import { useSelector } from "react-redux";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import PropTypes from "prop-types";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #e0e0e0',
-  boxShadow: 24,
-  borderRadius: '10px',
-  pt: 2,
-  px: 4,
-  pb: 3,
-  textAlign: 'center',
-};
-
 
 function DeleteModal({isModalOpen, handleDelete, closeModal, dateFrom, dateTo}) {
+  const theme = useSelector((state) => state.theme.theme);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: theme === "dark" ? 'black' : 'white',
+    color: theme === "dark" ?  'white' : 'black',
+    border: theme === "dark" ? '1px solid #3f8be2a3' : '1px solid rgba(1, 115, 113, 0.144)',
+    boxShadow: theme === "dark" ? '0 0 10px   #3f8be25a' : '0 0 10px #0173714a',
+    borderRadius: '10px',
+    pt: 2,
+    px: 4,
+    pb: 3,
+    textAlign: 'center',
+  };
+
   if (!isModalOpen) {
     return null;
   }
@@ -31,22 +35,22 @@ function DeleteModal({isModalOpen, handleDelete, closeModal, dateFrom, dateTo}) 
         aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
-          <h2 id="parent-modal-title">Delete Budget</h2>
+          <h2 className={`parent-modal-title ${theme==='dark' ? 'parent-modal-title-dark' : '' }`}>Delete Budget</h2>
           <p id="parent-modal-description">
             Are you sure you want to permanently delete this budget?
           </p>
-          <p id="parent-modal-description-dates"><span className="date-delete-modal">{`${dateFrom.split('/').join('-')}`}</span> to <span className="date-delete-modal">{`${dateTo.split('/').join('-')}`}</span></p>
+          <p id="parent-modal-description-dates"><span className={`date-delete-modal ${theme==='dark' ? 'date-delete-modal-dark' : '' }`}>{`${dateFrom.split('/').join('-')}`}</span> to <span className={`date-delete-modal ${theme==='dark' ? 'date-delete-modal-dark' : '' }`}>{`${dateTo.split('/').join('-')}`}</span></p>
           <div className="budget-modal-buttons-div">
             <Button 
                 sx = {{width: '40%'}}
                 color="error"
-                variant="contained"
+                variant= {theme === "dark" ? "outlined" : "contained"}
                 onClick={handleDelete}>Delete
             </Button>
 
             <Button 
                 sx = {{width: '40%'}}
-                variant='contained'
+                variant= {theme === "dark" ? "outlined" : "contained"}
                 onClick={closeModal}>Cancel
             </Button>
           </div>

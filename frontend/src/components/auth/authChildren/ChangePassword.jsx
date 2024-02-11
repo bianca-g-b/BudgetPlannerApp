@@ -1,6 +1,6 @@
 import "../../../styles/auth/ChangePassword.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
@@ -16,6 +16,7 @@ function ChangePassword() {
     const [openFail, setOpenFail] = useState(false);
     const [openWarning, setOpenWarning] = useState(false);
     const [openPasswordWarning, setOpenPasswordWarning] = useState(false);
+    const theme = useSelector((state) => state.theme.theme);
 
     const dispatch = useDispatch();
 
@@ -62,7 +63,7 @@ function ChangePassword() {
         <div className="change-psw-main-container">
             <div className="change-psw-container">
                 <div className="change-psw-info-container">
-                    <p className="psw-form-information">Change password</p>
+                    <p className={`psw-form-information ${theme==='dark' ? 'psw-form-information-dark' : '' }`}>Change password</p>
                 </div>
                 
                 <form className="change-psw-form"
@@ -71,7 +72,7 @@ function ChangePassword() {
                     <div className="new-password-container">
                         <label htmlFor="password">Current password</label>
                         <input type="password" 
-                            className="change-psw-input" 
+                            className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`}
                             placeholder="Enter current password"
                             onChange = {(e)=> setOldPassword(e.target.value)}
                         />
@@ -80,7 +81,7 @@ function ChangePassword() {
                     <div className="new-password-container">
                         <label htmlFor="password">New password</label>
                         <input type="password" 
-                            className="change-psw-input" 
+                            className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`}
                             placeholder="Enter new password"
                             onChange = {(e)=> setPassword(e.target.value)}
                         />
@@ -89,7 +90,7 @@ function ChangePassword() {
                     <div className="new-password-container">
                         <label htmlFor="password">Confirm password</label>
                         <input type="password" 
-                            className="change-psw-input" 
+                            className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`} 
                             placeholder="Confirm new password"
                             onChange = {(e) => setConfirmPassword(e.target.value)}
                         />
@@ -101,8 +102,8 @@ function ChangePassword() {
                         minLength={8}
                         value={password}
                         valueAgain={confirmPassword}
-                        validTextColor= '#017371'
-                        invalidTextColor= '#017371'
+                        validTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
+                        invalidTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
                         messages = {{
                             minLength: "Password must be at least 8 characters long",
                             lowercase: "Password must contain at least one lowercase letter",
@@ -114,8 +115,10 @@ function ChangePassword() {
                     />
 
                     <div className="submit-container new-psw-button-div">
-                        <Button type="submit" className="submit-button"
-                                variant="contained">Submit
+                        <Button type="submit" 
+                                className="submit-button"
+                                variant={theme === "dark" ? "outlined" : "contained"}
+                                >Submit
                         </Button>
                     </div>
 

@@ -13,6 +13,7 @@ function Account() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openFail, setOpenFail] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
+    const theme = useSelector((state) => state.theme.theme);
 
     const dispatch = useDispatch();
 
@@ -56,8 +57,8 @@ function Account() {
             <div className="account-header-container">
                 <p className="account-header">Account</p>
             </div>
-            <div className = "main-account-container">
-                <div className="account-container">    
+            <div className = {`main-account-container ${theme==="dark" ? "main-account-container-dark" : ""}`}>
+                <div className={`account-container ${theme==="dark" ? "account-container-dark" : "" }`}>    
                     <div className= "intro-container">
                         <div className="intro-title">Welcome, </div>
                         <div className="intro-user">{user}</div>
@@ -66,19 +67,19 @@ function Account() {
                     </div>
                     
                     <div className="account-options-container">
-                        <div className="account-title">MY ACCOUNT</div>
+                        <div className={`account-title ${theme==="dark" ? "account-title-dark" : ""}`}>MY ACCOUNT</div>
                         <NavLink 
-                            className="account-link"
+                            className={`account-link ${theme === "dark" ? "account-link-dark" : ""}`}
                             to="/account/email"
                             onClick={hideDescription}
                             >Email</NavLink>
                         <NavLink 
-                            className="account-link"
+                            className={`account-link ${theme === "dark" ? "account-link-dark" : ""}`}
                             to="/account/password"
                             onClick={hideDescription}
                             >Password</NavLink>
                         <button 
-                            className="delete-account-button account-link"
+                            className={`delete-account-button account-link ${theme === "dark" ? "account-link-dark" : ""}`}
                             onClick={openModal}
                             >Delete account</button>
                     </div>
@@ -99,9 +100,9 @@ function Account() {
                 {showDescription && 
                     <div className="account-description-container">
                         <div className="account-description">
-                            <h3 className="account-description-title">Welcome to your account page</h3>
+                            <h3 className={`account-description-title ${theme==="dark" ? "account-description-title-dark" : "" }`}>Welcome to your account page</h3>
                             <p className="account-description-text">Here you can manage your account details.</p>
-                            <p>Use the <span className="my-account-reference">MY ACCOUNT</span> menu on the left to modify your details or to delete your account.</p>
+                            <p>Use the <span className={`my-account-reference ${theme==="dark" ? "my-account-reference-dark" : "" }`}>MY ACCOUNT</span> menu on the left to modify your details or to delete your account.</p>
                         </div>
                     </div>
                 }

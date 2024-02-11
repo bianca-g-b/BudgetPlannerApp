@@ -9,6 +9,12 @@
     margin-top: 10.3%;
 }
 
+.main-bar-chart-div-dark {
+    background-color: #1e14a70a;
+    border: 1px solid #3f8be2a3;
+    box-shadow: 0 0 10px #3f8be25a;
+}
+
 .empty-budget-chart-message {
     margin-left: 2%;
     margin-top: 1%;
