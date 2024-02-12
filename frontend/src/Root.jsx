@@ -16,6 +16,7 @@ import MenuAppBar from './components/Menu.jsx';
 import PasswordReset from './components/auth/passwordReset/PasswordReset.jsx';
 import PasswordResetDone from './components/auth/passwordReset/PasswordResetDone.jsx';
 import PasswordResetConfirm from './components/auth/passwordReset/PasswordResetConfirm.jsx';
+import PasswordResetComplete from './components/auth/passwordReset/PasswordResetComplete.jsx';
 
 function Root() {
     return (
@@ -65,7 +66,8 @@ function Root() {
                 <Route path="/" element={<About />} />
                 <Route path="reset" element={<PasswordReset />} />
                 <Route path="reset/sent" element={<PasswordResetDone />} />
-                <Route path="reset/:uid/:token" element={<PasswordResetConfirm />} />
+                <Route path="reset/:uidb64/:token" element={<PasswordResetConfirm />} />
+                <Route path="reset/success" element={<PasswordResetComplete />} />
             
             </Route>
         

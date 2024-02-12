@@ -19,7 +19,7 @@ import Root from './Root.jsx';
 import PasswordReset from './components/auth/passwordReset/PasswordReset.jsx';
 import PasswordResetDone from './components/auth/passwordReset/PasswordResetDone.jsx';
 import PasswordResetConfirm from './components/auth/passwordReset/PasswordResetConfirm.jsx';
-
+import PasswordResetComplete from './components/auth/passwordReset/PasswordResetComplete.jsx';
 
 const router = createBrowserRouter([{
     Component: MenuAppBar,
@@ -51,7 +51,8 @@ const router = createBrowserRouter([{
         { path: "/", Component: About},
         { path: "/reset", Component: PasswordReset},
         { path: "/reset/sent", Component: PasswordResetDone},
-        { path: "/reset/:uid/:token", Component: PasswordResetConfirm},
+        { path: "/reset/:uidb64/:token", Component: PasswordResetConfirm},
+        { path: "/reset/success", Component: PasswordResetComplete},
         { path: "*", Component: Root}
       ]
 }])

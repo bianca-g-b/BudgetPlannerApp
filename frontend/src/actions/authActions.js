@@ -235,3 +235,27 @@ export const passwordReset = async (email) => {
     }
 }
 
+// password reset confirm
+export const passwordResetConfirm = async (uid, token, password, confirmPassword) => {
+    const csrfToken = document.cookie.split("csrftoken=")[1].split(";")[0];
+    const response = await fetch(`${baseUrl}/auth/resetpasswordconfirm/${uid}/${token}`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+        }, 
+        body: JSON.stringify({
+            password: password,
+            confirmPassword: confirmPassword,
+        }),
+        credentials: "include",
+        });
+    if (response.ok) {
+        console.log("Password reset successful");
+        return response;   
+    } else {
+        console.log("Password reset failed. Please try again.");
+        return response;
+    }
+}
