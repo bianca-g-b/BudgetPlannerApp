@@ -18,6 +18,7 @@ import BudgetById from './components/budget/budgetChildren/BudgetById.jsx';
 import Root from './Root.jsx';
 import PasswordReset from './components/auth/passwordReset/PasswordReset.jsx';
 import PasswordResetDone from './components/auth/passwordReset/PasswordResetDone.jsx';
+import PasswordResetConfirm from './components/auth/passwordReset/PasswordResetConfirm.jsx';
 
 
 const router = createBrowserRouter([{
@@ -50,6 +51,7 @@ const router = createBrowserRouter([{
         { path: "/", Component: About},
         { path: "/reset", Component: PasswordReset},
         { path: "/reset/sent", Component: PasswordResetDone},
+        { path: "/reset/:uid/:token", Component: PasswordResetConfirm},
         { path: "*", Component: Root}
       ]
 }])

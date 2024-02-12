@@ -7,11 +7,9 @@ from django.core.mail import send_mail
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.conf import settings
 import json
-import os
-from dotenv import load_dotenv
 
 # Create views here
 
@@ -175,8 +173,7 @@ def reset_password(request):
                 user = User.objects.get(email=email)
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
                 token = PasswordResetTokenGenerator().make_token(user)
-                port = os.environ.get("PORT")
-                email_url = f"http://127.0.0.1:{port}/reset/{uid}/{token}"
+                email_url = f"http://127.0.0.1:5173/reset/{uid}/{token}"
                 #send email with password reset link
                 send_mail(
                     "Password reset request",
@@ -193,7 +190,29 @@ def reset_password(request):
     else:
         return JsonResponse({"message": "Password reset email not sent"}, status = 400)
 
-
+# password reset confirm view
+@csrf_exempt
+def reset_password_confirm(request, uidb64, token):
+    if request.method == "POST":
+        if request.content_type == "application/json":
+            data = json.loads(request.body.decode("utf-8"))
+            password = data.get("password")
+            confirmPassword = data.get("confirmPassword")
+            if password == confirmPassword:
+                uid = force_bytes(urlsafe_base64_decode(uidb64))
+                user = User.objects.get(pk=uid)
+                if PasswordResetTokenGenerator().check_token(user, token):
+                    user.set_password(password)
+                    user.save()
+                    return JsonResponse({"message": "Password reset successful"}, status = 200)
+                else:
+                    return JsonResponse({"message": "Password reset failed"}, status = 400)
+            else:
+                return JsonResponse({"message": "Passwords do not match"}, status = 400)
+        else:
+            return JsonResponse({"message": "Password reset failed"}, status = 400)
+    else:
+        return JsonResponse({"message": "Password reset failed"}, status = 400)
 
 
 

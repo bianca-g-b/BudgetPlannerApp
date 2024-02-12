@@ -38,12 +38,27 @@ function Register() {
         } else {
             return false;
     }}
+    
+    // username validation
+   function validateUsername(username) {
+        if (username.length>=6) {
+            // check if username contains at least one lowercase letter
+            if (username.match(/[a-z]/)) {
+                return true;
+            } else {
+                return false;
+            } 
+        } else {
+            return false;
+        }
+    }
 
+   console.log(validateUsername('a1235'), "validateUsername")
     // create user account    
     async function handleRegister(e) {
         e.preventDefault();
         if (password === confirmPassword) {
-            if (validatePassword(password)=== true) {
+            if (validatePassword(password)=== true && validateUsername(username)=== true) {
                 const csrfToken = await fetchCSRFToken(dispatch);
                 const response = await registerUser(username, password, confirmPassword, email, csrfToken);
                 if (response.status === 202) {
@@ -115,6 +130,19 @@ function Register() {
                         onChange = { (e) => setConfirmPassword(e.target.value)}
                         />
                 </div>
+                <PasswordChecklist
+                    className= "password-checklist"
+                    rules={["minLength", "lowercase"]}
+                    minLength={6}
+                    value={username}
+                    validTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
+                    invalidTextColor= {theme === "dark" ? 'rgba(5,815,313,0.8)' : '#017371'}
+                    messages = {{
+                        minLength: "Username must be at least 6 characters long",
+                        lowercase: "Username must contain at least one lowercase letter",
+                    }}
+                    onChange={(isValid) => console.log("Is valid?", isValid)}
+                        />
 
                 <PasswordChecklist
                         className= "password-checklist"
@@ -134,7 +162,7 @@ function Register() {
                         onChange={(isValid) => console.log("Is valid?", isValid)}
                     />
                     <Button 
-                    sx={{ marginTop: "4%", }}
+                        sx={{ marginTop: "4%", }}
                         type="submit" 
                         color="primary"
                         variant={theme === "dark" ? "outlined" : "contained"}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup, signin, signout, get_csrf_token, user_details, change_email, delete_email, change_password, delete_account, reset_password
+from .views import signup, signin, signout, get_csrf_token, user_details, change_email, delete_email, change_password, delete_account, reset_password, reset_password_confirm
 
 app_name = "authentication"
 
@@ -13,5 +13,6 @@ urlpatterns = [
     path("emaildelete", delete_email, name="emaildelete"),
     path("changepassword", change_password, name="changepassword"),
     path("deleteaccount", delete_account, name="deleteaccount"),
-    path("resetpassword", reset_password, name="resetpassword"),   
+    path("resetpassword", reset_password, name="resetpassword"),
+    path("resetpasswordconfirm", reset_password_confirm, name="resetpasswordconfirm"),
 ]
