@@ -145,15 +145,16 @@
     font-weight: 400;
 }
 
-.forgot-password-link-dark {
-    color: rgba(5,815,313,0.8);
-}
-
 .forgot-password-link:hover {
     color: #1668b9;
     font-weight: 500;
 }
 
+.forgot-password-link-dark {
+    color: rgba(5,815,313,0.8);
+}
+
 .forgot-password-link-dark:hover {
     color: #2f97ff;
+    font-weight: 500;
 }
