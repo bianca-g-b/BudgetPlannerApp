@@ -50,11 +50,6 @@ function MainChart() {
         },
         slotProps: {
           popper : {
-            style: {
-              width: '30%',
-              transform: 'translate3d(-2.1rem, -2expx)',
-              
-            },
             placement: 'auto',
             sx: {
               "& .css-1vz5lb3-MuiChartsTooltip-container": {
