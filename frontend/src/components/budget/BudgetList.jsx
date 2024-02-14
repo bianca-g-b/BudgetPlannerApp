@@ -2,8 +2,8 @@ import "../../styles/budget/BudgetList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {getBudgetList, getBudgetById, deleteBudget} from "../../actions/budgetActions.js";
-import { setBudgetList, setBudgetById, setId, setClicked, setCurrentBudgets } from "../../redux/budgetSlice.js";
-import { NavLink, Outlet} from "react-router-dom";
+import { setBudgetList, setBudgetById, setId, setClicked, setCurrentBudgets, setCurrentPage } from "../../redux/budgetSlice.js";
+import { NavLink, Outlet, useNavigate} from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
@@ -12,9 +12,11 @@ import MuiAlert from '@mui/material/Alert';
 
 function BudgetList() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const budgetList = useSelector((state) => state.budget.budgetList);
     const currentBudgets = useSelector((state) => state.budget.currentBudgets);
+    const currentPage = useSelector((state) => state.budget.currentPage);
     const budget = useSelector((state)=> state.budget.budgetById);
     const id = useSelector((state)=> state.budget.id);
     const clicked = useSelector((state)=> state.budget.clicked);
@@ -24,11 +26,10 @@ function BudgetList() {
     const [totalPages, setTotalPages] = useState(0);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
-    
 
-    console.log(budgetList, "testing state budgetlist");
-    console.log(currentBudgets, "testing state currentbudgets");
-    console.log(budget, "testing state budgetbyid");
+    console.log("budgetList", budgetList)
+    console.log(currentBudgets)
+    
 
     // fetch data
     useEffect(() => {
@@ -37,12 +38,19 @@ function BudgetList() {
                 .then((action) => {
                     if (getBudgetList.fulfilled.match(action)) {
                         dispatch(setBudgetList(action.payload));
-                        dispatch(setCurrentBudgets(action.payload.slice(0, 10)));
+                        // dispatch(setCurrentBudgets(action.payload.slice(0, 10)));
                     }
                 })               
         }
         fetchData()
     }, [dispatch, csrfToken]);
+
+    // use effect to set currentBudgets to be the first 10 items in the budgetList, but only when going first time to the page
+    useEffect(() => {
+        if (budgetList.length > 0 && currentBudgets.length === 0) {
+            dispatch(setCurrentBudgets(budgetList.slice(0, 10)));
+        }
+    }, [budgetList, currentBudgets, dispatch])
 
     // get and set budget by id, id
     async function budgetById(id) {
@@ -95,6 +103,8 @@ function BudgetList() {
         }
     }
 
+    console.log(typeof handleDeleteBudget)
+
     // use effect to set total number of pages in pagination
     useEffect(() => {
         setTotalPages(Math.ceil(budgetList.length/10));
@@ -106,8 +116,20 @@ function BudgetList() {
         const firstIndex = (value-1) * 10;
         const lastIndex = firstIndex + 10;
         dispatch(setCurrentBudgets(budgetList.slice(firstIndex, lastIndex)));
+        //set clicked to the first id value in the currentBudgets array
+        dispatch(setCurrentPage(value));
     }
 
+    //write useEffect to change value of budget, id, clicked every time current budget and current page change
+    useEffect(() => {
+        if (currentBudgets.length > 0 && currentPage) {
+            dispatch(setClicked(currentBudgets[0].id));
+            navigate(`/dashboard/page=${currentPage}/${currentBudgets[0].id}`)
+            dispatch(getBudgetById(currentBudgets[0].id))
+            dispatch(setBudgetById(currentBudgets[0]));
+            dispatch(setId(currentBudgets[0].id));
+        }
+    } ,[currentBudgets,currentPage, dispatch, navigate])
 
     return (
         <div className="trial-first-div">
@@ -138,7 +160,7 @@ function BudgetList() {
                                     <td className="date-to-col">{budgetItem.date_to}</td>
                                     <td className="button-col see-more">
                                         <NavLink 
-                                            to={`/dashboard/${budgetItem.id}`}
+                                            to={`/dashboard/page=${currentPage}/${budgetItem.id}`}
                                             className="see-more-link"
                                             onClick={() => budgetById(budgetItem.id)}
                                              >&#x3e;</NavLink></td>
@@ -150,6 +172,7 @@ function BudgetList() {
                 {budgetList.length > 10 && <div className="budget-pagination-div">
                     <Stack spacing={2}>
                         <Pagination 
+                            page={currentPage}
                             count={totalPages}
                             onChange={(event, value) => handlePageChange(value)}
                             color="primary"
@@ -164,7 +187,7 @@ function BudgetList() {
                 {budget && <Outlet 
                     context= {{
                         budgetbyid: budget,
-                        handleDelete: () => handleDeleteBudget(budget.id),
+                        handleDeleteBudget: () => handleDeleteBudget(budget.id),
                         isModalOpen: isModalOpen,
                         openModal: openModal,
                         closeModal: closeModal,

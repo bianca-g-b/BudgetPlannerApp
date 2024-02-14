@@ -29,7 +29,7 @@ const router = createBrowserRouter([{
 
             { path: "/dashboard/*", Component: BudgetList,
               children: [
-                { Component: BudgetById, path: ":id" }
+                { Component: BudgetById, path: ":page/:id" }
               ]
             },
 

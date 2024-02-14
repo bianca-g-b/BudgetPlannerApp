@@ -25,7 +25,7 @@ function Root() {
 
                 <Route path="/dashboard" element={
                     <PrivateRoute><BudgetList /></PrivateRoute>}>
-                        <Route path=":id" element={
+                        <Route path=":page/:id" element={
                             <BudgetById />}/>  
                 </Route>
                 

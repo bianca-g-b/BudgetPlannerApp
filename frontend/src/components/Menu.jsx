@@ -27,9 +27,7 @@ export default function MenuAppBar() {
 
   const csrfToken = useSelector((state) => state.csrf.csrfToken);
   const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
-  const theme = useSelector((state) => state.theme.theme);
-  console.log(theme, "theme");
-  
+  const theme = useSelector((state) => state.theme.theme);  
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -55,7 +53,6 @@ export default function MenuAppBar() {
 // toggle theme
 const handleTheme = () => {
   dispatch(toggleTheme());
-  console.log(theme, "theme");
 }
 
   return (

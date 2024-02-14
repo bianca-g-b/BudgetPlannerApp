@@ -8,7 +8,8 @@ export const budgetSlice = createSlice({
         currentBudgets: [],
         budgetById: null,
         id: null,
-        clicked: false,
+        clicked: null,
+        currentPage: 1,
     },
     reducers: 
     {
@@ -36,12 +37,16 @@ export const budgetSlice = createSlice({
         },
         setCurrentBudgets: (state, action) => {
             state.currentBudgets = action.payload;
+        }, 
+        setCurrentPage: (state, action) => {
+            state.currentPage = action.payload;
+        
         }
     }
 })
 
 // export actions
-export const { setBudgetList, createBudget, setBudgetById, updateBudget, setId, removeBudget, setClicked, setCurrentBudgets } = budgetSlice.actions;
+export const { setBudgetList, createBudget, setBudgetById, updateBudget, setId, removeBudget, setClicked, setCurrentBudgets, setCurrentPage } = budgetSlice.actions;
 
 // export reducer
 export default budgetSlice.reducer;
