@@ -12,7 +12,7 @@ function MainChart() {
     const [totalPages, setTotalPages] = useState(0);
     const theme = useSelector((state) => state.theme.theme);
 
-    // extract chosen data from all budgets and create a dataset, then reverse it so that the most recently added budget is first
+    // extract chosen data from all budgets and create a dataset
     const dataset = budgetList.map((budget, index)=> {
         return {
             x: `${budgetList.length-index}. \n ${budget.date_from} - ${budget.date_to}`,
@@ -23,10 +23,9 @@ function MainChart() {
             savings: parseFloat(budget.total_savings),
         }
     })
-    dataset.reverse();
 
-    // set chartData to be the first 5 items in the dataset
-    const [chartData, setChartData] = useState(dataset.slice(0, 5));
+    // set chartData to be the first 6 items in the dataset
+    const [chartData, setChartData] = useState(dataset.slice(0, 6));
 
     const chartSettings = {
         yAxis: [
@@ -74,13 +73,13 @@ function MainChart() {
 
     // use effect to set total number of pages in pagination
     useEffect(() => {
-        setTotalPages(Math.ceil(budgetList.length/5));
+        setTotalPages(Math.ceil(budgetList.length/6));
     },[budgetList])
 
     // write function to handle page change and set chartData to be the correct 5 items from the dataset
     function handlePageChange(value) {
-      const firstIndex = (value-1) * 5;
-      const lastIndex = firstIndex + 5;
+      const firstIndex = (value-1) * 6;
+      const lastIndex = firstIndex + 6;
       setChartData(dataset.slice(firstIndex, lastIndex));
     }
 
