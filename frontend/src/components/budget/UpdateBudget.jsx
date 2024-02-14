@@ -26,6 +26,7 @@ function UpdateBudget() {
     const [openFail, setOpenFail] = useState(false);
 
     //extract budget by id from budget list
+    console.log(budgetList, "budgetList in update main");
     const budgetById2 = budgetList.find((budget) => budget.id === id2);
     console.log(budgetById2, "budgetById2 in update main");
     console.log("id", id2);

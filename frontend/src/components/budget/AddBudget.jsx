@@ -12,16 +12,21 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood,
     setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../../redux/budgetFieldsSlice.js';
+import { setCurrentPage } from "../../redux/budgetSlice.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+
 
 
 function AddBudget() {
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
+    const currentPage = useSelector((state) => state.budget.currentPage);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
+
+    console.log(currentPage, "currentPage in AddBudget")
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -89,9 +94,10 @@ function AddBudget() {
                     if (addBudget.fulfilled.match(action)) {
                         console.log(action.payload);
                         setOpenSuccess(true);
+                        dispatch(setCurrentPage(1));
                         // navigate to dashboard after 1.5 seconds
                         setTimeout(() => {
-                            navigate("/dashboard");
+                            navigate(`/dashboard`);
                             window.location.reload();
                         }, 1500);
                     } else {

@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-
 function BudgetList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -28,7 +27,7 @@ function BudgetList() {
     const [openFail, setOpenFail] = useState(false);
 
     console.log("budgetList", budgetList)
-    console.log(currentBudgets)
+    console.log(currentBudgets, "currentBudgets")
     
 
     // fetch data
@@ -38,19 +37,16 @@ function BudgetList() {
                 .then((action) => {
                     if (getBudgetList.fulfilled.match(action)) {
                         dispatch(setBudgetList(action.payload));
-                        // dispatch(setCurrentBudgets(action.payload.slice(0, 10)));
+                        const firstIndex = (currentPage-1) * 10;
+                        const lastIndex = firstIndex + 10;
+                        dispatch(setCurrentBudgets(action.payload.slice(firstIndex, lastIndex)));
                     }
-                })               
+                })
+           
         }
         fetchData()
-    }, [dispatch, csrfToken]);
+    }, [dispatch, csrfToken, currentPage]);
 
-    // use effect to set currentBudgets to be the first 10 items in the budgetList, but only when going first time to the page
-    useEffect(() => {
-        if (budgetList.length > 0 && currentBudgets.length === 0) {
-            dispatch(setCurrentBudgets(budgetList.slice(0, 10)));
-        }
-    }, [budgetList, currentBudgets, dispatch])
 
     // get and set budget by id, id
     async function budgetById(id) {
@@ -73,8 +69,8 @@ function BudgetList() {
         }
     }, [clicked, id])
 
-       // open modal
-       function openModal() {
+    // open modal
+    function openModal() {
         setIsModalOpen(true);
     }
 
@@ -90,8 +86,10 @@ function BudgetList() {
                 .then((action) => {
                     if (deleteBudget.fulfilled.match(action)) {
                         setOpenSuccess(true);
+                        dispatch(setCurrentPage(1));
                         // reload dashboard after 1.5 seconds
                         setTimeout(() => {
+                            navigate(`/dashboard`);
                             window.location.reload();
                         }, 1500);
                     } else {
@@ -102,8 +100,6 @@ function BudgetList() {
             console.log(error);
         }
     }
-
-    console.log(typeof handleDeleteBudget)
 
     // use effect to set total number of pages in pagination
     useEffect(() => {
@@ -120,7 +116,7 @@ function BudgetList() {
         dispatch(setCurrentPage(value));
     }
 
-    //write useEffect to change value of budget, id, clicked every time current budget and current page change
+    //write useEffect to change value of budget, id, clicked every time current budgets and current page change
     useEffect(() => {
         if (currentBudgets.length > 0 && currentPage) {
             dispatch(setClicked(currentBudgets[0].id));
@@ -139,7 +135,16 @@ function BudgetList() {
                     className={`add-budget-link ${theme === "dark" ? "dark-add-budget-link" : ""}`}
                     to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink> 
             </div>}
-            <div className="full-budgets-div">
+
+            {budgetList.length === 0 && <div className="empty-budget-list-div">
+                <p className="empty-budget-list-message">No budgets found. Add a budget to see it here.</p>
+                <NavLink
+                    className="add-budget-link"
+                    to="/dashboard/addbudget">Add new budget &#x21F1;</NavLink>
+            </div>}
+
+            
+            {currentBudgets && currentBudgets.length > 0 &&<div className="full-budgets-div">
             <div className= {`table-area-div ${theme === "dark" ? "dark-table-area-div" : ""}`}   
             >
                 <table className="budgets-table">
@@ -194,7 +199,7 @@ function BudgetList() {
                     }}
                     />}
             
-            </div>
+            </div>}
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
                 <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
