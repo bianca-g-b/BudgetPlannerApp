@@ -28,6 +28,7 @@ function BudgetList() {
 
     console.log("budgetList", budgetList)
     console.log(currentBudgets, "currentBudgets")
+    console.log("currentPage", currentPage)
     
 
     // fetch data
@@ -86,7 +87,9 @@ function BudgetList() {
                 .then((action) => {
                     if (deleteBudget.fulfilled.match(action)) {
                         setOpenSuccess(true);
-                        dispatch(setCurrentPage(1));
+                        if (budgetList.length % 10 === 1 && currentPage > 1) {
+                            dispatch(setCurrentPage(currentPage-1));
+                        }
                         // reload dashboard after 1.5 seconds
                         setTimeout(() => {
                             navigate(`/dashboard`);
