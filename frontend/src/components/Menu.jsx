@@ -73,13 +73,6 @@ const handleTheme = () => {
           <Box 
           sx={{ flexGrow: 1, display: 'flex', maxWidth: '100%', justifyContent: 'flex-start' }}
           >
-          <IconButton
-            onClick={handleTheme}
-            color="inherit"
-            aria-label="toggle theme"
-          >
-            {theme === "light" ? <DarkModeRoundedIcon sx={{color: "#1a233a"}}/> : <Brightness7RoundedIcon sx={{color: " #FDB813"}}/>}
-          </IconButton>
 
             {isAuthenticated && <Button
             component={Link}
@@ -98,6 +91,16 @@ const handleTheme = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+
+          <IconButton
+            sx = {{marginRight: '10px', marginTop: '2px'}}
+            onClick={handleTheme}
+            color="inherit"
+            aria-label="toggle theme"
+          >
+            {theme === "light" ? <DarkModeRoundedIcon sx={{color: "#1a233a"}}/> : <Brightness7RoundedIcon sx={{color: " #FDB813"}}/>}
+          </IconButton>
+
             <Tooltip title="Open menu">
               <IconButton 
               onClick={handleOpenUserMenu} 

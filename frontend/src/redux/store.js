@@ -6,6 +6,7 @@ import userSlice from "./userSlice";
 import authenticatedSlice from "./authenticatedSlice";
 import logoutSlice from "./logoutSlice";
 import themeSlice from "./themeSlice";
+import chartSlice  from "./chartSlice";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from "redux-persist";
 
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
     authenticated: authenticatedSlice,
     logout: logoutSlice,
     theme: themeSlice,
+    chart: chartSlice,
 });
 
 const rootReducer = (state, action) => {
