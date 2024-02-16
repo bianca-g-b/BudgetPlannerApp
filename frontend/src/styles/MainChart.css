@@ -27,3 +27,46 @@
 .empty-budget-chart-message:hover {
     color: #017371;
 }
+
+/*Media queries*/
+@media (max-width: 1850px) {
+    .main-bar-chart-div {
+        margin-top: 12%;
+    }
+}
+
+@media (max-width: 1700px) {
+    .main-bar-chart-div {
+        margin-top: 14%;
+    }
+}
+
+@media (max-width: 1500px) {
+    .main-bar-chart-div {
+        margin-top: 16%;
+    }
+}
+
+@media (max-width: 1300px) {
+    .main-bar-chart-div {
+        margin-top: 18%;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-bar-chart-div {
+        margin-top: 25%;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-bar-chart-div {
+        margin-top: 30%;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-bar-chart-div {
+        margin-top: 35%;
+    }
+}
