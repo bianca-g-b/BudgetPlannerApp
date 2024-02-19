@@ -59,7 +59,7 @@ function MainChart() {
 
 
     useEffect(() => {
-      // calculate the new data count based on screen width and set the chart height and pagination size accordingly
+      // calculate the new data count based on screen width and set the chart height and pagination size accordingly 
       let newDataCount;
       if (screenWidth <= 900) {
         newDataCount = 3;
