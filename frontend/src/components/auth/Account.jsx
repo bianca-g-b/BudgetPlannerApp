@@ -1,5 +1,5 @@
 import "../../styles/auth/Account.css";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import DeleteAccountModal from "./authChildren/DeleteAccountModal";
@@ -10,13 +10,13 @@ import MuiAlert from '@mui/material/Alert';
 function Account() {
     const user = useSelector((state) => state.user.username);
     const email = useSelector((state) => state.user.email);
+    const theme = useSelector((state) => state.theme.theme);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openFail, setOpenFail] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
-    const theme = useSelector((state) => state.theme.theme);
-
+    const location = useLocation();
     const dispatch = useDispatch();
-
+    
     // open modal
     function openModal() {
         setIsModalOpen(true);
@@ -50,7 +50,7 @@ function Account() {
         } else {
             setShowDescription(false);
         }
-    }, [])
+    }, [location])
 
     return (
         <div className="full-account-area">
