@@ -126,6 +126,9 @@
   border-left: none;
   border-right: none;
   border-top: none;
+  align-self: flex-start;
+  width: 100%;
+  text-align: left;
 }
 
 /* Delete account modal */
@@ -184,4 +187,93 @@
 
 .my-account-reference-dark {
   color: rgba(5,815,313,0.8);
+}
+
+/*Media queries*/
+@media (max-width: 2300px) {
+  .full-account-area {
+    margin-top: 8.6%;
+  }
+}
+
+@media (max-width: 2050px) {
+  .full-account-area {
+    margin-top: 9.6%;
+  }
+}
+
+@media (max-width: 1750px) {
+  .full-account-area {
+    margin-top: 10.6%;
+  }
+}
+
+@media (max-width: 1500px) {
+  .full-account-area {
+    margin-top: 12.6%;
+  }
+  .account-container, .account-container-dark {
+    border-right: none;
+    margin-right: 0;
+  }
+  .account-options-container {
+    width: 200px;
+  }
+  .change-psw-main-container {
+    margin-left: 0;
+  }
+  .intro-title {
+    font-size: large;
+  }
+  .intro-user, .intro-email {
+    font-size: medium;
+  }
+}
+
+@media (max-width: 1300px) {
+  .full-account-area {
+    margin-top: 14.6%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .full-account-area {
+    margin-top: 16.6%;
+  }
+  .account-options-container {
+    width: 100%;
+  }
+  .account-container, .account-container-dark {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .full-account-area {
+    margin-top: 18.6%;
+  }
+}
+
+@media (max-width: 750px) {
+  .full-account-area {
+    margin-top: 20.6%;
+  }
+}
+
+@media (max-width: 600px) {
+  .full-account-area {
+    margin-top: 23.6%;
+  }
+}
+
+@media (max-width: 450px) {
+  .full-account-area {
+    margin-top: 27%;
+  }
+}
+
+@media (max-width: 350px) {
+  .full-account-area {
+    margin-top: 33%;
+  }
 }
