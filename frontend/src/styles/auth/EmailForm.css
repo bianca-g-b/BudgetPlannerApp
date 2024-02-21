@@ -3,6 +3,7 @@
     flex-direction: row;
     align-items: center;
     margin-top: 8%;
+    /* width: 100%; */
 }
 
 .update-email-container,
@@ -11,11 +12,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 .add-email-container {
-    margin-left: 75%;
+    display: flex;
+    width: 100%;
 }
 
 .email-container {
@@ -114,4 +115,44 @@
 .delete-message-container {
     display: flex;
     margin-top: 1.7%;
+    width: 60%;
+    text-align: justify;
+}
+
+/*Media queries*/
+/*1500px width*/
+@media (max-width: 1500px) {
+    .all-email-container {
+        margin-left: 10%;
+    }
+    .email-container {
+      width: 100%;
+    }
+}
+
+/*1300px width*/
+@media (max-width: 1300px) {
+    .delete-message-container {
+        width: 78%;
+    }
+}
+
+/*1150px width*/
+@media (max-width: 1150px) {
+    .all-email-container {
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+
+    }
+    .update-email-container,
+    .delete-email-container {
+        width: 60%;
+        margin-right: 13%;
+    }
+    .delete-email-container {
+        margin-top: 7%;
+        padding-top: 5%;
+        border-top: 1px solid #0173714a;
+    }
 }

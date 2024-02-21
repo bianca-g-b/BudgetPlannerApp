@@ -190,24 +190,28 @@
 }
 
 /*Media queries*/
+/*2300px width*/
 @media (max-width: 2300px) {
   .full-account-area {
     margin-top: 8.6%;
   }
 }
 
+/*2050px width*/
 @media (max-width: 2050px) {
   .full-account-area {
     margin-top: 9.6%;
   }
 }
 
+/*1750px width*/
 @media (max-width: 1750px) {
   .full-account-area {
     margin-top: 10.6%;
   }
 }
 
+/*1500px width*/
 @media (max-width: 1500px) {
   .full-account-area {
     margin-top: 12.6%;
@@ -230,12 +234,14 @@
   }
 }
 
+/*1300px width*/
 @media (max-width: 1300px) {
   .full-account-area {
     margin-top: 14.6%;
   }
 }
 
+/*1100px width*/
 @media (max-width: 1100px) {
   .full-account-area {
     margin-top: 16.6%;
@@ -248,30 +254,35 @@
   }
 }
 
+/*900px width*/
 @media (max-width: 900px) {
   .full-account-area {
     margin-top: 18.6%;
   }
 }
 
+/*750px width*/
 @media (max-width: 750px) {
   .full-account-area {
     margin-top: 20.6%;
   }
 }
 
+/*600px width*/
 @media (max-width: 600px) {
   .full-account-area {
     margin-top: 23.6%;
   }
 }
 
+/*450px width*/
 @media (max-width: 450px) {
   .full-account-area {
     margin-top: 27%;
   }
 }
 
+/*350px width*/
 @media (max-width: 350px) {
   .full-account-area {
     margin-top: 33%;
