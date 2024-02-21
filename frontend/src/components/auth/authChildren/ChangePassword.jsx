@@ -1,6 +1,7 @@
 import "../../../styles/auth/ChangePassword.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
@@ -61,6 +62,7 @@ function ChangePassword() {
 
     return (
         <div className="change-psw-main-container">
+            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#8630; Back to MY ACCOUNT</NavLink>
             <div className="change-psw-container">
                 <div className="change-psw-info-container">
                     <p className={`psw-form-information ${theme==='dark' ? 'psw-form-information-dark' : '' }`}>Change password</p>

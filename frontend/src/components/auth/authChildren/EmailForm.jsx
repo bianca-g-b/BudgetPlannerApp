@@ -1,6 +1,7 @@
 import "../../../styles/auth/EmailForm.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { updateEmail, deleteEmail,fetchCSRFToken } from "../../../actions/authActions";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
@@ -41,7 +42,7 @@ function EmailForm() {
 
     return (
         <div className="all-email-container">
-
+            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#8630; Back to MY ACCOUNT</NavLink>
             <div className={`update-email-container ${ email ? "" : "add-email-container"}`}>
                 <div className="form-information">
                     {email && <p className={`update-title ${theme==="dark" ? "update-title-dark" : "" }`}>Update email address</p>}
@@ -83,6 +84,7 @@ function EmailForm() {
                 </div>
                 <div className="submit-delete-container">
                      <Button className="delete-email-button"
+                        color="error"
                         variant={theme === "dark" ? "outlined" : "contained"}
                         onClick = {handleDeleteEmail}
                     >Delete</Button>

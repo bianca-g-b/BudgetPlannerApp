@@ -160,7 +160,7 @@ function MainChart() {
                     className="empty-budget-chart-message">Add a budget to see the chart &#x21F1;</NavLink>
                 </div>
                 }
-                {budgetList.length > 0 && <BarChart
+                {budgetList.length > 0 && chartData.length > 0 && <BarChart
                     dataset={chartData}
                     xAxis={[{scaleType: 'band', dataKey: 'x'}]}
                     series={[
@@ -172,7 +172,7 @@ function MainChart() {
                     ]}
                     {...chartSettings}
                 /> }
-                {budgetList.length > 0 && <Stack spacing={2} className="pagination-div">
+                {budgetList.length > 0 && chartData.length > 0 && <Stack spacing={2} className="pagination-div">
                     <Pagination count={totalPages} 
                                 color="primary"
                                 size={paginationSize}

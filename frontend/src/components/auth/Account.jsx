@@ -58,7 +58,8 @@ function Account() {
                 <p className="account-header">Account</p>
             </div>
             <div className = {`main-account-container ${theme==="dark" ? "main-account-container-dark" : ""}`}>
-                <div className={`account-container ${theme==="dark" ? "account-container-dark" : "" }`}>    
+                <div className={`${theme==="dark" ? "account-container account-container-dark" : "account-container" }
+                                ${showDescription ? "show-account" : "hide-account"}`}>    
                     <div className= "intro-container">
                         <div className="intro-title">Welcome, </div>
                         <div className="intro-user">{user}</div>
@@ -102,7 +103,7 @@ function Account() {
                         <div className="account-description">
                             <h3 className={`account-description-title ${theme==="dark" ? "account-description-title-dark" : "" }`}>Welcome to your account page</h3>
                             <p className="account-description-text">Here you can manage your account details.</p>
-                            <p>Use the <span className={`my-account-reference ${theme==="dark" ? "my-account-reference-dark" : "" }`}>MY ACCOUNT</span> menu on the left to modify your details or to delete your account.</p>
+                            <p className="menu-use-instructions">Use the <span className={`my-account-reference ${theme==="dark" ? "my-account-reference-dark" : "" }`}>MY ACCOUNT</span> menu on the left to modify your details or to delete your account.</p>
                         </div>
                     </div>
                 }
