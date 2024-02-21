@@ -25,7 +25,7 @@ function ChangePassword() {
     function validatePassword(password) {
         if (validator.isStrongPassword(password, {
             minLength:8,
-            minSymbols:0,
+            minSymbols:1,
             minUppercase:0,
             minNumbers:1,
         })) {
