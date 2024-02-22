@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
@@ -37,28 +38,72 @@ function BudgetFormInputs({
     unsecuredValue,
 }) {
     const theme = useSelector(state => state.theme.theme);
-
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [labelFontSize, setLabelFontSize] = useState("1rem");
+    const [inputFontSize, setInputFontSize] = useState("");
+  
     const handleInputFocus =  (e) => {
         if (theme === 'dark') {
             e.target.style.boxShadow = ' 0 0 0 0.25rem rgba(32, 142, 201, 0.09)';
         } else {
-        e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
+            e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
         }
     }
 
     const handleInputBlur = (e) => {
         e.target.style.boxShadow = 'none';
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        let labelSize;
+        let inputSize;
+        if (screenWidth < 768 && screenWidth > 622) {
+            labelSize = "0.9rem";
+            inputSize = "form-control-sm";
+        } 
+        else if (screenWidth < 622 && screenWidth > 555) {
+            labelSize = "0.8rem";
+            inputSize = "form-control-sm";   
+        } else if (screenWidth < 555) {
+            labelSize = "0.9rem"; 
+        }
+        else {
+            labelSize = "1rem";
+        }
+        setLabelFontSize(labelSize);
+        setInputFontSize(inputSize);
+    }, [screenWidth])
+
+
+
     const inputFieldStyle = {
         border: `1px solid ${theme === 'dark' ? '#3f8be236' : '#0173714a'}`,
         backgroundColor: theme === 'dark' ? '#1d14a711' : '',
         color: theme === 'dark' ? 'white' : '',
     };
 
+    const inputClassName = theme === 'dark' ? `${inputFontSize} budget-input-dark` : `${inputFontSize}`;
+
+    const formLabelStyle = {
+        fontSize: labelFontSize,
+    }
+
+
     return (
         <div className="budget-form-inputs-main-container">
 
             <Form.Label 
+                style = {formLabelStyle}
                 htmlFor="basic-url">Total income:
             </Form.Label>
             <InputGroup className="mb-3">
@@ -67,7 +112,8 @@ function BudgetFormInputs({
                     className="income-input"
                 >£</InputGroup.Text>
                 <Form.Control
-                    className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                    id = {inputFontSize}
+                    className = {inputClassName}
                     aria-label="Amount"
                     inputMode='decimal'
                     placeholder={placeholder}
@@ -88,14 +134,16 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Housing (rent, mortgage, etc.)</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Housing (rent, mortgage, etc.)</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input"
                             >£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -111,13 +159,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Utilities (electricity, water, etc.)</Form.Label>
+                        <Form.Label     
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Utilities (electricity, water, etc.)</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text 
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -135,13 +185,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Food and other groceries</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Food and other groceries</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text 
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Food"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -157,13 +209,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Transportation (petrol, bus fare, etc.)</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Transportation (petrol, bus fare, etc.)</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -181,13 +235,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Household goods and services</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Household goods and services</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -203,13 +259,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Chilcare</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Chilcare</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -227,13 +285,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Cleaning and toiletries</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Cleaning and toiletries</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -249,13 +309,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Other essential expenses</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Other essential expenses</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -278,13 +340,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Luxury and gifts</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Luxury and gifts</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -300,13 +364,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Leisure and entertainment</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Leisure and entertainment</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -324,13 +390,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Holidays expenses</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Holidays expenses</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -346,13 +414,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Charitable contributions</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Charitable contributions</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -370,13 +440,15 @@ function BudgetFormInputs({
 
                 <div className="expenses-group-div">
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Other non-essential expenses</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Other non-essential expenses</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}
@@ -392,13 +464,15 @@ function BudgetFormInputs({
                     </div>
 
                     <div className="expenses-input-div">
-                        <Form.Label htmlFor="basic-url">Unsecured debt</Form.Label>
+                        <Form.Label 
+                            style = {formLabelStyle}
+                            htmlFor="basic-url">Unsecured debt</Form.Label>
                         <InputGroup className="mb-3">
                             <InputGroup.Text
                                 style = {inputFieldStyle}
                                 className="non-essential-input">£</InputGroup.Text>
                             <Form.Control 
-                                className = {theme === 'dark' ? 'budget-input-dark' : ''}
+                                className = {inputClassName}
                                 aria-label="Amount"
                                 inputMode='decimal'
                                 placeholder={placeholder}

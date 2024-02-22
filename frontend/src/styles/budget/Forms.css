@@ -178,3 +178,14 @@ html .budget-input-dark:-ms-input-placeholder { color:white; }
     width: 95%;
   }
 }
+
+/*555px*/
+@media (max-width: 555px) {
+  .expenses-group-div,
+  .date-inputs-container {
+    flex-direction: column;
+  }
+  .date-from-inputs-container, .date-to-inputs-container, .expenses-input-div {
+    width: 100%;
+  }
+}
