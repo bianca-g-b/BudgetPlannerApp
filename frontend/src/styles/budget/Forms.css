@@ -8,6 +8,7 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 4.2%;
+  margin-bottom: 2%;
 }
   
 .full-form-area {
@@ -94,3 +95,86 @@ html .budget-input-dark::-webkit-input-placeholder { color:white; }
 html .budget-input-dark:-moz-placeholder { color:white; }
 html .budget-input-dark::-moz-placeholder { color:white; }
 html .budget-input-dark:-ms-input-placeholder { color:white; }
+
+
+/*Media queries*/
+/*1700px*/
+@media (max-width: 1700px) {
+  .full-form-area {
+    width: 55%;
+  }
+}
+
+/*1500px*/
+@media (max-width: 1500px) {
+  .form-main-container {
+    margin-top: 5%;
+  }
+  .full-form-area {
+    width: 60%;
+  }
+}
+
+/*1300px*/
+@media (max-width: 1300px) {
+  .form-main-container {
+    margin-top: 6%;
+  }
+  .full-form-area {
+    width: 65%;
+  }
+}
+
+/*1225px*/
+@media (max-width: 1225px) {
+  .full-form-area {
+    width: 68%;
+  }
+}
+
+/*1150px*/
+@media (max-width: 1150px) {
+  .form-main-container {
+    margin-top: 7%;
+  }
+  .full-form-area {
+    width: 70%;
+  }
+}
+
+/*1000px*/
+@media (max-width: 1000px) {
+  .form-main-container {
+    margin-top: 8%;
+  }
+  .full-form-area {
+    width: 75%;
+  }
+}
+
+/*950px*/
+@media (max-width: 950px) {
+  .full-form-area {
+    width: 80%;
+  }
+}
+
+/*900px*/
+@media (max-width: 900px) {
+  .form-main-container {
+    margin-top: 9%;
+  }
+  .full-form-area {
+    width: 85%;
+  }
+}
+
+/*750px*/
+@media (max-width: 750px) {
+  .form-main-container {
+    margin-top: 10%;
+  }
+  .full-form-area {
+    width: 95%;
+  }
+}
