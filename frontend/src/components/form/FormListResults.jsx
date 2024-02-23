@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useHandleScreenSize, useHandleFormListFontSize } from '../../helpers/screenSizeHelper.js';
 import ListGroup from 'react-bootstrap/ListGroup';
 import PropTypes from "prop-types";
 
@@ -9,8 +11,19 @@ function FormListResults({
     savings,
 }) {
     const theme = useSelector((state) => state.theme.theme);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [listItemFontSize, setListItemFontSize] = useState("");
+    
+    // Custom hook to handle screen size
+    useHandleScreenSize({ screenSize: screenWidth, setScreenWidth: setScreenWidth });
+
+    // Custom hook to handle font size of list items
+    useHandleFormListFontSize({ screenWidth: screenWidth, setListItemFontSize: setListItemFontSize });
+
     return(
-        <ListGroup data-bs-theme={ theme === 'dark' ? 'dark' : ''}>
+        <ListGroup 
+            className = {listItemFontSize}
+            data-bs-theme={ theme === 'dark' ? `dark` : ''}>
             <ListGroup.Item variant="success">Total income: £{totalIncome}</ListGroup.Item>
             <ListGroup.Item variant="danger">Total essential expenses: £{totalEssentialExpenses}</ListGroup.Item>
             <ListGroup.Item variant="warning">Total non-essential expenses: £{totalNonEssentialExpenses}</ListGroup.Item>

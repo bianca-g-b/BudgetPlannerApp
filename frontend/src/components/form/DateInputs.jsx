@@ -1,6 +1,9 @@
 import "../../styles/budget/Forms.css";
+import { getInputFieldStyle, getFormLabelStyle } from "../../styles/budget/formStyle.js";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHandleScreenSize, useHandleFontSize } from "../../helpers/screenSizeHelper.js";
+import { handleInputFocus, handleInputBlur } from "../../helpers/handlers.js";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
@@ -14,63 +17,19 @@ function DateInputs({
     const theme = useSelector(state => state.theme.theme);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [labelFontSize, setLabelFontSize] = useState("1rem");
-    const [inputFontSize, setInputFontSize] = useState("");
+    const [inputFontClass, setInputFontClass] = useState("");
 
-    const handleInputFocus =  (e) => {
-        if (theme === 'dark') {
-            e.target.style.boxShadow = ' 0 0 0 0.25rem rgba(32, 142, 201, 0.09)';
-        } else {
-        e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
-        }
-    }
+    // Custom hook to handle screen size
+    useHandleScreenSize({ screenWidth: screenWidth, setScreenWidth: setScreenWidth})
 
-    const handleInputBlur = (e) => {
-        e.target.style.boxShadow = 'none';
-    }
+     // Custom hook to handle fonts sizes
+     useHandleFontSize({ screenWidth: screenWidth, setLabelFontSize: setLabelFontSize, setInputFontClass: setInputFontClass })
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-      }, []);
+    // Style for the input fields
+    const inputFieldStyle = getInputFieldStyle(theme);
 
-    useEffect(() => {
-        let labelSize;
-        let inputSize;
-        if (screenWidth < 768 && screenWidth > 622) {
-            console.log( screenWidth, "screenWidth if");
-            labelSize = "0.9rem";
-            inputSize = "form-control-sm";
-        } 
-        else if (screenWidth < 622 && screenWidth > 555) {
-            console.log( screenWidth, "screenWidth elif");
-            labelSize = "0.8rem";
-            inputSize = "form-control-sm";    
-        } else if (screenWidth < 555) {
-            console.log( screenWidth, "screenWidth elif");
-            labelSize = "0.9rem";    
-        }
-        else {
-            console.log( screenWidth, "screenWidth else");
-            labelSize = "1rem";
-        }
-        setLabelFontSize(labelSize);
-        setInputFontSize(inputSize);
-    }, [screenWidth])
-
-    const inputFieldStyle = {
-        border: `1px solid ${theme === 'dark' ? '#3f8be236' : '#0173714a'}`,
-        backgroundColor: theme === 'dark' ? '#1d14a711' : '',
-        color: theme === 'dark' ? 'white' : '',
-    };
-
-    const formLabelStyle = {
-        fontSize: labelFontSize,
-    }
+    // Style for the form labels
+    const formLabelStyle = getFormLabelStyle(labelFontSize);
 
     return(
         <div className="date-inputs-container">
@@ -84,13 +43,13 @@ function DateInputs({
                         className="date-input"
                     >&#x1F4C5;</InputGroup.Text>
                     <Form.Control
-                        className={`date-input ${inputFontSize} ${theme === 'dark' ? 'date-input-dark' : ''}`}
+                        className={`date-input ${inputFontClass} ${theme === 'dark' ? 'date-input-dark' : ''}`}
                         aria-label="Date"
                         type='date'
                         onChange = {handleDateFrom}
                         defaultValue = {dateFromValue}
                         style = {inputFieldStyle}
-                        onFocus={handleInputFocus}
+                        onFocus={(e) => handleInputFocus(e, {theme})}
                         onBlur={handleInputBlur}
                     />
                 </InputGroup>
@@ -106,14 +65,14 @@ function DateInputs({
                         className="date-input"
                     >&#x1F4C5;</InputGroup.Text>
                     <Form.Control 
-                        className={`date-input ${inputFontSize} ${theme === 'dark' ? 'date-input-dark' : ''}`}
+                        className={`date-input ${inputFontClass} ${theme === 'dark' ? 'date-input-dark' : ''}`}
                         aria-label="Date"
                         data-testid="date-display"
                         type='date'
                         onChange = {handleDateTo}
                         defaultValue = {dateToValue}
                         style = {inputFieldStyle}
-                        onFocus={handleInputFocus}
+                        onFocus={(e) => handleInputFocus(e, {theme})}
                         onBlur={handleInputBlur}
                     />
                 </InputGroup>

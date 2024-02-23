@@ -1,5 +1,8 @@
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useHandleScreenSize, useHandleFontSize } from "../../helpers/screenSizeHelper.js";
+import { handleInputFocus, handleInputBlur } from "../../helpers/handlers.js";
+import { getInputFieldStyle, getFormLabelStyle } from "../../styles/budget/formStyle.js";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
@@ -40,63 +43,22 @@ function BudgetFormInputs({
     const theme = useSelector(state => state.theme.theme);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [labelFontSize, setLabelFontSize] = useState("1rem");
-    const [inputFontSize, setInputFontSize] = useState("");
+    const [inputFontClass, setInputFontClass] = useState("");
   
-    const handleInputFocus =  (e) => {
-        if (theme === 'dark') {
-            e.target.style.boxShadow = ' 0 0 0 0.25rem rgba(32, 142, 201, 0.09)';
-        } else {
-            e.target.style.boxShadow = '0 0 0 0.25rem rgb(32 201 151 / 9%)';
-        }
-    }
+    // Custom hook to handle screen size
+    useHandleScreenSize({ screenWidth: screenWidth, setScreenWidth: setScreenWidth})
 
-    const handleInputBlur = (e) => {
-        e.target.style.boxShadow = 'none';
-    }
+    // Custom hook to handle fonts sizes
+    useHandleFontSize({ screenWidth: screenWidth, setLabelFontSize: setLabelFontSize, setInputFontClass: setInputFontClass })
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScreenWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    // Style for the input fields
+    const inputFieldStyle = getInputFieldStyle(theme);
 
-    useEffect(() => {
-        let labelSize;
-        let inputSize;
-        if (screenWidth < 768 && screenWidth > 622) {
-            labelSize = "0.9rem";
-            inputSize = "form-control-sm";
-        } 
-        else if (screenWidth < 622 && screenWidth > 555) {
-            labelSize = "0.8rem";
-            inputSize = "form-control-sm";   
-        } else if (screenWidth < 555) {
-            labelSize = "0.9rem"; 
-        }
-        else {
-            labelSize = "1rem";
-        }
-        setLabelFontSize(labelSize);
-        setInputFontSize(inputSize);
-    }, [screenWidth])
+    // Class for the input fields    
+    const inputClassName = theme === 'dark' ? `${inputFontClass} budget-input-dark` : `${inputFontClass}`;
 
-
-
-    const inputFieldStyle = {
-        border: `1px solid ${theme === 'dark' ? '#3f8be236' : '#0173714a'}`,
-        backgroundColor: theme === 'dark' ? '#1d14a711' : '',
-        color: theme === 'dark' ? 'white' : '',
-    };
-
-    const inputClassName = theme === 'dark' ? `${inputFontSize} budget-input-dark` : `${inputFontSize}`;
-
-    const formLabelStyle = {
-        fontSize: labelFontSize,
-    }
+    // Style for the form labels
+    const formLabelStyle = getFormLabelStyle(labelFontSize);
 
 
     return (
@@ -112,7 +74,6 @@ function BudgetFormInputs({
                     className="income-input"
                 >£</InputGroup.Text>
                 <Form.Control
-                    id = {inputFontSize}
                     className = {inputClassName}
                     aria-label="Amount"
                     inputMode='decimal'
@@ -122,7 +83,7 @@ function BudgetFormInputs({
                     onChange={handleTotalIncome}
                     defaultValue={incomeValue}
                     style = {inputFieldStyle}
-                    onFocus={handleInputFocus}
+                    onFocus={(e) => handleInputFocus(e, {theme})}
                     onBlur={handleInputBlur}
                  />
             </InputGroup>
@@ -152,7 +113,7 @@ function BudgetFormInputs({
                                 onChange = {handleHousing}
                                 defaultValue={housingValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -176,7 +137,7 @@ function BudgetFormInputs({
                                 onChange = {handleUtilities}
                                 defaultValue={utilitiesValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -202,7 +163,7 @@ function BudgetFormInputs({
                                 onChange = {handleFood} 
                                 defaultValue={foodValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -226,7 +187,7 @@ function BudgetFormInputs({
                                 onChange = {handleTransport}
                                 defaultValue={transportValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -252,7 +213,7 @@ function BudgetFormInputs({
                                 onChange = {handleHousehold}
                                 defaultValue={householdValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -276,7 +237,7 @@ function BudgetFormInputs({
                                 onChange = {handleChildcare}
                                 defaultValue={childcareValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -302,7 +263,7 @@ function BudgetFormInputs({
                                 onChange = {handleCleaning}
                                 defaultValue={cleaningValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -326,7 +287,7 @@ function BudgetFormInputs({
                                 onChange = {handleOtherEssential}
                                 defaultValue={otherEssentialValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -357,7 +318,7 @@ function BudgetFormInputs({
                                 onChange = {handleLuxury}
                                 defaultValue={luxuryValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -381,7 +342,7 @@ function BudgetFormInputs({
                                 onChange = {handleLeisure}
                                 defaultValue={leisureValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -407,7 +368,7 @@ function BudgetFormInputs({
                                 onChange = {handleHolidays}
                                 defaultValue={holidaysValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -431,7 +392,7 @@ function BudgetFormInputs({
                                 onChange = {handleCharity}
                                 defaultValue={charityValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -457,7 +418,7 @@ function BudgetFormInputs({
                                 onChange = {handleOtherNonEssential}
                                 defaultValue={otherNonEssentialValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>
@@ -481,7 +442,7 @@ function BudgetFormInputs({
                                 onChange = {handleUnsecured}
                                 defaultValue={unsecuredValue}
                                 style = {inputFieldStyle}
-                                onFocus={handleInputFocus}
+                                onFocus={(e) => handleInputFocus(e, {theme})}
                                 onBlur={handleInputBlur}
                             />
                         </InputGroup>

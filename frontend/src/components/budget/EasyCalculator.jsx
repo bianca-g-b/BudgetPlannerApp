@@ -37,7 +37,7 @@ function EasyCalculator() {
 
     return (
         <MainForm
-            formTitle = "Easy Calculator"
+            formTitle = "Quick Calculator"
         >
             <BudgetFormInputs
                 handleTotalIncome = {(event) => {

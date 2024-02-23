@@ -1,4 +1,5 @@
 import "../styles/MainChart.css";
+import { useHandleScreenSize } from "../helpers/screenSizeHelper.js";
 import { setDataset, setChartData, setTotalPages, setDataCount, setPage } from "../redux/chartSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -39,23 +40,8 @@ function MainChart() {
     },[budgetList, dispatch])
 
 
-    // console.log(data, "data");
-    console.log(dataset, "dataset");
-    console.log(chartData, "chartData");
-    console.log(totalPages, "totalPages");
-    console.log(dataCount, "dataCount");
-    console.log(page, "page");
-
-
-    useEffect(() => {
-      const handleResize = () => {
-          setScreenWidth(window.innerWidth);
-      };
-      window.addEventListener('resize', handleResize);
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
-    }, []);
+    // Custom hook to handle screen size
+    useHandleScreenSize({ screenWidth: screenWidth, setScreenWidth: setScreenWidth});
 
 
     useEffect(() => {
