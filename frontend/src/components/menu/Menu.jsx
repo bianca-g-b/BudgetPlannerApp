@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom';
-import { logoutUser } from '../actions/authActions';
-import { toggleTheme } from '../redux/themeSlice';
+import { logoutUser } from '../../actions/authActions';
+import { toggleTheme } from '../../redux/themeSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';

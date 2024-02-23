@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { useHandleScreenSize, useHandleFormListFontSize } from '../../helpers/screenSizeHelper.js';
+import { useHandleScreenSize, useHandleFormListFontSize } from '../../../helpers/screenSizeHelper.js';
 import ListGroup from 'react-bootstrap/ListGroup';
 import PropTypes from "prop-types";
 

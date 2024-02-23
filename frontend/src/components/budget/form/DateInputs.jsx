@@ -1,9 +1,9 @@
-import "../../styles/budget/Forms.css";
-import { getInputFieldStyle, getFormLabelStyle } from "../../styles/budget/formStyle.js";
+import "../../../styles/budget/Forms.css";
+import { getInputFieldStyle, getFormLabelStyle } from "../../../styles/budget/formStyle.js";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { useHandleScreenSize, useHandleFontSize } from "../../helpers/screenSizeHelper.js";
-import { handleInputFocus, handleInputBlur } from "../../helpers/handlers.js";
+import { useHandleScreenSize, useHandleFontSize } from "../../../helpers/screenSizeHelper.js";
+import { handleInputFocus, handleInputBlur } from "../../../helpers/handlers.js";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import PropTypes from "prop-types";
@@ -20,10 +20,10 @@ function DateInputs({
     const [inputFontClass, setInputFontClass] = useState("");
 
     // Custom hook to handle screen size
-    useHandleScreenSize({ screenWidth: screenWidth, setScreenWidth: setScreenWidth})
+    useHandleScreenSize({screenWidth, setScreenWidth})
 
-     // Custom hook to handle fonts sizes
-     useHandleFontSize({ screenWidth: screenWidth, setLabelFontSize: setLabelFontSize, setInputFontClass: setInputFontClass })
+    // Custom hook to handle fonts sizes
+    useHandleFontSize({screenWidth, setLabelFontSize, setInputFontClass})
 
     // Style for the input fields
     const inputFieldStyle = getInputFieldStyle(theme);

@@ -2,10 +2,10 @@ import "../../styles/budget/Forms.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import MainForm from "../form/MainForm.jsx";
-import DateInputs from '../form/DateInputs.jsx';
-import BudgetFormInputs from "../form/BudgetFormInputs.jsx";
-import FormButton from "../form/FormButton.jsx";
+import MainForm from "./form/MainForm.jsx";
+import DateInputs from './form/DateInputs.jsx';
+import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
+import FormButton from "./form/FormButton.jsx";
 import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold, setChildcare, setCleaning, setOtherEssential, 
     setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
