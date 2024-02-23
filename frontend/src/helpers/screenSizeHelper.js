@@ -47,3 +47,19 @@ export function useHandleFormListFontSize({screenWidth, setListItemFontSize}) {
     setListItemFontSize(listItemSize);
     }, [screenWidth, setListItemFontSize])
 }
+
+// modal screen width hook
+export function useHandleModalWidth({screenWidth, setModalWidth}) {
+    useEffect(() => {
+      let modalSize;
+      if (screenWidth < 768 && screenWidth > 450) {
+        modalSize = 350;
+      } else if (screenWidth < 450 ) {
+        modalSize = 300;
+      }
+      else {
+        modalSize = 400;
+      }
+      setModalWidth(modalSize);
+    }, [screenWidth, setModalWidth]);
+}
