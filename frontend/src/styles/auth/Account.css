@@ -126,7 +126,6 @@
   border-left: none;
   border-right: none;
   border-top: none;
-  align-self: flex-start;
   width: 100%;
   text-align: left;
 }
@@ -334,3 +333,17 @@
     padding-left: 10px;
   }
 }
+
+/*Modals media queries*/
+/*768px*/
+@media (max-width: 768px) {
+  .parent-modal-title {
+      font-size: 20px;
+      font-weight: 500;
+  }
+  #parent-modal-description,
+  #parent-modal-second-description {
+      font-size: 15px;
+  }
+}
+

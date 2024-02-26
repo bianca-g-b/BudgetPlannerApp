@@ -54,8 +54,12 @@ export function useHandleModalWidth({screenWidth, setModalWidth}) {
       let modalSize;
       if (screenWidth < 768 && screenWidth > 450) {
         modalSize = 350;
-      } else if (screenWidth < 450 ) {
+      } else if (screenWidth < 450 && screenWidth > 350) {
         modalSize = 300;
+      } else if (screenWidth < 350 && screenWidth > 300) {
+        modalSize = 280;
+      } else if (screenWidth < 300) {
+        modalSize = 235;
       }
       else {
         modalSize = 400;
