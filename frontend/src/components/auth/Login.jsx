@@ -95,7 +95,7 @@ function Login() {
                 </form>
 
 
-                <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
+                <Snackbar open={openFail} autoHideDuration={2500} onClose={() => setOpenFail(false)}>
                     <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                         Login failed! Please try again.
                     </MuiAlert>

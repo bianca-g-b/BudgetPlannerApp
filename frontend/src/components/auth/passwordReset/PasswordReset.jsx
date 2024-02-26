@@ -55,7 +55,7 @@ function PasswordReset() {
                     Reset Password
                 </Button>
             </form>
-            <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
+            <Snackbar open={openFail} autoHideDuration={2500} onClose={() => setOpenFail(false)}>
                 <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Password reset request failed! Please try again.
                 </MuiAlert>

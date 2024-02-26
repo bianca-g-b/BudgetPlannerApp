@@ -91,7 +91,7 @@ function Account() {
                         closeModal={closeModal}
                     />
 
-                    <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+                    <Snackbar open={openFail} autoHideDuration={2500} onClose={() => setOpenFail(false)}>
                         <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                             Failed to delete account! Please try again.
                         </MuiAlert>

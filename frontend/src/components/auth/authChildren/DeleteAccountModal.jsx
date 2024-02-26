@@ -21,7 +21,6 @@ function DeleteAccountModal({isModalOpen, handleDelete, closeModal}) {
 
   // Modal style
   const style = modalStyle(theme, modalWidth);
-  console.log(style);
   
   // Buttons style
   const buttonStyle = accountButtonStyle;

@@ -95,7 +95,7 @@ function BudgetList() {
                         setTimeout(() => {
                             navigate(`/dashboard`);
                             window.location.reload();
-                        }, 1500);
+                        }, 2500);
                     } else {
                         setOpenFail(true);
                     }
@@ -205,13 +205,13 @@ function BudgetList() {
             
             </div>}
 
-            <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
+            <Snackbar open={openSuccess} autoHideDuration={2500} onClose={() => setOpenSuccess(false)}>
                 <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                     Budget deleted successfully!
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+            <Snackbar open={openFail} autoHideDuration={2500} onClose={() => setOpenFail(false)}>
                 <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Budget deletion failed. Please try again.
                 </MuiAlert>

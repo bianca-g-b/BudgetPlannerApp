@@ -113,19 +113,19 @@ function PasswordResetConfirm() {
                     </Button>
                 </form>
             </div>
-            <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
+            <Snackbar open={openFail} autoHideDuration={2500} onClose={() => setOpenFail(false)}>
                 <MuiAlert variant='outlined' onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Failed to reset password. Please try again.
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openPasswordWarning} autoHideDuration={2000} onClose={() => setOpenPasswordWarning(false)}>
+            <Snackbar open={openPasswordWarning} autoHideDuration={2500} onClose={() => setOpenPasswordWarning(false)}>
                 <MuiAlert variant='outlined' onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                     Password does not meet minimum requirements. Please try again.
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openWarning} autoHideDuration={1500} onClose={() => setOpenWarning(false)}>
+            <Snackbar open={openWarning} autoHideDuration={2500} onClose={() => setOpenWarning(false)}>
                 <MuiAlert variant='outlined' onClose={() => setOpenWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                     Passwords do not match. Please try again.
                 </MuiAlert>
