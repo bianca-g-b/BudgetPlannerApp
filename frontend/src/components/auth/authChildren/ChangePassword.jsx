@@ -63,7 +63,7 @@ function ChangePassword() {
 
     return (
         <div className="change-psw-main-container">
-            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#8630; Back to MY ACCOUNT</NavLink>
+            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#11164; &nbsp;back to &nbsp; <span>MY ACCOUNT</span></NavLink>
             <div className="change-psw-container">
                 <div className="change-psw-info-container">
                     <p className={`psw-form-information ${theme==='dark' ? 'psw-form-information-dark' : '' }`}>Change password</p>

@@ -10,17 +10,15 @@
     text-decoration: none;
     margin-bottom: 5%;
     color: #3344DD;
-    font-weight: 600;
-    font-size: large;
-    text-transform: uppercase;
     cursor: pointer;
-    text-align: left;
     width: 100%;
     display: none;
     
 }
 .back-to-account:hover {
-    color: #017371;
+    span {
+        color: #017371;
+    }
 }
 
 .back-to-account-dark {
@@ -28,7 +26,9 @@
 }
 
 .back-to-account-dark:hover {
-    color: rgba(5,815,313,0.8);
+    span {
+        color: rgba(5,815,313,0.8);
+    }
 }
 
 .update-email-container,
@@ -217,6 +217,21 @@
     .back-to-account,
     .back-to-account-dark {
         display: flex;
+        padding-bottom: 1%;
+        padding-top: 1%;
+        font-size: 1.1rem;
+        font-weight: 400;
+    }
+    .back-to-account span{
+        font-weight: 500;
+    }
+    .back-to-account {
+        border-top: 1px solid rgba(1, 115, 113, 0.5);
+        border-bottom: 1px solid rgba(1, 115, 113, 0.5);
+    }
+    .back-to-account-dark {
+        border-top: 1px solid rgba(5, 815, 313, 0.6);
+        border-bottom: 1px solid rgba(5, 815, 313, 0.6);
     }
     .hide-account {
         display: none;
@@ -234,6 +249,30 @@
     .delete-email-container {
         margin-right: 0;
         width: 65%;
+    }
+}
+
+/*600px width*/
+@media (max-width: 600px) {
+    .update-email-container,
+    .delete-email-container {
+        width: 80%;
+    }
+}
+
+/*500px width*/
+@media (max-width: 500px) {
+    .update-email-container,
+    .delete-email-container {
+        width: 90%;
+    }
+    .update-title,
+    .delete-title {
+        font-size: large;
+    }
+    .email-container label,
+    .delete-message {
+        font-size: 15px;
     }
 }
 

@@ -43,7 +43,7 @@ function EmailForm() {
 
     return (
         <div className="all-email-container">
-            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#8630; Back to MY ACCOUNT</NavLink>
+            <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#11164; &nbsp;back to  &nbsp; <span> MY ACCOUNT</span></NavLink>
             <div className={`update-email-container ${ email ? "" : "add-email-container"}`}>
                 <div className="form-information">
                     {email && <p className={`update-title ${theme==="dark" ? "update-title-dark" : "" }`}>Update email address</p>}
