@@ -1,5 +1,6 @@
 import "../../../styles/auth/resetPassword/PasswordReset.css";
 import { passwordReset, fetchCSRFToken } from '../../../actions/authActions';
+import { errorAlertStyle } from "../../../styles/budget/alertsStyles";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -55,7 +56,7 @@ function PasswordReset() {
                 </Button>
             </form>
             <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Password reset request failed! Please try again.
                 </MuiAlert>
             </Snackbar>

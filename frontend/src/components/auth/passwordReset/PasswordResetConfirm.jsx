@@ -1,5 +1,6 @@
 import '../../../styles/auth/resetPassword/PasswordResetConfirm.css';
 import { passwordResetConfirm, fetchCSRFToken } from '../../../actions/authActions';
+import { warningAlertStyle, errorAlertStyle } from '../../../styles/budget/alertsStyles';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect} from "react";
@@ -113,19 +114,19 @@ function PasswordResetConfirm() {
                 </form>
             </div>
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                <MuiAlert variant='outlined' onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Failed to reset password. Please try again.
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openPasswordWarning} autoHideDuration={2000} onClose={() => setOpenPasswordWarning(false)}>
-                <MuiAlert onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                <MuiAlert variant='outlined' onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                     Password does not meet minimum requirements. Please try again.
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openWarning} autoHideDuration={1500} onClose={() => setOpenWarning(false)}>
-                <MuiAlert onClose={() => setOpenWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                <MuiAlert variant='outlined' onClose={() => setOpenWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                     Passwords do not match. Please try again.
                 </MuiAlert>
             </Snackbar>

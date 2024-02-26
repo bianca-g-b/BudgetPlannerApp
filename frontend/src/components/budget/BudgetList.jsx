@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {getBudgetList, getBudgetById, deleteBudget} from "../../actions/budgetActions.js";
 import { setBudgetList, setBudgetById, setId, setClicked, setCurrentBudgets, setCurrentPage } from "../../redux/budgetSlice.js";
+import { successAlertStyle, errorAlertStyle } from "../../styles/budget/alertsStyles.js";
 import { NavLink, Outlet, useNavigate} from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -205,13 +206,13 @@ function BudgetList() {
             </div>}
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
-                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                     Budget deleted successfully!
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Budget deletion failed. Please try again.
                 </MuiAlert>
             </Snackbar>

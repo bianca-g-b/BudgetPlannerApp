@@ -6,6 +6,7 @@ import { updateEmail, deleteEmail,fetchCSRFToken } from "../../../actions/authAc
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { successAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
 
 function EmailForm() {
     const dispatch = useDispatch();
@@ -91,26 +92,26 @@ function EmailForm() {
                 </div>
             </div>}          
 
-            <Snackbar open={openSuccessUpdate} autoHideDuration={1500} onClose={() => setOpenSuccessUpdate(false)}>
-                <MuiAlert onClose={() => setOpenSuccessUpdate(false)} severity="success" sx={{ width: '100%' }}>
+            <Snackbar open={openSuccessUpdate} autoHideDuration={2500} onClose={() => setOpenSuccessUpdate(false)}>
+                <MuiAlert variant="outlined" onClose={() => setOpenSuccessUpdate(false)} severity="success" sx={successAlertStyle(theme)}>
                     Email updated successfully!
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openFailUpdate} autoHideDuration={1500} onClose={() => setOpenFailUpdate(false)}>
-                <MuiAlert onClose={() => setOpenFailUpdate(false)} severity="error" sx={{ width: '100%' }}>
+            <Snackbar open={openFailUpdate} autoHideDuration={2500} onClose={() => setOpenFailUpdate(false)}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFailUpdate(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Failed to update email! Please try again.
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openSuccessDelete} autoHideDuration={1500} onClose={() => setOpenSuccessDelete(false)}>
-                <MuiAlert onClose={() => setOpenSuccessDelete(false)} severity="success" sx={{ width: '100%' }}>
+            <Snackbar open={openSuccessDelete} autoHideDuration={2500} onClose={() => setOpenSuccessDelete(false)}>
+                <MuiAlert variant="outlined" onClose={() => setOpenSuccessDelete(false)} severity="success" sx={successAlertStyle(theme)}>
                     Email deleted successfully!
                 </MuiAlert>
             </Snackbar>
 
-            <Snackbar open={openFailDelete} autoHideDuration={1500} onClose={() => setOpenFailDelete(false)}>
-                <MuiAlert onClose={() => setOpenFailDelete(false)} severity="error" sx={{ width: '100%' }}>
+            <Snackbar open={openFailDelete} autoHideDuration={2500} onClose={() => setOpenFailDelete(false)}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFailDelete(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Failed to delete email! Please try again.
                 </MuiAlert>
             </Snackbar>

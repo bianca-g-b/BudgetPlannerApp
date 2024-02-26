@@ -8,6 +8,7 @@ import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import { errorAlertStyle } from "../../styles/budget/alertsStyles.js";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -95,7 +96,7 @@ function Login() {
 
 
                 <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
-                    <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                         Login failed! Please try again.
                     </MuiAlert>
                 </Snackbar>

@@ -6,6 +6,7 @@ import DeleteAccountModal from "./authChildren/DeleteAccountModal";
 import { deleteAccount, fetchCSRFToken } from "../../actions/authActions";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { errorAlertStyle  } from "../../styles/budget/alertsStyles";
 
 function Account() {
     const user = useSelector((state) => state.user.username);
@@ -91,7 +92,7 @@ function Account() {
                     />
 
                     <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                        <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                        <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                             Failed to delete account! Please try again.
                         </MuiAlert>
                     </Snackbar>

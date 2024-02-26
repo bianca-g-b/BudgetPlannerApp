@@ -8,6 +8,7 @@ import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import PasswordChecklist from 'react-password-checklist';
 import validator from 'validator';
+import { successAlertStyle, warningAlertStyle, errorAlertStyle  } from "../../styles/budget/alertsStyles";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -171,25 +172,25 @@ function Register() {
             </form>
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
-                    <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                    <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                         Account created successfully!
                     </MuiAlert>
                 </Snackbar>
 
                 <Snackbar open={openFail} autoHideDuration={2000} onClose={() => setOpenFail(false)}>
-                    <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                    <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                         Failed to create account. Please try again.
                     </MuiAlert>
                 </Snackbar>
 
                 <Snackbar open={openPasswordWarning} autoHideDuration={1500} onClose={() => setOpenPasswordWarning(false)}>
-                    <MuiAlert onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                    <MuiAlert variant="outlined" onClose={() => setOpenPasswordWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                         Password does not meet minimum requirements. Please try again.
                     </MuiAlert>
                 </Snackbar>
 
                 <Snackbar open={openWarning} autoHideDuration={1500} onClose={() => setOpenWarning(false)}>
-                    <MuiAlert onClose={() => setOpenWarning(false)} severity="warning" sx={{ width: '100%' }}>
+                    <MuiAlert variant="outlined" onClose={() => setOpenWarning(false)} severity="warning" sx={warningAlertStyle(theme)}>
                         Passwords do not match. Please try again.
                     </MuiAlert>
                 </Snackbar>

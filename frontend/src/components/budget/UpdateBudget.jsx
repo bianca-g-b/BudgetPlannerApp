@@ -10,12 +10,14 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood, s
     setLuxury, setLeisure, setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../../redux/budgetFieldsSlice.js';
+import { successAlertStyle, errorAlertStyle } from "../../styles/budget/alertsStyles.js";
 import { setBudgetById } from "../../redux/budgetSlice.js";
 import { getBudgetById,editBudget } from "../../actions/budgetActions.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 function UpdateBudget() {
+    const theme = useSelector((state) => state.theme.theme);
     const budgetById = useSelector((state)=> state.budget.budgetById);
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
@@ -273,13 +275,13 @@ function UpdateBudget() {
             </FormButton>
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
-                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                     Budget updated successfully!
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Budget failed to update. Please try again.
                 </MuiAlert>
             </Snackbar>

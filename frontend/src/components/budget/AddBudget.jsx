@@ -15,6 +15,7 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood,
 import { setCurrentPage } from "../../redux/budgetSlice.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { successAlertStyle, errorAlertStyle } from "../../styles/budget/alertsStyles.js";
 
 
 
@@ -23,6 +24,7 @@ function AddBudget() {
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
     const currentPage = useSelector((state) => state.budget.currentPage);
+    const theme = useSelector((state) => state.theme.theme);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
@@ -205,13 +207,13 @@ function AddBudget() {
             </FormButton>
 
             <Snackbar open={openSuccess} autoHideDuration={1500} onClose={() => setOpenSuccess(false)}>
-                <MuiAlert onClose={() => setOpenSuccess(false)} severity="success" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                     Budget added successfully!
                 </MuiAlert>
             </Snackbar>
 
             <Snackbar open={openFail} autoHideDuration={1500} onClose={() => setOpenFail(false)}>
-                <MuiAlert onClose={() => setOpenFail(false)} severity="error" sx={{ width: '100%' }}>
+                <MuiAlert variant="outlined" onClose={() => setOpenFail(false)} severity="error" sx={errorAlertStyle(theme)}>
                     Budget failed to add. Please try again.
                 </MuiAlert>
             </Snackbar>
