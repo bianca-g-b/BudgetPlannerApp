@@ -122,7 +122,50 @@
   padding: 0;
 }
 
-  /*Media queries*/
-  @media (max-width: 2250) {
-    /*chart div needs to be smaller*/
+/*Media queries*/
+
+/*1500px*/
+@media (max-width: 1500px) {
+  .budget-lists {
+      flex-direction: column;
+      margin-left: 15%;
   }
+  .bar-div {
+      margin-top: 2%;
+      padding-top: 2%;
+      height: 500px;
+  }
+  .budgets-edit-delete-div {
+    width: 80%;
+    margin-left: 17%;
+  }
+}
+
+/*1300px*/
+@media (max-width: 1300px) {
+  .expenses-totals-lists {
+    flex-direction: column;
+  }
+  .budget-lists {
+    margin-left: 0;
+    align-items: center;
+  }
+  .budgets-edit-delete-div {
+    margin-left: 1%;
+    padding-right: 1%;
+  }
+  .expenses-only-div {
+    width: 100%;
+  }
+  .totals-list-div {
+    width: 100%;
+    margin-top: 2%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .totals-list-trial {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}

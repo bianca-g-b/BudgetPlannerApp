@@ -148,7 +148,7 @@ function BudgetList() {
             </div>}
 
             
-            {currentBudgets && currentBudgets.length > 0 &&<div className="full-budgets-div">
+            {currentBudgets && currentBudgets.length > 0 && <div className={`full-budgets-div ${theme==="dark" ? "full-budgets-div-dark" : ""}`}>
             <div className= {`table-area-div ${theme === "dark" ? "dark-table-area-div" : ""}`}   
             >
                 <table className="budgets-table">
@@ -188,6 +188,7 @@ function BudgetList() {
                             sx={{ 
                                 "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"}, 
                                 "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected" : {color: theme === "dark" ? "white" : "white"},
+                                "& .css-1v2lvtn-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"},
                             }}
                         />
                     </Stack>

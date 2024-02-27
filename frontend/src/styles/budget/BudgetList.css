@@ -120,9 +120,9 @@
 /*Pagination*/
 .budget-pagination-div {
     margin-top: 1%;
-    margin-left: 2%;
     position: absolute;
-    bottom: 3%;
+    bottom: 8%;
+    max-width: 20%;
 }
 
 /*Header*/
@@ -239,12 +239,60 @@
     .header-div {
         width: 20%;
     }
+    .table-area-div {
+        height: 1200px;
+    }
+    .budgets-table {
+        width: 25%;
+    }
+    .budget-pagination-div {
+        bottom: 42%;
+        max-width: 25%;
+    }
 }
 
 /*1300px*/
 @media (max-width: 1300px) {
+    .full-budgets-div {
+        flex-direction: column;
+        margin-bottom: 2%;
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        background-color: #d2c1f012;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 0 10px #0173714a;
+        border-radius: 10px;
+    }
+    .full-budgets-div-dark {
+        background-color: #1e14a70a;
+        border: 1px solid #3f8be2a3;
+        box-shadow: 0 0 10px   #3f8be25a;
+    }
     .trial-first-div {
         margin-top: 12.5%;
+    }
+    .dark-table-area-div,
+    .table-area-div {
+        border: none;
+        box-shadow: none;
+    }
+    .table-area-div {
+        position: relative;
+        height: auto;
+        align-items: center;
+    }
+    .budgets-table {
+        width: 80%;
+    }
+    .budget-pagination-div {
+        bottom: -5%;
+        left: 10%;
+        max-width: 80%;
+    }
+    .header-div {
+        margin-left: 5%;
+        margin-bottom: 2%;
     }
 }
 

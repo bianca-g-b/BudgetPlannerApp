@@ -320,10 +320,11 @@ function BudgetById() {
                         <List 
                             sx={listStyle}
                             >
+                            
                             <ListItemText 
                                 sx={listTypeStyle}
                                 primary="Totals" />
-
+                            <div className="totals-list-trial">
                             <ListItem>
                                 <ListItemAvatar>
                                     <Avatar 
@@ -383,6 +384,7 @@ function BudgetById() {
                                 <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
+                            </div>
                         </List>}
                     </div>
                 </div>
