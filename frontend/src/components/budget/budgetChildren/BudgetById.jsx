@@ -1,4 +1,8 @@
 import "../../../styles/budget/BudgetById.css";
+import { getListStyle, getListTypeStyle, getItemTextColour, getEssentialIconStyle,
+        getNonEssentialIconStyle, getIncomeIconStyle, getSavingsIconStyle,
+        getTotalSpendingIconStyle, getFontTheme, getListItemStyle, getPrimaryTypographyProps,
+        getBarChartSx, getBarChartData, getPopperSx } from "../../../styles/budget/budgetByIdStyle";
 import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import { NavLink, useOutletContext } from 'react-router-dom';
@@ -26,90 +30,30 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import CurrencyPoundOutlinedIcon from '@mui/icons-material/CurrencyPoundOutlined';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { ThemeProvider } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
 
 
 function BudgetById() {
     const {budgetbyid, handleDeleteBudget, isModalOpen, openModal, closeModal}= useOutletContext();
     const theme = useSelector((state) => state.theme.theme);
     
-    const listStyle = {
-        padding: 0,
-    }
-
-    const listTypeStyle = {
-        borderBottom: theme === 'dark' ? '1px solid rgba(5,815,313,0.6)' : '1px solid rgba(1,115,113,0.5)',
-        borderTop: theme === 'dark' ? '1px solid rgba(5,815,313,0.6)' : '1px solid rgba(1,115,113,0.5)',
-        textTransform: 'uppercase',
-        color: theme === 'dark' ? 'rgba(5,815,313,0.8)' : 'rgb(1, 115, 113)',
-        textAlign: 'center',
-        marginTop: '2px',
-        marginBottom: '2px',
-        paddingTop: '3px',
-    }
-
-    const itemTextColour = {
-        color: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)',
-    }
-
-    const essentialIconStyle = {
-        color: '#ec3e94',
-        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
-        border: '1px solid #ec3e94',
-        width: '35px',
-        height: '35px',
-    }
-
-    const nonEssentialIconStyle = {
-        color: '#fd7e14',
-        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
-        border: '1px solid #fd7e14',
-        width: '35px',
-        height: '35px',
-    }
-
-    const incomeIconStyle = {
-        color: '#36a67e',
-        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
-        border: '1px solid #36a67e',
-        width: '35px',
-        height: '35px',
-    }
-
-    const savingsIconStyle = {
-        color: '#2394d0',
-        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
-        border: '1px solid #2394d0',
-        width: '35px',
-        height: '35px',
-    }
-
-    const totalSpendingIconStyle = {
-        color: '#dc3545',
-        backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
-        border: '1px solid #dc3545',
-        width: '35px',
-        height: '35px',
-    }
-
-    const fontTheme = createTheme({
-        typography: {
-            fontFamily: 'Poppins, sans-serif',
-        },
-    })
-
-    const listItemStyle = {
-        paddingBottom: '1px',
-        paddingTop: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-    }
+    /* Styles */
+    const listStyle = getListStyle;
+    const listTypeStyle = getListTypeStyle(theme);
+    const itemTextColour = getItemTextColour(theme);
+    const essentialIconStyle = getEssentialIconStyle(theme);
+    const nonEssentialIconStyle = getNonEssentialIconStyle(theme);
+    const incomeIconStyle = getIncomeIconStyle(theme);
+    const savingsIconStyle = getSavingsIconStyle(theme);
+    const totalSpendingIconStyle = getTotalSpendingIconStyle(theme);  
+    const fontTheme = getFontTheme;
+    const listItemStyle = getListItemStyle;
+    const primaryTypographyProps  = getPrimaryTypographyProps;
 
 
     return (
         <div className="budget-lists">
         <ThemeProvider theme={fontTheme}>
-            <div className = "budgets-edit-delete-div">
+            <div className = {`budgets-edit-delete-div ${theme==="dark" ? "budgets-edit-delete-div-dark" : ""}`}>
                 <div className={`expenses-totals-lists ${theme === `dark` ? `dark-border` : `light-border`}`}>
                     <div className="expenses-only-div">
                         {budgetbyid && 
@@ -130,7 +74,7 @@ function BudgetById() {
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText 
-                                        primary="Housing" secondary={`£ ${budgetbyid.housing}`} secondaryTypographyProps = {itemTextColour}>
+                                        primary="Housing" secondary={`£ ${budgetbyid.housing}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -142,7 +86,7 @@ function BudgetById() {
                                             <ElectricBoltOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -156,7 +100,7 @@ function BudgetById() {
                                             <AddShoppingCartOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -168,7 +112,7 @@ function BudgetById() {
                                             <DirectionsRailwayFilledOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -182,7 +126,7 @@ function BudgetById() {
                                             <HandymanOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -194,7 +138,7 @@ function BudgetById() {
                                             <ChildCareOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -208,7 +152,7 @@ function BudgetById() {
                                             <LocalLaundryServiceOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -220,7 +164,7 @@ function BudgetById() {
                                             <ShopOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -243,7 +187,7 @@ function BudgetById() {
                                             <DiamondIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -255,7 +199,7 @@ function BudgetById() {
                                             <SnowboardingIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -269,7 +213,7 @@ function BudgetById() {
                                             <BeachAccessIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -281,7 +225,7 @@ function BudgetById() {
                                             <VolunteerActivismOutlinedIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -295,7 +239,7 @@ function BudgetById() {
                                             <ShopIcon />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} secondaryTypographyProps = {itemTextColour}>
+                                    <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
 
@@ -308,7 +252,7 @@ function BudgetById() {
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText 
-                                        primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} secondaryTypographyProps = {itemTextColour}>
+                                        primary="Unsecured debt" secondary={`£ ${budgetbyid.unsecured_loans}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                     </ListItemText>
                                 </ListItem>
                             </div>
@@ -324,7 +268,7 @@ function BudgetById() {
                             <ListItemText 
                                 sx={listTypeStyle}
                                 primary="Totals" />
-                            <div className="totals-list-trial">
+
                             <ListItem>
                                 <ListItemAvatar>
                                     <Avatar 
@@ -333,7 +277,7 @@ function BudgetById() {
                                         <AccountBalanceWalletOutlinedIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary="Income" secondary={`£ ${budgetbyid.total_income}`} secondaryTypographyProps = {itemTextColour}>
+                                <ListItemText primary="Income" secondary={`£ ${budgetbyid.total_income}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
 
@@ -345,7 +289,7 @@ function BudgetById() {
                                         <ShopOutlinedIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary="Essentials" secondary={`£ ${budgetbyid.total_essential}`} secondaryTypographyProps = {itemTextColour}>
+                                <ListItemText primary="Essentials" secondary={`£ ${budgetbyid.total_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
 
@@ -357,7 +301,7 @@ function BudgetById() {
                                         <ShopIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} secondaryTypographyProps = {itemTextColour}>
+                                <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
 
@@ -369,7 +313,7 @@ function BudgetById() {
                                         <CurrencyPoundOutlinedIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary="All expenses" secondary={`£ ${budgetbyid.total_expenses}`} secondaryTypographyProps = {itemTextColour}>
+                                <ListItemText primary="All expenses" secondary={`£ ${budgetbyid.total_expenses}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
 
@@ -381,10 +325,9 @@ function BudgetById() {
                                         <CurrencyPoundOutlinedIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} secondaryTypographyProps = {itemTextColour}>
+                                <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
-                            </div>
                         </List>}
                     </div>
                 </div>
@@ -416,31 +359,10 @@ function BudgetById() {
                 {budgetbyid && 
                 <div className="bar-div">
                     <BarChart
-                        sx = {{
-                            "& .css-1rbllhb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
-                            "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tick": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
-                            "& .MuiChartsLegend-series text tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
-                            "& .MuiChartsAxis-tickLabel": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
-                            "& .MuiChartsAxis-tickLabel tspan": {fill: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},
-                            }}
+                        sx = {{...getBarChartSx(theme)}}
                         xAxis={[{
                             scaleType: 'band',
-                            data: [
-                                'Housing',
-                                'Utilities',
-                                'Food and drinks',
-                                'Transport',
-                                'Household',
-                                'Childcare',
-                                'Cleaning and toiletries',
-                                'Other essential',
-                                'Luxury and gifts',
-                                'Leisure and entertainment',
-                                'Holidays',
-                                'Charity',
-                                'Other non-essential',
-                                'Unsecured debt',
-                            ],                              
+                            data: getBarChartData,                           
                         }]}
                         series={[{
                             data: [
@@ -452,21 +374,7 @@ function BudgetById() {
                         slotProps={{
                             popper: {
                                 placement: 'auto', 
-                                sx: {
-                                    "& .css-1vz5lb3-MuiChartsTooltip-container": {
-                                        backgroundColor: theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'white',
-                                        color: theme === 'dark' ? 'white' : 'black',
-                                        },
-                                    "& .css-2hvfka-MuiChartsTooltip-table" : {
-                                        borderSpacing: '5px'
-                                    },
-                                    "& .css-s3y5yc-MuiChartsTooltip-cell" : {
-                                        color: theme === 'dark' ? 'white' : 'black',
-                                    },
-                                    "& .css-s3y5yc-MuiChartsTooltip-cell.MuiChartsTooltip-valueCell" : {
-                                        color: theme === 'dark' ? 'white' : 'black',
-                                    }
-                                }
+                                sx: getPopperSx(theme),
                             }
                         }}
                     />

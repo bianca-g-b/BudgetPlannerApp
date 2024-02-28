@@ -127,37 +127,58 @@
 /*1500px*/
 @media (max-width: 1500px) {
   .budget-lists {
-      flex-direction: column;
-      margin-left: 15%;
+    flex-direction: column;
+    margin-left: 15%;
   }
   .bar-div {
-      margin-top: 2%;
-      padding-top: 2%;
-      height: 500px;
+    margin-top: 1%;
+    padding-top: 2%;
+    height: 500px;
+    margin-left: 17%;
+    width: 80%;
   }
   .budgets-edit-delete-div {
     width: 80%;
     margin-left: 17%;
+    border-bottom: 1px solid rgba(1,115,113,0.5);
+  }
+  .budgets-edit-delete-div-dark {
+    border-bottom: 1px solid rgba(5,815,313,0.6);
+  }
+  .light-edit-del-links-border {
+    padding-bottom: 2%;
+    margin-bottom: 1%;
+    border-bottom: 1px solid rgba(1,115,113,0.5);
+  }
+  .dark-edit-del-links-border {
+    padding-bottom: 2%;
+    margin-bottom: 1%;
+    border-bottom: 1px solid rgba(5,815,313,0.6);
   }
 }
 
 /*1300px*/
 @media (max-width: 1300px) {
-  .expenses-totals-lists {
-    flex-direction: column;
-  }
   .budget-lists {
     margin-left: 0;
     align-items: center;
   }
   .budgets-edit-delete-div {
     margin-left: 1%;
-    padding-right: 1%;
   }
-  .expenses-only-div {
+  .bar-div {
+    margin-top: 2%;
+    padding-top: 2%;
+    height: 500px;
+    margin-left: 0;
+    width: 80%;
+    border: none;
+  }
+}
+  /* .expenses-only-div {
     width: 100%;
-  }
-  .totals-list-div {
+  } */
+  /* .totals-list-div {
     width: 100%;
     margin-top: 2%;
     margin-left: 0;
@@ -167,5 +188,15 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+  } */
+
+
+/*750px*/
+@media (max-width: 750px) {
+  .budgets-edit-delete-div {
+    width: 95%;
+  }
+  .bar-div {
+    width: 95%;
   }
 }
