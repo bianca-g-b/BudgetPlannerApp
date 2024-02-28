@@ -15,8 +15,9 @@ export const getListTypeStyle = (theme) =>({
     paddingTop: '3px',
 })
 
-export const getItemTextColour = (theme) => ({
+export const getItemTextColour = (theme, itemFontSize) => ({
     color: theme === 'dark' ? 'rgba(173,181,189,1)' : 'rgba(0, 0, 0, 0.6)',
+    fontSize: itemFontSize,
 })
 
 export const getEssentialIconStyle = (theme) => ({
@@ -72,9 +73,9 @@ export const getListItemStyle = {
     paddingRight: 0,
 }
 
-export const getPrimaryTypographyProps  = {
-    // fontSize: '0.8rem',
-}
+export const getPrimaryTypographyProps  = (itemFontSize) => ({
+    fontSize: itemFontSize,
+})
 
 export const getBarChartSx = (theme) => ({
     "& .css-1rbllhb-MuiChartsAxis-root .MuiChartsAxis-line": {stroke: theme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0, 0, 0, 1)'},

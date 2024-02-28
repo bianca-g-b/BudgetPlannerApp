@@ -3,6 +3,8 @@ import { getListStyle, getListTypeStyle, getItemTextColour, getEssentialIconStyl
         getNonEssentialIconStyle, getIncomeIconStyle, getSavingsIconStyle,
         getTotalSpendingIconStyle, getFontTheme, getListItemStyle, getPrimaryTypographyProps,
         getBarChartSx, getBarChartData, getPopperSx } from "../../../styles/budget/budgetByIdStyle";
+import { useHandleScreenSize, useHandleItemFontSize } from "../../../helpers/screenSizeHelper";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import { NavLink, useOutletContext } from 'react-router-dom';
@@ -35,11 +37,19 @@ import { ThemeProvider } from "@mui/material";
 function BudgetById() {
     const {budgetbyid, handleDeleteBudget, isModalOpen, openModal, closeModal}= useOutletContext();
     const theme = useSelector((state) => state.theme.theme);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [itemFontSize, setItemFontSize] = useState('');
+
+    // Custom hook to handle screen size
+    useHandleScreenSize({screenWidth, setScreenWidth});
+
+    // Custom hook to handle item font size
+    useHandleItemFontSize({screenWidth, setItemFontSize});
     
     /* Styles */
     const listStyle = getListStyle;
     const listTypeStyle = getListTypeStyle(theme);
-    const itemTextColour = getItemTextColour(theme);
+    const itemTextColour = getItemTextColour(theme, itemFontSize);
     const essentialIconStyle = getEssentialIconStyle(theme);
     const nonEssentialIconStyle = getNonEssentialIconStyle(theme);
     const incomeIconStyle = getIncomeIconStyle(theme);
@@ -47,7 +57,7 @@ function BudgetById() {
     const totalSpendingIconStyle = getTotalSpendingIconStyle(theme);  
     const fontTheme = getFontTheme;
     const listItemStyle = getListItemStyle;
-    const primaryTypographyProps  = getPrimaryTypographyProps;
+    const primaryTypographyProps  = getPrimaryTypographyProps(itemFontSize);
 
 
     return (
@@ -268,7 +278,7 @@ function BudgetById() {
                             <ListItemText 
                                 sx={listTypeStyle}
                                 primary="Totals" />
-
+                            <div className="totals-first-div">
                             <ListItem>
                                 <ListItemAvatar>
                                     <Avatar 
@@ -304,7 +314,9 @@ function BudgetById() {
                                 <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
+                            </div>
 
+                            <div className="totals-second-div">
                             <ListItem>
                                 <ListItemAvatar>
                                     <Avatar 
@@ -328,6 +340,7 @@ function BudgetById() {
                                 <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
+                            </div>
                         </List>}
                     </div>
                 </div>

@@ -200,3 +200,30 @@
     width: 95%;
   }
 }
+
+/*760px*/
+@media (max-width: 760px) {
+  .expenses-totals-lists {
+    flex-direction: column;
+  }
+  .expenses-only-div {
+    width: 100%;
+  }
+  .totals-list-div {
+    display: block;
+    width: 100%;
+    margin-top: 2%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .totals-first-div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .totals-second-div {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+  }
+}

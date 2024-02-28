@@ -67,3 +67,22 @@ export function useHandleModalWidth({screenWidth, setModalWidth}) {
       setModalWidth(modalSize);
     }, [screenWidth, setModalWidth]);
 }
+
+// budget label font size hook
+export function useHandleItemFontSize({screenWidth, setItemFontSize}) {
+    useEffect(() => {
+      let labelSize;
+      if (screenWidth < 768 && screenWidth > 622) {
+        labelSize = "0.9rem";
+      } 
+      else if (screenWidth < 622 && screenWidth > 555) {
+          labelSize = "0.8rem";   
+      } else if (screenWidth < 555) {
+          labelSize = "0.9rem"; 
+      }
+      else {
+          labelSize = "1rem";
+      }
+      setItemFontSize(labelSize);
+    }, [screenWidth, setItemFontSize])
+}
