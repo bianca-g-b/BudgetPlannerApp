@@ -276,6 +276,7 @@
     .table-area-div {
         border: none;
         box-shadow: none;
+        background: none;
     }
     .table-area-div {
         position: relative;
@@ -295,6 +296,11 @@
         margin-left: 5%;
         margin-bottom: 2%;
     }
+    .date-from-col,
+    .date-to-col,
+    .see-more {
+        padding: 5px;
+    }
 }
 
 /*1100px*/
@@ -304,6 +310,11 @@
     }
     .header-div {
         width: 30%;
+    }
+    .date-from-col,
+    .date-to-col,
+    .see-more {
+        padding: 4px;
     }
 }
 
@@ -328,8 +339,20 @@
     .budget-pagination-div {
         left: 2%;
     }
-    .bar-div {
-        width: 95%;
+    .date-from-col,
+    .date-to-col,
+    .see-more {
+        padding: 3px;
+        font-size: 0.85rem;
+    }
+}
+/*635px*/
+@media (max-width: 635px) {
+    .date-from-col,
+    .date-to-col,
+    .see-more {
+        padding: 1.5px;
+        font-size: 0.85rem;
     }
 }
 

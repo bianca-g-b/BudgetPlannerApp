@@ -27,9 +27,9 @@ function BudgetList() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
-    console.log("budgetList", budgetList)
-    console.log(currentBudgets, "currentBudgets")
-    console.log("currentPage", currentPage)
+    // console.log("budgetList", budgetList)
+    // console.log(currentBudgets, "currentBudgets")
+    // console.log("currentPage", currentPage)
     
 
     // fetch data

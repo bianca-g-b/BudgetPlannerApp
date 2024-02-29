@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { useHandleScreenSize, useHandleFontSize } from "../../../helpers/screenSizeHelper.js";
+import { useHandleScreenSize } from "../../../helpers/screenSizeHelper.js";
+import { useHandleFontSize } from "../../../helpers/budgetHelpers.js";
 import { handleInputFocus, handleInputBlur } from "../../../helpers/handlers.js";
 import { getInputFieldStyle, getFormLabelStyle } from "../../../styles/budget/formStyle.js";
 import Form from 'react-bootstrap/Form';

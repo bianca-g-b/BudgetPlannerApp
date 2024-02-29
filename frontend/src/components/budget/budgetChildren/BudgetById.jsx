@@ -2,8 +2,9 @@ import "../../../styles/budget/BudgetById.css";
 import { getListStyle, getListTypeStyle, getItemTextColour, getEssentialIconStyle,
         getNonEssentialIconStyle, getIncomeIconStyle, getSavingsIconStyle,
         getTotalSpendingIconStyle, getFontTheme, getListItemStyle, getPrimaryTypographyProps,
-        getBarChartSx, getBarChartData, getPopperSx } from "../../../styles/budget/budgetByIdStyle";
-import { useHandleScreenSize, useHandleItemFontSize } from "../../../helpers/screenSizeHelper";
+        getBarChartSx, getBarChartData, getPopperSx, getTotalsPadding, getIconSx } from "../../../styles/budget/budgetByIdStyle";
+import { useHandleScreenSize } from "../../../helpers/screenSizeHelper";
+import { useHandleItemFontSize, useHandleTotalsPadding } from "../../../helpers/budgetHelpers";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from 'prop-types';
@@ -39,26 +40,35 @@ function BudgetById() {
     const theme = useSelector((state) => state.theme.theme);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [itemFontSize, setItemFontSize] = useState('');
+    const [sidesPadding, setSidesPadding] = useState('16px');
+    const [totalVerticalPadding, setTotalVerticalPadding] = useState('8px');
+    const [iconSize, setIconSize] = useState('35px');
+    const [iconFontSize, setIconFontSize] = useState('24px');
 
     // Custom hook to handle screen size
     useHandleScreenSize({screenWidth, setScreenWidth});
 
     // Custom hook to handle item font size
-    useHandleItemFontSize({screenWidth, setItemFontSize});
+    useHandleItemFontSize({screenWidth, setItemFontSize, setIconSize, setIconFontSize});
+
+    // Custom hook to handle padding for total items
+    useHandleTotalsPadding({screenWidth, setSidesPadding, setTotalVerticalPadding});
     
     /* Styles */
     const listStyle = getListStyle;
     const listTypeStyle = getListTypeStyle(theme);
     const itemTextColour = getItemTextColour(theme, itemFontSize);
-    const essentialIconStyle = getEssentialIconStyle(theme);
-    const nonEssentialIconStyle = getNonEssentialIconStyle(theme);
-    const incomeIconStyle = getIncomeIconStyle(theme);
-    const savingsIconStyle = getSavingsIconStyle(theme);
-    const totalSpendingIconStyle = getTotalSpendingIconStyle(theme);  
+    const essentialIconStyle = getEssentialIconStyle(theme, iconSize);
+    const nonEssentialIconStyle = getNonEssentialIconStyle(theme, iconSize);
+    const incomeIconStyle = getIncomeIconStyle(theme, iconSize);
+    const savingsIconStyle = getSavingsIconStyle(theme, iconSize);
+    const totalSpendingIconStyle = getTotalSpendingIconStyle(theme, iconSize);
+    const iconSx = getIconSx(iconFontSize);
     const fontTheme = getFontTheme;
     const listItemStyle = getListItemStyle;
     const primaryTypographyProps  = getPrimaryTypographyProps(itemFontSize);
-
+    const totalsPadding = getTotalsPadding(sidesPadding, totalVerticalPadding);
+  
 
     return (
         <div className="budget-lists">
@@ -80,7 +90,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <BedroomParentOutlinedIcon />
+                                            <BedroomParentOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText 
@@ -93,7 +103,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <ElectricBoltOutlinedIcon />
+                                            <ElectricBoltOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Utilities" secondary={`£ ${budgetbyid.utility_bills}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -107,7 +117,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <AddShoppingCartOutlinedIcon />
+                                            <AddShoppingCartOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Food and drinks" secondary={`£ ${budgetbyid.food_drinks}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -119,7 +129,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <DirectionsRailwayFilledOutlinedIcon />
+                                            <DirectionsRailwayFilledOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Transport" secondary={`£ ${budgetbyid.transport}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -133,7 +143,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <HandymanOutlinedIcon />
+                                            <HandymanOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Household" secondary={`£ ${budgetbyid.household_goods_services}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -145,7 +155,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <ChildCareOutlinedIcon />
+                                            <ChildCareOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Childcare" secondary={`£ ${budgetbyid.children_related_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -159,7 +169,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <LocalLaundryServiceOutlinedIcon />
+                                            <LocalLaundryServiceOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Cleaning and toiletries" secondary={`£ ${budgetbyid.cleaning_toiletries}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -171,7 +181,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
-                                            <ShopOutlinedIcon />
+                                            <ShopOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Other essential" secondary={`£ ${budgetbyid.other_essential_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -194,7 +204,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <DiamondIcon />
+                                            <DiamondIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Luxury and gifts" secondary={`£ ${budgetbyid.luxury_gifts}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -206,7 +216,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <SnowboardingIcon />
+                                            <SnowboardingIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Leisure and entertainment" secondary={`£ ${budgetbyid.leisure_entertainment}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -220,7 +230,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <BeachAccessIcon />
+                                            <BeachAccessIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Holidays" secondary={`£ ${budgetbyid.holidays}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -232,7 +242,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <VolunteerActivismOutlinedIcon />
+                                            <VolunteerActivismOutlinedIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Charity donations" secondary={`£ ${budgetbyid.charity}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -246,7 +256,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <ShopIcon />
+                                            <ShopIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText primary="Other non-essential" secondary={`£ ${budgetbyid.other_non_essential_costs}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
@@ -258,7 +268,7 @@ function BudgetById() {
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
-                                            <CreditCardIcon />
+                                            <CreditCardIcon sx={iconSx}/>
                                         </Avatar>
                                     </ListItemAvatar>
                                     <ListItemText 
@@ -278,63 +288,67 @@ function BudgetById() {
                             <ListItemText 
                                 sx={listTypeStyle}
                                 primary="Totals" />
+                                
                             <div className="totals-first-div">
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar 
-                                        sx={incomeIconStyle}
-                                        className="income-icon">
-                                        <AccountBalanceWalletOutlinedIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Income" secondary={`£ ${budgetbyid.total_income}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
-                                </ListItemText>
-                            </ListItem>
+                                <div className="totals-inner-div-1">
+                                    <ListItem sx={totalsPadding}>
+                                        <ListItemAvatar>
+                                            <Avatar 
+                                                sx={incomeIconStyle}
+                                                className="income-icon">
+                                                <AccountBalanceWalletOutlinedIcon sx={iconSx}/>
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary="Income" secondary={`£ ${budgetbyid.total_income}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
+                                        </ListItemText>
+                                    </ListItem>
+                                </div>
+                                <div className="totals-inner-div-2">
+                                    <ListItem sx={totalsPadding}>
+                                        <ListItemAvatar>
+                                            <Avatar 
+                                                sx={essentialIconStyle}
+                                                className="essential-icon">
+                                                <ShopOutlinedIcon sx={iconSx}/>
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary="Essentials" secondary={`£ ${budgetbyid.total_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
+                                        </ListItemText>
+                                    </ListItem>
 
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar 
-                                        sx={essentialIconStyle}
-                                        className="essential-icon">
-                                        <ShopOutlinedIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Essentials" secondary={`£ ${budgetbyid.total_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
-                                </ListItemText>
-                            </ListItem>
-
-                            <ListItem>
-                                <ListItemAvatar>
-                                    <Avatar 
-                                        sx={nonEssentialIconStyle}
-                                        className="non-essential-icon">
-                                        <ShopIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
-                                </ListItemText>
-                            </ListItem>
+                                    <ListItem sx={totalsPadding}>
+                                        <ListItemAvatar>
+                                            <Avatar 
+                                                sx={nonEssentialIconStyle}
+                                                className="non-essential-icon">
+                                                <ShopIcon sx={iconSx}/>
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary="Non-essentials" secondary={`£ ${budgetbyid.total_non_essential}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
+                                        </ListItemText>
+                                    </ListItem>
+                                </div>
                             </div>
 
                             <div className="totals-second-div">
-                            <ListItem>
+                            <ListItem sx={totalsPadding}>
                                 <ListItemAvatar>
                                     <Avatar 
                                         sx={totalSpendingIconStyle}
                                         className="savings-icon">
-                                        <CurrencyPoundOutlinedIcon />
+                                        <CurrencyPoundOutlinedIcon sx={iconSx}/>
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary="All expenses" secondary={`£ ${budgetbyid.total_expenses}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>
                                 </ListItemText>
                             </ListItem>
 
-                            <ListItem className="last-list-item">
+                            <ListItem className="last-list-item" sx={totalsPadding}>
                                 <ListItemAvatar>
                                     <Avatar 
                                         sx={savingsIconStyle}
                                         className="savings-icon">
-                                        <CurrencyPoundOutlinedIcon />
+                                        <CurrencyPoundOutlinedIcon sx={iconSx}/>
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary="Savings" secondary={`£ ${budgetbyid.total_savings}`} primaryTypographyProps={primaryTypographyProps} secondaryTypographyProps = {itemTextColour}>

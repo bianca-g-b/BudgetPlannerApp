@@ -175,21 +175,6 @@
     border: none;
   }
 }
-  /* .expenses-only-div {
-    width: 100%;
-  } */
-  /* .totals-list-div {
-    width: 100%;
-    margin-top: 2%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .totals-list-trial {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-  } */
-
 
 /*750px*/
 @media (max-width: 750px) {
@@ -221,9 +206,40 @@
     display: flex;
     flex-direction: row;
   }
+  .totals-inner-div-1 {
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+  }
+  .totals-inner-div-2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
   .totals-second-div {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
+  }
+  .bar-div {
+    height: 440px;
+}
+}
+
+/*635px*/
+@media (max-width: 635px) {
+  .totals-first-div {
+    flex-direction: column;
+  }
+  .totals-inner-div-1 {
+    width: 100%;
+  }
+  .edit-budget-link, 
+  .delete-budget-button {
+    font-size: 15px;
+  }
+  .bar-div {
+    height: 360px;
+    width: 100%;
   }
 }

@@ -20,44 +20,48 @@ export const getItemTextColour = (theme, itemFontSize) => ({
     fontSize: itemFontSize,
 })
 
-export const getEssentialIconStyle = (theme) => ({
+export const getEssentialIconStyle = (theme, iconSize) => ({
     color: '#ec3e94',
     backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
     border: '1px solid #ec3e94',
-    width: '35px',
-    height: '35px',
+    width: iconSize,
+    height: iconSize,
 })
 
-export const getNonEssentialIconStyle = (theme) => ({
+export const getNonEssentialIconStyle = (theme, iconSize) => ({
     color: '#fd7e14',
     backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
     border: '1px solid #fd7e14',
-    width: '35px',
-    height: '35px',
+    width: iconSize,
+    height: iconSize,
 })
 
-export const getIncomeIconStyle = (theme) => ({
+export const getIncomeIconStyle = (theme, iconSize) => ({
     color: '#36a67e',
     backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
     border: '1px solid #36a67e',
-    width: '35px',
-    height: '35px',
+    width: iconSize,
+    height: iconSize,
 })
 
-export const getSavingsIconStyle = (theme) => ({
+export const getSavingsIconStyle = (theme, iconSize) => ({
     color: '#2394d0',
     backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
     border: '1px solid #2394d0',
-    width: '35px',
-    height: '35px',
+    width: iconSize,
+    height: iconSize,
 })
 
-export const getTotalSpendingIconStyle = (theme) => ({
+export const getTotalSpendingIconStyle = (theme, iconSize) => ({
     color: '#dc3545',
     backgroundColor: theme==='dark' ? '#0a0a1e' : 'white',
     border: '1px solid #dc3545',
-    width: '35px',
-    height: '35px',
+    width: iconSize,
+    height: iconSize,
+})
+
+export const getIconSx = (iconFontSize) => ({
+    fontSize: iconFontSize,
 })
 
 export const getFontTheme = createTheme({
@@ -75,6 +79,10 @@ export const getListItemStyle = {
 
 export const getPrimaryTypographyProps  = (itemFontSize) => ({
     fontSize: itemFontSize,
+})
+
+export const getTotalsPadding = (sidesPadding, verticalPadding) => ({
+    padding: `${verticalPadding} ${sidesPadding}`,
 })
 
 export const getBarChartSx = (theme) => ({
