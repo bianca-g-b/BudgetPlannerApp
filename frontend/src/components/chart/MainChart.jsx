@@ -27,7 +27,7 @@ function MainChart() {
     const dispatch = useDispatch();
 
     // Custom hook to update dataset when budgetList changes
-    useHandleDataset(budgetList, dispatch, setDataset);
+    useHandleDataset({budgetList, dispatch, setDataset});
 
     // Custom hook to handle screen size
     useHandleScreenSize({screenWidth, setScreenWidth});

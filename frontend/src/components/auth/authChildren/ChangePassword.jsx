@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";
+import { handleValidatePassword } from "../../../helpers/authHelpers";
+import { successAlertStyle, warningAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import PasswordChecklist from "react-password-checklist";
 import validator from 'validator';
-import { successAlertStyle, warningAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
+
 
 function ChangePassword() {
     const [oldPassword, setOldPassword] = useState("");
@@ -22,18 +24,9 @@ function ChangePassword() {
 
     const dispatch = useDispatch();
 
-    // password validation
-    function validatePassword(password) {
-        if (validator.isStrongPassword(password, {
-            minLength:8,
-            minSymbols:1,
-            minUppercase:0,
-            minNumbers:1,
-        })) {
-            return true;
-        } else {
-            return false;
-    }}
+    // Password validation helper function
+    const validatePassword =(password) => handleValidatePassword(password, {validator});
+    
     
     async function updatePassword(e) {
         e.preventDefault();
@@ -74,7 +67,8 @@ function ChangePassword() {
 
                     <div className="new-password-container">
                         <label htmlFor="password">Current password</label>
-                        <input type="password" 
+                        <input type="password"
+                            autoComplete="off"
                             className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`}
                             placeholder="Enter current password"
                             onChange = {(e)=> setOldPassword(e.target.value)}
@@ -83,7 +77,8 @@ function ChangePassword() {
 
                     <div className="new-password-container">
                         <label htmlFor="password">New password</label>
-                        <input type="password" 
+                        <input type="password"
+                            autoComplete="off" 
                             className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`}
                             placeholder="Enter new password"
                             onChange = {(e)=> setPassword(e.target.value)}
@@ -92,7 +87,8 @@ function ChangePassword() {
 
                     <div className="new-password-container">
                         <label htmlFor="password">Confirm password</label>
-                        <input type="password" 
+                        <input type="password"
+                            autoComplete="off" 
                             className={`change-psw-input ${theme==='dark' ? 'change-psw-input-dark' : '' }`} 
                             placeholder="Confirm new password"
                             onChange = {(e) => setConfirmPassword(e.target.value)}
@@ -114,7 +110,7 @@ function ChangePassword() {
                             number: "Password must contain at least one number",
                             match: "Passwords must match",
                         }}
-                        onChange={(isValid) => console.log("Is valid?", isValid)}
+                        onChange={(isValid) => {return isValid}}
                     />
 
                     <div className="submit-container new-psw-button-div">

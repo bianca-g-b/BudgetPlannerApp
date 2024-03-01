@@ -1,14 +1,17 @@
 import "../../styles/auth/Register.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import { registerUser, fetchCSRFToken } from "../../actions/authActions";
 import { useNavigate, NavLink } from "react-router-dom";
+import { registerUser, fetchCSRFToken } from "../../actions/authActions";
+import { useRedirect } from "../../hooks/authHooks";
+import { handleValidatePassword, handleValidateUsername, handleRegister } from "../../helpers/authHelpers";
+import { successAlertStyle, warningAlertStyle, errorAlertStyle  } from "../../styles/budget/alertsStyles";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import PasswordChecklist from 'react-password-checklist';
 import validator from 'validator';
-import { successAlertStyle, warningAlertStyle, errorAlertStyle  } from "../../styles/budget/alertsStyles";
+
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -27,70 +30,24 @@ function Register() {
     const isAuthenticated = useSelector((state) => state.authenticated.isAuthenticated);
     const theme = useSelector((state) => state.theme.theme);
 
-    // password validation
-    function validatePassword(password) {
-        if (validator.isStrongPassword(password, {
-            minLength:8,
-            minSymbols:1,
-            minUppercase:0,
-            minNumbers:1,
-        })) {
-            return true;
-        } else {
-            return false;
-    }}
+    // Password validation helper function
+    const validatePassword =(password) => handleValidatePassword(password, {validator});
     
-    // username validation
-   function validateUsername(username) {
-        if (username.length>=6) {
-            // check if username contains at least one lowercase letter
-            if (username.match(/[a-z]/)) {
-                return true;
-            } else {
-                return false;
-            } 
-        } else {
-            return false;
-        }
-    }
+    // Username validation helper function
+    const validateUsername = (username) => handleValidateUsername(username);
 
-   console.log(validateUsername('a1235'), "validateUsername")
-    // create user account    
-    async function handleRegister(e) {
-        e.preventDefault();
-        if (password === confirmPassword) {
-            if (validatePassword(password)=== true && validateUsername(username)=== true) {
-                const csrfToken = await fetchCSRFToken(dispatch);
-                const response = await registerUser(username, password, confirmPassword, email, csrfToken);
-                if (response.status === 202) {
-                    setOpenSuccess(true);
-                    setTimeout(()=> {
-                        navigate("/login")
-                    }, 2500)
-                } else {
-                    setOpenFail(true);
-                }
-            } else {
-                setOpenWarning(true);
-            }
-        } else {
-            setOpenWarning(true);
-        }
-    }
-
-    // if user is logged in already, redirect to dashboard
-    useEffect(()=>{
-        if (user && isAuthenticated) {
-            navigate("/dashboard")
-        }
-    },[user, isAuthenticated, navigate])
+    // Hook to redirect to dashboard, if user is logged in
+    useRedirect({user, isAuthenticated, navigate});
     
     return (
         <div className = "register-form-container">
             <div className = {`register-main ${theme==='dark' ? 'register-main-dark' : ''}`}>
             <h1 className = {`register-form-title ${theme==='dark' ? 'register-form-title-dark' : ''}`}>Create account</h1>
             <form className = "register-container"
-                onSubmit = {handleRegister}
+                onSubmit = {(e) => handleRegister(e, {password, confirmPassword, username, email,
+                    validatePassword, validateUsername, fetchCSRFToken, 
+                    dispatch, registerUser, setOpenSuccess, setOpenFail, 
+                    setOpenWarning, navigate})}
                 >
                 <div className="reg-username-container">
                     <label htmlFor="username">Username</label>
@@ -160,7 +117,7 @@ function Register() {
                             number: "Password must contain at least one number",
                             match: "Passwords must match",
                         }}
-                        onChange={(isValid) => console.log("Is valid?", isValid)}
+                        onChange={(isValid) => {return isValid}}
                     />
                     <Button 
                         sx={{ marginTop: "4%", }}

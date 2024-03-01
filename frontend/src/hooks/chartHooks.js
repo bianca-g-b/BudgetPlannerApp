@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 /*MAIN CHART HOOKS*/
 
-export function useHandleDataset(budgetList, dispatch, setDataset) {
+export function useHandleDataset({budgetList, dispatch, setDataset}) {
     useEffect(() => {
       // extract chosen data from all budgets and create a dataset
       const data = budgetList.map((budget, index)=> {

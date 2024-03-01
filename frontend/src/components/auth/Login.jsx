@@ -1,14 +1,17 @@
 import "../../styles/auth/Login.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, NavLink } from "react-router-dom";
 import { fetchCSRFToken, loginUser, fetchUser} from "../../actions/authActions.js";
-import {useNavigate, NavLink } from "react-router-dom";
-import {setUser} from "../../redux/userSlice.js";
+import { setUser} from "../../redux/userSlice.js";
 import { setIsAuthenticated } from "../../redux/authenticatedSlice.js";
+import { handleLogin } from "../../helpers/authHelpers.js";
+import { useRedirect } from "../../hooks/authHooks";
+import { errorAlertStyle } from "../../styles/budget/alertsStyles.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
-import { errorAlertStyle } from "../../styles/budget/alertsStyles.js";
+
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -22,41 +25,17 @@ function Login() {
     const isAuthenticated = useSelector((state)=> state.authenticated.isAuthenticated);
     const theme = useSelector((state) => state.theme.theme);
 
-    // login user and set states for user and isAuthenticated if login is successful
-    async function handleLogin(e) {
-        e.preventDefault();
-        const csrfToken = await fetchCSRFToken(dispatch);
-        const response = await loginUser(username, password, csrfToken);
-        if (response.status === 202)  {
-            console.log("Login successful.");
-            const user = await fetchUser(dispatch, csrfToken);
-            dispatch(setUser(user));
-            if (user) {
-                dispatch(setIsAuthenticated(true));
-            } else {
-                dispatch(setIsAuthenticated(false));
-            }
-            console.log("user in login:", user);
-            console.log("is authenticated in login:",isAuthenticated);
-            navigate("/dashboard");   
-        } else {
-            setOpenFail(true);
-        }
-    }
+    // Hook to redirect to dashboard, if user is logged in
+    useRedirect({user, isAuthenticated, navigate});
 
-    // if the user is logged in already, redirect to the dashboard
-    useEffect(()=>{
-        if (user && isAuthenticated) {
-            navigate("/dashboard");
-        }
-    },[user, isAuthenticated, navigate])
-
-    return(
+    return (
         <div className = "login-form-container">
             <div className = {`login-main ${theme==='dark' ? 'login-main-dark' : ''}`}>
                 <h1 className = {`login-form-title ${theme==='dark' ? 'login-form-title-dark' : ''}`}>Login</h1>
                 <form className = "login-form"
-                    onSubmit = {handleLogin}
+                    onSubmit = {(e) => handleLogin(e, {username, password, fetchCSRFToken, loginUser,
+                    dispatch,  fetchUser, setUser, setIsAuthenticated, 
+                    navigate, isAuthenticated, setOpenFail})}
                 >
                     <div className="login-username-container">
                         <label htmlFor="username">Username</label>
