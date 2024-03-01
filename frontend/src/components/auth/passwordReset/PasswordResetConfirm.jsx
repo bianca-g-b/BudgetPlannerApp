@@ -1,9 +1,11 @@
 import '../../../styles/auth/resetPassword/PasswordResetConfirm.css';
 import { passwordResetConfirm, fetchCSRFToken } from '../../../actions/authActions';
 import { warningAlertStyle, errorAlertStyle } from '../../../styles/budget/alertsStyles';
+import { handleValidatePassword, handlePasswordResetConfirm } from "../../../helpers/authHelpers";
+import { useParamValues } from "../../../hooks/authHooks";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import Button from '@mui/material/Button';
 import PasswordChecklist from 'react-password-checklist';
 import validator from 'validator';
@@ -22,51 +24,21 @@ function PasswordResetConfirm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-    },[uidb64, token])
+    // Hook to get uidb64 and token from url
+    useParamValues({uidb64, token});
 
-    // password validation
-    function validatePassword(password) {
-        if (validator.isStrongPassword(password, {
-            minLength:8,
-            minSymbols:0,
-            minUppercase:0,
-            minNumbers:1,
-        })) {
-            return true;
-        } else {
-            return false;
-    }}
+    // Password validation helper function
+    const validatePassword =(password) => handleValidatePassword(password, {validator});
 
-    async function handlePasswordReset(event) {
-        event.preventDefault();
-        if (password === confirmPassword) {
-            if (validatePassword(password)=== true) {
-                const csrfToken = await fetchCSRFToken(dispatch);
-                const response = await passwordResetConfirm(uidb64, token, password, confirmPassword, csrfToken);
-                if (response.ok) {
-                    console.log(response);
-                    navigate('/reset/success')
-                } else {
-                    console.log("Password reset failed. Please try again.");
-                    setOpenFail(true);
-                } 
-            } else {
-                console.log("Password is not strong enough");
-                setOpenPasswordWarning(true);
-            }
-        } else {
-            console.log("Passwords do not match");
-            setOpenWarning(true);
-        }
-    }
 
     return (
         <div className="reset-password-main-div" >
             <div className={`reset-password-container ${theme==='dark' ? 'reset-password-container-dark' : '' }`}>
                 <p className={`reset-password-title ${theme==='dark' ? 'reset-password-title-dark' : '' }`}>Reset your password</p>
                 <form className="reset-password-form"
-                    onSubmit={handlePasswordReset}
+                    onSubmit={(e)=>handlePasswordResetConfirm(e, {password, confirmPassword, dispatch,
+                        uidb64, token, validatePassword, fetchCSRFToken, passwordResetConfirm,
+                        setOpenFail, setOpenPasswordWarning, setOpenWarning, navigate})}
                 >
                     <div className="reset-password-input-container">
                         <label htmlFor="password">New Password</label>

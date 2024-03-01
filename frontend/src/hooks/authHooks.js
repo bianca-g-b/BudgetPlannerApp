@@ -10,3 +10,9 @@ export function useRedirect({user, isAuthenticated, navigate}) {
         }
     },[user, isAuthenticated, navigate])
 }
+
+// Token and uidb64 hook
+export function useParamValues({uidb64, token}) {
+    useEffect(()=>{
+    },[uidb64, token])
+}

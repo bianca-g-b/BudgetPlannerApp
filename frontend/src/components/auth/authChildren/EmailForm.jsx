@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { updateEmail, deleteEmail,fetchCSRFToken } from "../../../actions/authActions";
+import { handleUpdateEmail, handledeleteEmail } from "../../../helpers/authHelpers";
+import { successAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import { successAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
 
 function EmailForm() {
     const dispatch = useDispatch();
@@ -18,29 +19,7 @@ function EmailForm() {
     const [openFailDelete, setOpenFailDelete] = useState(false);
     const theme = useSelector((state) => state.theme.theme);
 
-
-    async function handleUpdateEmail(e) {
-        e.preventDefault();
-        const csrfToken = await fetchCSRFToken(dispatch);
-        const response = await updateEmail(dispatch, newEmail, csrfToken);
-        if (response.status === 202) {
-            setOpenSuccessUpdate(true);
-        } else {
-            setOpenFailUpdate(true);
-        }
-    }
-
-    async function handleDeleteEmail(e) {
-        e.preventDefault();
-        const csrfToken = await fetchCSRFToken(dispatch);
-        const response = await deleteEmail(dispatch, csrfToken);
-        if (response.status === 202) {
-            setOpenSuccessDelete(true);
-        } else {
-            setOpenFailDelete(true);
-        }
-    }
-
+    
     return (
         <div className="all-email-container">
             <NavLink to="/account" className={`back-to-account ${theme==="dark" ? "back-to-account-dark" : ""}`}>&#11164; &nbsp;back to  &nbsp; <span> MY ACCOUNT</span></NavLink>
@@ -51,7 +30,8 @@ function EmailForm() {
                 </div>
 
                 <form className="email-form"
-                    onSubmit = {handleUpdateEmail}
+                    onSubmit = {(e) => handleUpdateEmail(e, {email, newEmail, fetchCSRFToken,
+                        dispatch, updateEmail, setOpenSuccessUpdate, setOpenFailUpdate})}
                 >
                     <div className="email-container">
                         <label htmlFor="email">Email (must be unique)</label>
@@ -62,6 +42,7 @@ function EmailForm() {
                             onChange = { (e) => setNewEmail(e.target.value)}
                             />
                     </div>
+
                    {email && <div className="submit-container">
                         <Button type="submit" className="submit-button"
                             variant={theme === "dark" ? "outlined" : "contained"}
@@ -87,7 +68,8 @@ function EmailForm() {
                      <Button className="delete-email-button"
                         color="error"
                         variant={theme === "dark" ? "outlined" : "contained"}
-                        onClick = {handleDeleteEmail}
+                        onClick = {(e) => handledeleteEmail(e, {fetchCSRFToken, dispatch, deleteEmail,
+                            setOpenSuccessDelete, setOpenFailDelete})}
                     >Delete</Button>
                 </div>
             </div>}          

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { changePassword, fetchCSRFToken, logoutUser } from "../../../actions/authActions";
-import { handleValidatePassword } from "../../../helpers/authHelpers";
+import { handleValidatePassword, handleUpdatePassword } from "../../../helpers/authHelpers";
 import { successAlertStyle, warningAlertStyle, errorAlertStyle } from "../../../styles/budget/alertsStyles";
 import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
@@ -26,33 +26,7 @@ function ChangePassword() {
 
     // Password validation helper function
     const validatePassword =(password) => handleValidatePassword(password, {validator});
-    
-    
-    async function updatePassword(e) {
-        e.preventDefault();
-        if (password === confirmPassword) {
-            if (validatePassword(password)=== true) {
-                const csrfToken = await fetchCSRFToken(dispatch);
-                const response = await changePassword(oldPassword, password, confirmPassword, csrfToken);
-                if (response.status === 202) {
-                    setOpenSuccess(true);
-                    console.log("Password changed successfully");
-                    setTimeout(() => {
-                        logoutUser(dispatch, csrfToken);
-                    }, 2500);                  
-                } else {
-                    console.log("Failed to change password");
-                    setOpenFail(true);
-                }
-            } else {
-                console.log("Password does not meet requirements");
-                setOpenPasswordWarning(true);
-            }
-        } else {
-            console.log("Passwords do not match");
-            setOpenWarning(true);
-        }
-    }
+
 
     return (
         <div className="change-psw-main-container">
@@ -63,7 +37,9 @@ function ChangePassword() {
                 </div>
                 
                 <form className="change-psw-form"
-                    onSubmit={updatePassword}>
+                    onSubmit={(e) => handleUpdatePassword(e, {password, confirmPassword, oldPassword,
+                        validatePassword, fetchCSRFToken, dispatch, changePassword, logoutUser,
+                        setOpenSuccess, setOpenFail, setOpenWarning, setOpenPasswordWarning})}>
 
                     <div className="new-password-container">
                         <label htmlFor="password">Current password</label>
