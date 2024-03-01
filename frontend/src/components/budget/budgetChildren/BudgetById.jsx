@@ -1,14 +1,11 @@
 import "../../../styles/budget/BudgetById.css";
-import { getListStyle, getListTypeStyle, getItemTextColour, getEssentialIconStyle,
-        getNonEssentialIconStyle, getIncomeIconStyle, getSavingsIconStyle,
-        getTotalSpendingIconStyle, getFontTheme, getListItemStyle, getPrimaryTypographyProps,
-        getBarChartSx, getBarChartData, getPopperSx, getTotalsPadding, getIconSx } from "../../../styles/budget/budgetByIdStyle";
-import { useHandleScreenSize } from "../../../helpers/screenSizeHelper";
-import { useHandleItemFontSize, useHandleTotalsPadding } from "../../../helpers/budgetHelpers";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import PropTypes from 'prop-types';
 import { NavLink, useOutletContext } from 'react-router-dom';
+import * as budgetStyle from "../../../styles/budget/budgetsPageStyle";
+import { useHandleScreenSize } from "../../../hooks/screenSizeHooks";
+import { useHandleItemFontSize, useHandleTotalsPadding } from "../../../hooks/budgetHooks";
+import PropTypes from 'prop-types';
 import DeleteModal from "./Modal";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -44,30 +41,32 @@ function BudgetById() {
     const [totalVerticalPadding, setTotalVerticalPadding] = useState('8px');
     const [iconSize, setIconSize] = useState('35px');
     const [iconFontSize, setIconFontSize] = useState('24px');
+    const [listItemAvatarWidth, setListItemAvatarWidth] = useState('56px');
 
     // Custom hook to handle screen size
     useHandleScreenSize({screenWidth, setScreenWidth});
 
     // Custom hook to handle item font size
-    useHandleItemFontSize({screenWidth, setItemFontSize, setIconSize, setIconFontSize});
+    useHandleItemFontSize({screenWidth, setItemFontSize, setIconSize, setIconFontSize, setListItemAvatarWidth});
 
     // Custom hook to handle padding for total items
     useHandleTotalsPadding({screenWidth, setSidesPadding, setTotalVerticalPadding});
     
     /* Styles */
-    const listStyle = getListStyle;
-    const listTypeStyle = getListTypeStyle(theme);
-    const itemTextColour = getItemTextColour(theme, itemFontSize);
-    const essentialIconStyle = getEssentialIconStyle(theme, iconSize);
-    const nonEssentialIconStyle = getNonEssentialIconStyle(theme, iconSize);
-    const incomeIconStyle = getIncomeIconStyle(theme, iconSize);
-    const savingsIconStyle = getSavingsIconStyle(theme, iconSize);
-    const totalSpendingIconStyle = getTotalSpendingIconStyle(theme, iconSize);
-    const iconSx = getIconSx(iconFontSize);
-    const fontTheme = getFontTheme;
-    const listItemStyle = getListItemStyle;
-    const primaryTypographyProps  = getPrimaryTypographyProps(itemFontSize);
-    const totalsPadding = getTotalsPadding(sidesPadding, totalVerticalPadding);
+    const listStyle = budgetStyle.getListStyle;
+    const listTypeStyle = budgetStyle.getListTypeStyle(theme);
+    const itemTextColour = budgetStyle.getItemTextColour(theme, itemFontSize);
+    const essentialIconStyle = budgetStyle.getEssentialIconStyle(theme, iconSize);
+    const nonEssentialIconStyle = budgetStyle.getNonEssentialIconStyle(theme, iconSize);
+    const incomeIconStyle = budgetStyle.getIncomeIconStyle(theme, iconSize);
+    const savingsIconStyle = budgetStyle.getSavingsIconStyle(theme, iconSize);
+    const totalSpendingIconStyle = budgetStyle.getTotalSpendingIconStyle(theme, iconSize);
+    const iconSx = budgetStyle.getIconSx(iconFontSize);
+    const fontTheme = budgetStyle.getFontTheme;
+    const listItemStyle = budgetStyle.getListItemStyle;
+    const primaryTypographyProps  = budgetStyle.getPrimaryTypographyProps(itemFontSize);
+    const totalsPadding = budgetStyle.getTotalsPadding(sidesPadding, totalVerticalPadding);
+    const avatarSx = budgetStyle.getAvatarSx(listItemAvatarWidth);
   
 
     return (
@@ -86,7 +85,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -99,7 +98,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -113,7 +112,7 @@ function BudgetById() {
 
                             <div className="expenses-group">    
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -125,7 +124,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -139,7 +138,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -151,7 +150,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -165,7 +164,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -177,7 +176,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={essentialIconStyle}
                                             className="essential-icon">
@@ -200,7 +199,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -212,7 +211,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -226,7 +225,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -238,7 +237,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -252,7 +251,7 @@ function BudgetById() {
 
                             <div className="expenses-group">
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -264,7 +263,7 @@ function BudgetById() {
                                 </ListItem>
 
                                 <ListItem sx={listItemStyle}>
-                                    <ListItemAvatar>
+                                    <ListItemAvatar sx={avatarSx}>
                                         <Avatar 
                                             sx={nonEssentialIconStyle}
                                             className="non-essential-icon">
@@ -292,7 +291,7 @@ function BudgetById() {
                             <div className="totals-first-div">
                                 <div className="totals-inner-div-1">
                                     <ListItem sx={totalsPadding}>
-                                        <ListItemAvatar>
+                                        <ListItemAvatar sx={avatarSx}>
                                             <Avatar 
                                                 sx={incomeIconStyle}
                                                 className="income-icon">
@@ -305,7 +304,7 @@ function BudgetById() {
                                 </div>
                                 <div className="totals-inner-div-2">
                                     <ListItem sx={totalsPadding}>
-                                        <ListItemAvatar>
+                                        <ListItemAvatar sx={avatarSx}>
                                             <Avatar 
                                                 sx={essentialIconStyle}
                                                 className="essential-icon">
@@ -317,7 +316,7 @@ function BudgetById() {
                                     </ListItem>
 
                                     <ListItem sx={totalsPadding}>
-                                        <ListItemAvatar>
+                                        <ListItemAvatar sx={avatarSx}>
                                             <Avatar 
                                                 sx={nonEssentialIconStyle}
                                                 className="non-essential-icon">
@@ -332,7 +331,7 @@ function BudgetById() {
 
                             <div className="totals-second-div">
                             <ListItem sx={totalsPadding}>
-                                <ListItemAvatar>
+                                <ListItemAvatar sx={avatarSx}>
                                     <Avatar 
                                         sx={totalSpendingIconStyle}
                                         className="savings-icon">
@@ -344,7 +343,7 @@ function BudgetById() {
                             </ListItem>
 
                             <ListItem className="last-list-item" sx={totalsPadding}>
-                                <ListItemAvatar>
+                                <ListItemAvatar sx={avatarSx}>
                                     <Avatar 
                                         sx={savingsIconStyle}
                                         className="savings-icon">
@@ -364,13 +363,13 @@ function BudgetById() {
                     <NavLink
                         className={`edit-budget-link ${theme === "dark" ? "dark-edit-budget-link" : ""}`}
                         to={`/dashboard/update/${budgetbyid.id}`}
-                        >Edit this budget &#x21F1;
+                        >Edit budget &#x21F1;
                     </NavLink>
 
                     <button
                         onClick={openModal}
                         className={`delete-budget-button ${theme === "dark" ? "dark-delete-budget-button" : ""}`}
-                        >Delete this budget &#x21F1;
+                        >Delete budget &#x21F1;
                     </button>
 
                     <DeleteModal 
@@ -386,10 +385,10 @@ function BudgetById() {
                 {budgetbyid && 
                 <div className="bar-div">
                     <BarChart
-                        sx = {{...getBarChartSx(theme)}}
+                        sx = {{...budgetStyle.getBarChartSx(theme)}}
                         xAxis={[{
                             scaleType: 'band',
-                            data: getBarChartData,                           
+                            data: budgetStyle.getBarChartData,                           
                         }]}
                         series={[{
                             data: [
@@ -401,7 +400,7 @@ function BudgetById() {
                         slotProps={{
                             popper: {
                                 placement: 'auto', 
-                                sx: getPopperSx(theme),
+                                sx: budgetStyle.getPopperSx(theme),
                             }
                         }}
                     />

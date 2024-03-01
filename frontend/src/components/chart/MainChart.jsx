@@ -1,11 +1,12 @@
 import "../../styles/chart/MainChart.css";
-import { getChartSettings, getChartPaginationStyle, getChartSeries } from "../../styles/chart/chartStyle.js";
-import { useHandleScreenSize } from "../../helpers/screenSizeHelper.js";
-import { useHandleDataset, useHandleChart, handlePageChange } from "../../helpers/chartHelpers.js";
-import { setDataset, setChartData, setTotalPages, setDataCount, setPage } from "../../redux/chartSlice.js";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { setDataset, setChartData, setTotalPages, setDataCount, setPage } from "../../redux/chartSlice.js";
+import { getChartSettings, getChartPaginationStyle, getChartSeries } from "../../styles/chart/chartStyle.js";
+import { useHandleScreenSize } from "../../hooks/screenSizeHooks.js";
+import { useHandleDataset, useHandleChart } from "../../hooks/chartHooks.js";
+import { handlePageChange } from "../../helpers/chartHelpers.js";
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import Pagination from '@mui/material/Pagination';

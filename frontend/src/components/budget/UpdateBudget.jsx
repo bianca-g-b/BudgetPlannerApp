@@ -22,16 +22,12 @@ function UpdateBudget() {
     const budgetFields = useSelector((state) => state.budgetFields);
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const id2 = useSelector((state)=> state.budget.id);
-
     const budgetList = useSelector((state) => state.budget.budgetList);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
     //extract budget by id from budget list
-    console.log(budgetList, "budgetList in update main");
     const budgetById2 = budgetList.find((budget) => budget.id === id2);
-    console.log(budgetById2, "budgetById2 in update main");
-    console.log("id", id2);
 
 
     const dispatch = useDispatch();
@@ -73,8 +69,8 @@ function UpdateBudget() {
             dispatch(getBudgetById(id2))
                 .then((action) => {
                     if (editBudget.fulfilled.match(action)) {
-                        console.log(action.payload, "useEffect");
-                        console.log(budgetFields, "budget fields")
+                        // console.log(action.payload, "useEffect");
+                        // console.log(budgetFields, "budget fields")
                     }
                 })
         }
@@ -111,7 +107,6 @@ function UpdateBudget() {
 
     async function handleUpdateBudget(event) {
         event.preventDefault();
-        console.log(event, "event")
         const details = {
             id: budgetById.id,
             date_from: budgetFields.dateFrom,
@@ -143,7 +138,6 @@ function UpdateBudget() {
             dispatch(editBudget(details, csrfToken))
                 .then((action) => {
                     if (editBudget.fulfilled.match(action)) {
-                        console.log(action.payload);
                         dispatch(setBudgetById(action.payload));
                         setOpenSuccess(true);
                         // navigate to dashboard after 1.5 seconds

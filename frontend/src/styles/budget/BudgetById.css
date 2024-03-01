@@ -69,6 +69,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
   margin-top: 1%;
   padding-top: 4%;
@@ -115,6 +116,7 @@
 .delete-budget-button {
   background: none;
   border: none;
+  padding: 0;
 }
 
 .edit-budget-link {
@@ -223,7 +225,7 @@
   }
   .bar-div {
     height: 440px;
-}
+  }
 }
 
 /*635px*/
@@ -241,5 +243,21 @@
   .bar-div {
     height: 360px;
     width: 100%;
+  }
+}
+
+/*500px*/
+@media (max-width: 500px) {  
+  .edit-budget-link, 
+  .delete-budget-button {
+    font-size: 14px;
+  }
+}
+
+/*360px*/
+@media (max-width: 360px) {
+  .edit-budget-link, 
+  .delete-budget-button {
+    font-size: 13px;
   }
 }

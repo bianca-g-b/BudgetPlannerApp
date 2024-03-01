@@ -1,5 +1,13 @@
 import { createTheme } from '@mui/material/styles';
 
+/*Budget List Styles*/
+export const getBudgetPaginationSx = (theme) => ({
+    "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"}, 
+    "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected" : {color: theme === "dark" ? "white" : "white"},
+    "& .css-1v2lvtn-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"},
+})
+
+/*Budget By Id Styles*/
 export const getListStyle = {
     padding: '0',
 }
@@ -83,6 +91,10 @@ export const getPrimaryTypographyProps  = (itemFontSize) => ({
 
 export const getTotalsPadding = (sidesPadding, verticalPadding) => ({
     padding: `${verticalPadding} ${sidesPadding}`,
+})
+
+export const getAvatarSx = (listItemAvatarWidth) => ({
+    minWidth: listItemAvatarWidth,
 })
 
 export const getBarChartSx = (theme) => ({

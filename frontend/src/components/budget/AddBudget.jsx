@@ -23,12 +23,10 @@ function AddBudget() {
     const csrfToken = useSelector((state) => state.csrf.csrfToken);
     const user_id = useSelector((state) => state.user.user_id);
     const budgetFields = useSelector((state) => state.budgetFields);
-    const currentPage = useSelector((state) => state.budget.currentPage);
     const theme = useSelector((state) => state.theme.theme);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
-    console.log(currentPage, "currentPage in AddBudget")
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

@@ -1,6 +1,7 @@
 /*First component container*/
 .trial-first-div {
     margin-top: 6%;
+    margin-bottom: 5%;
 }
 
 .full-budgets-div {
@@ -301,6 +302,12 @@
     .see-more {
         padding: 5px;
     }
+    .clicked, .clicked.dark-row {
+        border-left-width: 4px;
+    }
+    .budgets-page-header {
+        font-size: 30px;
+    }
 }
 
 /*1100px*/
@@ -323,8 +330,17 @@
     .trial-first-div {
         margin-top: 16.5%;
     }
+    .budgets-page-header {
+        font-size: 29px;
+    }
 }
 
+/*760px*/
+@media (max-width: 760px) {
+    .add-budget-link {
+        font-size: 18.5px;
+    }
+}
 /*750px*/
 @media (max-width: 750px) {
     .trial-first-div {
@@ -354,6 +370,12 @@
         padding: 1.5px;
         font-size: 0.85rem;
     }
+    .add-budget-link {
+        font-size: 17.5px;
+    }
+    .budgets-page-header {
+        font-size: 28px;
+    }
 }
 
 /*600px*/
@@ -368,12 +390,24 @@
     .header-div {
         width: 70%;
     }
+    .clicked, .clicked.dark-row {
+        border-left-width: 3.5px;
+    }
+    .add-budget-link {
+        font-size: 16px;
+    }
+    .budgets-page-header {
+        font-size: 27px;
+    }
+    .trial-first-div {
+        margin-top: 25%;
+    }
 }
 
 /*450px*/
 @media (max-width: 450px) {
     .trial-first-div {
-        margin-top: 25%;
+        margin-top: 28%;
     }
 }
 
@@ -382,11 +416,24 @@
     .header-div {
         width: 100%;
     }
+    .trial-first-div {
+        margin-top: 32%;
+    }
+}
+
+/*360px*/
+@media (max-width: 360px) {
+    .add-budget-link {
+        font-size: 15px;
+    }
+    .budgets-page-header {
+        font-size: 26px;
+    }
 }
 
 /*350px*/
 @media (max-width: 350px) {
     .trial-first-div {
-        margin-top: 30%;
+        margin-top: 35%;
     }
 }

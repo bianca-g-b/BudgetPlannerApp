@@ -1,14 +1,18 @@
 import "../../styles/budget/BudgetList.css";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import {getBudgetList, getBudgetById, deleteBudget} from "../../actions/budgetActions.js";
+import { NavLink, Outlet, useNavigate} from "react-router-dom";
+import { getBudgetList, getBudgetById, deleteBudget } from "../../actions/budgetActions.js";
 import { setBudgetList, setBudgetById, setId, setClicked, setCurrentBudgets, setCurrentPage } from "../../redux/budgetSlice.js";
 import { successAlertStyle, errorAlertStyle } from "../../styles/budget/alertsStyles.js";
-import { NavLink, Outlet, useNavigate} from "react-router-dom";
+import { getBudgetPaginationSx } from "../../styles/budget/budgetsPageStyle.js";
+import { handleBudgetById, handleDeleteBudget, handlePageChange } from "../../helpers/budgetHelpers.js";
+import { useFetchData,useClickedClassName, useSetTotalPages, useUpdateValues } from "../../hooks/budgetHooks.js";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+
 
 function BudgetList() {
     const dispatch = useDispatch();
@@ -27,109 +31,31 @@ function BudgetList() {
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openFail, setOpenFail] = useState(false);
 
-    // console.log("budgetList", budgetList)
-    // console.log(currentBudgets, "currentBudgets")
-    // console.log("currentPage", currentPage)
-    
 
-    // fetch data
-    useEffect(() => {
-        async function fetchData() {
-            dispatch(getBudgetList(csrfToken))
-                .then((action) => {
-                    if (getBudgetList.fulfilled.match(action)) {
-                        dispatch(setBudgetList(action.payload));
-                        const firstIndex = (currentPage-1) * 10;
-                        const lastIndex = firstIndex + 10;
-                        dispatch(setCurrentBudgets(action.payload.slice(firstIndex, lastIndex)));
-                    }
-                })
-           
-        }
-        fetchData()
-    }, [dispatch, csrfToken, currentPage]);
+    // Pagination sx settings
+    const paginationSx = getBudgetPaginationSx(theme);
 
+    // Fetch data hook
+    useFetchData({dispatch, getBudgetList, csrfToken, setBudgetList, currentPage, setCurrentBudgets});
+  
+    // Custom hook to add className to table row when button is clicked and remove it when another button is clicked
+    useClickedClassName({clicked, id, setIsClicked});
 
-    // get and set budget by id, id
-    async function budgetById(id) {
-        dispatch(setId(id))
-        dispatch(getBudgetById(id))
-            .then((action)=> {
-                if (getBudgetById.fulfilled.match(action)) {
-                    dispatch(setBudgetById(action.payload))
-                    dispatch(setClicked(id));
-                }
-            })
-    }
-        
-    // write useEffect to add className to table row when button is clicked and remove className when another button is clicked
-    useEffect(() => {
-        if (clicked === id) {
-            setIsClicked(true)
-        } else {
-            setIsClicked(false)
-        }
-    }, [clicked, id])
-
-    // open modal
+    // Open modal
     function openModal() {
         setIsModalOpen(true);
     }
 
-    // close modal
+    // Close modal
     function closeModal() {
         setIsModalOpen(false);
     }
 
-    // delete budget by id
-    async function handleDeleteBudget(id) {
-        try {
-            dispatch(deleteBudget(id, csrfToken))
-                .then((action) => {
-                    if (deleteBudget.fulfilled.match(action)) {
-                        setOpenSuccess(true);
-                        if (budgetList.length % 10 === 1 && currentPage > 1) {
-                            dispatch(setCurrentPage(currentPage-1));
-                        }
-                        // reload dashboard after 1.5 seconds
-                        setTimeout(() => {
-                            navigate(`/dashboard`);
-                            window.location.reload();
-                        }, 2500);
-                    } else {
-                        setOpenFail(true);
-                    }
-                })
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // Hook to set total number of pages in pagination
+    useSetTotalPages({setTotalPages, budgetList});
 
-    // use effect to set total number of pages in pagination
-    useEffect(() => {
-        setTotalPages(Math.ceil(budgetList.length/10));
-    }
-    ,[budgetList])
-
-    // write function to handle page change and set currentBudgets to be the correct 10 items from the budgetList
-    function handlePageChange(value) {
-        const firstIndex = (value-1) * 10;
-        const lastIndex = firstIndex + 10;
-        dispatch(setCurrentBudgets(budgetList.slice(firstIndex, lastIndex)));
-        //set clicked to the first id value in the currentBudgets array
-        dispatch(setCurrentPage(value));
-    }
-
-    //write useEffect to change value of budget, id, clicked every time current budgets and current page change
-    useEffect(() => {
-        if (currentBudgets.length > 0 && currentPage) {
-            dispatch(setClicked(currentBudgets[0].id));
-            navigate(`/dashboard/page=${currentPage}/${currentBudgets[0].id}`)
-            dispatch(getBudgetById(currentBudgets[0].id))
-            dispatch(setBudgetById(currentBudgets[0]));
-            dispatch(setId(currentBudgets[0].id));
-        }
-    } ,[currentBudgets,currentPage, dispatch, navigate])
+    // Hook to change value of budget, id, clicked every time current budgets and current page change
+    useUpdateValues({currentBudgets, currentPage, dispatch, navigate, setBudgetById, setId, setClicked, getBudgetById});
 
     return (
         <div className="trial-first-div">
@@ -171,7 +97,7 @@ function BudgetList() {
                                         <NavLink 
                                             to={`/dashboard/page=${currentPage}/${budgetItem.id}`}
                                             className="see-more-link"
-                                            onClick={() => budgetById(budgetItem.id)}
+                                            onClick={() => handleBudgetById(budgetItem.id, {dispatch, setId, getBudgetById, setBudgetById, setClicked})}
                                              >&#x3e;</NavLink></td>
                                 </tr>
                             )
@@ -183,13 +109,9 @@ function BudgetList() {
                         <Pagination 
                             page={currentPage}
                             count={totalPages}
-                            onChange={(event, value) => handlePageChange(value)}
+                            onChange={(event, value) => handlePageChange(value, {dispatch, setCurrentBudgets, budgetList, setCurrentPage})}
                             color="primary"
-                            sx={{ 
-                                "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"}, 
-                                "& .css-1to7aaw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected" : {color: theme === "dark" ? "white" : "white"},
-                                "& .css-1v2lvtn-MuiPaginationItem-root" : {color: theme === "dark" ? "white" : "black"},
-                            }}
+                            sx={paginationSx}
                         />
                     </Stack>
                 </div>}
@@ -197,7 +119,7 @@ function BudgetList() {
                 {budget && <Outlet 
                     context= {{
                         budgetbyid: budget,
-                        handleDeleteBudget: () => handleDeleteBudget(budget.id),
+                        handleDeleteBudget: () => handleDeleteBudget(budget.id, {dispatch, deleteBudget, csrfToken, setOpenSuccess, setOpenFail, budgetList, currentPage, setCurrentPage, navigate}),
                         isModalOpen: isModalOpen,
                         openModal: openModal,
                         closeModal: closeModal,
@@ -206,7 +128,7 @@ function BudgetList() {
             
             </div>}
 
-            <Snackbar open={openSuccess} autoHideDuration={2500} onClose={() => setOpenSuccess(false)}>
+            <Snackbar open={openSuccess} autoHideDuration={2000} onClose={() => setOpenSuccess(false)}>
                 <MuiAlert variant="outlined" onClose={() => setOpenSuccess(false)} severity="success" sx={successAlertStyle(theme)}>
                     Budget deleted successfully!
                 </MuiAlert>

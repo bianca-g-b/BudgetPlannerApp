@@ -1,86 +1,45 @@
-import { useEffect } from 'react';
+/*BUDGET PAGE HELPER FUNCTIONS*/
 
-// Budget form inputs
-export function useHandleFontSize({screenWidth, setLabelFontSize, setInputFontClass }) {
-    useEffect(() => {
-      let labelSize;
-      let inputSize;
-      if (screenWidth < 768 && screenWidth > 622) {
-        labelSize = "0.9rem";
-        inputSize = "form-control-sm";
-    } 
-    else if (screenWidth < 622 && screenWidth > 555) {
-        labelSize = "0.8rem";
-        inputSize = "form-control-sm";   
-    } else if (screenWidth < 555) {
-        labelSize = "0.9rem";
-        inputSize = "form-control-sm"; 
-    }
-    else {
-        labelSize = "1rem";
-    }
-    setLabelFontSize(labelSize);
-    setInputFontClass(inputSize);
-    }, [screenWidth, setLabelFontSize, setInputFontClass])
+// Budget by id function
+export async function handleBudgetById(id, {dispatch, setId, getBudgetById, setBudgetById, setClicked}) {
+    dispatch(setId(id))
+    dispatch(getBudgetById(id))
+        .then((action)=> {
+            if (getBudgetById.fulfilled.match(action)) {
+                dispatch(setBudgetById(action.payload))
+                dispatch(setClicked(id));
+            }
+        })
 }
 
-// Budget form
-export function useHandleFormListFontSize({screenWidth, setListItemFontSize}) {
-    useEffect(() => {
-      let listItemSize;
-      if (screenWidth < 768 ) {
-        listItemSize = "form-control-sm";
-    } 
-    else {
-        listItemSize = "";
+// Delete budget function
+export async function handleDeleteBudget(id, {dispatch, deleteBudget, csrfToken, setOpenSuccess, setOpenFail, budgetList, currentPage, setCurrentPage, navigate}) {
+    try {
+        dispatch(deleteBudget(id, csrfToken))
+            .then((action) => {
+                if (deleteBudget.fulfilled.match(action)) {
+                    setOpenSuccess(true);
+                    if (budgetList.length % 10 === 1 && currentPage > 1) {
+                        dispatch(setCurrentPage(currentPage-1));
+                    }
+                    // reload dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        navigate(`/dashboard`);
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    setOpenFail(true);
+                }
+            })
+    } catch (error) {
+        console.log(error);
     }
-    setListItemFontSize(listItemSize);
-    }, [screenWidth, setListItemFontSize])
 }
 
-// Budget label font size hook
-export function useHandleItemFontSize({screenWidth, setItemFontSize, setIconSize, setIconFontSize }) {
-    useEffect(() => {
-      let labelSize;
-      let iconSize;
-      let iconFontSize;
-      if (screenWidth < 768 && screenWidth > 622) {
-        labelSize = "0.9rem";
-        iconSize = "30px";
-        iconFontSize = "18px"
-      } 
-      else if (screenWidth < 622 && screenWidth > 555) {
-          labelSize = "0.8rem";
-          iconSize = "29px";
-          iconFontSize= "16px"
-      } else if (screenWidth <= 555 ) {
-          labelSize = "0.9rem"; 
-          iconSize = "25px";
-          iconFontSize = "14px"
-      } else {
-          labelSize = "1rem";
-          iconSize = "35px";
-          iconFontSize = "24px";
-      }
-        setItemFontSize(labelSize);
-        setIconSize(iconSize);
-        setIconFontSize(iconFontSize);
-    }, [screenWidth, setItemFontSize, setIconSize, setIconFontSize])
-}
-
-// Padding for total items hook in BudgetList
-export function useHandleTotalsPadding({screenWidth, setSidesPadding, setTotalVerticalPadding}) {
-    useEffect(() => {
-      let sidesPadding;
-      let verticalPadding;
-      if (screenWidth < 760 ) {
-        sidesPadding = 0;
-        verticalPadding = 0;
-      } else {
-        sidesPadding = "16px";
-        verticalPadding= "8px";
-      }
-      setSidesPadding(sidesPadding);
-      setTotalVerticalPadding(verticalPadding);
-    }, [screenWidth, setSidesPadding, setTotalVerticalPadding])
+// Handle page change function
+export function handlePageChange(value, {dispatch, setCurrentBudgets, budgetList, setCurrentPage}) {
+    const firstIndex = (value-1) * 10;
+    const lastIndex = firstIndex + 10;
+    dispatch(setCurrentBudgets(budgetList.slice(firstIndex, lastIndex)));
+    dispatch(setCurrentPage(value));
 }

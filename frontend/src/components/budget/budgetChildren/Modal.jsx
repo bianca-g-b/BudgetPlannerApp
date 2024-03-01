@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { modalStyle } from "../../../styles/budget/modalStyle.js";
-import { useHandleScreenSize, useHandleModalWidth } from "../../../helpers/screenSizeHelper.js";
+import { useHandleScreenSize, useHandleModalWidth } from "../../../hooks/screenSizeHooks.js";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
