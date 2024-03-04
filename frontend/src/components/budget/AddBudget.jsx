@@ -1,8 +1,8 @@
 import "../../styles/budget/Forms.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { addBudget } from '../../actions/budgetActions.js';
-import { useState, useEffect } from 'react';
 import MainForm from "./form/MainForm.jsx";
 import DateInputs from './form/DateInputs.jsx';
 import BudgetFormInputs from "./form/BudgetFormInputs.jsx";
@@ -13,6 +13,7 @@ import { setDateFrom, setDateTo, setIncome, setHousing, setUtilities, setFood,
     setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings,
     } from '../../redux/budgetFieldsSlice.js';
 import { setCurrentPage } from "../../redux/budgetSlice.js";
+import { useResetBudget } from "../../hooks/budgetHooks.js";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { successAlertStyle, errorAlertStyle } from "../../styles/budget/alertsStyles.js";
@@ -31,33 +32,13 @@ function AddBudget() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // add useEffect to reset budget fields when new budget has been added
-    useEffect(()=>{
-        if (openSuccess) {
-            const today = new Date();
-            dispatch(setDateFrom(today.toLocaleDateString()));
-            dispatch(setDateTo(new Date(today.setDate(today.getDate() + 30)).toLocaleDateString()));
-            dispatch(setIncome(0.0));
-            dispatch(setHousing(0.0));
-            dispatch(setUtilities(0.0));
-            dispatch(setFood(0.0));
-            dispatch(setTransport(0.0));
-            dispatch(setHousehold(0.0));
-            dispatch(setChildcare(0.0));
-            dispatch(setCleaning(0.0));
-            dispatch(setOtherEssential(0.0));
-            dispatch(setLuxury(0.0));
-            dispatch(setLeisure(0.0));
-            dispatch(setHolidays(0.0));
-            dispatch(setCharity(0.0));
-            dispatch(setOtherNonEssential(0.0));
-            dispatch(setUnsecuredDebt(0.0));
-            dispatch(setTotalEssential(0.0));
-            dispatch(setTotalNonEssential(0.0));
-            dispatch(setTotalExpenses(0.0));
-            dispatch(setTotalSavings(0.0));
-        }
-    }, [openSuccess, dispatch])
+    // Custom hook to reset budget fields when new budget has been added
+    useResetBudget({openSuccess, dispatch, setDateFrom, setDateTo,
+        setIncome, setHousing, setUtilities, setFood, setTransport, setHousehold,
+        setChildcare, setCleaning, setOtherEssential, setLuxury, setLeisure,
+        setHolidays, setCharity, setOtherNonEssential, setUnsecuredDebt, 
+        setTotalEssential, setTotalNonEssential, setTotalExpenses, setTotalSavings
+        });
 
     async function handleCreateBudget(event) {
         event.preventDefault();
