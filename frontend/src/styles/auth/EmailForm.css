@@ -271,6 +271,8 @@
         font-size: large;
     }
     .email-container label,
+    .email-input,
+    .email-input::placeholder,
     .delete-message {
         font-size: 15px;
     }

@@ -162,11 +162,17 @@
     .register-form-container {
         margin-top: 18%;
     }
+    .register-form-title {
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 900px) {
     .register-form-container {
         margin-top: 25%;
+    }
+    .register-form-title {
+        font-size: 29px;
     }
 }
 @media (max-width: 750px) {
@@ -182,6 +188,9 @@
     .register-main {
         width: 90%;
     }
+    .register-form-title {
+        font-size: 28px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -191,10 +200,41 @@
     .register-main {
         width: 95%;
     }
+    .login-redirect-message {
+        font-size: 15px;
+        margin-top: 8%;
+    }
+    .login-redirect-link {
+        font-size: 20px;
+        margin-bottom: 5%;
+    }
 }
 
 @media (max-width: 500px) {
     .register-form-container {
         margin-top: 35%;
+    }
+    .register-form-title {
+        font-size: 27px;
+    }
+    .reg-username-container label,
+    .reg-email-container label,
+    .reg-new-password-container label,
+    .reg-username-input,
+    .reg-email-input,
+    .reg-password-input,
+    .reg-username-input::placeholder,    
+    .reg-email-input::placeholder,
+    .reg-password-input::placeholder {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 350px) {
+    .register-form-title {
+        font-size: 25px;
+    }
+    .login-redirect-message {
+        margin-top: 10%;
     }
 }

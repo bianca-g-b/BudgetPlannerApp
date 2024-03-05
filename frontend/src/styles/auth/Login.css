@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 12%;
     width: 100%;
 }
 
@@ -14,6 +13,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 12%;
     padding-top: 4%;
     padding-right: 4.5%;
     padding-left: 4.5%;
@@ -157,4 +157,110 @@
 .forgot-password-link-dark:hover {
     color: #2f97ff;
     font-weight: 500;
+}
+
+/*Media queries*/
+@media (max-width: 1850px) {
+    .login-main {
+        margin-top: 12%;
+    }
+}
+
+@media (max-width: 1700px) {
+    .login-main {
+        margin-top: 14%;
+    }
+}
+
+@media (max-width: 1500px) {
+    .login-main {
+        margin-top: 16%;
+    }
+}
+
+@media (max-width: 1300px) {
+    .login-main {
+        margin-top: 18%;
+    }
+    .login-form-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    .login-main {
+        margin-top: 25%;
+    }
+    .login-form-title {
+        font-size: 29px;
+    }
+}
+
+@media (max-width: 750px) {
+    .login-main {
+        width: 60%;
+    }
+    .login-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .login-form-title {
+        font-size: 28px;
+    }
+    .login-main {
+        width: 65%;
+    }
+}
+
+@media (max-width: 650px) {
+    .login-main {
+        width: 70%;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-main {
+        margin-top: 30%;
+        width: 75%;
+    }
+    .register-redirect-message {
+        font-size: 15px;
+        margin-top: 8%;
+    }
+    .register-redirect-link {
+        font-size: 20px;
+        margin-bottom: 5%;
+    }
+}
+
+@media (max-width: 500px) {
+    .login-main {
+        margin-top: 35%;
+        width: 85%;
+    }
+    .login-form-title {
+        font-size: 27px;
+    }
+    .login-username-container label,
+    .login-password-container label,
+    .login-username-input,
+    .login-password-input,
+    .login-username-input::placeholder,
+    .login-password-input::placeholder {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 350px) {
+    .login-main {
+        width: 95%;
+    }
+    .login-form-title {
+        font-size: 25px;
+    }
+    .register-redirect-message {
+        margin-top: 10%;
+    }
 }

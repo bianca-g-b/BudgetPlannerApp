@@ -99,7 +99,7 @@ function Register() {
                         minLength: "Username must be at least 6 characters long",
                         lowercase: "Username must contain at least one lowercase letter",
                     }}
-                    onChange={(isValid) => console.log("Is valid?", isValid)}
+                    onChange={(isValid) => {return isValid}}
                         />
 
                 <PasswordChecklist
