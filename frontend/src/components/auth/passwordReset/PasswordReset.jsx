@@ -20,7 +20,7 @@ function PasswordReset() {
         <div className={`password-reset-request-div ${theme==='dark' ? 'password-reset-request-div-dark' : ''}`}>
             <div className="password-reset-page-info">
                 <p className={`password-reset-page-title ${theme==='dark' ? 'password-reset-page-title-dark' : ''}`}>Password Reset</p>
-                <p className="password-reset-page-message">Please enter the email address associated with your account. 
+                <p className="password-reset-page-message">Please enter the email address associated with your account. <br className="new-line"/>
                     We will send you an email with a link to reset your password.</p>
             </div>
             <form 
