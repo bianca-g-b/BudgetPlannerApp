@@ -4,6 +4,9 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 import { toggleTheme } from '../../redux/themeSlice';
 import { handleLogout } from '../../helpers/authHelpers';
+import { useHandleScreenSize } from '../../hooks/screenSizeHooks';
+import { useHandleMenuStyle } from '../../hooks/menuHooks';
+import { getAppBarSx, getMenuSx, getLinkSx } from '../../styles/menu/menuStyle';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,6 +26,10 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 
 export default function MenuAppBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [linkFontSize, setLinkFontSize] = useState('1.2rem');
+  const [menuIconFontSize, setMenuIconFontSize] = useState('1.5rem');
+  const [linkMargin, setLinkMargin] = useState('15px');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,81 +45,69 @@ export default function MenuAppBar() {
     setAnchorElUser(null);
   };
 
+  // Hook for screen size
+  useHandleScreenSize({screenWidth, setScreenWidth});
 
-// toggle theme
-const handleTheme = () => {
-  dispatch(toggleTheme());
-}
+  // Hook for menu style
+  useHandleMenuStyle({screenWidth, setLinkFontSize, setMenuIconFontSize, setLinkMargin});
+
+  // toggle theme
+  const handleTheme = () => {
+    dispatch(toggleTheme());
+  }
+
+  // Styles
+  const appBarSx = getAppBarSx(theme);
+  const menuSx = getMenuSx(theme);
+  const linkSx = getLinkSx(linkFontSize, linkMargin);
 
   return (
     <>
     <AppBar 
       position="absolute"
-      sx = {{
-        backgroundColor: theme === "dark" ? "#0c1225" : "#1976d2",
-        color: 'white',
-        boxShadow: 0,
-        position: 'fixed',
-        borderBottom: theme === "dark" ? ' 1px solid #3f6de229' : '1px solid white',
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        fontSize: '0.8rem',
-      }}
+      sx = {appBarSx}
       >
       <Container maxWidth="xxl">
         <Toolbar disableGutters>
-          <Box 
-          sx={{ flexGrow: 1, display: 'flex', maxWidth: '100%', justifyContent: 'flex-start' }}
-          >
-
+          <Box sx={{ flexGrow: 1, display: 'flex', maxWidth: '100%', justifyContent: 'flex-start' }}>
             {isAuthenticated && <Button
             component={Link}
             href="/dashboard"
-            sx={{ my: 1, color: 'white', display: 'block', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2rem', textTransform: 'uppercase', '&:hover': {color: '#cfe2ff'}}}
+            sx={linkSx}
             >Budgets
             </Button>}
 
             {isAuthenticated && <Button
             component={Link}
             href="/chart"
-            sx={{ my: 1, color: 'white', display: 'block', fontSize: '1.2rem', fontWeight: '600', letterSpacing: '0.2rem', marginLeft: '15px' ,textTransform: 'uppercase', '&:hover': {color: '#cfe2ff'}}}
+            sx={linkSx}
             >Chart
             </Button>}
-
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-
-          <IconButton
-            sx = {{marginRight: '10px', marginTop: '2px'}}
-            onClick={handleTheme}
-            color="inherit"
-            aria-label="toggle theme"
-          >
-            {theme === "light" ? <DarkModeRoundedIcon sx={{color: "#1a233a"}}/> : <Brightness7RoundedIcon sx={{color: " #FDB813"}}/>}
-          </IconButton>
+          <Box sx={{ flexGrow: 0, display: 'flex', flexDirection: 'row'}}>
+            <IconButton
+              sx = {{marginRight: '10px', marginTop: '2px'}}
+              onClick={handleTheme}
+              color="inherit"
+              aria-label="toggle theme">
+              {theme === "light" ? <DarkModeRoundedIcon sx={{color: "#1a233a", fontSize: menuIconFontSize}}/> : <Brightness7RoundedIcon sx={{color: " #FDB813", fontSize: menuIconFontSize}}/>}
+            </IconButton>
 
             <Tooltip title="Open menu">
               <IconButton 
-              onClick={handleOpenUserMenu} 
-              sx={{ p: 0 }}
-              size="large"
-              aria-label="menu for current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color= "inherit"
-              >
-                <GridViewIcon />
+                onClick={handleOpenUserMenu} 
+                sx={{ p: 0 }}
+                size="large"
+                aria-label="menu for current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color= "inherit">
+                <GridViewIcon sx={{fontSize: menuIconFontSize}}/>
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ 
-                mt: '45px',
-                '& .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper' : {
-                  backgroundColor: theme === "dark" ? "#1a1a1a" : "#1976d2",
-                  border: theme === "dark" ? '1px solid black' : '1px solid white',
-                  color: 'white',
-                  }
-                }}
+              sx={menuSx}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -128,47 +123,46 @@ const handleTheme = () => {
               onClose={handleCloseUserMenu}
             > 
 
-                <MenuItem 
-                    component = {Link}
-                    href="/"
-                    onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">About</Typography>
-                </MenuItem>     
+              <MenuItem 
+                  component = {Link}
+                  href="/"
+                  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">About</Typography>
+              </MenuItem>     
 
-                {isAuthenticated && <MenuItem 
-                    component = {Link}
-                    href="/account"
-                    onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Account</Typography>
-                </MenuItem>}
+              {isAuthenticated && <MenuItem 
+                  component = {Link}
+                  href="/account"
+                  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Account</Typography>
+              </MenuItem>}
 
-                <MenuItem 
-                    component = {Link}
-                    href="/calculator"
-                    onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Calculator</Typography>
-                </MenuItem>
+              <MenuItem 
+                  component = {Link}
+                  href="/calculator"
+                  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Calculator</Typography>
+              </MenuItem>
 
-                {isAuthenticated && <MenuItem 
-                    onClick={() => handleLogout({logoutUser, dispatch, csrfToken, navigate, handleCloseUserMenu})}
-                    >
-                  <Typography textAlign="center">Logout</Typography>
-                </MenuItem>}
+              {isAuthenticated && <MenuItem 
+                  onClick={() => handleLogout({logoutUser, dispatch, csrfToken, navigate, handleCloseUserMenu})}
+                  >
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>}
 
-                {!isAuthenticated && <MenuItem 
-                    component = {Link}
-                    href="/register"
-                    onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Register</Typography>
-                </MenuItem>}
+              {!isAuthenticated && <MenuItem 
+                  component = {Link}
+                  href="/register"
+                  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Register</Typography>
+              </MenuItem>}
 
-                {!isAuthenticated && <MenuItem 
-                    component = {Link}
-                    href="/login"
-                    onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Login</Typography>
-                </MenuItem>}
-              
+              {!isAuthenticated && <MenuItem 
+                  component = {Link}
+                  href="/login"
+                  onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Login</Typography>
+              </MenuItem>}             
             </Menu>
           </Box>
         </Toolbar>
