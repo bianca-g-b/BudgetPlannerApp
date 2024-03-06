@@ -34,8 +34,8 @@ function Login() {
                 <h1 className = {`login-form-title ${theme==='dark' ? 'login-form-title-dark' : ''}`}>Login</h1>
                 <form className = "login-form"
                     onSubmit = {(e) => handleLogin(e, {username, password, fetchCSRFToken, loginUser,
-                    dispatch,  fetchUser, setUser, setIsAuthenticated, 
-                    navigate, isAuthenticated, setOpenFail})}
+                    dispatch, fetchUser, setUser, setIsAuthenticated, 
+                    navigate, setOpenFail})}
                 >
                     <div className="login-username-container">
                         <label htmlFor="username">Username</label>

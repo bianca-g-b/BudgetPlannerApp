@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Outlet } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 import { toggleTheme } from '../../redux/themeSlice';
+import { handleLogout } from '../../helpers/authHelpers';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -37,18 +38,6 @@ export default function MenuAppBar() {
     setAnchorElUser(null);
   };
 
-  // logout user and clear states for user and isAuthenticated
-  const handleLogout = async () => {
-    const response  = await logoutUser(dispatch, csrfToken);
-    if (response.status === 202) {
-        console.log("logout successful");
-        handleCloseUserMenu();
-        navigate("/login"); 
-    } else {
-        alert("Logout failed. Please try again.");
-        throw new Error("Logout failed");
-    }
-}
 
 // toggle theme
 const handleTheme = () => {
@@ -66,6 +55,7 @@ const handleTheme = () => {
         position: 'fixed',
         borderBottom: theme === "dark" ? ' 1px solid #3f6de229' : '1px solid white',
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        fontSize: '0.8rem',
       }}
       >
       <Container maxWidth="xxl">
@@ -160,7 +150,7 @@ const handleTheme = () => {
                 </MenuItem>
 
                 {isAuthenticated && <MenuItem 
-                    onClick={handleLogout}
+                    onClick={() => handleLogout({logoutUser, dispatch, csrfToken, navigate, handleCloseUserMenu})}
                     >
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>}

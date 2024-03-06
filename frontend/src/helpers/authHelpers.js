@@ -56,7 +56,7 @@ export async function handleRegister(e, {password, confirmPassword, username, em
 
 // Login handler function
 export async function handleLogin(e, {username, password, fetchCSRFToken, loginUser, dispatch, 
-    fetchUser, setUser, setIsAuthenticated, navigate, isAuthenticated, setOpenFail}) {
+    fetchUser, setUser, setIsAuthenticated, navigate, setOpenFail}) {
     e.preventDefault();
     const csrfToken = await fetchCSRFToken(dispatch);
     const response = await loginUser(username, password, csrfToken);
@@ -69,11 +69,21 @@ export async function handleLogin(e, {username, password, fetchCSRFToken, loginU
         } else {
             dispatch(setIsAuthenticated(false));
         }
-        console.log("user in login:", user);
-        console.log("is authenticated in login:",isAuthenticated);
         navigate("/dashboard");   
     } else {
         setOpenFail(true);
+    }
+}
+
+// Logout handler function
+export async function handleLogout({logoutUser, dispatch, csrfToken, navigate, handleCloseUserMenu}) {
+    const response  = await logoutUser(dispatch, csrfToken);
+    if (response.status === 202) {
+        handleCloseUserMenu();
+        navigate("/login"); 
+    } else {
+        alert("Logout failed. Please try again.");
+        throw new Error("Logout failed");
     }
 }
 
@@ -88,20 +98,16 @@ export async function handleUpdatePassword(e, {password, confirmPassword, oldPas
             const response = await changePassword(oldPassword, password, confirmPassword, csrfToken);
             if (response.status === 202) {
                 setOpenSuccess(true);
-                console.log("Password changed successfully");
                 setTimeout(() => {
                     logoutUser(dispatch, csrfToken);
                 }, 2500);                  
             } else {
-                console.log("Failed to change password");
                 setOpenFail(true);
             }
         } else {
-            console.log("Password does not meet requirements");
             setOpenPasswordWarning(true);
         }
     } else {
-        console.log("Passwords do not match");
         setOpenWarning(true);
     }
 }
@@ -141,11 +147,9 @@ export async function handlePasswordReset(e, {fetchCSRFToken, dispatch, navigate
     passwordReset, setOpenFail}) {
     e.preventDefault();
     const email = e.target[0].value;
-    console.log(email);
     const csrfToken = await fetchCSRFToken(dispatch);
     const response = await passwordReset(email, csrfToken);
     if (response.ok) {
-        console.log("Password reset email sent");
         navigate("/reset/sent");
     } else {
         setOpenFail(true);
@@ -162,18 +166,14 @@ export async function handlePasswordResetConfirm(e, {password, confirmPassword, 
             const csrfToken = await fetchCSRFToken(dispatch);
             const response = await passwordResetConfirm(uidb64, token, password, confirmPassword, csrfToken);
             if (response.ok) {
-                console.log(response);
                 navigate('/reset/success')
             } else {
-                console.log("Password reset failed. Please try again.");
                 setOpenFail(true);
             } 
         } else {
-            console.log("Password is not strong enough");
             setOpenPasswordWarning(true);
         }
     } else {
-        console.log("Passwords do not match");
         setOpenWarning(true);
     }
 }

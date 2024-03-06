@@ -17,6 +17,18 @@ export function useFetchData({dispatch, getBudgetList, csrfToken, setBudgetList,
     }, [dispatch, csrfToken, currentPage, getBudgetList, setBudgetList, setCurrentBudgets]);
 }
 
+// fetch budgets data hook for main chart
+export function useFetchBudgets({dispatch, getBudgetList, csrfToken, setBudgetList}) {
+    useEffect(() => {
+        dispatch(getBudgetList(csrfToken))
+            .then((action) => {
+              if (getBudgetList.fulfilled.match(action)) {
+                dispatch(setBudgetList(action.payload));
+              }
+            })
+        },[dispatch, getBudgetList, csrfToken, setBudgetList])
+}
+
 // Clicked table row class name hook
 export function useClickedClassName({clicked, id, setIsClicked}) {
     useEffect(() => {
