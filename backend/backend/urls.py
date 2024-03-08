@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from budget_planner import views
+# from authentication import views as authViews
 
 #Create router
 router = routers.DefaultRouter()
 router.register(r"budget", views.BudgetView, "budget")
+# router.register(r"auth", authViews.signin, "auth")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("auth/", include("authentication.urls", namespace="authentication")),
-    # path("form/", views.budget_form, name="budget_form")
 ]

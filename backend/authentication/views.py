@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import JsonResponse
+from django.views import View
 from django.middleware.csrf import get_token
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -16,20 +18,22 @@ import json
 User = get_user_model()
 
 #csrf token
-def get_csrf_token(request):
-    csrf_token = get_token(request)
-    return JsonResponse({"csrfToken": csrf_token})
+class CsrfToken(View):
+    def get(self, request):
+        csrf_token = get_token(request)
+        return JsonResponse({"csrfToken": csrf_token})
 
 #user details
-@login_required
-def user_details(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-        user_id = request.user.id
-        email = request.user.email
-        return JsonResponse({"username": username, "user_id": user_id, "email": email}, status=200)
-    else:
-        return JsonResponse({"message": "User details not found"}, status=400)
+class UserDetails(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        if request.user.is_authenticated:
+            username = request.user.username
+            user_id = request.user.id
+            email = request.user.email
+            return JsonResponse({"username": username, "user_id": user_id, "email": email}, status=200)
+        else:
+            return JsonResponse({"message": "User details not found"}, status=400)
 
 #registration
 @csrf_exempt
