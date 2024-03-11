@@ -24,8 +24,8 @@ class CsrfToken(View):
         return JsonResponse({"csrfToken": csrf_token})
 
 #user details
-class UserDetails(View):
-    @method_decorator(login_required)
+@method_decorator(login_required, name="dispatch")
+class UserDetails(View):    
     def get(self, request):
         if request.user.is_authenticated:
             username = request.user.username
@@ -36,13 +36,11 @@ class UserDetails(View):
             return JsonResponse({"message": "User details not found"}, status=400)
 
 #registration
-@csrf_exempt
-def signup(request):
-    if request.user.is_authenticated:
-        print(request.user)
-        return JsonResponse({"message": "User is already authenticated"}, status=400)
-    print(request)
-    if request.method == "POST":
+@method_decorator(csrf_exempt, name="dispatch")
+class SignUp(View):   
+    def post(self, request):
+        if request.user.is_authenticated:
+            return JsonResponse({"message": "User is already authenticated"}, status=400)
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             username = data.get("username")
@@ -51,7 +49,6 @@ def signup(request):
             email = data.get("email")
             if email == "":
                 email=None
-            print("email",email)
             if password == confirmPassword:
                 if email==None or email=="":
                     user = User.objects.create_user(username, password=password)
@@ -63,9 +60,6 @@ def signup(request):
                 return JsonResponse({"message": "Passwords do not match"}, status=400)
         else:
             return JsonResponse({"message": "User registration failed1"}, status=400)
-    else:
-        return JsonResponse({"message": "User registration failed2"}, status=400)
-
     
 #login
 @csrf_exempt

@@ -1,6 +1,4 @@
 from django.db import models
-# from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
 from authentication.models import CustomUser
 from django.utils import timezone
 from datetime import timedelta
@@ -10,9 +8,6 @@ date_now = timezone.localdate
 next_month = timezone.localdate() + timedelta(days=30)
 
 # Create your models here.
-
-# Get user model
-# User = get_user_model()
 
 # Create budget model
 class Budget(models.Model):
