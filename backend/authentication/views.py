@@ -37,7 +37,7 @@ class UserDetails(View):
 
 #registration
 @method_decorator(csrf_exempt, name="dispatch")
-class SignUp(View):   
+class Signup(View):   
     def post(self, request):
         if request.user.is_authenticated:
             return JsonResponse({"message": "User is already authenticated"}, status=400)
@@ -62,11 +62,11 @@ class SignUp(View):
             return JsonResponse({"message": "User registration failed1"}, status=400)
     
 #login
-@csrf_exempt
-def signin(request):
-    if request.user.is_authenticated:
-        return JsonResponse({"message": "User is already authenticated"}, status=400)
-    if request.method == "POST":
+@method_decorator(csrf_exempt, name="dispatch")
+class Signin(View):
+    def post(self, request):
+        if request.user.is_authenticated:
+            return JsonResponse({"message": "User is already authenticated"}, status=400)
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             username = data.get("username")
@@ -79,8 +79,7 @@ def signin(request):
                 return JsonResponse({"message": "User login failed1"}, status = 400)
         else:
             return JsonResponse({"message": "User login failed2"}, status = 400)
-    else:
-        return JsonResponse({"message": "User login failed3"}, status = 400)
+
     
 #logout
 @csrf_exempt
