@@ -17,13 +17,13 @@ import json
 # Get user model
 User = get_user_model()
 
-#csrf token
+# csrf token
 class CsrfToken(View):
     def get(self, request):
         csrf_token = get_token(request)
         return JsonResponse({"csrfToken": csrf_token})
 
-#user details
+# user details
 @method_decorator(login_required, name="dispatch")
 class UserDetails(View):    
     def get(self, request):
@@ -35,7 +35,7 @@ class UserDetails(View):
         else:
             return JsonResponse({"message": "User details not found"}, status=400)
 
-#registration
+# registration
 @method_decorator(csrf_exempt, name="dispatch")
 class Signup(View):   
     def post(self, request):
@@ -59,9 +59,9 @@ class Signup(View):
             else:
                 return JsonResponse({"message": "Passwords do not match"}, status=400)
         else:
-            return JsonResponse({"message": "User registration failed1"}, status=400)
+            return JsonResponse({"message": "User registration failed"}, status=400)
     
-#login
+# login
 @method_decorator(csrf_exempt, name="dispatch")
 class Signin(View):
     def post(self, request):
@@ -76,24 +76,21 @@ class Signin(View):
                 login(request, user, backend="django.contrib.auth.backends.ModelBackend")
                 return JsonResponse({"message": "Login successful"}, status = 202)
             else:
-                return JsonResponse({"message": "User login failed1"}, status = 400)
+                return JsonResponse({"message": "User login failed"}, status = 400)
         else:
-            return JsonResponse({"message": "User login failed2"}, status = 400)
+            return JsonResponse({"message": "User login failed"}, status = 400)
 
-    
-#logout
-@csrf_exempt
-def signout(request):
-    if request.method == "POST":
+# logout
+@method_decorator(csrf_exempt, name="dispatch")
+class Signout(View):
+    def post(self, request):
         logout(request)
         return JsonResponse({"message": "Logout successful"}, status = 202)
-    else:
-        return JsonResponse({"message": "Logout failed"}, status = 400)
 
 # add or change email address
-@login_required
-def change_email(request):
-    if request.method == "POST":
+@method_decorator(login_required, name="dispatch")
+class ChangeEmail(View):
+    def post(self, request):
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             email = data.get("email")
@@ -101,27 +98,24 @@ def change_email(request):
             request.user.save()
             return JsonResponse({"message": "Email address changed successfully", "email":email}, status = 202)
         else:
-            return JsonResponse({"message": "Email address change failed1"}, status = 400)
-    else:
-        return JsonResponse({"message": "Email address change failed2"}, status = 400)
+            return JsonResponse({"message": "Email address change failed"}, status = 400)
+
     
 # delete email address from account
-@login_required
-def delete_email(request):
-    if request.method =="DELETE":
+@method_decorator(login_required, name="dispatch")
+class DeleteEmail(View):
+    def delete(self, request):
         if request.content_type == "application/json":
             request.user.email = None
             request.user.save()
             return JsonResponse({"message": "Email address deleted successfully"}, status = 202)
         else:
-            return JsonResponse({"message": "Failed to delete email address1"}, status = 400)
-    else:
-        return JsonResponse({"message": "Failed to delete email address2"}, status = 400)
+            return JsonResponse({"message": "Failed to delete email address"}, status = 400)
     
 # change password
-@login_required
-def change_password(request):
-    if request.method == "POST":
+@method_decorator(login_required, name="dispatch")
+class ChangePassword(View):
+    def post(self, request):
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             old_password = data.get("oldPassword")
@@ -138,13 +132,11 @@ def change_password(request):
                 return JsonResponse({"message": "Old password is incorrect"}, status=400)
         else:
             return JsonResponse({"message": "Password change failed (content type)"}, status=400)
-    else:
-        return JsonResponse({"message": "Password change failed (request method)"}, status=400)
         
 # delete account and all data associated with it
-@login_required
-def delete_account(request):
-    if request.method == "DELETE":
+@method_decorator(login_required, name="dispatch")
+class DeleteAccount(View):
+    def delete(self, request):
         if request.content_type == "application/json":
             user_pk = request.user.pk
             user_data = User.objects.get(pk=user_pk)
@@ -152,14 +144,12 @@ def delete_account(request):
             request.user.delete()
             return JsonResponse({"message": "Account deleted successfully"}, status = 202)
         else:
-            return JsonResponse({"message": "Failed to delete account1"}, status = 400)
-    else:
-        return JsonResponse({"message": "Failed to delete account2"}, status = 400)
+            return JsonResponse({"message": "Failed to delete account"}, status = 400)
     
 # password reset views
-@csrf_exempt    
-def reset_password(request):
-    if request.method == "POST":
+@method_decorator(csrf_exempt, name="dispatch")    
+class ResetPassword(View):
+    def post(self, request):
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             email = data.get("email")
@@ -183,13 +173,11 @@ def reset_password(request):
                 return JsonResponse({"message": "Password reset email not sent"}, status = 400)
         else:
             return JsonResponse({"message": "Password reset email not sent"}, status = 400)
-    else:
-        return JsonResponse({"message": "Password reset email not sent"}, status = 400)
 
 # password reset confirm view
-@csrf_exempt
-def reset_password_confirm(request, uidb64, token):
-    if request.method == "POST":
+@method_decorator(csrf_exempt, name="dispatch")
+class ResetPasswordConfirm(View):
+    def post(self,request, uidb64, token):
         if request.content_type == "application/json":
             data = json.loads(request.body.decode("utf-8"))
             password = data.get("password")
@@ -207,8 +195,7 @@ def reset_password_confirm(request, uidb64, token):
                 return JsonResponse({"message": "Passwords do not match"}, status = 400)
         else:
             return JsonResponse({"message": "Password reset failed"}, status = 400)
-    else:
-        return JsonResponse({"message": "Password reset failed"}, status = 400)
+
 
 
 

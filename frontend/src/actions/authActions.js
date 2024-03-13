@@ -179,7 +179,6 @@ export const changePassword = async (oldPassword,password, confirmPassword) => {
         credentials: "include",
     });
     if (response.ok) {
-        console.log(response.status)
         return response
     } else {
         console.log("Password change failed")
@@ -227,7 +226,6 @@ export const passwordReset = async (email) => {
         credentials: "include",
     });
     if (response.ok) {
-        console.log(response);
         return response;
     } else {
         console.log("Password reset failed. Please try again.");

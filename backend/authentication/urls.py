@@ -1,18 +1,18 @@
 from django.urls import path
-from .views import CsrfToken, Signup, Signin, signout, UserDetails, change_email, delete_email, change_password, delete_account, reset_password, reset_password_confirm
+from .views import CsrfToken, Signup, Signin, Signout, UserDetails, ChangeEmail, DeleteEmail, ChangePassword, DeleteAccount, ResetPassword, ResetPasswordConfirm
 
 app_name = "authentication"
 
 urlpatterns = [
     path("signup", Signup.as_view(), name="signup"),
     path("signin", Signin.as_view(), name="signin"),
-    path("signout", signout, name="signout"),
+    path("signout", Signout.as_view(), name="signout"),
     path("csrf", CsrfToken.as_view(), name="csrf"),
     path("user", UserDetails.as_view(), name="user"),
-    path("email", change_email, name="email"),
-    path("emaildelete", delete_email, name="emaildelete"),
-    path("changepassword", change_password, name="changepassword"),
-    path("deleteaccount", delete_account, name="deleteaccount"),
-    path("resetpassword", reset_password, name="resetpassword"),
-    path("resetpasswordconfirm/<uidb64>/<token>", reset_password_confirm, name="resetpasswordconfirm"),
+    path("email", ChangeEmail.as_view(), name="email"),
+    path("emaildelete", DeleteEmail.as_view(), name="emaildelete"),
+    path("changepassword", ChangePassword.as_view(), name="changepassword"),
+    path("deleteaccount", DeleteAccount.as_view(), name="deleteaccount"),
+    path("resetpassword", ResetPassword.as_view(), name="resetpassword"),
+    path("resetpasswordconfirm/<uidb64>/<token>", ResetPasswordConfirm.as_view(), name="resetpasswordconfirm"),
 ]
