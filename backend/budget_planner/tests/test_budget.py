@@ -5,8 +5,8 @@ from authentication.models import CustomUser
 
 # Create your tests here.
 
-# Test for Budget Model
-class BudgetModelTests(TestCase):
+# Budget tests
+class BudgetTests(TestCase):
     # Create a budget object for testing
     @classmethod
     def setUpTestData(cls):
