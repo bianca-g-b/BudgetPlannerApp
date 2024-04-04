@@ -7,7 +7,7 @@ class AuthTests(TestCase):
     def setUpTestData(cls):
         cls.credentials = {
             "username": "user",
-            "password": "12345",
+            "password": "abc12345",
             "email": None
         }
         cls.user = CustomUser.objects.create_user(**cls.credentials)
@@ -37,6 +37,10 @@ class AuthTests(TestCase):
         # check if email was deleted
         self.user.refresh_from_db()
         self.assertEqual(self.user.email, None)
+
+        # test if user can change password
+        response = self.client.post("/auth/changepassword",{"oldPassword":"abc12345","password": "newpassword123", "confirmPassword": "newpassword123"} ,content_type = "application/json")
+        self.assertEqual(response.status_code, 202)
 
         # logout user and test if it was successful 
         response = self.client.post("/auth/signout", content_type="application/json")
