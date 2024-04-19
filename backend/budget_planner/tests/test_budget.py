@@ -10,9 +10,16 @@ class BudgetTests(TestCase):
     # Create a budget object for testing
     @classmethod
     def setUpTestData(cls):
+        cls.credentials = {
+            "username": "username1",
+            "password": "abc123456",
+            "email": "user@user.com"
+        }
+        cls.user = CustomUser.objects.create_user(**cls.credentials)
+
         cls.post = Budget.objects.create(
             id=1,
-            user_id=CustomUser.objects.create_user(username="user1", password="12345", email="user@user.com"),
+            user_id=cls.user,
             date_from="2021-01-01",
             date_to="2021-01-31",
             total_income=1500,
@@ -39,7 +46,7 @@ class BudgetTests(TestCase):
     # Test if the budget was created properly and the values are equal to the ones in setUpTestData
     def test_budget_content(self):
         self.assertEqual(self.post.id, 1)
-        self.assertEqual(self.post.user_id.username, "user1")
+        self.assertEqual(self.post.user_id.username, "username1")
         self.assertEqual(self.post.user_id.email, "user@user.com")
         self.assertEqual(self.post.date_from, "2021-01-01")
         self.assertEqual(self.post.date_to, "2021-01-31" )
@@ -62,4 +69,15 @@ class BudgetTests(TestCase):
         self.assertEqual(self.post.total_non_essential, 400)
         self.assertEqual(self.post.total_expenses, 1200)
         self.assertEqual(self.post.total_savings, 300)
+
+    # Test if the user can get the budget
+    def test_get_budget(self):
+        # test that the user cannot get the budget list without logging in
+        response = self.client.get("/api/budget/", content_type="application/json")
+        self.assertEqual(response.status_code, 403)
+
+        # login the user and test if it was successful
+        response = self.client.post("/auth/signin", self.credentials, content_type="application/json")
+        self.assertEqual(response.status_code, 202)
+
 
