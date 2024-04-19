@@ -110,7 +110,7 @@ class BudgetTests(TestCase):
             }, 
             content_type="application/json"
         )
-        
+
         self.assertEqual(response.status_code, 201)
     
         # refresh the database and test that the second budget was created
@@ -125,5 +125,46 @@ class BudgetTests(TestCase):
         # test if the user can get a budget by id
         response = self.client.get("/api/budget/2/", content_type="application/json")
         self.assertEqual(response.status_code, 200)
+
+        # test if the user can update a budget
+        response = self.client.patch(
+            "/api/budget/2/",
+            {
+                "id": 2,
+                "user_id": self.user.pk,
+                "date_from":"19/04/2024", 
+                "date_to":"19/05/2024", 
+                "total_income":"2500", 
+                "housing":"300",
+                "utility_bills":"150", 
+                "food_drinks":"200", 
+                "transport":"75", 
+                "household_goods_services":"150", 
+                "children_related_costs":"150", 
+                "cleaning_toiletries":"50", 
+                "other_essential_costs":"50", 
+                "luxury_gifts":"50", 
+                "leisure_entertainment":"75", 
+                "holidays":"350", 
+                "charity":"125", 
+                "other_non_essential_costs":"115", 
+                "unsecured_loans":"50", 
+                "total_essential":"1125",
+                "total_non_essential":"715",
+                "total_expenses":"1840",
+                "total_savings":"660"
+            },
+            content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+
+        # test if the user can delete a  budget
+        response = self.client.delete("/api/budget/2/")
+        self.assertEqual(response.status_code, 204)
+
+        # resfresh the database and check if the budget list length is now 1
+        self.user.refresh_from_db()
+        budgets = Budget.objects.all()
+        self.assertEqual(len(budgets), 1)
 
 
