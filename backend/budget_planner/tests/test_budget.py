@@ -112,4 +112,12 @@ class BudgetTests(TestCase):
         budgets = Budget.objects.all()
         self.assertEqual(len(budgets), 2)
 
+        # test if the user can get the budget list
+        response = self.client.get("/api/budget/", content_type="application/json")
+        self.assertEqual(response.status_code, 200)
+
+        # test if the user can get a budget by id
+        response = self.client.get("/api/budget/2/", content_type="application/json")
+        self.assertEqual(response.status_code, 200)
+
 
