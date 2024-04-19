@@ -80,4 +80,36 @@ class BudgetTests(TestCase):
         response = self.client.post("/auth/signin", self.credentials, content_type="application/json")
         self.assertEqual(response.status_code, 202)
 
+        # create another budget object
+        Budget.objects.create(
+            id=2,
+            user_id=self.user,
+            date_from="2021-01-01",
+            date_to="2021-01-31",
+            total_income=2000,
+            housing=200,
+            utility_bills=150,
+            food_drinks=200,
+            transport=75,
+            household_goods_services=150,
+            children_related_costs=150,
+            cleaning_toiletries=50,
+            other_essential_costs=50,
+            luxury_gifts=50,
+            leisure_entertainment=75,
+            holidays=250,
+            charity=125,
+            other_non_essential_costs=115,
+            unsecured_loans=50,
+            total_essential= 1025,
+            total_non_essential=615,
+            total_expenses=1640,
+            total_savings=360,
+        )
+    
+        # refresh the database and test that the second budget was created
+        self.user.refresh_from_db()
+        budgets = Budget.objects.all()
+        self.assertEqual(len(budgets), 2)
+
 
