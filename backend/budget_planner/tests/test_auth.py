@@ -1,5 +1,8 @@
 from django.test import TestCase
 from authentication.models import CustomUser
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 
 # Create your tests here.
 
@@ -62,3 +65,23 @@ class AuthTests(TestCase):
         with self.assertRaises(CustomUser.DoesNotExist):
             self.user.refresh_from_db()
             CustomUser.objects.get(username="user")
+
+    # Test password reset 
+    def test_password_reset(self):
+        # login the user
+        response = self.client.post("/auth/signin",  self.credentials, content_type="application/json")
+        self.assertEqual(response.status_code, 202)
+        # add email address to the user
+        response = self.client.post("/auth/email", {"email": "user@email.com"}, content_type="application/json") 
+        self.assertEqual(response.status_code, 202)
+        # log the user out
+        response = self.client.post("/auth/signout", content_type="application/json")
+        self.assertEqual(response.status_code, 202)
+
+        # test if the user can request a reset password link
+        response = self.client.post(
+            "/auth/resetpassword",
+            {"email": "user@email.com"},
+            content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
